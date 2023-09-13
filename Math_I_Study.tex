@@ -1,0 +1,252 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[italian]{babel}
+\usepackage{newlfont}
+\usepackage{color}
+\usepackage{float}
+\usepackage{frontespizio}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{biblatex}
+\usepackage{csquotes}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{comment}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Overleaf Example},
+	pdfpagemode=FullScreen,
+}
+
+\textwidth=450pt\oddsidemargin=0pt
+\geometry{a4paper, top=3cm, bottom=3cm, left=3cm, right=3cm, % heightrounded, bindingoffset=5mm 
+}
+\theoremstyle{definition}
+\newtheorem{Def}{Definizione}[chapter]
+
+\theoremstyle{Theorem}
+\newtheorem{Theo}[Def]{Teorema}
+\newtheorem{Prop}[Def]{Proposizione}
+
+\newtheorem{Lm}[Def]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{Ex}[Def]{Esempio}
+
+\theoremstyle{definition}
+\newtheorem{Lem}[Def]{Lemma:}
+
+\theoremstyle{definition}
+\newtheorem{Obs}[Def]{Osservazione:}
+
+
+
+
+
+\begin{document}
+	\begin{frontespizio}
+			\begin{titlepage}
+			\begin{center}
+				\rule[0.1cm]{15.8cm}{0.1mm}
+				\rule[0.5cm]{15.8cm}{0.6mm}
+				
+				{\small{\bf Gabriele Novelli}}
+				
+			\end{center}
+			
+			\vspace{23mm}
+			
+			\begin{center}\textcolor{black}{
+					%
+					% INSERIRE IL TITOLO DELLA TESI
+					%
+					{\LARGE{\bf Matematica astratta }}
+			}\end{center}
+			\vspace{50mm} \par \noindent
+			
+		\end{titlepage}
+		\end{frontespizio}
+	\tableofcontents
+	\newpage
+	\thispagestyle{empty}
+	\mbox{}
+	\newpage
+	\chapter{L'algebra esterna}
+	In questa sezione enunciamo tutto il necessario per comprendere l'algebra esterna e la sua utilità. Come sempre, sono convinto che il modo migliore per affrontare una qualsiasi teoria, sia quello di ragionare con il "senno di poi".\\
+	Il nostro obbiettivo è quello di generalizzare la nozione di area, ovvero di trovare un modo per definire l'area di un certo spazio, senza necessariamente poter misurare le distanze. In particolare, vogliamo far sì che questa area sia orientata. Prendiamo in esame per un istante il prodotto vettoriale $\times$ con cui abbiamo (si spera) familiarità. Esso ci permette di definire, nel piano cartesiano, un'area orientata, a partire dal prodotto di due vettori. Inoltre (e forse questa è la caratteristica chiave) esso è alternante (cioè scambiando i vettori compare un segno (-)). L'alternanza si manifesta in tutta la sua forza nella caratteristica $v\times v=0$. Con questa proprietà in mente domandiamoci: come poter definire un prodotto che si annulla moltiplicando un oggetto con sè stesso?
+	\begin{Def}
+		Sia $V$ uno spazio vettoriale reale e $$I_k=\{v_1\otimes v_2\otimes v_3\otimes...\otimes v_k; \, \hbox{con} \, v_i=v_j \, \hbox{per almeno un paio di indici} \, i\neq j \}$$. Definiamo il k-esimo prodotto esterno come $\bigwedge^kV=T^k(V)/I_k$
+	\end{Def}
+La definizione è evidentemente molto enigmatica. Percorriamola passo passo. Indichiamo con $I_k$ l'insieme di tutti i tensori appartenenti a $T^k(V)$ tali da avere all'interno almeno due elementi uguali. Definiamo poi una relazione di equivalenza $\sim$ in questo modo:
+$$v\sim u\Longleftrightarrow v-u\in I_k$$ per ogni $v,u\in T^k(V)$.
+Lo spazio $$\bigwedge^kV=T^k(V)/I_k$$ è lo spazio delle classi di equivalenza date dalla relazione sopra definita. 
+\begin{Obs}
+	E' noto dall'algebra lineare che lo spazio quoziente (se quozientato con uno spazio vettoriale) è uno spazio vettoriale con le operazioni $+$ e $\cdot$ indotte dallo spazio di partenza, definite come segue: $[v]+[u]=[v+u]$ e $\lambda[v]=[\lambda v]$. Dimostrare che queste operazioni definiscono uno spazio non è difficile; infatti l'unico vero problema è mostrare che queste operazioni sono ben definite sullo spazio. Ma anche questo è facile:
+	Supponiamo che $v+I=v'+I$ e $u+I=u'+I$, allora dobbiamo dimostrare che $v+u+I=v'+u'+I$, ma ciò è immediato in quanto $v-v'=I=u-u'$ da cui $(v-v')+(u-u')=I=(v+u)-(v'+u')$. Lo stesso ragionamento vale per gli scalari: $a(v-v')=I=av-av'$. Ciò prova che le operazioni sono ben definite. Rimangono da dimostrare le 8 proprietà degli spazi vettoriali, che non proverò perché mi scoccia scriverle.\\
+	Da questa osservazione possiamo concludere che, essendo $I_k$ uno spazio vettoriale, anche $\bigwedge^kV$ lo è.
+\end{Obs}
+\begin{Obs}
+	Dal fatto che il prodotto tensore è lineare segue che anche il prodotto $\wedge$ (che da ora in poi chiameremo anche wedge) è lineare. Infatti:
+	$v_1\otimes (kv_2)=kv_1\otimes v_2$ da cui $v_1\wedge (kv_2)=kv_1\wedge v_2$.
+	Allo stesso modo: $v_1\otimes (v_2+v_3)=v_1\otimes v_2+v_1\otimes v_3$ da cui: $v_1\wedge (v_2+v_3)=v_1\wedge v_2+v_1\wedge v_3$.
+\end{Obs}
+\begin{Obs}
+	Supponiamo che $v_1,...,v_k$ siano vettori di $V$. Allora, se esiste un indice $i$ tale che $v_i=v_{i+1}$, per definizione vale:
+	$$v_1\wedge...\wedge v_k=0$$ cioè appartiene alla classe di equivalenza di $0$. Infatti $v_1\otimes...\otimes v_k+0\otimes...\otimes 0\in I_k$. Riusciamo ora a capire il perché abbiamo scelto proprio lo spazio quoziente per definire questo nuovo prodotto: la condizione di annichilimento nella moltiplicazione con sè stessi. 
+\end{Obs}
+\begin{Obs}
+	Prendiamo $v,u\in V$ e valutiamo
+	$$(v+u)\otimes (v+u)=v\otimes v+v\otimes u + u \otimes u +u\otimes v$$
+	Tuttavia, notiamo che $(v+u)\otimes (v+u)\in I_2$ e che $v\otimes v;u \otimes u\in I_2$, da cui segue che $(v+u)\otimes (v+u)-v\otimes v-u \otimes u=u\otimes v+v\otimes v\in I_2$.\\
+	Questo ci porta a dire che $u\otimes v$ e $v\otimes v$ sono nella stessa classe di equivalenza, cioè $$u\wedge v=-v\wedge u$$
+	Possiamo allora generalizzare, a partire da questo risultato, la seguente proprietà:
+\end{Obs}
+\begin{Prop}
+	$v_1\wedge...\wedge v_i\wedge v_{i+1}\wedge...\wedge v_k=v_1\wedge...\wedge v_{i+1}\wedge v_{i}\wedge...\wedge v_k$
+\end{Prop}
+\begin{proof}
+	Sfruttiamo la linearità del prodotto tensoriale:
+	$$I_k\ni u_1\otimes...\otimes (v_i+v_{i+1})\otimes(v_i+v_{i+1})\otimes ...\otimes u_k=$$
+	$$u_1\otimes...\otimes v_i\otimes v_i\otimes ...\otimes u_k+u_1\otimes...\otimes  v_{i+1}\otimes v_{i+1}\otimes ...\otimes u_k+$$
+	$$
+	u_1\otimes...\otimes v_{i+1}\otimes v_i\otimes ...\otimes u_k+u_1\otimes...\otimes  v_{i}\otimes v_{i+1}\otimes ...\otimes u_k=$$
+	$$u_1\otimes...\otimes v_{i+1}\otimes v_i\otimes ...\otimes u_k+u_1\otimes...\otimes  v_{i}\otimes v_{i+1}\otimes ...\otimes u_k+I_k+I_k\in I_k$$
+	Da cui segue che
+	$$u_1\wedge...\wedge v_{i+1}\wedge v_i\wedge ...\wedge u_k=(-1)u_1\wedge...\wedge  v_{i}\wedge v_{i+1}\wedge ...\wedge u_k$$
+	Ripetendo questo procedimento possiamo ottenere un segno $(-)$ per ogni scambio di indici adiacenti che operiamo. Dunque, se $\sigma(i)$ è una permutazione degli indici $i$, allora:
+	$$u_1\wedge...\wedge u_k=sgn(\sigma)u_\sigma(1)\wedge...\wedge u_\sigma(k)$$
+	Con $sgn(\sigma)$ abbiamo indicato il segno della permutazione, cioè $sgn(\sigma)=\pm1$ a seconda che il numero di scambi sia pari o dispari.
+\end{proof}
+\begin{Obs}
+	Dalla precedente proposizione si evince che il prodotto $\wedge$ che abbiamo definito è alternante. E sarà proprio questa alternanza ad essere la chiave della sua caratterizzazione. Di seguito, cercheremo di trovare una base per lo spazio $\bigwedge^kV$ e di dimostrare che esso è isomorfo allo spazio delle applicazioni alternanti su $V$.
+\end{Obs}
+\begin{Theo} \label{Theo 1}
+	Siano $V,W$ spazi vettoriali e $T:V\rightarrow W$ una mappa lineare. Se $I\subset V$ è un sottospazio di $V$, allora esiste una mappa $\bar{T}:V/I\rightarrow W$ lineare tale che $\bar{T}(x+I)=T(x)$ per ogni $x\in V$ se e solo se $T(s)=0$ per ogni $s\in I$.
+\end{Theo}
+\begin{proof}
+	Supponiamo che $\bar{T}$ esista. Allora, preso $s\in I$ vale $\bar{T}(s+I)=T(s)=\bar{T}(0_{V/I})=0$. Ricordiamo infatti che mappe lineari mandano 0 in 0.\\
+	\\
+	Se invece supponiamo che $T(s)=0$ per ogni $s\in I$, allora ci basta definire una mappa $\bar{T}:V/I\rightarrow W$ come $\bar{T}(x+I)=T(x)$. Infatti se $v\sim v'$ sono due vettori di $V$ in relazione tra loro, allora $v-v'\in I$ e quindi $\bar{T}(v+S)=T(v)=T(v')=\bar{T}(v'+s)$ da cui:
+	$$T(v)-T(v')=0=T(v-v')=\bar{T}(v-v'+I)$$ ovvero la mappa è ben definita ed è lineare.
+\end{proof}
+Questo teorema ci permette di stabilire una connessione ulteriore tra lo spazio $V\times V\times...\times V$ e $\bigwedge^kV$
+\begin{Theo}
+	Sia $V$ uno spazio vettoriale. Per ogni mappa $\phi:V^k\rightarrow M$ k-lineare alternante, esiste un'unica mappa $\bar{\phi}:\bigwedge^kV\rightarrow M$ k-lineare. Inoltre, esiste una mappa $\wedge:V^k\rightarrow\bigwedge^kV$ k-lineare alternante e vale il seguente diagramma.
+\end{Theo}
+\begin{center}
+	\begin{tikzcd}
+		\bigwedge^kV \arrow[rd, "\bar{\phi}"]     &   \\
+		V^k \arrow[u, "\wedge"] \arrow[r, "\phi"] & W
+	\end{tikzcd}
+\end{center}
+\begin{proof}
+	Prendiamo una mappa $\phi:V^k\rightarrow M$ k-lineare, allora, per la proprietà fondamentale del prodotto tensoriale, esiste una mappa lineare $\tilde{\phi}:T^k(V)\rightarrow M$ tale che $$\phi(v_1,...,v_k)=\tilde{\phi}(v_1\otimes...\otimes v_k)$$ 
+	Inoltre, data l'alternanza di $\phi$, vale la relazione: $\tilde{\phi}(v_1\otimes...\otimes v_k)=0$ se esistono $v_i=v_j$ con $i\neq j$. Questa condizione può essere espressa come $\tilde{\phi}(I_k)=0$.
+	Come provato nel teorema \ref{Theo 1}, l'esistenza di $\tilde{\phi}$ con queste caratteristiche implica quella di una mappa $\bar{\phi}:\bigwedge^kV\rightarrow M$ lineare.\\
+	Definiamo poi $\wedge(v_1,...,v_k)=v_1\wedge...\wedge v_k$. questa mappa è multilineare dato che il prodotto tensore lo è. Inoltre, è anche alternante in quanto $\wedge(v_1,...,v_i,v_i,v_{i+2},...v_k)=0$ per costruzione.
+\end{proof}
+Dunque, preso un set di vettori, possiamo associarvi in modo del tutto lineare un elemento di $\bigwedge^kV$. Insomma, abbiamo definito in tutto e per tutto una nuova operazione.\\
+Siamo ora pronti ad enunciare un risultato fondamentale:
+\begin{Theo}
+	Esiste una mappa bilineare $\xi:\bigwedge^kV\times\bigwedge^lV\rightarrow\bigwedge^{k+l}V$ tale che $(v_1\wedge...\wedge v_k,u_1\wedge...\wedge u_l)\longrightarrow v_1\wedge...\wedge v_k\wedge u_1\wedge...\wedge u_l $.
+\end{Theo}
+\begin{proof}
+	Consideriamo la mappa $(v_1,..., v_k)\longrightarrow v_1\wedge...\wedge v_k\wedge u_1\wedge...\wedge u_l$, come provato in precedenza, poichè questa mappa è alternante e lineare, è automaticamente definita una seconda mappa lineare $(v_1\wedge...\wedge v_k)\longrightarrow v_1\wedge...\wedge v_k\wedge u_1\wedge...\wedge u_l$. Lo stesso ragionamento si applica all'altra proiezione.\\
+	Da ciò, la mappa $(v_1,..., v_k,u_1,...,u_k)\longrightarrow v_1\wedge...\wedge v_k\wedge u_1\wedge...\wedge u_l$ è bilineare alternante. Questo ci permette di definire una nuova mappa
+	$$(v_1\wedge...\wedge v_k,u_1\wedge...\wedge u_k)\longrightarrow v_1\wedge...\wedge v_k\wedge u_1\wedge...\wedge u_l$$ bilineare alternante.
+\end{proof}
+Costruiamo ora una base per lo spazio $\bigwedge^kV$.
+\begin{Prop}
+	Sia $V$ uno spazio vettoriale di dimensione $n$. L'insieme $S=\{e_{i_1}\wedge...\wedge e_{i_k}|1\leq i_1\le...\le i_k\leq n \}$ è base per $\bigwedge^kV$.
+\end{Prop}
+\begin{proof}
+	Per costruzione, $S$ genera tutto quanto $\bigwedge^kV$. Infatti, un qualsiasi elemento di $\bigwedge^kV$ si può scomporre, per linearità del prodotto tensore, in somme di $e_1\wedge...\wedge e_n$. Tuttavia, tutti gli elementi che hanno indici in comune sono nulli per costruzione. Inoltre, tutti gli elementi che hanno gli stessi indici in posizioni diverse sono equivalenti a meno di un fattore $(-1)^p$. Questo restringe i generatori di $\bigwedge^kV$ ad $S$. Rimane solamente da dimostrare che questi sono linearmente indipendenti.\\
+	Se i vettori $e_{i_1}\wedge...\wedge e_{i_k}$ fossero linearmente dipendenti, allora esisterebbe una loro combinazione lineare nulla, ovvero
+	$$\sum_{S}C_Se_{i_1}\wedge...\wedge e_{i_k}=0$$
+	dove la somma è su tutte le permutazioni degli indici di $S$. Tuttavia, l'unico modo per ottenere $0$ è che tutti i coefficienti siano nulli. Infatti $e_{i_1}\wedge...\wedge e_{i_k}$ non appartiene alla classe di equivalenza di $0$ in quanto non ha elementi con indici uguali.
+	\end{proof}
+Come corollario a questa proposizione abbiamo che $dim(\bigwedge^kV)={n\choose k}$.
+Inoltre, è noto dall'algebra lineare che la dimensione di $Alt^k(V,\mathbb{R})$ è ${n\choose k}$, possiamo dire che esiste un isomorfismo tra questi due spazi. Come secondo corollario dunque possiamo scrivere: 
+$$Alt^k(V,\mathbb{R})\simeq \bigwedge^kV$$ 
+Enunciamo ora alcuni risultati che ci permetteranno di stabilire con esattezza i coefficienti $C_S$ definiti sopra.
+\begin{Prop}
+	Sia $V$ uno spazio vettoriale e $f\in Alt^q(V,\mathbb{R})$. Se $v_1,...,v_q$ sono linearmente dipendenti allora $f(v_1,...,v_q)=0.$
+\end{Prop}
+\begin{proof}
+	Dato che $f$ è una mappa alternante allora $f(v_1,...,v_i,...v_j,...,v_q)=0$ se $v_i=v_j$ per $i\neq j$. Supponiamo quindi che esista un $v_i$ che è combinazione lineare degli altri vettori, cioè $v_i=\sum_{j\neq i}\xi_jv_j$. Allora, per linearità di $f$ si ha
+	$$f(v_1,...,v_i,...,v_q)=f(v_1,...,\sum_{j\neq i}\xi_jv_j,...,v_q)=\sum_{j\neq i}\xi_jf(v_1,...,v_j,...,v_j,...,v_q)=0$$
+\end{proof}
+Quello che segue è un teorema che definisce univocamente i coefficienti $C_S$ di cui abbiamo parlato. Il Teorema è complesso nella sua stesura e nella notazione, ma non di difficile comprensione.
+\begin{Theo}\label{Theo 2}
+	Sia $V$ uno spazio vettoriale con base $\{e_1,...,e_n\}$ finita, tale che $v_i=\sum_{j}\xi_{ij}e_j$. Sia una mappa $f\in Alt^q(V,\mathbb{R})$. Definiamo la matrice 
+	$M=\begin{pmatrix}
+		\xi_{11} &...& \xi_{1n}\\
+		... &...& ...\\
+		\xi_{n1} &...& \xi_{nn}\\
+	\end{pmatrix}$ e l'insieme $H=\{j_1,j_2,...j_q|1\leq j_1\le...\le j_q\leq n\}$. Definiamo ora la matrice 
+	$M_H=\begin{pmatrix}
+		\xi_{1j_1} &...& \xi_{1j_q}\\
+		... &...& ...\\
+		\xi_{qj_1} &...& \xi_{qj_q}\\
+	\end{pmatrix}$. Allora 
+$$f(v_1,...,v_q)=\sum_{H}det(M_H)f(e_{j_1},...,e_{j_q})$$
+\end{Theo}
+\begin{proof}
+	La dimostrazione è molto semplice ed è letteralemnte un'applicazione della linearità della mappa $f$. Basta svolgere i calcoli, che tra l'altro, sono anche corti. Procediamo:
+	$$f(v_1,...,v_q)=f(\sum_{j_1}\xi_{1j_1}e_{j_1},...,\sum_{j_q}\xi_{qj_q}e_{j_q})=\sum_{j_1}...\sum_{j_q}\xi_{1j_1}...\xi_{qj_q}f(e_{j_1},...,e_{j_q})$$
+	Ricordando che $f$ si annulla quando due argomenti sono uguali in quanto alternante, otteniamo:
+	$$f(v_1,...,v_q)=\sum_{j_1\le j_2\le...\le j_q}\xi_{1j_1}...\xi_{qj_q}f(e_{j_1},...,e_{j_q})=
+	\sum_{H}\sum_{\sigma}\xi_{1\sigma{j_1}}...\xi_{q\sigma(j_q)}f(e_{\sigma(j_1)},...,e_{\sigma(j_q)})=$$
+	$$\sum_{H}\sum_{\sigma}sgn(\sigma)\xi_{1\sigma{j_1}}...\xi_{q\sigma(j_q)}f(e_{j_1},...,e_{j_q})=$$
+	$$
+	=\sum_{H}det(M_H)f(e_{j_1},...,e_{j_q})$$
+	Per definizione di determinante. Con $\sigma$ indichiamo una qualsiasi permutazione degli indici di $H$.
+\end{proof}
+Dunque, ritornando alla determinazione dei coefficienti, possiamo dire che se $V$ è un spazio vettoriale e $v_1,.,,,v_k$ sono vettori di $V$, allora l'elemento $v_1\wedge...\wedge v_k\in \bigwedge^kV$ è dato da:
+$$v_1\wedge...\wedge v_k=\sum_{H}det(M_H)e_{j_1}\wedge...\wedge e_{j_q}$$
+Facciamo ora alcuni esempi pratici di calcolo. Infatti tutto questo ambaradan di conti non ci permette forse di distinguere, con una rapida occhiata, come comportarsi nell'affrontare un esercizio.
+\begin{Ex}
+	Sia $\mathbb{R}^2$ spazio vettoriale con base canonica $e_1,e_2$. Si valuti il prodotto $\wedge$ tra i vettori $v=ae_1+be_2$ e $u=c_e1+b_e2$.\\
+	Come risolvere questo esercizio? Beh, invece che esplodere nel computare quella infinità di conti che abbiamo dimostrato definire i coefficienti, utilizziamo semplicemente la linearità di $\wedge$.
+	$$v\wedge u=(ae_1+be_2)\wedge(ce_1+de_2)=ace_1\wedge e_1+ade_1\wedge e_2+bce_2\wedge e_1+bde_2\wedge e_2$$ 
+	Ricordando che $e_i\wedge e_i=0$ e che $e_i\wedge e_j=-e_j\wedge e_i$ otteniamo:
+	$$v\wedge u=(ad-bc)e_1\wedge e_2$$
+	Non a caso $det(M_H)=det\begin{pmatrix}
+		a&b\\c&d
+	\end{pmatrix}=ad-bc$
+\end{Ex}
+\begin{Ex}
+	Lo scorso esempio era parecchio facile, in quanto la dimensione dello spazio vettoriale era la stessa de numero dei vettori che moltiplicavamo. Affrontiamo ora un esempio leggermente più complesso:\\
+	Sia $\mathbb{R}^3$ con la solita base canonica $\{e_1.e_2,e_3\}$ e siano i vettori $v=ae_1+be_2$; $u=ce_2+de_3$. Calcolare $v\wedge u$. Abbiamo due strade. Dato che la dimensione dello spazio è ancora piccola, possiamo procedere per linearità. L'altra scelta è quella di calcolare il risultato utilizzando la formula del teorema \ref{Theo 2}. Facciamole entrambe:\\\\
+	\textbf{Metodo 1: Linearità}\\
+	\\
+	$v\wedge u=(ae_1+be_2)\wedge(ce_2+de_3)=ace_1\wedge e_2+ade_1\wedge e_3+bce_2\wedge e_2+bde_3\wedge e_3=ace_1\wedge e_2+ade_1\wedge e_3+bde_2\wedge e_3$ che è già risolto. In questo caso la linearità ci ha permesso di risolvere in pochi passaggi.\\
+	\\
+	\textbf{Metodo 2: Matrici}\\
+	\\
+	La matrice $M$ è data da $M=\begin{pmatrix}
+		a&b&0\\0&c&d
+\end{pmatrix}$ e tutti i possibili $H$ sono $H_1=\{1,2\}$,$H_2=\{1,3\}$ e $H_3=\{2,3\}$. Dunque dobbiamo somare i determinanti di tre matrici:\\
+$$M_{H_1}=\begin{pmatrix}
+	a&b\\0&c
+\end{pmatrix};
+M_{H_2}=\begin{pmatrix}
+a&0\\0&d
+\end{pmatrix};
+M_{H_3}=\begin{pmatrix}
+	b&0\\c&d
+\end{pmatrix}$$ 
+Otteniamo:
+$$v\wedge u=ace_1\wedge e_2+ade_1\wedge e_3+bde_2\wedge e_3$$
+\end{Ex}
+\chapter{K-Forme}
+In questo capitolo introduciamo le k-forme e ne enunciamo qualche proprietà
+\end{document}
