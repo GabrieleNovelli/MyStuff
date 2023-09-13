@@ -83,7 +83,8 @@
 	In questa sezione enunciamo tutto il necessario per comprendere l'algebra esterna e la sua utilità. Come sempre, sono convinto che il modo migliore per affrontare una qualsiasi teoria, sia quello di ragionare con il "senno di poi".\\
 	Il nostro obbiettivo è quello di generalizzare la nozione di area, ovvero di trovare un modo per definire l'area di un certo spazio, senza necessariamente poter misurare le distanze. In particolare, vogliamo far sì che questa area sia orientata. Prendiamo in esame per un istante il prodotto vettoriale $\times$ con cui abbiamo (si spera) familiarità. Esso ci permette di definire, nel piano cartesiano, un'area orientata, a partire dal prodotto di due vettori. Inoltre (e forse questa è la caratteristica chiave) esso è alternante (cioè scambiando i vettori compare un segno (-)). L'alternanza si manifesta in tutta la sua forza nella caratteristica $v\times v=0$. Con questa proprietà in mente domandiamoci: come poter definire un prodotto che si annulla moltiplicando un oggetto con sè stesso?
 	\begin{Def}
-		Sia $V$ uno spazio vettoriale reale e $$I_k=\{v_1\otimes v_2\otimes v_3\otimes...\otimes v_k; \, \hbox{con} \, v_i=v_j \, \hbox{per almeno un paio di indici} \, i\neq j \}$$. Definiamo il k-esimo prodotto esterno come $\bigwedge^kV=T^k(V)/I_k$
+		Sia $V$ uno spazio vettoriale reale e $$I_k=\{v_1\otimes v_2\otimes v_3\otimes...\otimes v_k; \, \hbox{con} \, v_i=v_j \, \hbox{per almeno un paio di indici} \, i\neq j \}$$
+		 Definiamo il k-esimo prodotto esterno come $\bigwedge^kV=T^k(V)/I_k$
 	\end{Def}
 La definizione è evidentemente molto enigmatica. Percorriamola passo passo. Indichiamo con $I_k$ l'insieme di tutti i tensori appartenenti a $T^k(V)$ tali da avere all'interno almeno due elementi uguali. Definiamo poi una relazione di equivalenza $\sim$ in questo modo:
 $$v\sim u\Longleftrightarrow v-u\in I_k$$ per ogni $v,u\in T^k(V)$.
@@ -133,13 +134,12 @@ Lo spazio $$\bigwedge^kV=T^k(V)/I_k$$ è lo spazio delle classi di equivalenza d
 \end{Theo}
 \begin{proof}
 	Supponiamo che $\bar{T}$ esista. Allora, preso $s\in I$ vale $\bar{T}(s+I)=T(s)=\bar{T}(0_{V/I})=0$. Ricordiamo infatti che mappe lineari mandano 0 in 0.\\
-	\\
 	Se invece supponiamo che $T(s)=0$ per ogni $s\in I$, allora ci basta definire una mappa $\bar{T}:V/I\rightarrow W$ come $\bar{T}(x+I)=T(x)$. Infatti se $v\sim v'$ sono due vettori di $V$ in relazione tra loro, allora $v-v'\in I$ e quindi $\bar{T}(v+S)=T(v)=T(v')=\bar{T}(v'+s)$ da cui:
 	$$T(v)-T(v')=0=T(v-v')=\bar{T}(v-v'+I)$$ ovvero la mappa è ben definita ed è lineare.
 \end{proof}
 Questo teorema ci permette di stabilire una connessione ulteriore tra lo spazio $V\times V\times...\times V$ e $\bigwedge^kV$
 \begin{Theo}
-	Sia $V$ uno spazio vettoriale. Per ogni mappa $\phi:V^k\rightarrow M$ k-lineare alternante, esiste un'unica mappa $\bar{\phi}:\bigwedge^kV\rightarrow M$ k-lineare. Inoltre, esiste una mappa $\wedge:V^k\rightarrow\bigwedge^kV$ k-lineare alternante e vale il seguente diagramma.
+	Sia $V$ uno spazio vettoriale. Per ogni mappa $\phi:V^k\rightarrow M$ k-lineare alternante, esiste un'unica mappa $\bar{\phi}:\bigwedge^kV\rightarrow M$ lineare. Inoltre, esiste una mappa $\wedge:V^k\rightarrow\bigwedge^kV$ k-lineare alternante e vale il seguente diagramma.
 \end{Theo}
 \begin{center}
 	\begin{tikzcd}
@@ -155,7 +155,7 @@ Questo teorema ci permette di stabilire una connessione ulteriore tra lo spazio 
 \end{proof}
 Dunque, preso un set di vettori, possiamo associarvi in modo del tutto lineare un elemento di $\bigwedge^kV$. Insomma, abbiamo definito in tutto e per tutto una nuova operazione.\\
 Siamo ora pronti ad enunciare un risultato fondamentale:
-\begin{Theo}
+\begin{Theo} \label{Theo 3}
 	Esiste una mappa bilineare $\xi:\bigwedge^kV\times\bigwedge^lV\rightarrow\bigwedge^{k+l}V$ tale che $(v_1\wedge...\wedge v_k,u_1\wedge...\wedge u_l)\longrightarrow v_1\wedge...\wedge v_k\wedge u_1\wedge...\wedge u_l $.
 \end{Theo}
 \begin{proof}
@@ -163,6 +163,7 @@ Siamo ora pronti ad enunciare un risultato fondamentale:
 	Da ciò, la mappa $(v_1,..., v_k,u_1,...,u_k)\longrightarrow v_1\wedge...\wedge v_k\wedge u_1\wedge...\wedge u_l$ è bilineare alternante. Questo ci permette di definire una nuova mappa
 	$$(v_1\wedge...\wedge v_k,u_1\wedge...\wedge u_k)\longrightarrow v_1\wedge...\wedge v_k\wedge u_1\wedge...\wedge u_l$$ bilineare alternante.
 \end{proof}
+Questo teorema ci assicura che operando il prodotto $\wedge$ di prodotti $\wedge$ k ed l-esimi, possiamo trovare una corrispondenza tra il vettore risultante e lo spazio dei prodotti $\wedge$ k+l esimi.
 Costruiamo ora una base per lo spazio $\bigwedge^kV$.
 \begin{Prop}
 	Sia $V$ uno spazio vettoriale di dimensione $n$. L'insieme $S=\{e_{i_1}\wedge...\wedge e_{i_k}|1\leq i_1\le...\le i_k\leq n \}$ è base per $\bigwedge^kV$.
@@ -176,6 +177,7 @@ Costruiamo ora una base per lo spazio $\bigwedge^kV$.
 Come corollario a questa proposizione abbiamo che $dim(\bigwedge^kV)={n\choose k}$.
 Inoltre, è noto dall'algebra lineare che la dimensione di $Alt^k(V,\mathbb{R})$ è ${n\choose k}$, possiamo dire che esiste un isomorfismo tra questi due spazi. Come secondo corollario dunque possiamo scrivere: 
 $$Alt^k(V,\mathbb{R})\simeq \bigwedge^kV$$ 
+Inoltre, ritornando al teorema \ref{Theo 3}, gli spazi $\bigwedge^kV\times\bigwedge^lV$ e $\bigwedge^{k+l}V$ sono isomorfi.\\
 Enunciamo ora alcuni risultati che ci permetteranno di stabilire con esattezza i coefficienti $C_S$ definiti sopra.
 \begin{Prop}
 	Sia $V$ uno spazio vettoriale e $f\in Alt^q(V,\mathbb{R})$. Se $v_1,...,v_q$ sono linearmente dipendenti allora $f(v_1,...,v_q)=0.$
@@ -248,5 +250,10 @@ Otteniamo:
 $$v\wedge u=ace_1\wedge e_2+ade_1\wedge e_3+bde_2\wedge e_3$$
 \end{Ex}
 \chapter{K-Forme}
-In questo capitolo introduciamo le k-forme e ne enunciamo qualche proprietà
+In questo capitolo introduciamo le k-forme e ne enunciamo qualche proprietà.
+\begin{Def}
+	Si definisce una k-forma su $p\in M$ varietà liscia una mappa $\omega_p:T_pM^k\rightarrow \mathbb{R}$ k-lineare ed alternante.
+\end{Def}
+Data una k-forma definita su tutti i punti di una carta $U$ centrata in $p$, e dati $X_i$ campi vettoriali ben definiti su $U$, definiamo un campo di k-forme come
+$$\omega(X_1,...,X_k)(p)=\omega_p(X_{1p},...,X_{kp})$$
 \end{document}
