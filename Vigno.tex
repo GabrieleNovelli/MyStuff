@@ -1,0 +1,293 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[italian]{babel}
+\usepackage{newlfont}
+\usepackage{color}
+\usepackage{float}
+\usepackage{frontespizio}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{biblatex}
+\usepackage{csquotes}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{comment}
+\usepackage[compat=1.0.0]{tikz-feynman}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Overleaf Example},
+	pdfpagemode=FullScreen,
+}
+
+\textwidth=450pt\oddsidemargin=0pt
+\geometry{a4paper, top=3cm, bottom=3cm, left=3cm, right=3cm, % heightrounded, bindingoffset=5mm 
+}
+\theoremstyle{definition}
+\newtheorem{Def}{Definizione}[chapter]
+
+\theoremstyle{Theorem}
+\newtheorem{Theo}[Def]{Teorema}
+\newtheorem{Prop}[Def]{Proposizione}
+
+\newtheorem{Lm}[Def]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{Ex}[Def]{Esempio}
+
+\theoremstyle{definition}
+\newtheorem{Lem}[Def]{Lemma:}
+
+\theoremstyle{definition}
+\newtheorem{Obs}[Def]{Osservazione:}
+\begin{document}
+	\chapter{Ripassino}
+	Caro il mio dottor Cisafrulli, per comprendere bene ciò che seguirà serve capire bene che diamine è uno spazio quoziente. Non che io dubiti delle sue capacità cognitive, né delle sue competenze fisiche, ma mi è sorto il dubbio che lei non sappia che cazzo sia sto spazio quoziente. Questo semplicemente perché non ne abbiamo mai fatto uso.
+	\begin{Def}
+		Sia $V$ uno spazio vettoriale finito dimensionale e $I$ un sottospazio di $V$. Lo spazio quoziente è definito come:
+		$$V/I=\{[v]|v\sim w \iff v-w\in I;v,w\in V; \}$$
+	\end{Def}
+	Cerchiamo di capire bene questa definizione. Lo spazio quoziente è uno spazio i cui elementi sono classi di equivalenza. In particolare, due elementi $v,w\in V$ appartengono alla stessa classe se e solo se $v-w\in I$. Molto facile.
+	\begin{Obs}
+		$I$ è un sottospazio vettoriale di $V$, quindi $0\in I$. Se $v\in I$, allora $[v]=0$, dato che $0\in I$. Insomma, tutti gli elementi di $I$ sono nella stessa classe, quella di $0$.
+	\end{Obs}
+	\begin{Prop}
+		$V/I$ è uno spazio vettoriale.
+	\end{Prop}
+	\begin{proof}
+		Ci basta dimostrare che questo spazio abbia uno $0$ (identità) e che rispetti tutti gli altri assiomi degli spazi vettoriali.
+		Siano allora $v,w\in V$ e $\lambda\in \mathbb{K}$ campo di $V$. Definiamo allora la seguente operazione su $V/I$:
+		$$[v]+[w]=[v+w]; \lambda[v]=[\lambda v]$$
+		In sostanza, definiamo la somma e il prodotto con uno scalare come lineari. Per vedere se questa operazione è ben definita ci basta verificare che non dipenda dal rappresentante della classe. Siano allora $[v]$ e $[w]$ due elementi di $V/I$. Scegliamo due rappresentanti di queste classi:
+		$$v+I$$ come rappresentante di $[v]$ e $w+I$ come rappresentante di $[w]$. Con un palese abuso di notazione, indichiamo con $I$ un generico elemento di $I$. In questo senso $I+I=I$ dato che il sottospazio $I$ è per l'appunto uno spazio vettoriale. Ma allora:
+		$$v+I+w+I=v+w+I$$
+		Ovvero la somma di due classi non dipende dal rappresentante scelto. Lo stesso vale evidentemente per la moltiplicazione con uno scalare.\\
+		\\
+		Per quanto riguarda l'elemento neutro, questo è chiaramente $[0]$ per come abbiamo definito la somma. $[v]+[0]=[v+0]=[v]$.\\
+		\\
+		Il fatto che questa somma rispetti tutte le proprietà degli spazi vettoriali è evidente (no davvero, lo è, perché i rappresentanti delle classi sono elementi di $V$, quindi tutto è rispettato). 	
+	\end{proof}
+	Ma quale è la dimensione di $V/I$? Beh, la risposta è tanto facile quanto stupida: se $n$ è la dimensione di $V$ e $m<n$ è quella di $I$, allora la dimensione di $V/I$ è $n-m$. Non è difficile accorgersi di questo fatto se scegliamo una base di $V$ come $\{e_i; i=1,...,n\}$. Allora le classi di equivalenza saranno generate da $[e_i]$. Ora, parte di questi elementi di base genereranno $I$, quindi apparterranno alla stessa classe, ovvero $[0]$. I rimanenti vettori (che sono $n-m$), genereranno tutto il rimanente.
+	\\\\
+	Per semplicità, da ora in poi considereremo solo spazi vettoriali definiti sui reali.
+	\chapter{Il prodotto tensore}
+	Egregio professor Marfioli, è finalmente arrivato il momento di cimentarci in una costruzione matematica allucinante: il prodotto tensore. In quanto segue, definiremo il prodotto tensoriale tra due spazi utilizzando la \textbf{vera} definizione: quella indipendente dalle basi. Lo so, ci vogliamo del male.
+	\\
+	Consideriamo due spazi vettoriali $V,W$ di dimensione finita arbitraria su campo reale. Costruiamo il seguente spazio:
+	$$R=\hbox{span}\{(v,w)|v\in V, w\in W\}$$
+	In sostanza $R$ è l'insieme spannato da tutte le coppie $(v,w)\in V\times W$. Ovviamente, essendo uno span, è uno spazio vettoriale.
+	\begin{Obs}
+		Attenzione! Lo spazio $R$ non è $V\times W$!!! Infatti un generico vettore di $R$ sarà $\sum_{v\in V,w\in W}a^{vw} (v,w)$ e $(v_1,w_1)+(v_2,w_2)\neq (v_1+v_2,w_1+w_2)$.
+	\end{Obs} 
+	Consideriamo ora $I$ un sottoinsieme di $R$ definito come:
+	$$I=\hbox{span}\{(v_1+v_2,w)-(v_1,w)-(v_2,w); (v,w_1+w_2)-(v,w_1)-(v,w_2);$$
+	$$(\lambda v,w)-\lambda(v,w);(v,\lambda w)-\lambda(v,w);v,v_1,v_2\in V, w,w_1,w_2\in W,\lambda\in \mathbb{R}\}$$
+	\\
+	Mi rendo conto, egregio professor Marfioli, che questa definizione stimola la blasfemia. Ma non è nulla di complicato. Semplicemente $I$ è definito come lo span di queste $4$ tipologie di vettori appartenenti a $R$. Notare che sono "4 tipologie" e non "4 vettori", poiché $v,v_1,v_2, w,w_1,w_2$ sono arbitrari.\\
+	\begin{Def}
+		Dati due spazi vettoriali $V,W$ di dimensione finita su campo reale, il loro prodotto tensore è dato da:
+		$$V\otimes W=R/I$$
+	\end{Def}
+	\begin{Obs}
+		Sia $R$ che $I$ sono spazi vettoriali. Allora è chiaro per costruzione che anche $V\otimes W=R/I$ è uno spazio vettoriale.
+	\end{Obs}
+	In particolare, gli elementi di $V\otimes W$ sono classi di equivalenza $[(v,w)]$ di elementi di $R$. Due elementi sono nella stessa classe se differiscono per un elemento di $I$. Denotiamo ciò con $v\otimes w=[(v,w)]$ e chiamiamo questa classe \textbf{prodotto tensore} di $v,w$.
+	\begin{Obs}
+		La fastidiosa costruzione di $I$ ci permette di rendere bilineare il prodotto tensore! Vediamo questo esplicitamente:\\
+		La classe di $[(0,0)]$ contiene tutti gli elementi di $I$, per definizione. Ma allora conterrà anche $[(v_1+v_2,w)-(v_1,w)-(v_2,w)]$. Come abbiamo visto nel precedente capitolo, le classi di equivalenza sono lineari, ovvero possiamo scrivere:
+		$$[(v_1+v_2,w)-(v_1,w)-(v_2,w)]=[(v_1+v_2,w)]-[(v_1,w)]-[(v_2,w)]=$$
+		$$(v_1+v_2)\otimes w-v_1\otimes w-v_2\otimes w=0\otimes 0=0$$
+		Da cui segue immediatamente che:
+		$$(v_1+v_2)\otimes w=v_1\otimes w+v_2\otimes w$$
+		La stessa identica costruzione la possiamo fare con tutti gli altri elementi che generano $I$, ottenendo le seguenti proprietà per il prodotto tensore:
+		\begin{enumerate}
+			\item $(v_1+v_2)\otimes w=v_1\otimes w+v_2\otimes w$
+			\item $v\otimes (w_1+w_2)=v\otimes w_1+v\otimes w_2$
+			\item $\lambda(v\otimes w)=\lambda v\otimes w=v\otimes \lambda w$
+		\end{enumerate}
+	\end{Obs}
+	\chapter{L'algebra esterna}
+Consideriamo, caro il mio dottor Ciurli, uno spazio vettoriale $V$ a dimensione finita. Ricordiamo che abbiamo definito $T^n(V)=V\otimes V\otimes V... \otimes V$ per $n$ volte. Questo è uno spazio vettoriale, come precedentemente provato. Siamo ora interessati a quozientare questo spazio. 
+$$I=\hbox{span}\{v_1\otimes v_2 \otimes...\otimes v_n|v_i\in V \hbox{ per ogni } i; \exists i\neq j \hbox{ tali per cui } v_i=v_j\}$$
+Cerchiamo di capire meglio questa definizione. Stiamo considerando uno insieme i cui elementi sono $n$-tensori di $V$ e per cui ogni elemento contiene almeno due vettori uguali, tra quelli prodotti tensorialmente. Facciamo un paio di esempi:
+\begin{Ex}
+	Sia $T^2(V)$. Allora $I$ è fatto da tutti i vettori del tipo: $v\otimes v$ e dalle loro combinazioni lineari.
+\end{Ex}
+\begin{Ex}
+	Sia $T^3(V)$, allora $I$ è formato da tutti i vettori del tipo $v\otimes v\otimes w$; $v\otimes w\otimes v$; $w\otimes v\otimes v$; $v\otimes v\otimes v$ e dalle loro combinazioni lineari.
+\end{Ex}
+E così via.\\
+\\
+\begin{Prop}
+	$I$ è un sottospazio vettoriale di $T^n(V)$.
+\end{Prop}
+\begin{proof}
+	Il risultato è ovvio dato che $I$ è definito come span di alcuni vettori di $T^n(V)$.
+\end{proof}
+Vogliamo ora studiare il seguente spazio quoziente: 
+$$T^n(V)/I$$
+Questa definizione può far paura ma noi, dottor Piciarnalli, armati di cagatura di maroni e forza di volontà, non ci lasceremo spaventare. Per definizione, lo spazio in questione è composto da classi di equivalenza, i cui elementi differiscono al più per un elemento di $I$.\\
+Questo significa che un elemento di $T^n(V)/I$ è una classe $[v_1\otimes...\otimes v_n]$ di elementi di $T^n(V)$, tale che gli elementi di questa classe differiscono al più per un elemento di $I$, che si può scrivere come:
+$$\hbox{Se } v_1\otimes...\otimes v_n \hbox{ e } w_1\otimes...\otimes w_n \hbox{ sono nella stessa classe, allora } v_1\otimes...\otimes v_n- w_1\otimes...\otimes w_n\in I$$
+\begin{Def}
+	Sia $V$ uno spazio vettoriale a dimensione finta $n$. Definiamo la potenza esterna k-esima di $V$ come lo spazio:
+	$$\bigwedge^k V=T^k(V)/I$$
+\end{Def}
+\begin{Prop}
+	$\bigwedge^k V=T^k(V)/I$ è uno spazio vettoriale.
+\end{Prop}
+\begin{proof}
+	Ovvio, in quanto abbiamo fatto un quoziente tra due spazi vettoriali, uno sottospazio dell'altro (il risultato è sempre ancora uno spazio vettoriale).
+	\end{proof}
+	Introduciamo ora una nuova notazione, che potrà sembrare ritardata, ma che si rivelerà molto utile più avanti.
+	Prendiamo $[v_1\otimes...\otimes v_k]$ come un elemento di $\bigwedge^k V=T^k(V)/I$. Allora noi indichiamo: $[v_1\otimes...\otimes v_k]=v_1\wedge v_2 \wedge...\wedge v_k$.\\
+	Con un precoce abusoi di terminologia, diciamo che, presi qualsiasi vettori $v_1,...,v_n$ di $V$, il loro \textbf{prodotto wedge} o \textbf{esterno} è $v_1\wedge v_2 \wedge...\wedge v_n$.    
+	\begin{Obs}
+		Osserviamo che tutti i vettori che appartengono a $I$ sono nella classe di equivalenza di $0$. Questo è evidente dato che $0$ è in $I$, dunque un elemento di $I$ differisce da se stesso di $0$, che è un elemento di $I$.\\
+		Questo significa che tutti i vettori del tipo $v_1\otimes v_2\otimes...\otimes v_k$ tali che almeno due elementi $v_i$ e $v_j$ sono uguali per $i\neq j$ sono in $I$, e quindi nella stessa classe di $0$.
+	\end{Obs}
+	\begin{Ex}
+		Sia $V$ spazio vettoriale di dimensione $n$. Allora $\bigwedge^2 V=T^2(V)/I$ è lo spazio di tutte le classi $[v_1\otimes v_2]=v_1\wedge v_2$. $I$ contiene tutti i vettori come $w\otimes w$, quindi $[0]=[v_1\otimes v_1]=v_1\wedge v_1$.
+	\end{Ex}
+	La prossima proposizione è fondamentale per capire le caratteristiche principali del prodotto esterno.
+	\begin{Prop}
+		Sia $V$ uno spazio vettoriale a dimensione finita. Sia $\bigwedge^k V$ la potenza esterna k-esima. Allora $v_1\otimes ...\otimes v_i\otimes v_{i+1}\otimes... v_k+v_1\otimes ...\otimes v_{i+1}\otimes v_{i}\otimes... v_k\in I$.
+	\end{Prop}
+	\begin{proof}
+		Dato che $I$ è uno spazio vettoriale, la somma di due elementi di $I$ è ancora un elemento di $I$. Questo significa che se, abusando di notazione, indichiamo con $I$ un generico elemento di $I$ (lo so, perdonami), allora $I+I=I$, nel senso che il risultato è ancora un elemento di $I$.\\
+		Detto ciò; consideriamo che:
+		$v_1\otimes ...\otimes (v_i+v_{i+1})\otimes(v_i+v_{i+1}) \otimes... v_k\in I$ evidentemente, in quanto due elementi moltiplicati tensorialmente sono uguali. Quindi: $v_1\otimes ...\otimes (v_i+v_{i+1})\otimes(v_i+v_{i+1}) \otimes... \otimes v_k=I$ nel senso che è un elemento di $I$.\\
+		Dato che il prodotto tensoriale è multilineare, possiamo scrivere:
+		$$v_1\otimes ...\otimes (v_i+v_{i+1})\otimes(v_i+v_{i+1}) \otimes... \otimes v_k=$$
+		$$I=v_1\otimes ...\otimes v_i\otimes v_i\otimes... \otimes v_k+v_1\otimes ...\otimes v_{i+1}\otimes v_i\otimes... \otimes v_k+$$
+		$$+v_1\otimes ...\otimes v_i\otimes v_{i+1}\otimes...\otimes v_k+v_1\otimes ...\otimes v_{i+1}\otimes v_{i+1}\otimes...\otimes v_k$$
+		Tuttavia, il primo termine ed il quarto termine (quelli che contengono $v_i\otimes v_i$ e $v_{i+1}\otimes v_{i+1}$) sono anche essi elementi di $I$. Dunque possiamo "sostituirli con $I$":
+		$$v_1\otimes ...\otimes (v_i+v_{i+1})\otimes(v_i+v_{i+1}) \otimes... \otimes v_k=I=$$
+		$$I+v_1\otimes ...\otimes v_{i+1}\otimes v_i\otimes... \otimes v_k+v_1\otimes ...\otimes v_i\otimes v_{i+1}\otimes...\otimes v_k+I$$
+		Da cui segue che:
+		$$I-I-I=I=v_1\otimes ...\otimes v_{i+1}\otimes v_i\otimes... \otimes v_k+v_1\otimes ...\otimes v_i\otimes v_{i+1}\otimes...\otimes v_k$$
+	\end{proof}
+	Da questo risultato apparentemente inutile e contorto cosa possiamo ricavare dottor Marfioli? Esatto! Una proprietà fondamentale! Se abbiamo che
+	$$I=v_1\otimes ...\otimes v_{i+1}\otimes v_i\otimes... \otimes v_k+v_1\otimes ...\otimes v_i\otimes v_{i+1}\otimes...\otimes v_k$$
+	significa che
+	$$I=v_1\otimes ...\otimes v_{i+1}\otimes v_i\otimes... \otimes v_k-(-v_1\otimes ...\otimes v_i\otimes v_{i+1}\otimes...\otimes v_k)$$
+	Ovvero $v_1\otimes ...\otimes v_{i+1}\otimes v_i\otimes... \otimes v_k$ è nella stessa classe di equivalenza del tensore $-v_1\otimes ...\otimes v_i\otimes v_{i+1}\otimes...\otimes v_k$!!!
+	Questo significa che $$v_1\wedge ...\wedge v_i\wedge v_{i+1}\wedge...\wedge v_k=-v_1\wedge ...\wedge v_{i+1}\wedge v_{i}\wedge...\wedge v_k$$ 
+	In sostanza, il prodotto wedge è anticommutativo: cambiando l'ordine di due elementi si paga un segno meno davanti a tutto.
+	\\
+	\\
+	Possiamo estendere questo risultato per una generica permutazione degli indici: siano $v_1,...,v_n\in V$ e $\sigma_i$ una permutazione degli indici $i=1,...,n$. Allora vale evidentmente:
+	$$v_1\wedge...\wedge v_n=sgn(\sigma)v_{\sigma_1}\wedge...\wedge v_{\sigma_n}$$ \\
+	\\
+	Prima di passare ad una parte di rottura di maroni allucinante sulla ben-definitezza del prodotto wedge, vediamo alcune altre cosucce.
+	\begin{Theo}
+		Dato uno spazio vettoriale $V$ a dimensione finita $n$ con base $\{e_i; i=1,...,n\}$, allora una base per la potenza esterna k-esima $\bigwedge^k V$ è data da:
+		$$\{e_{i_1}\wedge e_{i_2}\wedge...\wedge e_{i_n}|1\leq i_1 < i_2 <... < i_n \leq n\}$$ 
+	\end{Theo}
+	Prima di dimostrare questa cavolata, cerchiamo di capire. Questo teorema ci vuole comunicare che una base della potenza k-esima è innanzitutto costruibile a partire da una base di $V$. Scelta quest'ultima, ci basta prendere i prodotti wedge degli elementi di base "ordinando" gli indici in modo crescente. Questo ordinamento, come vedremo dalla dimostrazione, è una pura conseguenza dell'alternanza del prodotto wedge.\\
+	\begin{proof}
+		Prendiamo un set di vettori $v_1,...,v_k$ appartenenti a $V$ e scegliamo una base di $V$ come $\{e_1,...,e_n\}$. Per ora supponiamo $k\leq n$. Possiamo ovviamente decomporre i vettori scelti come combinazioni lineari degli elementi della base:
+		$$v_i=\sum_{j=1}^{n} v^{j_i}_i e_j=v^{j_i}_i e_j \hbox{ Useremo la notazione di Einstein per non sovraccaricare i conti}$$
+		dove $i$ indica il nostro vettore scelto tra il set $v_1,...,v_k$, mentre $j_i$ indica l'enumerazione relativa agli elementi della base.\\
+		\\
+		A questo punto, all'interno di $T^k(V)$ abbiamo che
+		$$v_1\wedge...\wedge v_k=[v_1\otimes...\otimes v_k]=[(v^{j_1}_1 e_{j_1})\otimes(v^{j_2}_2 e_{j_2})...\otimes (v^{j_k}_k e_{j_k})]$$
+		Dato che la suddivisione in classe di equivalenza è lineare ($\lambda[v]=[\lambda v]$), così come lo è il prodotto tensore, possiamo portare fuori dalla classe tutte le costanti:
+		$$[(v^{j_1}_1 e_{j_1})\otimes(v^{j_2}_2 e_{j_2})...\otimes (v^{j_k}_k e_{j_k})]=v^{j_1}_1v^{j_2}_2...v^{j_k}_k[ e_{j_1}\otimes e_{j_2}...\otimes  e_{j_k}]$$
+		E' dunque chiaro che i vettori che generano ogni elemento di $\bigwedge^k V$ sono 
+		$$[ e_{j_1}\otimes e_{j_2}...\otimes  e_{j_k}]= e_{j_1}\wedge e_{j_2}\wedge ...\wedge e_{j_k}$$
+		dove $j_1,j_2,...,j_k$ vanno da $1$ a $n=dim(V)$. Tuttavia, questi vettori non sono totalmente linearmente indipendenti. In particolare, se esistono due indici $j_m=j_n$ con $m\neq n$, il vettore risultante $e_{j_1}\wedge e_{j_2}\wedge ...\wedge e_{j_m}...\wedge e_{j_n}\wedge...\wedge e_{j_k}=0$ è nullo. Dunque i vettori linearmente indipendenti sono al più tutti quelli nella forma $e_{j_1}\wedge e_{j_2}\wedge ...\wedge e_{j_k}$ con $j_i\neq j_k$. Ma possiamo restringere ancor più questo insieme. Infatti, sappiamo che scambiando l'ordine di due elementi $e_{j_i}, e_{j_k}$, il prodotto $\wedge$ guadagna un segno meno, ovvero
+		$$e_{j_1}\wedge e_{j_2}\wedge ...\wedge e_{j_m}\wedge e_{j_{m+1}}\wedge...\wedge e_{j_k}=-e_{j_1}\wedge e_{j_2}\wedge ...\wedge e_{j_{m+1}}\wedge e_{j_{m}}\wedge...\wedge e_{j_k}$$
+		Cioè questi vettori non sono linearmente indipendenti.\\
+		E' allora chiaro che gli unici vettori che rimarranno linearmente indipendenti saranno quelli nella forma $e_{j_1}\wedge e_{j_2}\wedge ...\wedge e_{j_k}$ in cui $1\leq j_1<j_2<...< j_k\leq n$.
+	\end{proof}
+	\begin{Obs}
+		L'ordinamento crescente degli indici è puramente convenzionale. Nulla cambia se scegliamo un altro ordinamento, come ad esempio quello decrescente. Tuttavia, la convenzione è di prendere l'ordinamento crescente in quanto più intuitivo.
+	\end{Obs}
+	\begin{Obs}
+		Come corollario dal precedente teorema otteniamo che la dimensione di $\bigwedge^k V$ è ${n\choose k}$. Da ciò, è facile rendersi conto di come, per $k> n$, $\bigwedge^k V$ è nullo.	
+		\end{Obs}
+	Il precedente risultato è molto bello e utile, ma, non ci da alcun indizio su come effettivamente determinare una decomposizione in vettori di base di $v_1\wedge v_2\wedge...\wedge v_k$. Per riuscire a determinare questa decomposizione, è utile considerare un altro spazio.\\
+	\\
+	Definiamo 
+	$$Alt^k(V,\mathbb{R})=\{f:V^k\rightarrow \mathbb{R}| f \hbox{ è alternante e lineare}\}$$
+	Una mappa alternante rispetta la proprietà $f(v_1,...v_i,v_{i+1},...,v_k)=-f(v_1,...v_{i+1},v_{i},...,v_k)$ esattamente come il prodotto wedge. Non a caso: $dim Alt^k(V,\mathbb{R})={n\choose k}$ e quindi esiste un isomorfismo:
+	$$Alt^k(V,\mathbb{R})\simeq \bigwedge^k V$$
+	\begin{Prop}
+		Sia $V$ uno spazio vettoriale e $f\in Alt^q(V,\mathbb{R})$. Se $v_1,...,v_q$ sono linearmente dipendenti allora $f(v_1,...,v_q)=0.$
+	\end{Prop}
+	\begin{proof}
+		Dato che $f$ è una mappa alternante allora $f(v_1,...,v_i,...v_j,...,v_q)=0$ se $v_i=v_j$ per $i\neq j$. Supponiamo quindi che esista un $v_i$ che è combinazione lineare degli altri vettori, cioè $v_i=\sum_{j\neq i}\xi_jv_j$. Allora, per linearità di $f$ si ha
+		$$f(v_1,...,v_i,...,v_q)=f(v_1,...,\sum_{j\neq i}\xi_jv_j,...,v_q)=\sum_{j\neq i}\xi_jf(v_1,...,v_j,...,v_j,...,v_q)=0$$
+	\end{proof}
+	Quello che segue è un teorema che definisce univocamente i coefficienti di decomposizione di cui abbiamo parlato. Il Teorema è complesso nella sua stesura e nella notazione, ma non di difficile comprensione.
+	\begin{Theo}\label{Theo 2}
+		Sia $V$ uno spazio vettoriale con base $\{e_1,...,e_n\}$ finita, tale che $v_i=\sum_{j}\xi_{ij}e_j$. Sia una mappa $f\in Alt^q(V,\mathbb{R})$. Definiamo la matrice 
+		$M=\begin{pmatrix}
+			\xi_{11} &...& \xi_{1n}\\
+			... &...& ...\\
+			\xi_{n1} &...& \xi_{nn}\\
+		\end{pmatrix}$ e l'insieme $H=\{j_1,j_2,...j_q|1\leq j_1\le...\le j_q\leq n\}$. Definiamo ora la matrice 
+		$M_H=\begin{pmatrix}
+			\xi_{1j_1} &...& \xi_{1j_q}\\
+			... &...& ...\\
+			\xi_{qj_1} &...& \xi_{qj_q}\\
+		\end{pmatrix}$. Allora 
+		$$f(v_1,...,v_q)=\sum_{H}det(M_H)f(e_{j_1},...,e_{j_q})$$
+	\end{Theo}
+	\begin{proof}
+		La dimostrazione è molto semplice ed è letteralemnte un'applicazione della linearità della mappa $f$. Basta svolgere i calcoli, che tra l'altro, sono anche corti. Procediamo:
+		$$f(v_1,...,v_q)=f(\sum_{j_1}\xi_{1j_1}e_{j_1},...,\sum_{j_q}\xi_{qj_q}e_{j_q})=\sum_{j_1}...\sum_{j_q}\xi_{1j_1}...\xi_{qj_q}f(e_{j_1},...,e_{j_q})$$
+		Ricordando che $f$ si annulla quando due argomenti sono uguali in quanto alternante, otteniamo:
+		$$f(v_1,...,v_q)=\sum_{j_1\le j_2\le...\le j_q}\xi_{1j_1}...\xi_{qj_q}f(e_{j_1},...,e_{j_q})=
+		\sum_{H}\sum_{\sigma}\xi_{1\sigma{j_1}}...\xi_{q\sigma(j_q)}f(e_{\sigma(j_1)},...,e_{\sigma(j_q)})=$$
+		$$\sum_{H}\sum_{\sigma}sgn(\sigma)\xi_{1\sigma{j_1}}...\xi_{q\sigma(j_q)}f(e_{j_1},...,e_{j_q})=$$
+		$$
+		=\sum_{H}det(M_H)f(e_{j_1},...,e_{j_q})$$
+		Per definizione di determinante. Con $\sigma$ indichiamo una qualsiasi permutazione degli indici di $H$.
+	\end{proof}
+	Dunque, ritornando alla determinazione dei coefficienti, possiamo dire che se $V$ è un spazio vettoriale e $v_1,.,,,v_k$ sono vettori di $V$, allora l'elemento $v_1\wedge...\wedge v_k\in \bigwedge^kV$ è dato da:
+	$$v_1\wedge...\wedge v_k=\sum_{H}det(M_H)e_{j_1}\wedge...\wedge e_{j_q}$$
+	Facciamo ora alcuni esempi pratici di calcolo. Infatti tutto questo ambaradan di conti non ci permette forse di distinguere, con una rapida occhiata, come comportarsi nell'affrontare un esercizio.
+	\begin{Ex}
+		Sia $\mathbb{R}^2$ spazio vettoriale con base canonica $e_1,e_2$. Si valuti il prodotto $\wedge$ tra i vettori $v=ae_1+be_2$ e $u=c_e1+b_e2$.\\
+		Come risolvere questo esercizio? Beh, invece che esplodere nel computare quella infinità di conti che abbiamo dimostrato definire i coefficienti, utilizziamo semplicemente la linearità di $\wedge$.
+		$$v\wedge u=(ae_1+be_2)\wedge(ce_1+de_2)=ace_1\wedge e_1+ade_1\wedge e_2+bce_2\wedge e_1+bde_2\wedge e_2$$ 
+		Ricordando che $e_i\wedge e_i=0$ e che $e_i\wedge e_j=-e_j\wedge e_i$ otteniamo:
+		$$v\wedge u=(ad-bc)e_1\wedge e_2$$
+		Non a caso $det(M_H)=det\begin{pmatrix}
+			a&b\\c&d
+		\end{pmatrix}=ad-bc$
+	\end{Ex}
+	\begin{Ex}
+		Lo scorso esempio era parecchio facile, in quanto la dimensione dello spazio vettoriale era la stessa de numero dei vettori che moltiplicavamo. Affrontiamo ora un esempio leggermente più complesso:\\
+		Sia $\mathbb{R}^3$ con la solita base canonica $\{e_1.e_2,e_3\}$ e siano i vettori $v=ae_1+be_2$; $u=ce_2+de_3$. Calcolare $v\wedge u$. Abbiamo due strade. Dato che la dimensione dello spazio è ancora piccola, possiamo procedere per linearità. L'altra scelta è quella di calcolare il risultato utilizzando la formula del teorema \ref{Theo 2}. Facciamole entrambe:\\\\
+		\textbf{Metodo 1: Linearità}\\
+		\\
+		$v\wedge u=(ae_1+be_2)\wedge(ce_2+de_3)=ace_1\wedge e_2+ade_1\wedge e_3+bce_2\wedge e_2+bde_3\wedge e_3=ace_1\wedge e_2+ade_1\wedge e_3+bde_2\wedge e_3$ che è già risolto. In questo caso la linearità ci ha permesso di risolvere in pochi passaggi.\\
+		\\
+		\textbf{Metodo 2: Matrici}\\
+		\\
+		La matrice $M$ è data da $M=\begin{pmatrix}
+			a&b&0\\0&c&d
+		\end{pmatrix}$ e tutti i possibili $H$ sono $H_1=\{1,2\}$,$H_2=\{1,3\}$ e $H_3=\{2,3\}$. Dunque dobbiamo somare i determinanti di tre matrici:\\
+		$$M_{H_1}=\begin{pmatrix}
+			a&b\\0&c
+		\end{pmatrix};
+		M_{H_2}=\begin{pmatrix}
+			a&0\\0&d
+		\end{pmatrix};
+		M_{H_3}=\begin{pmatrix}
+			b&0\\c&d
+		\end{pmatrix}$$ 
+		Otteniamo:
+		$$v\wedge u=ace_1\wedge e_2+ade_1\wedge e_3+bde_2\wedge e_3$$
+	\end{Ex}
+	Prima di perderci definitivamente in una breve ma noiosissima analisi matematica del prodotto wedge, caro il mio dottor Bipartisan, cerchiamo di capire a che cazzo serve sto benedetto prodotto $\wedge$. Intuitivamente, il prodotto $\wedge$ definisce un'area. Supponiamo di avere due vettori $v,w$ in uno spazio $V$. Operare il prodotto $v\wedge w$ ci fornisce una grandezza orientata, nel senso che se cambiamo l'ordine degli argomenti paghiamo un segno meno. Possiamo allora immaginare questo prodotto come l'area orientata del triangolo generato dai "lati" $v,w$. E' difficile immaginarsi questa costruzione in uno spazio vettoriale astratto, ma questo ragionamento è esattamente quello utilizzato per definire il volume infinitesimo in $k$ dimensioni in una varietà differenziabile. La figata dell'alternanza è proprio l'orientabilità: il volume infinitesimo che otteniamo è orientato e quindi, intuitivamente, è possibile integrarci dei flussi. 
+\end{document}
