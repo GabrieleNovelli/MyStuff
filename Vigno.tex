@@ -16,6 +16,7 @@
 \usepackage{amssymb}
 \usepackage{comment}
 \usepackage[compat=1.0.0]{tikz-feynman}
+\usepackage{tikz-cd}
 
 \hypersetup{
 	colorlinks=true,
@@ -112,6 +113,17 @@
 			\item $\lambda(v\otimes w)=\lambda v\otimes w=v\otimes \lambda w$
 		\end{enumerate}
 	\end{Obs}
+	Notare che, in tutto questo non abbiamo ancora fissato una singola base.
+	Enunciamo ora una proprietà della madonna che non serve a niente ma va saputa:
+	\begin{Theo}
+		Siano $V,W,Z$ spazi vettoriali su $\mathbb{R}$ a dimensione finita. Sia $f:V\times W\rightarrow Z$ bilineare. Allora esiste un'unica mappa $\tilde{f}:V\otimes W \rightarrow Z$ tale per cui:
+		\[
+		\begin{tikzcd}
+			V\times W \arrow{r}{f=\tilde{f}\circ \otimes} \arrow[swap]{dr}{\otimes} & Z \\
+			& V\otimes W \arrow{u}{\tilde{f}}
+		\end{tikzcd}
+		\]
+	\end{Theo}
 	\chapter{L'algebra esterna}
 Consideriamo, caro il mio dottor Ciurli, uno spazio vettoriale $V$ a dimensione finita. Ricordiamo che abbiamo definito $T^n(V)=V\otimes V\otimes V... \otimes V$ per $n$ volte. Questo è uno spazio vettoriale, come precedentemente provato. Siamo ora interessati a quozientare questo spazio. 
 $$I=\hbox{span}\{v_1\otimes v_2 \otimes...\otimes v_n|v_i\in V \hbox{ per ogni } i; \exists i\neq j \hbox{ tali per cui } v_i=v_j\}$$
