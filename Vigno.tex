@@ -124,6 +124,20 @@
 		\end{tikzcd}
 		\]
 	\end{Theo}
+	\begin{proof}
+		Per ipotesi esiste la mappa $f:V\times W\rightarrow Z$ bilineare. Costruiamo allora la seguente mappa:
+		$$F:R\rightarrow Z$$
+		come $F((v,w))=f(v,w)$ ovviamente ben definita. Per linearità di $f$ vale la seguente proprietà:
+		$$F(\sum_i \lambda_i(v^i,w^i))=\sum_{i}\lambda_if(v^i,w^i)$$
+		In più, la bilinearità di $f$ manda a 0 tutti gli elementi di $I$!!!
+		Infatti:
+		$$F((v_1+v_2,w)-(v_1,w)-(v_2,w))=F((v_1+v_2,w))-F((v_1,w))-F((v_2,w))=$$
+		$$=f((v_1+v_2,w))-f((v_1,w))-f((v_2,w))=0$$
+		E lo stesso vale per tutti gli altri generatori di $I$. Dunque, esiste una mappa indotta da $F$, ovvero:
+		$$G:R/I=V\otimes W\rightarrow Z$$
+		Tale che $G(v\otimes w)=F(v,w)=f(v,w)$. Questo prova l'esistenza della mappa ricercata. Per provare l'unicità, supponiamo che esista un'altra mappa $H:V\otimes W\rightarrow Z$ tale che $H(v\otimes w)=f(v,w)$. Ma questa non può che essere uguale a $G$, dato che è univocamente determinata dalla sua azione sulle coppie $(v,w)$ (deve far commutare il diagramma).
+	\end{proof}
+	Definiamo infine lo spazio vettoriale $T^n(V)=V\otimes V\otimes V...\otimes V=\bigotimes^n V$ come il prodotto tensore $n$ volte di $V$ con sè stesso.
 	\chapter{L'algebra esterna}
 Consideriamo, caro il mio dottor Ciurli, uno spazio vettoriale $V$ a dimensione finita. Ricordiamo che abbiamo definito $T^n(V)=V\otimes V\otimes V... \otimes V$ per $n$ volte. Questo è uno spazio vettoriale, come precedentemente provato. Siamo ora interessati a quozientare questo spazio. 
 $$I=\hbox{span}\{v_1\otimes v_2 \otimes...\otimes v_n|v_i\in V \hbox{ per ogni } i; \exists i\neq j \hbox{ tali per cui } v_i=v_j\}$$
@@ -301,5 +315,7 @@ $$\hbox{Se } v_1\otimes...\otimes v_n \hbox{ e } w_1\otimes...\otimes w_n \hbox{
 		Otteniamo:
 		$$v\wedge u=ace_1\wedge e_2+ade_1\wedge e_3+bde_2\wedge e_3$$
 	\end{Ex}
-	Prima di perderci definitivamente in una breve ma noiosissima analisi matematica del prodotto wedge, caro il mio dottor Bipartisan, cerchiamo di capire a che cazzo serve sto benedetto prodotto $\wedge$. Intuitivamente, il prodotto $\wedge$ definisce un'area. Supponiamo di avere due vettori $v,w$ in uno spazio $V$. Operare il prodotto $v\wedge w$ ci fornisce una grandezza orientata, nel senso che se cambiamo l'ordine degli argomenti paghiamo un segno meno. Possiamo allora immaginare questo prodotto come l'area orientata del triangolo generato dai "lati" $v,w$. E' difficile immaginarsi questa costruzione in uno spazio vettoriale astratto, ma questo ragionamento è esattamente quello utilizzato per definire il volume infinitesimo in $k$ dimensioni in una varietà differenziabile. La figata dell'alternanza è proprio l'orientabilità: il volume infinitesimo che otteniamo è orientato e quindi, intuitivamente, è possibile integrarci dei flussi. 
+	Caro il mio dottor Bipartisan, cerchiamo di capire a che cazzo serve sto benedetto prodotto $\wedge$. Intuitivamente, il prodotto $\wedge$ definisce un'area. Supponiamo di avere due vettori $v,w$ in uno spazio $V$. Operare il prodotto $v\wedge w$ ci fornisce una grandezza orientata, nel senso che se cambiamo l'ordine degli argomenti paghiamo un segno meno. Possiamo allora immaginare questo prodotto come l'area orientata del triangolo generato dai "lati" $v,w$. E' difficile immaginarsi questa costruzione in uno spazio vettoriale astratto, ma questo ragionamento è esattamente quello utilizzato per definire il volume infinitesimo in $k$ dimensioni in una varietà differenziabile. La figata dell'alternanza è proprio l'orientabilità: il volume infinitesimo che otteniamo è orientato e quindi, intuitivamente, è possibile integrarci dei flussi.
+	\\\\
+	Ci sarebbe da enunciare ora una noiosissima proposizione sul prodotto wedge, analoga alla proprietà universale dei tensori. Tuttavia, trovo questa proprietà non solo noiosa, ma anche inutile. Ergo, non la scriverò.
 \end{document}
