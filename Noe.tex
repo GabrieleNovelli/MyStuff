@@ -48,10 +48,18 @@
 \theoremstyle{definition}
 \newtheorem{Obs}[Def]{Osservazione:}
 \begin{document}
+	Ciao Noe;
+	Questo libricino è stato partorito in seguito alla conversazione che abbiamo avuto da brilli. Spero che i contenuti di queste pagine ti possano far ricordare il mio nome per tutta la tua vita, ovunque essa ti porti. Sei stata la personalità che mi ha più segnato in ambito accademico ed il rapporto che sono riuscito a costruire con te è uno dei più belli che possiedo. Prego con tutto il mio cuore che la nostra amicizia possa continuare in eterno. Fisica non sarà più la stessa cosa (casa) senza di te. \\
+	\\
+	Mi sono impegnato incredibilmente per cercare di rendere comprensibili gli argomenti trattati qua dentro. Spero che i miei sforzi non siano stati vani.\\
+	\\
+	Con amore;\\\\
+	Gabriele Novelli
 	\chapter{Il temperamento equabile}
+	\subsection{Le basi}
 	Per capire a fondo il temperamento equabile, è necessario comprendere le basi di come funziona l'orecchio umano. In generale, un suono "puro" o "nota", corrisponde ad un'onda sonora, caratterizzato da una frequenza $\omega$ fissata.\\
 	\\
-	Immaginiamo ora due suoni con frequenza $\omega_1,\omega_2$. Per nostra natura, riconosceremo due suoni come uguali se le loro frequenze stanno tra loro in rapporti di numeri interi: $\omega_1=k\omega_2$, $k\in \mathbb{N}$. Per fare un esempio concreto, chiamando $La$ (o $A$) la nota corrispondente a $440 Hz$, il nostro cervello riconoscerà come $La$ anche le note con frequenza $880 Hz,1320 Hz$ e così via. Essendo percepite come uguali, due note le cui frequenze stanno tra loro come numeri interi risulteranno decisamente consonanti all'orecchio umano, se suonate in successione.
+	Immaginiamo ora due suoni con frequenza $\omega_1,\omega_2$. Per nostra natura, riconosceremo due suoni come uguali se le loro frequenze stanno tra loro in rapporti di numeri interi: $\omega_1=k\omega_2$, $k\in \mathbb{N}$. Per fare un esempio concreto, chiamando $La$ (o $A$) la nota corrispondente a $440 Hz$, il nostro cervello riconoscerà come $La$ anche le note con frequenza $880 Hz,1320 Hz$ e così via. Essendo percepite come uguali (ma ad altezze diverse), due note le cui frequenze stanno tra loro come numeri interi risulteranno decisamente consonanti all'orecchio umano, se suonate in successione.
 	\begin{Def}
 		Chiamiamo intervallo tra due note le differenze tra le loro frequenze.
 	\end{Def}
@@ -75,7 +83,7 @@
 	Supponiamo allora di voler costruire proprio un pianoforte, utilizzando come nota di riferimento il $La$ a $440 Hz$ ed un'estensione di un'Ottava Giusta. Il nostro approccio sarà quello di assegnare i nostri tasti a frequenze all'interno di una determinata ottava, in quanto eccedendo al di fuori di essa ritroveremmo "le stesse note", nel senso che il nostro orecchio le sentirebbe come uguali.\\
 	Dunque il primo tasto del pianoforte corrisponderà a $440 Hz$ e l'ultimo ad $880 Hz$. Tra uno dei tasti intermedi inseriremo $660 Hz$, dato che è la quinta giusta. Ora il nostro pianoforte ha 3 tasti, tutti consonanti tra loro. Vorremmo aggiungerne di più, ma come? Beh, potremmo semplicemente procedere per quinte ed ottave giuste. \\
 	Dunque, una quinta giusta sopra $660 Hz$ è $990Hz$, che è fuori dal nostro range $(880<990)$. Tuttavia, possiamo includere questo intervallo nel nostro range scendendo di un'Ottava Giusta: ${990 Hz\over 2}=495 Hz$, che è perfettamente nel range voluto. Possiamo ripetere questo ragionamento ancora ed ancora: saliamo di una Quinta giusta ed occasionalmente scendiamo di un'Ottava Giusta. \\
-	Dunque, una Quinta Giusta sopra $945 Hz$ è $495Hz \times {3\over 2}=742.5Hz$ che è ancora dentro l'Ottava. Una Quinta sopra $742.5 Hz$ è $742.5 Hz\times {3\over 2}=1113.75 Hz$, che è superiore a $880 Hz$; scendiamo allora di un'Ottava Giusta: ${1113.75 Hz\over 2}=556.875$ e così via.\\
+	Dunque, una Quinta Giusta sopra $495 Hz$ è $495Hz \times {3\over 2}=742.5Hz$ che è ancora dentro l'Ottava. Una Quinta sopra $742.5 Hz$ è $742.5 Hz\times {3\over 2}=1113.75 Hz$, che è superiore a $880 Hz$; scendiamo allora di un'Ottava Giusta: ${1113.75 Hz\over 2}=556.875$ e così via.\\
 	\\
 	Applicando questo procedimento iterativamente, riusciamo ad includere nella nostra ottava molti più tasti. Tuttavia, vorremmo non doverne includere infiniti (il nostro pianoforte non è infinito e vorremmo avere più di una singola ottava di estensione). Ci fermeremo allora quando, salendo di una Quinta o scendendo di un'Ottava, ritroveremo $880Hz$.\\
 	Dimostriamo ora che questo non accade mai.
@@ -86,8 +94,8 @@
 	 \begin{proof}
 	 	Sia $\omega$ la nostra frequenza di partenza, sia $n$ il numero di volte in cui saliamo di una quinta e $m$ il numero di volte in cui scendiamo di una Ottava. Allora vogliamo trovare due indici $n,m$ tali per cui:
 	 	$$\omega=\bigg({3\over 2}\bigg)^n\bigg({1\over 2}\bigg)^m=2\omega$$
-	 	con $n,m,k\in \mathbb{N}$. Questa equazione ci restituisce:
-	 	$$3^n\times k=2^{n+m+1}$$
+	 	con $n,m\in \mathbb{N}$. Questa equazione ci restituisce:
+	 	$$3^n=2^{n+m+1}$$
 	 	Vediamo chiaramente che questa equazione non è risolta da alcuna terna di indici dato che $3^n$ è un numero dispari mentre $2^{n+m+1}$ è pari.
 	 \end{proof}
 	 Questo significa che saremmo costretti ad utilizzare un numero infinito di tasti per comporre una singola ottava. Chiaramente, questa strada non è quella giusta.
@@ -95,8 +103,27 @@
 	 Cambiamo totalmente approccio. L'idea è quella di includere più intervalli rispetto a quelli di Quinta giusta ed Ottava Giusta. Dividiamo allora l'ottava in 7 intervalli, corrispondenti ai seguenti rapporti di frequenze:
 	 $$1,{9\over8},{5\over4},{4\over3},{3\over 2},{5\over3},{15\over8}$$
 	 Questo significa che se la prima nota della scala ha frequenza $\omega$, la seconda avrà $9\omega\over8$, la terza ${5\omega\over 4}$ e così via.\\
-	 Per fare un esempio, se prendiamo come frequenza di base $440 Hz$, corrispondente ad un $La$ (o A), avremo:
-	 $$440 Hz,495 Hz,550 Hz, 586.\bar{6},660 Hz,733.\bar{3},825 Hz$$
+	 Per fare un esempio, se prendiamo come frequenza di base $440 Hz$, corrispondente ad un $La$ (o A), avremo:\\
+	 \begin{center}
+	 	\begin{tikzpicture}
+	 		\draw (0,0)--(13,0);
+	 		\node at (1,1) {440 Hz};
+	 		\node at (2.5,1) {495 Hz};
+	 		\node at (4.3,1) {550 Hz};
+	 		\node at (6.5,1) {586.$\bar{6}$ Hz};
+	 		\node at (8.3,1) {660 Hz};
+	 		\node at (10.3,1) {$733.\bar{3}$ Hz};
+	 		\node at (12,1) {825 Hz};
+	 		
+	 		\node at (1,0) {\textbullet};
+	 		\node at (2.5,0) {\textbullet};
+	 		\node at (4.3,0) {\textbullet};
+	 		\node at (6.5,0) {\textbullet};
+	 		\node at (8.3,0) {\textbullet};
+	 		\node at (10.3,0) {\textbullet};
+	 		\node at (12,0) {\textbullet};
+	 	\end{tikzpicture}
+	 \end{center}
 	 Tutti questi intervalli risultano abbastanza consonanti tra di loro e possono essere usati per costruire un pianoforte: scegliendo il $La$  come nota di base, ad ogni tasto corrisponderà una di queste frequenze.
 	 Il problema che sorge con questa suddivisione è la trasposizione: supponiamo di non voler suonare partendo dal $La$, a $440 Hz$, ma dalla nota corrispondente a $550 Hz$, che chiameremo $\bar{Do}$. Il problema è chiaro: la seconda nota nella scala di $\bar{Do}$ dovrebbe stare in rapporto a $550 Hz$ per $9\over 8$, ovvero $550Hz\times {9\over 8}=618.75Hz$. Tuttavia, nella nostra scala, la nota successiva a $550 Hz$ è $586 Hz$, molto lontana da quella voluta. Questo è un disastro: servirebbe ri-accordare ogni volta lo strumento, dipendentemente dalla nota che si sceglie come riferimento.\\
 	 Insomma, la suddivisione che abbiamo costruito con l'intonazione giusta è strutturata sul $La$, ed in questo senso è una scala di $La$. Tuttavia, la scala intonata giusta di $\bar{Do}$ (e di qualsiasi altra nota) non contiene le stesse frequenze.\\
@@ -110,19 +137,83 @@
 	 Ovvero ritorneremo "quasi" alla frequenza di partenza. Dunque, seguendo questa coincidenza matematica, dividiamo la nostra ottava in $12$ intervalli, tutti uguali. In particolare, questi saranno:
 	 $$1,2^{1\over12},2^{2\over12},2^{3\over12},2^{4\over12},2^{5\over12},2^{6\over12},2^{7\over12},2^{8\over12},2^{9\over12},2^{10\over12},2^{11\over12},2^{12\over12}=2$$
 	 Dove ogni numero indica ovviamente il rapporto della sue frequenza rispetto alla fondamentale.\\
+	 Notiamo subito che nonostante la suddivisione sia in 12, abbiamo inserito 13 intervalli. Questo poichè il tredicesimo coincide con il dodicesimo, in quanto è un multiplo intero della frequenza iniziale.\\
 	 Chiamiamo la scala ottenuta seguendo questa prescrizione scala equabile.
 	 Nel caso del $La$ (o A), avremo:
-	 $$440Hz,466.1638 Hz,493.8833 Hz,523.2511 Hz,554.3653 Hz,587.3295 Hz,622.2540 Hz,$$
-	 $$659.2551 Hz,698.4564 Hz,739.9888 Hz,783.9909 Hz,830.6094 Hz,880 Hz$$ 
+	 \begin{center}
+	 	\begin{tikzpicture}
+	 		\draw (0,0)--(15,0);
+	 		\node at (1.2,1) {440 Hz};
+	 		\node at (2.4,-1) {466.1638 Hz};
+	 		\node at (3.6,0.5) {493.8833 Hz};
+	 		\node at (4.8,-0.5) {523.2511 Hz};
+	 		\node at (6,1) {554.3653 Hz};
+	 		\node at (7.2,-1) {587.3295 Hz};
+	 		\node at (8.4,0.5) {622.2540 Hz};
+	 		\node at (9.6,-0.5) {659.2551 Hz};
+	 		\node at (10.8,1) {698.4564 Hz};
+	 		\node at (12,-1) {739.9888 Hz};
+	 		\node at (13.2,0.5) {783.9909 Hz};
+	 		\node at (14.4,-0.5) {830.6094 Hz};
+	 		
+	 		\draw (0,0)--(15,0);
+	 		\node at (1.2,0) {\textbullet};
+	 		\node at (2.4,0) {\textbullet};
+	 		\node at (3.6,0) {\textbullet};
+	 		\node at (4.8,0) {\textbullet};
+	 		\node at (6,0) {\textbullet};
+	 		\node at (7.2,0) {\textbullet};
+	 		\node at (8.4,0) {\textbullet};
+	 		\node at (9.6,0) {\textbullet};
+	 		\node at (10.8,0) {\textbullet};
+	 		\node at (12,0) {\textbullet};
+	 		\node at (13.2,0) {\textbullet};
+	 		\node at (14.4,0) {\textbullet};
+	 	\end{tikzpicture}
+	 \end{center} 
 	 Il problema della trasposizione è risolto: se volessimo costruire la scala equabile partendo da un'altra nota; ad esempio dalla terza nota della scala corrispondente a $493.8833 Hz$, le successive note starebbero tra loro negli stessi rapporti di frequenze di quelle elencate sopra e coinciderebbero con esse.\\
 	 \\
 	 Cerchiamo di chiarire ancora meglio: prendiamo come nota di riferimento sempre il $La$, che da ora in avanti chiameremo $A$. Assegniamo ora alle frequenze temperate equabilmente i seguenti nomi:
-	  $$440Hz=A,466.1638 Hz=A\sharp=B\flat,493.8833 Hz=B,523.2511 Hz=C,$$
-	  $$,554.3653 Hz=C\sharp=D\flat,587.3295 Hz=D,622.2540 Hz=D\sharp=E\flat,$$
-	 $$659.2551 Hz=E,698.4564 Hz=F,739.9888 Hz=F\sharp=G\flat,$$
-	 $$,783.9909 Hz=G,830.6094 Hz=G\sharp=A\flat,880 Hz=A$$
+	 \begin{center}
+	 	\begin{tabular}{||c|c||}
+	 		\hline 
+	 		Frequenza & Nome\\
+	 		\hline
+	 		440Hz&A\\
+	 		\hline 
+	 		466.1638 Hz&$A\sharp$=$B\flat$\\
+	 		\hline 
+	 		493.8833 Hz&B\\
+	 		\hline
+	 		523.2511 Hz&C\\
+	 		\hline
+	 		554.3653 Hz&$C\sharp$=$D\flat$\\
+	 		\hline 
+	 		587.3295 Hz&D\\
+	 		\hline
+	 		622.2540 Hz&$D\sharp=E\flat$\\
+	 		\hline
+	 		659.2551 Hz&E\\
+	 		\hline
+	 		698.4564 Hz&F\\
+	 		\hline
+	 		739.9888 Hz&$F\sharp=G\flat$\\
+	 		\hline
+	 		783.9909 Hz&G\\
+	 		\hline 
+	 		830.6094 Hz&$G\sharp=A\flat$\\
+	 		\hline 880 Hz &A\\
+	 		\hline
+	 	\end{tabular}
+	 \end{center}
 	 Possiamo allora riscrivere la scala sostituendo i nomi alle frequenze come:
-	 $$A,A\sharp=B\flat,B,C,C\sharp=D\flat,D,D\sharp=E\flat,E,F,F\sharp=G\flat,G,G\sharp,A$$
+	 \begin{center}
+	 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	 		\hline
+	 		$A$&$A\sharp=B\flat$&$B$&$C$&$C\sharp=D\flat$&$D$&$D\sharp=E\flat$&$E$&$F$&$F\sharp=G\flat$&$G$&$G\sharp$&$A$ \\
+	 		\hline
+	 	\end{tabular}
+	 \end{center}
 	 Notare che a $440Hz$ ed a $880Hz$ abbiamo associato lo stesso nome, in quanto l'orecchio le sente come lo stesso suono ma a due altezze diverse. Inoltre, la nota sopra $880Hz$, secondo il temperamento equabile, sarà alla frequenza $932.328 Hz=880 Hz\times 2^{1\over 12}$, che è esattamente il doppio di $466.1638 Hz=A\sharp=B\flat$ e per ciò avrà lo stesso nome. Questo ragionamento vale anche per tutte quante le note successive, che allora avranno lo stesso nome delle loro predecessore.\\
 	 \\
 	 E' evidente che il temperamento equabile ci ha permesso di costruire una scala: una suddivisione dell'ottava in 12 intervalli in rapporti costanti di frequenze. Questa struttura si ripete di ottava in ottava, mantenendo la stessa struttura: ogni nota è in rapporto di frequenza con le adiacenti di esattamente $2^{1\over 12}$.
@@ -409,7 +500,7 @@
 	 			\item La terza maggiore della fondamentale;\\
 	 			\item La quinta della fondamentale;\\
 	 		\end{enumerate}
-	 		Nel caso di $C$, l'accordo maggiore di $C$ si indica con un abuso di notazione con $C$... ed è composto dalle note: $C,E,G$.
+	 		Nel caso di $C$, l'accordo maggiore di $C$ si indica con un abuso di notazione con $C$... ed è composto dalle note: $C,E,G$. Noi per chiarire lo chiameremo $CMaj$. Questo vale anche per tutte le altre note: $DMaj, E\flat Maj,G\sharp MAj...$ ecc ecc.
 	 		Un accordo minore è invece costituito dalle seguenti 3 note:
 	 		\begin{enumerate}
 	 			\item La fondamentale dell'accordo;\\
@@ -422,14 +513,169 @@
 	 			Costruiamo un po' di accordi maggiori e minori sulla scala cromatica, per prendere familiarità:\\
 	 			\\
 	 			L'accordo di $E$ maggiore avrà la fondamentale ($E$), la terza maggiore $(G\sharp)$ e la quinta ($B$). Sarà allora
-	 			$$E,G\sharp,B$$
+	 			$$EMaj=E,G\sharp,B$$
 	 			L'accordo di $E$ minore avrà la fondamentale ($E$), la terza minore $(G)$ e la quinta ($B$). Sarà allora 
-	 			$$E,G,B$$
+	 			$$Em=E,G,B$$
 	 			E' chiaro che per passare da un accordo maggiore ad uno minore basta abbassare la terza di un semitono.\\
 	 			\\
 	 			Facciamone ora uno difficile: L'accordo di $F\sharp$ maggiore ha: la fondamentale $F\sharp$, la terza maggiore $A\sharp$ e la quinta $C\sharp$ e sarà quindi:
-	 			$$F\sharp,A\sharp,C\sharp$$
+	 			$$F\sharp Maj=F\sharp,A\sharp,C\sharp$$
 	 			L'accordo di $F\sharp$ minore ha: la fondamentale $F\sharp$, la terza minore $A$ e la quinta $C\sharp$ e sarà quindi:
-	 			$$F\sharp,A,C\sharp$$
+	 			$$F\sharp m=F\sharp,A,C\sharp$$
+	 		\end{Ex}
+	 		Ora che abbiamo compreso come si costruiscono gli accordi maggiori e minori, armonizziamo la scala maggiore. L'idea è quella di prendere ogni nota e costruirvici un accordo sopra. Dunque, ad ogni nota della scala affiancheremo una terza (maggiore o minore) ed una quinta, rimanendo nella scala. Facciamo un esempio:
+	 		\begin{Ex}
+	 			La scala maggiore di $C$ è:
+	 			$$C,D,E,F,G,A,B,C$$
+	 			Su ogni nota di questa scala costruiamo un accordo. Avremo un accordo di $C$, uno di $D$, uno di $E$ e così via.\\
+	 			\\
+	 			Partiamo da $C$. Rimanendo all'interno della scala, $C$ ha una terza maggiore $E$ ed una quinta $G$. Allora l'accordo sarà $CEG$ ovvero $CMaj$.\\
+	 			Prendiamo ora la seconda nota, $D$. La sua terza è, rimanendo nella scala, $F$, che è una terza minore per $D$. Avremo poi una quinta di $D$, ovvero $A$. Allora l'accordo che costruiremo su $D$ sarà $Dm=DFA$.\\
+	 			Prendiamo poi la terza nota: $E$. La sua terza all'interno della scala è $G$, che è una terza minore per $E$. Avremo poi una quinta $B$ (sempre per $E$). Allora l'accordo sarà $Em=EGB$ minore. Avanzando con questo metodo, costruiamo i seguenti accordi:
+	 			\begin{center}
+	 				\begin{tabular}{||c|c||}
+	 					\hline
+	 					Nome Nota & Accordo\\
+	 					\hline
+	 					$C$ & $CMaj=CEG$\\
+	 					\hline
+	 					$D$ & $Dm=DFA$\\
+	 					\hline
+	 					$E$ & $Em=EGB$\\
+	 					\hline
+	 					$F$ & $FMaj=FAC$\\
+	 					\hline
+	 					$G$ & $GMaj=GBD$\\
+	 					\hline
+	 					$A$ & $Am=ACE$\\
+	 					\hline
+	 					$B$ & $Bm^{\flat5}=BDF$\\
+	 					\hline
+	 				\end{tabular}
+	 			\end{center}
+	 			Notiamo subito una peculiarità: se proviamo a costruire l'accordo sull'ultimo grado della scala, otteniamo qualche cosa di inusuale: la nota $B$ ha una terza minore: $D$, ed una quinta diminuita $F$. Tutti gli altri accordi hanno una quinta "giusta", mentre questo no. Chiamiamo questo accordo $$Bm^{\flat5}$$
+	 			Indicando con $m$ la terza minore e con $\flat5$ la quinta abbassata di un semitono. Chiamiamo questo accordo diminuito per semplicità.
+	 		\end{Ex}
+	 		\begin{Obs}
+	 			La costruzione che abbiamo operato sulla scala di $C$ è estendibile a tutte le altre scale grazie al temperamento equabile! In particolare, il primo grado della scala avrà un accordo maggiore, il secondo ed il terzo minori, il quarto ed il quinto maggiori, il sesto ancora minore ed il settimo diminuito.\\
+	 			\\
+	 			Il lettore potrà verificare ciò che scrivo armonizzando tutte e 12 le scale. Riportiamo qua un paio di esempi:
+	 		\end{Obs}
+	 		\begin{Ex}
+	 			Per la scala di $E$ avremo:
+	 				\begin{center}
+	 				\begin{tabular}{||c|c||}
+	 					\hline
+	 					Nome Nota & Accordo\\
+	 					\hline
+	 					$E$ & $EMaj$\\
+	 					\hline
+	 					$F\sharp$ & $F\sharp m$\\
+	 					\hline
+	 					$G\sharp$ & $G\sharp m$\\
+	 					\hline
+	 					$A$ & $AMaj$\\
+	 					\hline
+	 					$B$ & $BMaj$\\
+	 					\hline
+	 					$C\sharp$ & $C\sharp m$\\
+	 					\hline
+	 					$D\sharp$ & $D\sharp m^{\flat5}$\\
+	 					\hline
+	 				\end{tabular}
+	 			\end{center}
+	 		\end{Ex}
+	 		\begin{Ex}
+	 			Per la scala di $B$ avremo:
+	 				Per la scala di $E$ avremo:
+	 			\begin{center}
+	 				\begin{tabular}{||c|c||}
+	 					\hline
+	 					Nome Nota & Accordo\\
+	 					\hline
+	 					$B$ & $BMaj$\\
+	 					\hline
+	 					$C\sharp$ & $C\sharp m$\\
+	 					\hline
+	 					$D\sharp$ & $D\sharp m$\\
+	 					\hline
+	 					$E$ & $EMaj$\\
+	 					\hline
+	 					$F\sharp$ & $F\sharp Maj$\\
+	 					\hline
+	 					$G\sharp$ & $G\sharp m$\\
+	 					\hline
+	 					$A\sharp$ & $A\sharp m^{\flat5}$\\
+	 					\hline
+	 				\end{tabular}
+	 			\end{center}
+	 		\end{Ex}
+	 		La struttura generale sarà la seguente:
+	 		\begin{center}
+	 			\begin{tabular}{||c|c||}
+	 				\hline
+	 				Nome Nota & Accordo\\
+	 				\hline
+	 				$Fondamentale$ & $Maj$\\
+	 				\hline
+	 				$Seconda maggiore$ & $m$\\
+	 				\hline
+	 				$Terza maggiore$ & $m$\\
+	 				\hline
+	 				$Quarta$ & $Maj$\\
+	 				\hline
+	 				$Quinta$ & $Maj$\\
+	 				\hline
+	 				$Sesta$ & $m$\\
+	 				\hline
+	 				$Settima maggiore$ & $m^{\flat5}$\\
+	 				\hline
+	 			\end{tabular}
+	 		\end{center}
+	 		Possiamo ora armonizzare la scala minore. L'idea è quella ri ripetere il procedimento fatto per la scala maggiore: prendere ogni nota ed associarvici un accordo costruendolo all'interno della scala con terze e quinte. Tuttavia, ricordiamo che ad ogni scala maggiore è associata una scala minore! Ma allora, l'armonizzazione della scala minore sarà la stessa di quella della scala maggiore, semplicemente partendo dal sesto grado.
+	 		\begin{center}
+	 			\begin{tabular}{||c|c||}
+	 				\hline
+	 				Nome Nota & Accordo\\
+	 				\hline
+	 				$Fondamentale$ & $m$\\
+	 				\hline
+	 				$Seconda maggiore$ & $m^{\flat5}$\\
+	 				\hline
+	 				$Terza minore$ & $Maj$\\
+	 				\hline
+	 				$Quarta$ & $m$\\
+	 				\hline
+	 				$Quinta$ & $m$\\
+	 				\hline
+	 				$Sesta minore$ & $Maj$\\
+	 				\hline
+	 				$Settima minore$ & $Maj$\\
+	 				\hline
+	 			\end{tabular}
+	 		\end{center}
+	 		\begin{Ex}
+	 			La scala minore di $A$ può essere armonizzata prendendo quella di $C$ e riscrivendola a partire dal sesto grado:
+	 			\begin{center}
+	 				\begin{tabular}{||c|c||}
+	 					\hline
+	 					Nome Nota & Accordo\\
+	 					\hline
+	 					$A$ & $Am$\\
+	 					\hline
+	 					$B$ & $Bm^{\flat5}$\\
+	 					\hline
+	 					$C$ & $CMaj$\\
+	 					\hline
+	 					$D$ & $Dm$\\
+	 					\hline
+	 					$E$ & $Em$\\
+	 					\hline
+	 					$F$ & $FMaj$\\
+	 					\hline
+	 					$G$ & $GMaj$\\
+	 					\hline
+	 				\end{tabular}
+	 			\end{center}
 	 		\end{Ex}
 \end{document}
