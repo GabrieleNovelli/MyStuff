@@ -17,6 +17,16 @@
 \usepackage{comment}
 \usepackage[compat=1.0.0]{tikz-feynman}
 \usepackage{tikz-cd}
+\usepackage[print,1 to1]{booklet}
+\usepackage{truncate}
+\usepackage{fancyhdr}
+
+% Configurazione della pagina per il libretto
+\geometry{centering,bindingoffset=1cm,top=6.5cm,bottom=6.5cm,left=4.5cm,right=4.5cm}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\bfseries\centering\fontsize{10}{12}\selectfont}{\thesection}{1em}{}
+
 
 \hypersetup{
 	colorlinks=true,
@@ -27,9 +37,6 @@
 	pdfpagemode=FullScreen,
 }
 
-\textwidth=450pt\oddsidemargin=0pt
-\geometry{a4paper, top=3cm, bottom=3cm, left=3cm, right=3cm, % heightrounded, bindingoffset=5mm 
-}
 \theoremstyle{definition}
 \newtheorem{Def}{Definizione}[chapter]
 
@@ -48,6 +55,15 @@
 \theoremstyle{definition}
 \newtheorem{Obs}[Def]{Osservazione:}
 \begin{document}
+	\setpdftargetpages
+	Caro Dottor Vignoli,\\
+	\\
+	Le scrivo questo libricino come regalo di laurea. Dato che lei mi ha sempre preso per il culo per la mia indole matematica, ci tengo a darle la possibilità di sorbirsi una potentissima cagatura di maroni. A parte gli scherzi: questo libricino contiene qualche pagina su di un argomento di matematica che mi sta molto a cuore: l'algebra esterna. Questa costruzione è a mio avviso una delle più astratte e complesse da comprendere a fondo che lei possa trovare.\\
+	Ci tengo infine a ringraziarla per tutto ciò che lei ha fatto per me in questi anni. La sua persona sarà per sempre incisa nei miei ricordi come qualche cosa di inscindibile dalla fisica. Lei ha reso questi miei faticosi anni migliori, e non c'è regalo che possa ripagare ciò.\\
+	\\
+	Con amore;\\
+	\\
+	Gabriele Novelli
 	\chapter{Ripassino}
 	Caro il mio dottor Cisafrulli, per comprendere bene ciò che seguirà serve capire bene che diamine è uno spazio quoziente. Non che io dubiti delle sue capacità cognitive, né delle sue competenze fisiche, ma mi è sorto il dubbio che lei non sappia che cazzo sia sto spazio quoziente. Questo semplicemente perché non ne abbiamo mai fatto uso.
 	\begin{Def}
@@ -66,7 +82,7 @@
 		Siano allora $v,w\in V$ e $\lambda\in \mathbb{K}$ campo di $V$. Definiamo allora la seguente operazione su $V/I$:
 		$$[v]+[w]=[v+w]; \lambda[v]=[\lambda v]$$
 		In sostanza, definiamo la somma e il prodotto con uno scalare come lineari. Per vedere se questa operazione è ben definita ci basta verificare che non dipenda dal rappresentante della classe. Siano allora $[v]$ e $[w]$ due elementi di $V/I$. Scegliamo due rappresentanti di queste classi:
-		$$v+I$$ come rappresentante di $[v]$ e $w+I$ come rappresentante di $[w]$. Con un palese abuso di notazione, indichiamo con $I$ un generico elemento di $I$. In questo senso $I+I=I$ dato che il sottospazio $I$ è per l'appunto uno spazio vettoriale. Ma allora:
+		$v+I$ come rappresentante di $[v]$ e $w+I$ come rappresentante di $[w]$. Con un palese abuso di notazione, indichiamo con $I$ un generico elemento di $I$. In questo senso $I+I=I$ dato che il sottospazio $I$ è per l'appunto uno spazio vettoriale. Ma allora:
 		$$v+I+w+I=v+w+I$$
 		Ovvero la somma di due classi non dipende dal rappresentante scelto. Lo stesso vale evidentemente per la moltiplicazione con uno scalare.\\
 		\\
@@ -148,8 +164,7 @@ Cerchiamo di capire meglio questa definizione. Stiamo considerando uno insieme i
 \begin{Ex}
 	Sia $T^3(V)$, allora $I$ è formato da tutti i vettori del tipo $v\otimes v\otimes w$; $v\otimes w\otimes v$; $w\otimes v\otimes v$; $v\otimes v\otimes v$ e dalle loro combinazioni lineari.
 \end{Ex}
-E così via.\\
-\\
+E così via.
 \begin{Prop}
 	$I$ è un sottospazio vettoriale di $T^n(V)$.
 \end{Prop}
@@ -160,7 +175,8 @@ Vogliamo ora studiare il seguente spazio quoziente:
 $$T^n(V)/I$$
 Questa definizione può far paura ma noi, dottor Piciarnalli, armati di cagatura di maroni e forza di volontà, non ci lasceremo spaventare. Per definizione, lo spazio in questione è composto da classi di equivalenza, i cui elementi differiscono al più per un elemento di $I$.\\
 Questo significa che un elemento di $T^n(V)/I$ è una classe $[v_1\otimes...\otimes v_n]$ di elementi di $T^n(V)$, tale che gli elementi di questa classe differiscono al più per un elemento di $I$, che si può scrivere come:
-$$\hbox{Se } v_1\otimes...\otimes v_n \hbox{ e } w_1\otimes...\otimes w_n \hbox{ sono nella stessa classe, allora } v_1\otimes...\otimes v_n- w_1\otimes...\otimes w_n\in I$$
+$$\hbox{Se } v_1\otimes...\otimes v_n \hbox{ e } w_1\otimes...\otimes w_n \hbox{ sono nella stessa classe, allora }$$
+$$ v_1\otimes...\otimes v_n- w_1\otimes...\otimes w_n\in I$$
 \begin{Def}
 	Sia $V$ uno spazio vettoriale a dimensione finta $n$. Definiamo la potenza esterna k-esima di $V$ come lo spazio:
 	$$\bigwedge^k V=T^k(V)/I$$
@@ -211,7 +227,7 @@ $$\hbox{Se } v_1\otimes...\otimes v_n \hbox{ e } w_1\otimes...\otimes w_n \hbox{
 	Possiamo estendere questo risultato per una generica permutazione degli indici: siano $v_1,...,v_n\in V$ e $\sigma_i$ una permutazione degli indici $i=1,...,n$. Allora vale evidentmente:
 	$$v_1\wedge...\wedge v_n=sgn(\sigma)v_{\sigma_1}\wedge...\wedge v_{\sigma_n}$$ \\
 	\\
-	Prima di passare ad una parte di rottura di maroni allucinante sulla ben-definitezza del prodotto wedge, vediamo alcune altre cosucce.
+	Vediamo alcune altre cosucce. Ci interessa, professor Bipartisan, trovare una base per la nostra potenza esterna k-esima:
 	\begin{Theo}
 		Dato uno spazio vettoriale $V$ a dimensione finita $n$ con base $\{e_i; i=1,...,n\}$, allora una base per la potenza esterna k-esima $\bigwedge^k V$ è data da:
 		$$\{e_{i_1}\wedge e_{i_2}\wedge...\wedge e_{i_n}|1\leq i_1 < i_2 <... < i_n \leq n\}$$ 
@@ -219,7 +235,7 @@ $$\hbox{Se } v_1\otimes...\otimes v_n \hbox{ e } w_1\otimes...\otimes w_n \hbox{
 	Prima di dimostrare questa cavolata, cerchiamo di capire. Questo teorema ci vuole comunicare che una base della potenza k-esima è innanzitutto costruibile a partire da una base di $V$. Scelta quest'ultima, ci basta prendere i prodotti wedge degli elementi di base "ordinando" gli indici in modo crescente. Questo ordinamento, come vedremo dalla dimostrazione, è una pura conseguenza dell'alternanza del prodotto wedge.\\
 	\begin{proof}
 		Prendiamo un set di vettori $v_1,...,v_k$ appartenenti a $V$ e scegliamo una base di $V$ come $\{e_1,...,e_n\}$. Per ora supponiamo $k\leq n$. Possiamo ovviamente decomporre i vettori scelti come combinazioni lineari degli elementi della base:
-		$$v_i=\sum_{j=1}^{n} v^{j_i}_i e_j=v^{j_i}_i e_j \hbox{ Useremo la notazione di Einstein per non sovraccaricare i conti}$$
+		$$v_i=\sum_{j=1}^{n} v^{j_i}_i e_j=v^{j_i}_i e_j \hbox{ Useremo la notazione di Einstein per} $$$$\hbox{non sovraccaricare i conti}$$
 		dove $i$ indica il nostro vettore scelto tra il set $v_1,...,v_k$, mentre $j_i$ indica l'enumerazione relativa agli elementi della base.\\
 		\\
 		A questo punto, all'interno di $T^k(V)$ abbiamo che
@@ -250,7 +266,9 @@ $$\hbox{Se } v_1\otimes...\otimes v_n \hbox{ e } w_1\otimes...\otimes w_n \hbox{
 	\end{Prop}
 	\begin{proof}
 		Dato che $f$ è una mappa alternante allora $f(v_1,...,v_i,...v_j,...,v_q)=0$ se $v_i=v_j$ per $i\neq j$. Supponiamo quindi che esista un $v_i$ che è combinazione lineare degli altri vettori, cioè $v_i=\sum_{j\neq i}\xi_jv_j$. Allora, per linearità di $f$ si ha
-		$$f(v_1,...,v_i,...,v_q)=f(v_1,...,\sum_{j\neq i}\xi_jv_j,...,v_q)=\sum_{j\neq i}\xi_jf(v_1,...,v_j,...,v_j,...,v_q)=0$$
+		$$f(v_1,...,v_i,...,v_q)=f(v_1,...,\sum_{j\neq i}\xi_jv_j,...,v_q)=$$
+		$$\sum_{j\neq i}\xi_jf(v_1,...,v_j,...,v_j,...,v_q)=0$$
+		L'ultima uguaglianza è una banale conseguenza dell'alternanza di $f$: scambiando due elementi si prende un segno (-).
 	\end{proof}
 	Quello che segue è un teorema che definisce univocamente i coefficienti di decomposizione di cui abbiamo parlato. Il Teorema è complesso nella sua stesura e nella notazione, ma non di difficile comprensione.
 	\begin{Theo}\label{Theo 2}
@@ -269,10 +287,11 @@ $$\hbox{Se } v_1\otimes...\otimes v_n \hbox{ e } w_1\otimes...\otimes w_n \hbox{
 	\end{Theo}
 	\begin{proof}
 		La dimostrazione è molto semplice ed è letteralemnte un'applicazione della linearità della mappa $f$. Basta svolgere i calcoli, che tra l'altro, sono anche corti. Procediamo:
-		$$f(v_1,...,v_q)=f(\sum_{j_1}\xi_{1j_1}e_{j_1},...,\sum_{j_q}\xi_{qj_q}e_{j_q})=\sum_{j_1}...\sum_{j_q}\xi_{1j_1}...\xi_{qj_q}f(e_{j_1},...,e_{j_q})$$
+		$$f(v_1,...,v_q)=f(\sum_{j_1}\xi_{1j_1}e_{j_1},...,\sum_{j_q}\xi_{qj_q}e_{j_q})=$$
+		$$\sum_{j_1}...\sum_{j_q}\xi_{1j_1}...\xi_{qj_q}f(e_{j_1},...,e_{j_q})$$
 		Ricordando che $f$ si annulla quando due argomenti sono uguali in quanto alternante, otteniamo:
-		$$f(v_1,...,v_q)=\sum_{j_1\le j_2\le...\le j_q}\xi_{1j_1}...\xi_{qj_q}f(e_{j_1},...,e_{j_q})=
-		\sum_{H}\sum_{\sigma}\xi_{1\sigma{j_1}}...\xi_{q\sigma(j_q)}f(e_{\sigma(j_1)},...,e_{\sigma(j_q)})=$$
+		$$f(v_1,...,v_q)=\sum_{j_1\le j_2\le...\le j_q}\xi_{1j_1}...\xi_{qj_q}f(e_{j_1},...,e_{j_q})=$$
+		$$\sum_{H}\sum_{\sigma}\xi_{1\sigma{j_1}}...\xi_{q\sigma(j_q)}f(e_{\sigma(j_1)},...,e_{\sigma(j_q)})=$$
 		$$\sum_{H}\sum_{\sigma}sgn(\sigma)\xi_{1\sigma{j_1}}...\xi_{q\sigma(j_q)}f(e_{j_1},...,e_{j_q})=$$
 		$$
 		=\sum_{H}det(M_H)f(e_{j_1},...,e_{j_q})$$
