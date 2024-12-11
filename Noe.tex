@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{report}
+\documentclass[12pt,a4paper]{book}
 
 \usepackage[italian]{babel}
 \usepackage{newlfont}
@@ -17,6 +17,22 @@
 \usepackage{comment}
 \usepackage[compat=1.0.0]{tikz-feynman}
 \usepackage{tikz-cd}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{pgfpages}
+\usepackage[print,1 to1]{booklet}
+\usepackage{truncate}
+\usepackage{fancyhdr}
+
+% Configurazione della pagina per il libretto
+\geometry{centering,bindingoffset=1cm,top=6.5cm,bottom=6.5cm,left=4.5cm,right=4.5cm}
+
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\bfseries\centering\fontsize{10}{12}\selectfont}{\thesection}{1em}{}
+
 
 \hypersetup{
 	colorlinks=true,
@@ -27,9 +43,6 @@
 	pdfpagemode=FullScreen,
 }
 
-\textwidth=450pt\oddsidemargin=0pt
-\geometry{a4paper, top=3cm, bottom=3cm, left=3cm, right=3cm, % heightrounded, bindingoffset=5mm 
-}
 \theoremstyle{definition}
 \newtheorem{Def}{Definizione}[chapter]
 
@@ -48,6 +61,7 @@
 \theoremstyle{definition}
 \newtheorem{Obs}[Def]{Osservazione:}
 \begin{document}
+	\setpdftargetpages
 	Ciao Noe;
 	Questo libricino è stato partorito in seguito alla conversazione che abbiamo avuto da brilli. Spero che i contenuti di queste pagine ti possano far ricordare il mio nome per tutta la tua vita, ovunque essa ti porti. Sei stata la personalità che mi ha più segnato in ambito accademico ed il rapporto che sono riuscito a costruire con te è uno dei più belli che possiedo. Prego con tutto il mio cuore che la nostra amicizia possa continuare in eterno. Fisica non sarà più la stessa cosa (casa) senza di te. \\
 	\\
@@ -105,7 +119,7 @@
 	 Questo significa che se la prima nota della scala ha frequenza $\omega$, la seconda avrà $9\omega\over8$, la terza ${5\omega\over 4}$ e così via.\\
 	 Per fare un esempio, se prendiamo come frequenza di base $440 Hz$, corrispondente ad un $La$ (o A), avremo:\\
 	 \begin{center}
-	 	\begin{tikzpicture}
+	 	\begin{tikzpicture} [scale=0.8,every node/.style={font=\small}]
 	 		\draw (0,0)--(13,0);
 	 		\node at (1,1) {440 Hz};
 	 		\node at (2.5,1) {495 Hz};
@@ -141,7 +155,7 @@
 	 Chiamiamo la scala ottenuta seguendo questa prescrizione scala equabile.
 	 Nel caso del $La$ (o A), avremo:
 	 \begin{center}
-	 	\begin{tikzpicture}
+	 	\begin{tikzpicture} [scale=0.76,every node/.style={font=\small}]
 	 		\draw (0,0)--(15,0);
 	 		\node at (1.2,1) {440 Hz};
 	 		\node at (2.4,-1) {466.1638 Hz};
@@ -208,11 +222,13 @@
 	 \end{center}
 	 Possiamo allora riscrivere la scala sostituendo i nomi alle frequenze come:
 	 \begin{center}
+	 		\resizebox{13 cm}{!}{
 	 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 	 		\hline
 	 		$A$&$A\sharp=B\flat$&$B$&$C$&$C\sharp=D\flat$&$D$&$D\sharp=E\flat$&$E$&$F$&$F\sharp=G\flat$&$G$&$G\sharp$&$A$ \\
 	 		\hline
 	 	\end{tabular}
+	 }
 	 \end{center}
 	 Notare che a $440Hz$ ed a $880Hz$ abbiamo associato lo stesso nome, in quanto l'orecchio le sente come lo stesso suono ma a due altezze diverse. Inoltre, la nota sopra $880Hz$, secondo il temperamento equabile, sarà alla frequenza $932.328 Hz=880 Hz\times 2^{1\over 12}$, che è esattamente il doppio di $466.1638 Hz=A\sharp=B\flat$ e per ciò avrà lo stesso nome. Questo ragionamento vale anche per tutte quante le note successive, che allora avranno lo stesso nome delle loro predecessore.\\
 	 \\
@@ -227,6 +243,7 @@
 	 $$1,2^{1\over12},2^{2\over12},2^{3\over12},2^{4\over12},2^{5\over12},2^{6\over12},2^{7\over12},2^{8\over12},2^{9\over12},2^{10\over12},2^{11\over12},2^{12\over12}=2$$
 	 Questi sono dodici intervalli o gradi. Diamo ora i seguenti nomi:
 	 \begin{center}
+	 		\resizebox{13 cm}{!}{
 	 	\begin{tabular}{||c|c|c||} 
 	 		\hline
 	 		Intervallo & Nome & Distanza in semitoni\\ [0.5ex] 
@@ -258,6 +275,7 @@
 	 		$2$ & Ottava &12 semitoni = 6 toni \\  
 	 		\hline
 	 	\end{tabular}
+	 }
 	 \end{center}
 	  Nel caso della scala di $A$, avremo:
 	  \begin{center}
@@ -295,7 +313,9 @@
 	  \end{center}
 	  Nel caso della scala di avremo:
 	  	  \begin{center}
+	  	  	
 	  	\begin{tabular}{||c|c||} 
+	  		 
 	  		\hline
 	  		Intervallo & Nome \\ [0.5ex] 
 	  		\hline\hline
@@ -371,11 +391,13 @@
 	 \begin{Ex}
 	 	Vogliamo costruire la scala maggiore di $A$, a partire da tutte le note della scala cromatica:
 	 	\begin{center}
+	 			\resizebox{11 cm}{!}{
 	 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 	 			\hline
 	 			$A$&$A\sharp=B\flat$&$B$&$C$&$C\sharp=D\flat$&$D$&$D\sharp=E\flat$&$E$&$F$&$F\sharp=G\flat$&$G$&$G\sharp$&$A$ \\
 	 			\hline
 	 		\end{tabular}
+	 	}
 	 	\end{center}
 	 	La struttura soprastante chiede le seguenti note:
 	 	$$A,B,C\sharp,D,E,F\sharp,G\sharp,A$$
@@ -388,11 +410,12 @@
 	 \begin{Ex}
 	 	Vogliamo costruire la scala maggiore di $C$, a partire da tutte le note della scala cromatica:
 	 		 	\begin{center}
+	 		 			\resizebox{12 cm}{!}{
 	 		 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 	 		 			\hline
 	 		 			$A$&$A\sharp=B\flat$&$B$&$C$&$C\sharp=D\flat$&$D$&$D\sharp=E\flat$&$E$&$F$&$F\sharp=G\flat$&$G$&$G\sharp$&$A$ \\
 	 		 			\hline
-	 		 	\end{tabular}
+	 		 	\end{tabular}}
 	 		 \end{center}
 	 		 La struttura soprastante chiede le seguenti note:
 	 		 	$$C,D,E,F,G,A,B,C$$
@@ -423,11 +446,13 @@
 	 		 \begin{Ex}
 	 		 	La scala minore di $C$ è costruita a partire da quella cromatica, ovvero da queste note:
 	 		 	\begin{center}
+	 		 			\resizebox{10 cm}{!}{
 	 		 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 	 		 			\hline
 	 		 			$A$&$A\sharp=B\flat$&$B$&$C$&$C\sharp=D\flat$&$D$&$D\sharp=E\flat$&$E$&$F$&$F\sharp=G\flat$&$G$&$G\sharp$&$A$ \\
 	 		 			\hline
 	 		 		\end{tabular}
+	 		 	}
 	 		 	\end{center}
 	 		 	La nostra prescrizione ci impone:
 	 		 	$$\hbox{Tono-Semitono-Tono-Tono-Semitono-Tono-Tono}$$
@@ -439,11 +464,12 @@
 	 		 \begin{Ex}
 	 		 	Costruiamo la scala minore di $D$. Come al solito, dovremo scegliere 7 tra le 12 note cromatiche:
 	 		 	\begin{center}
+	 		 			\resizebox{11 cm}{!}{
 	 		 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 	 		 			\hline
 	 		 			$A$&$A\sharp=B\flat$&$B$&$C$&$C\sharp=D\flat$&$D$&$D\sharp=E\flat$&$E$&$F$&$F\sharp=G\flat$&$G$&$G\sharp$&$A$ \\
 	 		 			\hline
-	 		 		\end{tabular}
+	 		 		\end{tabular}}
 	 		 	\end{center}
 	 		 	Seguendo la solita prescrizione:
 	 		 		$$\hbox{Tono-Semitono-Tono-Tono-Semitono-Tono-Tono}$$
@@ -484,7 +510,7 @@
 	 			$$\hbox{\textit{Se suono più spesso $C$ allora la fondamentale è $C$, ed il mio orecchio sente la scala}}$$ $$\hbox{\textit{come se fosse la scala maggiore di $C$. Se suono più spesso $A$}}$$
 	 			$$\hbox{\textit{la fondamentale è $A$ e il mio orecchio sente la scala come fosse la scala minore di $A$}}$$
 	 		\end{Obs}
-	 		\chapter{L'armonizzazione delle scale maggiori e minori}
+	 		\chapter[l'armonizzazione]{L'armonizzazione delle scale maggiori e minori}
 	 		Armonizzare una scala significa costruire degli accordi su di una scala.
 	 		\begin{Def}
 	 			Un accordo è un insieme di più note suonate insieme.
