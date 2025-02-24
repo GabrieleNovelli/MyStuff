@@ -1,0 +1,378 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[italian]{babel}
+\usepackage{newlfont}
+\usepackage{color}
+\usepackage{float}
+\usepackage{frontespizio}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{biblatex}
+\usepackage{csquotes}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{comment}
+\usepackage[compat=1.0.0]{tikz-feynman}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Overleaf Example},
+	pdfpagemode=FullScreen,
+}
+
+\textwidth=450pt\oddsidemargin=0pt
+\geometry{a4paper, top=3cm, bottom=3cm, left=3cm, right=3cm, % heightrounded, bindingoffset=5mm 
+}
+\theoremstyle{definition}
+\newtheorem{Def}{Definizione}[chapter]
+
+\theoremstyle{Theorem}
+\newtheorem{Theo}[Def]{Teorema}
+\newtheorem{Prop}[Def]{Proposizione}
+
+\newtheorem{Lm}[Def]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{Ex}[Def]{Esempio}
+
+\theoremstyle{definition}
+\newtheorem{Lem}[Def]{Lemma:}
+
+\theoremstyle{definition}
+\newtheorem{Obs}[Def]{Osservazione:}
+\begin{document}
+	\chapter{Metric Manifolds}
+	\section{Riemaniann metric}
+	\begin{Def}
+		Consider a manifold $M$ and it's tangent space $T_pM$ at any point. We call Riemaniann metric the assignment of an inner product $\langle,\rangle_p$ on the tangent space. This means that:
+		\begin{itemize}
+			\item $\langle,\rangle$ is bilinear;
+			\item $\langle,\rangle$ is symmetric;
+			\item $\langle,\rangle$ is positive definite.
+		\end{itemize}
+		Moreover, we require that the innser product is smooth. This means that if $X,Y\in\mathfrak{X}(M)$ then $p\rightarrow\langle X_p,Y_p\rangle_p$ is a smooth function of $M$.\\
+		We call a Riemaniann Manifold a manifold with a Riemaniann metric.
+	\end{Def}
+	\chapter{Bundles}
+	\section{Fiber Bundles}
+	\begin{Def}
+		Let $E,M,F$ be topological spaces and let $M$ be connected. Let $\pi:E\rightarrow M$ be a map with the following properties:
+		\begin{itemize}
+			\item $\pi$ is continuous and surjective;
+			\item per every point $x_M\in M$ there existes an open set $U\subset M$ such that there exists an homeomorphism $\varphi:\pi^{-1}(U)\rightarrow U\times F$ called local trivialization, which makes the follwing diagram commute:
+		\end{itemize}
+		\[
+		\begin{tikzcd}
+			\pi^{-1}(U) \arrow{r}{\varphi} \arrow[swap]{dr}{\pi} & U\times F \arrow{d}{Proj}\\
+			& U 
+		\end{tikzcd}
+		\]
+		Where $Proj: U\times F\rightarrow U$ is the standard projection. $Proj(x_M,x_F)=x_M$
+		We call $(E,M,\pi,F)$ a fiber bundle, $M$ base space, $E$ total space and $F$ fiber.
+	\end{Def}
+	\begin{center}
+		\includegraphics[scale=0.3]{bundle_cilinder.pdf}
+	\end{center}
+	Basically, this definition tells us that locally we can see $E$ as homeomoprhic to the product space $M\times F$. Now we make some examples:
+	\begin{Ex}[Product Bundle]\label{Ex_1.1}
+		Let $M$ be a connected topological space and $F$ a fiber. We set $E=M\times F$ and construct a projection in the usual obvious way:\\ $\pi:M\times F\rightarrow M$ like $\pi(x_M,x_F)=x_M$. This map is obviusly continuous and surjective since it is a projection. Now we just need to construct local trivializations: we set
+		$$\varphi:\pi^{-1}(U)\rightarrow U\times F$$
+		such that $\varphi(x_M,x_F)=(x_M,x_F)$ the identity map.
+	\end{Ex}
+	\begin{Ex}[\textbf{Cilinder}] \label{Ex_1.2}
+		An example of the product bundle is the cilinder. It can be constructed as a fiber bundle over the circle $S^1=\{z\in \mathbb{C}|z=e^{i\theta}, \theta\in[0,2\pi]\}$. We call $Cil=S^1\times [0,1]$ the cilinder and cosntruct the product bundle just like we did in example \ref{Ex_1.1}. We define the projection as: $\pi:Cil\rightarrow S^1$ that sends $\pi(z,t)\rightarrow z$. This is a projection so it is continuous and surjective.\\
+		As for the local trivializations, we can take any subset of the circle $U$ and trivialize the bundle with the identity:
+		$\varphi:\pi^{-1}(U)\rightarrow U\times [0,1]=\mathbb{I}_d$.\\
+		In this case the fiber of the cilinder is a line. So each point has associaated a line and the totality of those lines composes the cilinder.
+		\begin{center}
+			\includegraphics[scale=0.3]{bundle_generic.pdf}
+	\end{center}
+	\end{Ex}
+	\begin{Ex}[\textbf{Möbius strip}]\label{Ex_1.3}
+		This is an example of a non trivial bundle.
+	\end{Ex}
+	\begin{Def}
+		We say that a fiber bundle $(E,M,\pi,F)$ is a vector bundle if $M$ and $E$ are manifolds, $F$ and $\pi^{-1}(p)=F_p\in E$ are real finite-dimensional vector spaces; and the trivializing functions $\varphi:\pi^{-1}(U)\rightarrow U\times F$ are such that the induced map $\pi^{-1}(p)\rightarrow\{p\}\times F$ is a linear isomorphism.
+	\end{Def}
+	\begin{Def}
+		A vector bundle is said to be trivial if $E$ is isomorphic to $M\times F$ the product bundle.
+	\end{Def}
+	It clearly follows that the product bundle is trivial and so it is called the trivial bundle also.
+	\begin{Def}
+		A vector bundle is said to be smooth if $\pi$ is smooth and the local trivializations are diffeomorphisms.
+	\end{Def}
+	\section{The tangent bundle}
+		Let M be a manifold. At any point $p\in M$ we can define the tangent space $T_pM\simeq \mathbb{R}^n$. We define the tangent bundle as $TM=\bigsqcup_{p\in M}T_pM=\bigcup_p\in M \{p\}\times T_pM$ the disjoint union of all the tangent spaces. Now we want to endow the tangent bundle with a manifold structure.\\
+		We have a projection $\pi:TM\rightarrow M$ obviously defined as $\pi(p,v_p)=p$ where $v_p\in T_pM$ and it is clearly surjective and continuous due to it being a projection
+		\subsection{The topology of the tangent bundle}
+		We want to construct a map that lets $TM$ have an induced topology from the manifold M.\\
+		\\
+		Let $(U,\phi)$ be a chart on $M$ with $\phi:U\rightarrow \mathbb{R}^n$. Then, any vector in $p\in U$ can be written in local coordiantes: $v_p=v^i_p\partial_i|_p$. At $p$, the functions $v^i_p$ are functions of $v$ since they are already evaluated in $p$.\\
+		Now we construct the following mapping:
+		$$\Phi:TU\rightarrow \phi(U)\times \mathbb{R}^n; \hbox{ like: }
+		\Phi(p,v_p)=(x^i_pe_i,v^i_p\partial_i|_p)$$
+		This mapping is 1-1 and surjective so it is a bijection inside $U$. Moreover, it is continuous. Thus, being an homeomorphism, $\Phi$ insuces a topology on $TM$.
+		\begin{Theo}
+			The tangent bundle $TM$ has a second countable and Haussdorf topology
+		\end{Theo}
+		\begin{proof}
+			Non ho voglia
+		\end{proof}
+		\subsection{The smooth structure}
+		Consider an Atlas $\mathfrak{A}_M=\{U_\alpha,\phi_\alpha\}$ for the manifold $M$. We want to show that the induced collection $\mathfrak{A}_{TM}=\{TU_\alpha,\Phi_\alpha\}$ is an atlas on $TM$, knowing that $TM=\bigcup TU_\alpha$ (obviously) and $\Phi_\alpha:TU_\alpha\rightarrow U_\alpha\times \mathbb{R}^n$ is the map constructed above.\\
+		\\
+		Now, as we have seen, the maps $\Phi_\alpha$ are homeomorphisms between open sets of $TM$ and $\mathbb{R}^{2n}$. It remains to check the compatibility between two overlapping charts.\\
+		\\
+		Consider two overlapping charts $\Phi_1,\Phi_2$ on $TU_1,TU_2$ open sets of the tangent bundle, with $TU_1\cap TU_2\neq \emptyset$. Then on the two charts $(U_1,\phi_1)$, $(U_2,\phi_2)$ we can express tangent vectors in two different coordiante basis:
+		$$v=a^i{\partial\over \partial{x^i}}=b^j{\partial \over \partial y^j}$$
+		Clearly at any point:
+		$$a^i=b^j{\partial x^i\over\partial y^j} \hbox{ and } b^j=a^i{\partial y^j\over\partial x^i}$$
+		Now it only remains to show that the composition $\Phi_1\circ \Phi_2^{-1}$ is a diffeomorphism.\\
+		By definition:
+		$$\Phi_1\circ \Phi_2^{-1}:\phi_2(U_2\cap U_1)\times \mathbb{R}^n\rightarrow \phi_1(U_2\cap U_1)\times \mathbb{R}^n$$
+		This map, being a composition of heomeomorphisms, is still an homeomorphism. Now, taking a point $p\in U_2\cap U_1$ and a tangent vector $v_p$ we wxplicitly write:
+		$$\Phi_1\circ \Phi_2^{-1}(x^i_p,a^i_p)=(y^j_p,b^j_p)$$
+		where we have shortened the notation:
+		$$(x^i,a^i)=(x^1_p,...,x^n_p,a^1_p,...,a^n_p)$$
+		However, we can make the following substitution:
+		$$(y^j_p,b^j_p)=\bigg((\phi_2\circ \phi_1^{-1})(\phi_1(p)),a^i_p{\partial y^j\over\partial x^i}\bigg|_p\bigg)=\bigg((\phi_2\circ \phi_1^{-1})(\phi_1(p)),a^i_p{\partial (\phi_2\circ \phi_1^{-1})^j\over\partial r^i}\bigg|_p(\phi_1(p))\bigg)$$
+		Due to $\phi_2\circ \phi_1^{-1}$ being a diffeomorphism, $\Phi_1\circ \Phi_2^{-1}$ is also a diffeomorphism.\\
+		This completes the proof.\\
+		\\
+		Thus, the Tangent bundle $TM$ of a manifold of dimension $n$ is also a manifold, but of dimension $2n$, with an atlas given by:
+		$$\mathfrak{A}_{TM}=\{TU_\alpha,\Phi_\alpha\} \hbox{ where } \Phi_\alpha:TU_\alpha\rightarrow U_\alpha\times \mathbb{R}^n$$
+		\subsection{The smooth vector bundle structure of the tangent bundle}
+		Consider a manifold $M$ of dimension $n$ and it's tangent bundle $TM$ with the induced $2n$-manifold structure from $M$. We have a projection $\pi:TM\rightarrow M$ defined as $\pi(p,v_p)=p$ which is continuous and surjective. 
+		\\
+		Before constructing the local trivializations, we need to show that this projection is smooth. This is done via charts. Consider a chart $(U,\phi)$ on $M$ and the corresponding $(TU,\Phi:TU\rightarrow \phi(U)\times \mathbb{R}^n)$. Then we can look at the composition:
+		$$\phi\circ \pi\circ \Phi^{-1}:\phi(U)\times \mathbb{R}^n\rightarrow \mathbb{R}^n \hbox{ such that }$$ 
+		$$\phi(\pi(\Phi^{-1}(x^i,a^i)))=\phi(\pi(p,v_p))=\phi(p)=x^i$$
+		This is clearly smooth and so $\pi$ is to, since $\phi$ and $\Phi$ are smooth and homeomorphisms.\\
+		\\
+		Now we need to construct local trivializations. We wish for an homeomorphism $\varphi:\pi^{-1}(U)\rightarrow U\times F$ where the fiber at each point is the tangent space $T_pM$. We also wish for this homeomorphism to be a diffeomorphism and to reduce on the fiber to a linear isomorphism.\\
+		\\
+		Given any chart on $TM$ like $(TU,\Phi)$, we take as our candidate the map: 
+		$$\varphi:(\phi^{-1}\times \mathbb{I}_{\mathbb{R}^n})\circ \Phi:TU\rightarrow U\times \mathbb{R}^n$$
+		In particular we have the following succession:
+		$$\varphi:TU\xrightarrow{\text{$\Phi$}} U\times \mathbb{R}^n\xrightarrow{\text{$\phi^{-1}\times \mathbb{I}_{\mathbb{R}^n}$}}U\times \mathbb{R}^n$$
+		This map is clearly an homeomorphism and a diffeomorphism since the charts on manifolds are both and so is the identity. As for the linear isomorphism reduction, consider the map:
+		$\varphi_p$ where we fix the first argument $p$. The induced map is the follwoing:
+		$$\varphi_p(v_p)=\varphi(p,v_p)=(p,v^i_p\partial_i|_p)$$
+		This is clearly a linear isomorphism between $\mathbb{R}^n$ and itself (we have the idenity composed with $\Phi$, which reduces to an isomorphism).
+	\section{Sections and frames}
+	\begin{Def}
+		Let $(E,M,\pi,F)$ be a vector bundle. We say that a map \\$s:U\subset M\rightarrow E$ is a section if $\pi\circ s=\mathbb{I}_d$. \\
+		Let $(U_M,\phi_M)$ be a chart on $M$, $\phi_M:U_M\rightarrow \mathbb{R}^n$ and $(U_E,\phi_E)$ be a chart on $E$, $\phi_E:U_E\rightarrow \mathbb{R}^k$. Then we say that $s$ is a smooth section if $\phi_E\circ s\circ \phi^{-1}_M:\mathbb{R}^n\rightarrow \mathbb{R}^k$ is a smooth function.\\
+		We denote the space of all smooth sections $\Gamma(E)$.
+		\\
+		We say that a section is global if it is defined over the entire manifold.
+	\end{Def}
+	\begin{Obs}\label{Obs_1.1}
+		The set $\Gamma(E)$ is clearly a vector space and it is endowed with the following operations:
+		\begin{itemize}
+			\item $(s+t)(p)=s(p)+t(p)$;
+			\item $st(p)=s(p)t(p)$.
+		\end{itemize}
+	\end{Obs}
+	\begin{Ex}\label{Ex_1.4}
+		Consider the Cilinder $Cil=S^1\times [0,1]$ as a fiber bundle. A generic section is a map $s:S^1\rightarrow Cil$ such that $s(z)=(z,t)$. So to each subset of the circle it associates a "line" in the cilinder.
+	\end{Ex}
+	\begin{Ex}
+		Consider the tangent bundle $TM$ of a manifold $M$. A section is a map that associates to each point a tangent vector. $s:M\rightarrow TM$. Note that every vector field is a section of the tangent bundle, since it does the same thing: it takes a point and associates a vector to it. Thus, smooth vector fields are smooth sections of the tangent bundle and vice-versa. We call the space $\Gamma(TM)=\mathfrak{X}(M)$.
+	\end{Ex}
+	\begin{Def}
+		Let $(E,M,\pi,F)$ be a vector bundle. We define a \textbf{frame} on an open set $U\subset M$ as a collection of sections $\{s_i\}$ such that $\{s_i(p)\}$ form a basis for $E$ at $p$, which means a base of the fiber $F$ at p. 
+	\end{Def}
+	\begin{Obs}
+		The fact that we can express sections in a particular base is due to the fact that the vector bundle structure ensures that the fiber in each point has the structure of a vector field. This implies that each expansion of a section will be $s=s^ie_i$; where $e_i:M\rightarrow E$ are the elements of the base. Since sections are maps that take points and give back couples of points$\times$fiber, the elements $s^i$ in the expansion will be functions: $s^i:M\rightarrow \mathbb{R}$. In general, those functions can be discontinuous or not smooth.\\
+		Moreover, since $s^i$ are functions of points, we can apply vector fields to them!
+	\end{Obs}
+	\begin{Prop}
+		A smooth vector bundle is trivial if and only if it has a smooth frame in each open set.
+	\end{Prop}
+	\begin{proof}
+		Let $E$ be trivial. This means there exists a diffeomorphic trivialization $\varphi:E\rightarrow M\times \mathbb{R}^k$. Let now $\{e_i\}$ be a base for $\mathbb{R}^k$. Then, $\{(p,e_i)\}$ form a base of $E$ due to the presence of the isomorphism, which sends a base into a base. This map is smooth in an obvious way.\\
+		\\
+		Now we check the contrary: suppose we have a smooth frame on a generic open subset $U\subset M$.
+	\end{proof}
+	\section{Connections}
+	\begin{Def}
+		Let $(E,M,\pi,F)$ be a vector bundle. We call \textbf{connection} a map $\nabla:\mathfrak{X}(M)\times\Gamma(E)\rightarrow\Gamma(E)$ such that:
+		\begin{itemize}
+			\item $\nabla$ is $\mathfrak{F}$-linear in $\mathfrak{X}(M)$ and $\mathbb{R}$ linear in $\Gamma(E)$: $\nabla_{fX}(\lambda s)=\lambda f\nabla_X s$ for $f:M\rightarrow \mathbb{R}, s\in\Gamma(E),\lambda\in\mathbb{R}$;
+			\item $\nabla$ respects Leibniz: $\nabla_X (fs)=(Xf)s+f\nabla_X s$.
+		\end{itemize}
+		If $E=TM$ we say that the connection is affine.
+	\end{Def}
+	Note that since $X$ is a smooth vector field on $M$, we have that $Xf=df(X)$ is the differential of $f$ applied to $X$.
+	\begin{Def}
+		We say that a section $s$ is flat if $\nabla_X s=0$ for every $X\in \mathfrak{X}(M)$.
+	\end{Def}
+	\subsection{On the existence of connections}
+	We are now going to show how to construct a connection. In particular, we will see that a connection always exists on a manifold with a smooth vector bundle.
+	\begin{Prop}
+		One can always construct a connection on the trivial vector bundle of a manifold.
+	\end{Prop}
+	\begin{proof}
+		Consider a trivial vector bundle $(E,M,\pi,F\simeq \mathbb{R}^k)$. By definition, this bundle is isomorphic to $M\times \mathbb{R}^k$ through an isomorphism:
+		$$\phi:E\rightarrow M\times\mathbb{R}^k$$
+		Let now $\{e_i\}$ be a base for $\mathbb{R}^k$ and, since the bundle is trivial, we have a global frame given by the family of sections
+		$$s_i:M\rightarrow E;\hbox{ such that } s_i(p)=(p,e_i)$$
+		Those, by definition of frame, $s_i(p)$ are a base for $M\times \mathbb{R}^k$ at the point $p$. From this it immediatly follows that $\phi^{-1}\circ s_i$ is a frame for $E$. Since every element of $E$ can be described by this base, which is global and so holds for any point, also any section will be decomposed as:
+		$$s=h^i(\phi^{-1}\circ s_i); \hbox{ where $h^i$ are functions of the points }$$
+		Now, we define the connection such that the sections $\phi^{-1}\circ s_i$ are flat:
+		$$\nabla_X(s)=(Xh^i)((\phi^{-1}\circ s_i))$$
+		Thuis clearly respects Leibniz and the linearity.
+	\end{proof}
+	The idea now is to use this construction on the trivial bundle to build a connection on a bundle which can be locally but not globally trivialized. In order to do so we need a lemma:
+	\begin{Prop}
+		If $\nabla_i$ is a collection of connections, then $t^i\nabla_i$ is still a connection, provided that $\sum t^i=1$.
+	\end{Prop}
+	\begin{proof}
+		We just need to check when the properties of the resulting connections are satisfied. The linearity persists with the sum. The problem lies inside the Leibniz rule.
+		Consider $t_i\nabla^i_X (fs)=$ where the index $i$ identifies the family of connections. Then, since each one of them satisfies Leibniz on its own, we must have:
+		$$t_i\nabla^i_X (fs)=\sum t_i(Xf)s+f(t_i\nabla^i_X s)$$ 
+		and the only way for the first term to respect Leibniz is to add up to 1.
+	\end{proof}
+	\begin{Theo}
+		Any smooth vector bundle over a manifold has a connection
+	\end{Theo}
+	The idea is to look at the bundle locally and then build the connection as a sum of the "trivial ones". Consider trivializing open set $U\in M$ and the corresponding trivializing map $\varphi:\pi^{-1}(U)\rightarrow U\times F$. Inside this set the bundle is trivial and so it has an induced connection $\nabla_\alpha$. Now, consider a family of open sets $\{U_\alpha\}$ that covers the manifold and a partition of unity $\{\rho_\alpha\}$ that identifies them (it can always be found for a manifold due to it being second countable). We are going to have a family of induced connections on each $U_\alpha$, which we are going to index as $\nabla^\alpha$.\\
+	We define $\nabla_X s=\rho_\alpha\nabla_X^\alpha s$. Since on each subset the coefficients add up to 1. Thus, this is a connection.
+	\subsection{The Riemaniann structure induced on the tangent bundle}
+	We are now interested in finding relations between the covariant derivative and the metric tensor. Suppose to have a metric manifold with $\langle,\rangle$. We want to use the relations between $M$ and $TM$ to induce a metric on $TM$. This is done via a very similar procedure with respect to connections:
+	\begin{Prop}
+		It is always possible to induce a Riemaniann metric on the trivial bundle.
+	\end{Prop}
+	\begin{proof}
+		Let $E$ be the trivial bundle on $M$. By definition, there is an isomorphism $\phi:E\rightarrow M\times \mathbb{R}^k$. This induces the following metric tensor: given $u,v\in E_p$ fiber of $E$ at $p$. the fiber map $\phi_p:E_p\rightarrow \mathbb{R}^k$ is a linear isomorphism, so we set:
+		$$\langle u,v\rangle=\langle\phi_p(u),\phi_p(v) \rangle$$
+		This is obviously a Riemaniann metric since the starting one is.
+	\end{proof}
+	\begin{Obs}
+		Note that, if we choose an orthonormal base of $\mathbb{R}^k$ and through the isomorphism, we construct a base of sections, this base will be also orthonormal for the induced scalar product due to it's definition. This construction is possible only because on each fiber $E$ has the structure of a vector space.
+	\end{Obs}
+	Now, we can use the existence of the metric on a trivialiging subset to construct a general metric on the whole manifold. This procedure makes use of the particion of unity.
+	\begin{Theo}
+		On every smooth vector bundle on a Riemaniann manifold there is a Riemaniann metric.
+	\end{Theo}
+	\begin{proof}
+		Consider a trivializing open cover $\{U_\alpha,\Phi:U_\alpha\rightarrow \phi(U_\alpha)\times \mathbb{R}^k\}$. On each of those subsets $U_\alpha$ there exists a Riemaniann metric $\langle,\rangle_\alpha$, induced by the one on the manifold. Consider now a partition of unity $\{\rho^\alpha\}$ subordinate to the open cover $U_\alpha$.\\
+		Define the following general metric on the whole manifold:
+		$$\langle,\rangle=\rho^\alpha\langle,\rangle_\alpha$$
+		This is still a Riemaniann metric since is the sum of Riemaniann metrics and on each point it becomes a finite sum by the properties of the partition of unity of a manifold.
+	\end{proof}
+	\subsection{Metric connections}
+	\begin{Def}
+		We say that a connection $\nabla$ on a Riemaniann bundle $E$ is compatible with the metric, or that it is a metric connection, if:
+		$$X\langle s,t\rangle =\langle \nabla_X s,t\rangle+\langle s,\nabla_X t\rangle$$
+	\end{Def}
+	\begin{Prop}
+		The connection induced on the trivial bundle is always compatible with the metric.
+	\end{Prop}
+	\begin{proof}
+		Let $E$ be the trivial bundle on $M$ and let $\phi$ be the homeomorphism-isomorphism $\phi:E\rightarrow M\times \mathbb{R}^k$.
+		Let $\{e_i\}$ be an orthonormal base for $\mathbb{R}^k$, then, through the isomorphism, we can construct a global frame for $E$: we define the sections $s_i:M\rightarrow M\times \mathbb{R}^k$ which give rise to a global frame for $M\times \mathbb{R}^k$. Then, a global frame for $E$ will be $\phi^{-1}\circ s_i:M\rightarrow E$.
+		Thus, each section of $E$ will be expressed as: 
+		$$s=a^i(\phi^{-1}\circ s_i)$$
+		Take now any two sections of $E$ like $s=a^i(\phi^{-1}\circ s_i)$ $t=b^j(\phi^{-1}\circ s_j)$ and a smooth vector field $X\in\mathfrak{X}(M)$. By construction we know that for any two sections the induced metric si $\langle s,t\rangle=\langle \phi_p(s),\phi_p(t)\rangle$. Thus, we evalue:
+		$$X\langle s,t\rangle=X\langle a^i(\phi^{-1}\circ s_i),b^j(\phi^{-1}\circ s_j)\rangle =X\langle a^i s_i,b^js_j\rangle $$
+		By orthonormality of the base of $\mathbb{R}^k$, we have:
+		$$X\langle s,t\rangle=\sum_i (Xa^i)b^i+a^i(Xb^i)$$
+		But recall that we had seen that the induced connection on the trivial bundle was: 
+		$$\nabla_X s=(Xa^i)(\phi^{-1}\circ s_i)$$
+		So that:
+		$$X\langle s,t\rangle=\langle \nabla_Xs,t\rangle+\langle s,\nabla_Xt\rangle$$
+	\end{proof}
+	\begin{Theo}
+		On any Riemaniann bundle there is a connection compatible with the metric.
+	\end{Theo}
+	\begin{proof}
+		Consider
+	\end{proof}
+	\section{Connections and matrices}
+	Recall that a connection on a smoothe vector bundle is a map
+	$$\nabla:\mathfrak{X}(M)\times \Gamma(E)\rightarrow\Gamma(E)$$
+	That respects linearity and Leibniz. Thus, consider an open set $U\in M$ and the corresponding trivialization for $E$. We can find a frame in this set, indexed with $\{s_i:M\rightarrow E\}$. This means that we can write any section as a linear combination:
+	$s=h^is_i$. Thus we find:
+	$$\nabla_Xs=(Xh^i)s_i+h^i\nabla_Xs_i$$
+	Since the resulto of the connection applied to a section must also be a section, it means that $\nabla_Xs_i$ must be a section for every $i$. Thus, it can be expanded in the same base:
+	$$\nabla_X s_i=\omega_i^j(X)s_j$$
+	By $\mathfrak{F}$-linearity of $\nabla$, we have that also $\omega$ is $\mathfrak{F}$-linear and so it is a 1-form on $U\in M$. In fact $\omega$ can be seen as a map at any point:
+	$$\omega_p:\mathfrak{X}(M)\rightarrow\mathbb{R}$$ 
+	where the subscript $p$ means we are evaluating it at a point $p$.
+	We are going to call $\omega$ \textbf{connection form} and $\omega^j_i$ \textbf{connection matrix}.
+	\begin{Theo}
+		Let $(E,M,\pi,F)$ be a Riemaniann bundle and $\nabla$ a connection on it. Then:
+		\begin{itemize}
+			\item If $\nabla$ is compatible with the metric then its connection matrix $\omega^i_j$ relative to any orthonormal frame $\{e_i\}$ over any trivializing open set $U\subset M$ is skew-symmetric.
+			\item If any point $p\in M$ has a trivializing open set $U$ such that we can find an orthonormal frame for which $\omega^i_j$ is skwe-symmetric, then the connection is compatible with the metric.
+		\end{itemize}
+	\end{Theo}
+	\begin{proof}
+		Suppose that $\nabla$ is compatible with the metric. Take any trivializing open set $U\subset M$ and an orthonormal frame  defined over it $\{e_i\}$. Then:
+		$$X\langle e_i,e_j\rangle=0=\langle\nabla_X e_i,e_j\rangle+\langle e_i,\nabla_Xe_j\rangle=$$
+		$$=\langle\omega^k_i(X)e_k,e_j\rangle+\langle e_i,\omega^\rho_j(X)e_\rho\rangle=\omega^j_i(X)+\omega^i_j(X)=0$$
+		Suppose now that for any point $p\in M$ we can find a frame $\{e_i\}$ in which the connectrion matrix is skew-symmetric. Then we have that, given two sections $s=s^ie_i$, $t=t^ie_i$ we can write:
+		$$X\langle s,t\rangle=X\langle s^ie_i,t^je_j\rangle=X(s^it^i)=(Xs^i)t^i+s^i(Xt^i)$$
+		On the other hand:
+		$$\langle \nabla_Xs^ie_i,t^je_j\rangle+\langle s^ie_i,\nabla_Xt^je_j\rangle=$$
+		$$(Xs^i)t^j+s^i(Xt^j)+s^it^j[\langle \omega^k_ie_k,e_j\rangle+\langle e_i,\omega^k_je_k\rangle]$$
+		By the skew-symmetry of $\omega$ and the orthonormality of the base elements, we get that the last terms vanish and so:
+		$$X\langle s,t\rangle=\langle\nabla_Xs,t\rangle+\langle s,\nabla_Xt\rangle$$
+	\end{proof}
+	\section{The covariant derivative}
+	A vector field is defined as a map $X:M\rightarrow TM$, a section of the tangent bundle. Consider now any curve $\gamma:[a,b]\in\mathbb{R}\rightarrow M$. We can see a vector field along a curve as a map that assigns to each point a tangent vector. Thus:
+	$$X:[a,b]\rightarrow \bigsqcup_{p\in \gamma(t)} T_pM=TM|_{\gamma(t)}$$
+	Since vector fields are sections of the tangent bundle, we call the space of smooth vector fields along the curve $\gamma$ in the usual way: $\Gamma(TM|_{\gamma(t)})$.
+	The idea now is to associate to any affine connection on the manifold $\nabla$ a derivative, which we are going to call covariant derivative.
+	\begin{Prop}
+		Let $\nabla$ be an affine connection on a manifold $M$ and $\gamma:[a,b]\rightarrow M$ a smooth curve. Then there exists a unique map called coavriant derivative:
+		$${D\over dt}:\Gamma(TM|_{\gamma(t)})\rightarrow\Gamma(TM|_{\gamma(t)})$$
+		such that it respects the following properties:
+		\begin{itemize}
+			\item $\forall X\in \Gamma(TM|_{\gamma(t)})$ the covariant derivative is $\mathbb{R}-linear$;
+			\item the covariant derivative satisfies the Leibniz rule:
+			$${D(fX)\over dt}={df\over dt}X+f{DX\over dt}$$;
+			\item if $\mathbb{X}$ is obtained by restricting $X$ to $\gamma$, then we have:
+			$${D\mathbb{X}\over dt}=\nabla_{\gamma'(t)}X$$
+		\end{itemize}
+	\end{Prop}
+	\begin{proof}
+		Suoppose that the covariant derivative exists. Then, consider a trivializing open set $U\in M$ for $TM$ and an orthonormal frame $\{e_i\}$ of sections on it. Since smmoothe vector fields are smooth sections of the tangent bundle, we can write:
+		$$V(t)=v^i(t)e_i$$
+		Then, by the 3 properties, we have:
+		$${DV(t)\over dt}={dv^i(t)\over dt}e_{i,\gamma'(t)}+v^i\nabla_{\gamma'(t)}e_i$$
+		Thus, supposing that the covariant derivative exists, this formula proves its uniqueness.\\
+		\\
+		As for the existence, we can define the covariant derivative like the above formulation. Naively, this definition satisfies all properties. Moreover, the covariant derivative is independent, by uniqueness, of the frame.
+	\end{proof}
+	\begin{Prop}
+		If $\nabla$ is an affine connection compatible with the metric, then given a smooth curve $\gamma$ and two smooth vector fields $X,Y$, we get:
+		$${d\over dt}\langle X,Y\rangle=\langle {DX\over dt},Y\rangle+\langle X,{DY\over dt}\rangle$$
+	\end{Prop}
+	\begin{proof}
+		The proof is just a corollary of the definition of covariant derivative. Let us take a trivializing open set $U$ of $TM$ and an orthonormal frame. Then the vector fields will be written as:
+		$$X=x^ie_i \hbox{ and } Y=y^ie_i$$
+		Now we just substitute those expansions in the above formulas and see thay coincide:
+		$${d\over dt}\langle X,Y\rangle={d\over dt}(x^iy^i)={dx^i\over dt}y^i+x^i{dy^i\over dt}$$
+		As for the second one:
+		$$\langle {DX\over dt},Y\rangle+\langle X,{DY\over dt}\rangle=
+		\langle {dx^i\over dt}e_i+x^i\nabla_{\gamma'(t)}e_i,y^je_j\rangle+\langle x^ie_i,{dy^j\over dt}e_j+y^j\nabla_{\gamma'(t)}e_j\rangle=$$
+		$$=\langle {dx^i\over dt}e_i,y^je_j\rangle+\langle x^i\nabla_{\gamma'(t)}e_i,y^je_j\rangle+\langle x^ie_i,{dy^j\over dt}e_j\rangle+\langle x^ie_i,y^j\nabla_{\gamma'(t)}e_j\rangle$$
+		Now, the two terms containing the connection can be rweritten, since the connection is supoposed tobe compatible with the metric:
+		$$\langle x^i\nabla_{\gamma'(t)}e_i,y^je_j\rangle+\langle x^ie_i,y^j\nabla_{\gamma'(t)}e_j\rangle=x^iy^j\gamma'(t)\langle e_i,e_j\rangle=x^iy^j\gamma'(t)\delta^i_j=0$$
+		In fact, applying a vector fdield to a constant function on the manifold gives 0.
+		Thus, we get the equality.
+	\end{proof}
+	\section{The Christoffel symbols}
+	\chapter{Principal Bundles}
+	\end{document}
