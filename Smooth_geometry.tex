@@ -347,7 +347,7 @@
 		\end{itemize}
 	\end{Prop}
 	\begin{proof}
-		Suoppose that the covariant derivative exists. Then, consider a trivializing open set $U\in M$ for $TM$ and an orthonormal frame $\{e_i\}$ of sections on it. Since smmoothe vector fields are smooth sections of the tangent bundle, we can write:
+		Suoppose that the covariant derivative exists. Then, consider a trivializing open set $U\in M$ for $TM$ and an orthonormal frame $\{e_i\}$ of sections on it. Since smmooth vector fields are smooth sections of the tangent bundle, we can write:
 		$$V(t)=v^i(t)e_i$$
 		Then, by the 3 properties, we have:
 		$${DV(t)\over dt}={dv^i(t)\over dt}e_{i,\gamma'(t)}+v^i\nabla_{\gamma'(t)}e_i$$
@@ -373,6 +373,118 @@
 		In fact, applying a vector fdield to a constant function on the manifold gives 0.
 		Thus, we get the equality.
 	\end{proof}
+	\begin{Obs}
+		Note that we have defined the covariant derivatie only on an affine connection, which means a connection on the tangent bundle $TM$ of a manifold $\nabla:\mathfrak{X}(M)\times\mathfrak{X}(M)\rightarrow\mathfrak{X}(M)$. In general, we could have done this also for a generic smooth vector bundle???
+	\end{Obs}
 	\section{The Christoffel symbols}
 	\chapter{Principal Bundles}
+	\section{Generalizing fiber bundles}
+	\begin{Def}
+		Let $G$ be a Lie group and $M$ a manifold. We define a \textbf{right-action} of $G$ on $M$ as a map $\mu:G\times M\rightarrow M$ such that:
+		\begin{itemize}
+			\item $\mu(g,x)=x\cdot g$ is smooth (a Lie group is a manifold);
+			\item $x\cdot e=x$ for any $x\in M$, where $e$ is the neutral element of $G$;
+			\item $x\cdot (gh)=(x\cdot g)\cdot h$.
+		\end{itemize}
+		The left action is defined similarly.
+	\end{Def}
+	\begin{Def}
+		We call \textbf{stabilizer} of $x\in M$ under $G$ Lie group the subgroup:
+		$$Stab(x)=\{g\in G|x\cdot g=x\}$$
+		We call the \textbf{orbit} of $x$ the set:
+		$$O(x)=xG=\{x\cdot g|g\in G\}$$
+	\end{Def}
+	The fact that $Stab(x)$ is a subgroup is trivially verified. Also, the stabilizer is a Lie subgroup but we are not going to prove this result since it is well known and not necessary for the general understanding.
+	\begin{Def}
+		A manifold $M$ with a lei group $G$ (left) right-acting on it is called a \textbf{G-manifold}. We also say that a map $f:M\rightarrow N$ between $G-manifolds$ is equivariant if $f(x\cdot g)=f(x)\cdot g$.
+	\end{Def}
+	\begin{Def}
+		Let $(E,M,\pi,G)$ be a fiber bundle, where $G$ is a Lie group and $M$ and $E$ are manifolds. Let $\pi$ be smooth and the trivializations diffeomorphic; let $G$ be acting on $E$ such that:
+		\begin{itemize}
+			\item $G$ acts on $E$ freely: freely: $Stab(E)=\{e\in G\}$;
+			\item let $U\in M$ be a local trivializing set and $\phi:\pi^{-1}(U)\rightarrow U\times M$  the corresponding trivialization, then $\phi$ is equivariant: $\phi(x,h)\cdot g=\phi(x,hg)$
+		\end{itemize} 
+		Then we say that this fiber bundle is a \textbf{principal $G$-bundle}
+		 Let us now make some examples of $G$-bundles to better understand the structure.
+		 \begin{Ex}[\textbf{The product bundle}]
+		 	Consider the product bundle as usual, but let $E$ and $M$ be manifolds and $G$ be a Lie group. Then $E=M\times G$. We can give this the fiber bundle structure in the usual way: we first of all define a projection:
+		 	$$\pi:M\times G\rightarrow M\hbox{ like }\pi(x,g)=x$$
+		 	This map is clearly continuous and surjective. Also, it can be shown to be smooth through the use of charts (it is just a matter of substituting coordinates, since both $M$ and $G$ have the structure of a manifold). The local trivializations will just be the identity map, which is clearly diffeomorphic. Now, we need to ask for a $G$ action of $G$ on $M\times G$. But the action is abvious:
+		 	$$(x,g)\cdot h=(x,gh)$$
+		 	Also, the identity map clearly preserves this action in an equivariant way.
+		 \end{Ex}
+		 \begin{Ex}
+		 	Let $G$ be a Lie group and $H$ be a closed subgroup of $G$.
+		 \end{Ex}
+	\end{Def}
+	Now we start to see some properties which will come in handy in a while.
+	\begin{Prop}
+		Let $(E,M,\pi,G)$ be a principal $G-$bundle, then $G$ acts transitively on each fiber. Also, for any group $G$, any right-equivariant map is a left translation.
+	\end{Prop}
+	\begin{proof}
+		$G$ acts transitively on $\{p\} \times G$, obviously. Looking at the fiber diffeomorphism $\phi:\pi^{-1}\rightarrow U\times G$, it can be reduced to $\phi_p:E_p\rightarrow \{p\}\times G$, which is equivariant. Thus, on each fiber, $G$ acts transitively.\\
+		\\
+		As for the second proposition, it is just an easy resulto of group theory: if $f(gh)=f(g)h$, setting $g=e$ we get: $f(h)=f(e)h=l_{f(e)}h$.
+	\end{proof}
+	\section{Transition functions}
+	Suppose to have a principal $G$ bundle $(E,M,\pi,G)$ and two trivializing open sets $U_1,U_2$ with the corresponding trivialization maps $\phi_{1/2}:\pi^{-1}(U_{1/2})\rightarrow U_{1/2}\times G$. Suppose that $U_1\cap U_2\neq\emptyset$. Then we can look at the composition between one map and the other:
+	$$\phi_1\circ\phi_2^{-1}:U_{1}\cap U_2\times G\rightarrow U_{1}\cap U_2\times G$$
+	This map is a composition of two diffeomorphisms, so it is a diffeomorphism. Also, for each point $p\in M$, the fiber reduces to an equivariant map from $G$ to $G$. By the previous lemma, the equivariant map is a left translation!!! Thus:
+	$$\phi_1\circ\phi_2^{-1}(p,g)=(p,h)=(p,g_{12}(p)h)$$
+	\begin{Obs}
+		The \textbf{transition functions} $g_{ij}$ are smooth since $\phi$ are diffeomorphisms. Note however that $g_{ij}$ are not necessarily diffeomorphisms since the two manifolds $M,G$ have in general not the same dimension??????
+	\end{Obs}
+	Now we look at some properties of the transition functions:
+	\begin{Prop}
+		Let $\{U_\alpha\}$ be a trivializing open cover for a principal $G-bundle$. Then the transition functions $g_{\alpha\beta}$ satisfy the following properties:
+		\begin{itemize}
+			\item $g_{\alpha\beta}g_{\beta\gamma}=g_{\alpha\gamma}$;
+			\item $g_{\alpha\beta}=g_{\beta\alpha}^{-1}$;
+			\item $g_{\alpha\alpha}=e$.
+		\end{itemize}
+	\end{Prop}
+	\begin{proof}
+		Suppose we have 3 open sets that intersect: $U_\alpha\cap U_\beta\cap U_\gamma\neq\emptyset$. Then we will have 3 trivializing maps:
+		$$\phi_\alpha:\pi^{-1}(U_\alpha)\rightarrow U_\alpha\times G;
+		\hspace{6pt}
+		\phi_\beta:\pi^{-1}(U_\beta)\rightarrow U_\beta\times G;
+		\hspace{6pt}
+		\phi_\gamma:\pi^{-1}(U_\gamma)\rightarrow U_\gamma\times G
+		$$
+		Now we look at the composition of those diffeomorphisms:
+		$$\phi_\alpha\circ\phi^{-1}_\beta(p,h)=(p,g_{\alpha\beta}(p)h)$$
+		$$\phi_\beta\circ\phi^{-1}_\gamma(p,h)=(p,g_{\beta\gamma}(p)h)$$
+		Obviously:
+		$$\phi_\alpha\circ\phi^{-1}_\gamma=\phi_\alpha\circ\phi^{-1}_\beta\circ \phi_\beta\circ\phi^{-1}_\gamma$$
+		so that we get:
+		$$(p,g_{\alpha\gamma}(p)h)=(\phi_\alpha\circ\phi^{-1}_\beta)\circ (\phi_\beta\circ\phi^{-1}_\gamma)(p,h)=\phi_\alpha\circ\phi^{-1}_\beta(p,g_{\beta\gamma}(p)h)=(p,g_{\alpha\beta}(p)g_{\beta\gamma}(p)h)$$
+		This proves the first property.
+		\\
+		The second one just follows from the fact that $\phi$ are diffeomorphisms.\\
+		As for the third one, we take the first and the second property and evalue:
+		$$g_{\alpha\beta}g_{\beta\alpha}=g_{\alpha\alpha}=e$$
+	\end{proof}
+	\section{The frame bundle}
+	\subsection{The manifold structure of the frame bundle}
+	\begin{Def}
+		Consider a vector space $V$ of finite dimension. We define $FR(V)$ as the set made of all ordered bases of $V$. This means that $Fr(V)$ contains all of the possible ways of choosing a base for $V$.
+	\end{Def}
+	\begin{Obs}
+		There is a natural action of the general linear group on $Fr(V)$. The idea is the following: since $Fr(V)$ contains all of the possible basis of $V$, we get that, having choosen a base, we can re-order the elements of it and obtain the same base. We can also linearly combine those elements to obtain another base. Thus, all of the elements of $Fr(V)$ will be reached by matrices in $GL(n,\mathbb{R})$, where $n$ is the dimension of the vector space.\\
+		\\
+		In particular, identifying an element of $Fr(V)$ with a row vector $\vec{e}=(e_1,...,e_n)$, we have a right-action of the Lie group $GL(n,\mathbb{R})$ of the form:
+		$$\vec{e}A=(e_1,...,e_n)\begin{pmatrix}
+			a_{11}&a_{12}&...&a_{1n}\\
+			a_{21}&a_{12}&...&a_{2n}\\
+			.     &.     &.   &     \\
+			.     &.     &.   &     \\
+			a_{n1}&.     &...&a_{nn}\\
+		\end{pmatrix}$$
+		We also note that the stabilizer of any $\vec{e}\in Fr(V)$ is just $\mathbb{I}_n\in GL(n,\mathbb{R})$, so that the group acts freely on $Fr(V)$. Moreover, the orbit of any element is the whole space: 
+		$$O(\vec{e}\in Fr(V))=Fr(V)$$
+		This last result is obvious: given any two basis I can always fine one as a linear combination of the other and so the two will be related by a matrix. Moreover, this matrix will be invertible since the correspoinding mao has to be a diffeomorphism (we are sending a base into a base).\\
+		Now, by the orbit-stabilzer theorem, having fixed an element $\vec{e}\in Fr(V)$, we have a bijection:
+		$$\phi_{\vec{e}}:{GL(n,\mathbb{R})\over Stab(\vec{e})}\rightarrow O(\vec{e})=Fr(V);\hbox{ such that } \phi_{\vec{e}}([A])=\vec{e}A$$
+		The idea now is to put a manifold structure on $Fr(V)$ such that the above map becomes a diffeomorphism.
+	\end{Obs}
 	\end{document}
