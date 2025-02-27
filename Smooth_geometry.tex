@@ -162,7 +162,7 @@
 		Given any chart on $TM$ like $(TU,\Phi)$, we take as our candidate the map: 
 		$$\varphi:(\phi^{-1}\times \mathbb{I}_{\mathbb{R}^n})\circ \Phi:TU\rightarrow U\times \mathbb{R}^n$$
 		In particular we have the following succession:
-		$$\varphi:TU\xrightarrow{\text{$\Phi$}} U\times \mathbb{R}^n\xrightarrow{\text{$\phi^{-1}\times \mathbb{I}_{\mathbb{R}^n}$}}U\times \mathbb{R}^n$$
+		$$\varphi:TU\xrightarrow{\text{$\Phi$}} \phi(U)\times \mathbb{R}^n\xrightarrow{\text{$\phi^{-1}\times \mathbb{I}_{\mathbb{R}^n}$}}U\times \mathbb{R}^n$$
 		This map is clearly an homeomorphism and a diffeomorphism since the charts on manifolds are both and so is the identity. As for the linear isomorphism reduction, consider the map:
 		$\varphi_p$ where we fix the first argument $p$. The induced map is the follwoing:
 		$$\varphi_p(v_p)=\varphi(p,v_p)=(p,v^i_p\partial_i|_p)$$
@@ -484,7 +484,85 @@
 		$$O(\vec{e}\in Fr(V))=Fr(V)$$
 		This last result is obvious: given any two basis I can always fine one as a linear combination of the other and so the two will be related by a matrix. Moreover, this matrix will be invertible since the correspoinding mao has to be a diffeomorphism (we are sending a base into a base).\\
 		Now, by the orbit-stabilzer theorem, having fixed an element $\vec{e}\in Fr(V)$, we have a bijection:
-		$$\phi_{\vec{e}}:{GL(n,\mathbb{R})\over Stab(\vec{e})}\rightarrow O(\vec{e})=Fr(V);\hbox{ such that } \phi_{\vec{e}}([A])=\vec{e}A$$
-		The idea now is to put a manifold structure on $Fr(V)$ such that the above map becomes a diffeomorphism.
-	\end{Obs}
+		$$\phi_{\vec{e}}:{GL(n,\mathbb{R})\over Stab(\vec{e})}=GL(n,\mathbb{R})\rightarrow O(\vec{e})=Fr(V);\hbox{ such that } \phi_{\vec{e}}([A])=\vec{e}A$$
+		The idea now is to put a manifold structure on $Fr(V)$ such that the above map becomes a diffeomorphism. Note also that the stabilizer of any element is just the identity group. Thus, not only the image, but also the domain of $\phi_{\vec{e}}$ will be independent of the choiche of $\vec{e}$.\\
+		\\
+		If $\vec{e'}$ is another element of $Fr(V)$, then there will exist $A\in GL(n\mathbb{R})$ such that $\vec{e'}=\vec{e}A$. Thus:
+		$$\phi_{\vec{e'}}(g)=\vec{e'}g=\vec{e}Ag=(\phi_{\vec{e}}\circ l_A)(g)$$
+		Since the left multiplication is a diffeomorphism, we can give to any $\phi_{\vec{e'}}$ the same diffeomorphism structure as $\phi_{\vec{e}}$.\\
+		\\
+		I DO NOT KNOW IF THIS IS TRUE\\
+		The map $\phi_{\vec{e}}$ is an homeomorphism since it is a bijection and is obviously continuous. Now we simply endow $Fr(V)$ with charts. Suppose that $(U,\varphi)$ is a chart of $GL(n,\mathbb{R})$. Then $(\phi(U),\varphi\circ\phi^{-1}_{\vec{e}})$ will be our chart for $Fr(V)$. This is the composition of two homeomorphisms so it is an homeomorphism. The composition of two charts is smooth since the one on $GL(n\mathbb{R})$ is. This gives $Fr(V)$ the manifold structure we wanted.\\
+		I DO NOT KNOW IF THIS WAS TRUE I MADE IT UP
+		\end{Obs}
+		\subsection{The frame bundle}
+		Suppose to have a smooth vector bundle $(E,M,\pi,F)$. Our idea is now to associate to $M$ a smooth principal $GL(n,\mathbb{R})-bundle$. We first of all need a projection: define the Frame Bundle as the following space:
+		$$Fr(E)=\bigsqcup_{p\in M}Fr(E_p)$$
+		The disjoint union of the fibers at each point. There is a natural projection that we can use:
+		$$\pi_G:Fr(E)\rightarrow M\hbox{ such that } \pi_G(\vec{e_p}\in Fr(E_p))=p$$
+		Now we need to find local trivializations. The idea is quite simple but somewhat elaborate.\\
+		\\
+		Since we arer starting with a smooth vecotr bundle, the fiber has in each point the structure of a vector space of finite dimension $k$. Thus, we can construct for each $p$ the manifold $Fr(E_p=F_p)$ and then consider the disjoint union $Fr(E)$, which will be a manifold as well. Now, suppose to have a chart on $Fr(E)$ like $(U_{M},\psi:U_{Fr(E)}\rightarrow \mathbb{R}^n\times\mathbb{R}^k)$. Due to the existence of the projection $\pi_G$ we can induce a chart on $M$ by finding the corresponding open set on it $U_M$ and it's map $\phi:U_M\rightarrow \mathbb{R}^n$. We choose as trivializtion the same map we had choosen to trivialize the tangent bundle:
+		$$\varphi\equiv(\phi^{-1}\circ \mathbb{I}_{\mathbb{R}^k})\circ \psi: U_{Fr(E)}\xrightarrow{\psi}\phi(U_M)\times\mathbb{R}^k\xrightarrow{\phi^{-1}\times\mathbb{I}_{\mathbb{R}^k}}U_m\times\mathbb{R}^k$$
+		This is clearly a diffeomorphism.\\
+		\\
+		Note that at every point there is an identification of $Fr(E_p)$ with the general lienar group $GL(k,\mathbb{R})$. To make this bundle structure into a principal bundle we need to verify that $GL(k,\mathbb{R})$ acts freely on $Fr(E)$ and that the trivializations are equivariant under the action of the group.\\
+		\\
+		Now, the action of $GL(k,\mathbb{R})$ on the fiber is just given by the product of matrices and so it is free. In particular, $GL(k,\mathbb{R})$ acts on $Fr(E)$ like this:
+		$$(p\in M,\vec{e_p}\in Fr(E_p))\longrightarrow(p,\vec{e_p}A)$$
+		This action is evidently free. Moreover, considering the chart $\varphi$, it is equivariant under this action. Thus, we have a principal $GL(k,\mathbb{R})$-bundle $(Fr(E),M,\pi_G,GL(k,\mathbb{R}))$.
+		\subsection{Fundamental vector fields}
+		Suppose to have a Lie group $G$ that right-acts smoothly on a manifold $M$. Then, consider any element $A\in\mathfrak{g}$ inside the Lie Algebra of $G$. Define:
+		$$\bar{A}={d\over dt}\bigg|_{t=0}p\cdot e^{tA}\in T_pM$$
+		This, at any point is called \textbf{fundamental vector field associated to $A$}.\\
+		\begin{center}
+			\includegraphics[scale=0.3]{fundamental_vector.pdf}
+		\end{center}
+		The idea is to take a point $p\in M$ and a curve passing through it like $c_p(t)=p\cdot e^{tA}$. This is a smooth curve and so it can be derived. The fundamental vector field in $p$ is the initial tangent vector of this curve (initial in the sense that for $t=0$ the curve goes through $p$).
+		\begin{Prop}
+			The fundamentale vector field associated to $A$ is always smooth.
+		\end{Prop}
+		\begin{proof}
+			Non ne ho voglia ma è una cazzata di conti.
+		\end{proof}
+		There is an alternative mathematical construction for the same concept: define the map $j_p:G\rightarrow M$ like follows:
+		$$j_p(g)=p\cdot g$$
+		Its differential is defined as:
+		$$dj_p(A\in\mathfrak{g})={d\over dt}\bigg|_{t=0}j_p(e^{tA})={d\over dt}\bigg|_{t=0}p\cdot e^{tA}$$
+		\begin{Prop}
+			Let $G$ be a Lie group right-acting smoothly on a manifold $M$ and let $r_g(p)=p\cdot g$ the right translation. For $A\in\mathfrak{g}$, it's fundamental vector field $\bar{A}$ satisfies:
+			$$dr_g(\bar{A})=\overline{Ad(g^{-1})(A)}$$
+		\end{Prop}
+		\begin{proof}
+			Recall that the adjoint representation is given by the differential of the conjugation map:
+			$$Ad(g)=dc_g:\mathfrak{g}\rightarrow\mathfrak{g};\hbox{ in particular }Ad(g)(A)=gAg^{-1}$$
+			Now, consider $(r_g\circ j_p)(h)=p\cdot hg=p\cdot gg^{-1}hg=p\cdot g c_{g^{-1}}(h)=(j_{pg}\circ c_{g^{-1}})(h)$
+			By the chain rule:
+			$$dr_g(\bar{A}_p)=dr_gdj_p(A)=dj_{pg}dc_{g^{-1}}(A)=dj_{pg}(Ad(g^{-1})(A))=\overline{Ad(g^{-1})(A_{pg})}$$
+		\end{proof}
+		\subsection{The integral curves of the fundamental vector fields}
+		\begin{Prop}
+			The curve $c_p(t)=p\cdot e^{tA}$ is the integral curve of the fundamental vector field $\bar{A}$ passing through $p\in M$.
+		\end{Prop}
+		\begin{proof}
+			It suffices to differentiate:
+			$$c'_p(t)={d\over dt}\bigg|_{s=0}c_p(t+s)=
+			{d\over dt}\bigg|_{s=0}p\cdot e^{tA}e^{sA}=\bar{A}_{pe^{tA}}=
+			\bar{A}_{c_p(t)}$$
+		\end{proof}
+		\begin{Prop}
+			The fundamental vector field $\bar{A}$ vanishes at $p$ if and only if $A$ is in the Lie algerba of $Stab(p)$.
+		\end{Prop}
+		\begin{proof}
+			If $\bar{A}_p=0$ it means that the constant map $c_p(t)=p\in M$ is an integral curve of this vecotr field. By the previous proposition, we have the equivalence:
+			$p=p\cdot e^{tA}$ from which we see that $A$ must be in the Lie algebra of $Stab(p)$ since $e^{tA}\in Stab(p)$.\\
+			\\
+			On the contrary, if $A\in Stab(p)$ then we ge that:
+			$$\bar{A}_p={d\over dt}\bigg|_{t=0}p\cdot e^{tA}=
+			{d\over dt}\bigg|_{t=0}p=0$$
+		\end{proof}
+		\begin{Obs}
+			As a corollary of the previous statement we can say that $Ker(dj_p)$ at the identity is the stabilizer $Stab(p)$. This is pretty esay to see and pretty obvious to think about:
+			$$Ker dj_p=\{A\in \mathfrak{g}|dj_p(A)=0\}=Stab(p)\hbox{ By the previous result}$$
+		\end{Obs}
 	\end{document}
