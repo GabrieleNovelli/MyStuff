@@ -565,4 +565,56 @@
 			As a corollary of the previous statement we can say that $Ker(dj_p)$ at the identity is the stabilizer $Stab(p)$. This is pretty esay to see and pretty obvious to think about:
 			$$Ker dj_p=\{A\in \mathfrak{g}|dj_p(A)=0\}=Stab(p)\hbox{ By the previous result}$$
 		\end{Obs}
+		\subsection{The vertical subbundle of the tangent bundle}
+		Let $(E,M,\pi,G)$ be a principal $G$-bundle on a manifold $M$. By construction, the projection $\pi:E\rightarrow M$ is smooth, so it can be differentiated. The differential $d\pi_{(p,g)}:T_{(p,g)}E\rightarrow T_{\pi(p,g)}M$ is surjective since the projection is. We now define the \textbf{vertical tangent subspace} $\mathcal{V}_{(p,g)}\subset T_{(p,g)}E$ as the Kernel of the differential of the projection:
+		$$\mathcal{V}_{(p,g)}\equiv Ker(d\pi_{(p,g)})$$
+		\begin{Obs}
+			Since, by the theorem of dimension, 
+			$$dim \bigg(Ker(d\pi_{(p,g)})\bigg)+dim\bigg(Im(d\pi_{(p,g)})\bigg)=dim\bigg(T_{(p,g)}E\bigg)$$
+			Moreover, the map $d\pi$ is surjective and so the image corresponds to the full space $T_{\pi(p,g)}M$, we get:
+			$$dim \bigg(Ker(d\pi_{(p,g)})\bigg)=dim\mathcal{V}_{(p,g)}=dim\bigg(T_{(p,g)}E\bigg)-dim\bigg(T_{\pi_{(p,g)}}M\bigg)=dim G$$
+		\end{Obs}
+		\begin{Prop}
+			For every element of $E$, the corresponding fundamental tangent vector is vertical.
+		\end{Prop}
+		\begin{proof}
+			We just need to prove that the fundamental tangent vector is in the Kernel of the differential. Recall that the fundamental vecotr field can be seen as the differential of the map $j_{(p,g)}:G\rightarrow E$ defined as 
+			$$j_{(p,g)}(h)=(p,g)\cdot h $$
+			Taking now the composition with the projection:
+			$$(\pi\circ j_{(p,g)})(h)=\pi((p,g)\cdot h)=\pi(p,g)$$
+			This result is independent of the choice of $h\in G$, thus the composition $\pi\circ j_{(p,g)}$ is the constant map and hao it's differential the null map.\\
+			Recalling that $\bar{A}_{(p,g)}=dj_{(p,g)}(A)$ we clearly see that:
+			$$d\pi_{(p,g)}(\bar{A}_{(p,g)})=
+			(d\pi_{(p,g)}\circ dj_{(p,g)})(A)=
+			d(\pi\circ j_{(p,g)})(A)=0$$
+		\end{proof}
+		We can now generalize proposiotion REFERENZA for a principal $G$-bundle:
+		\begin{Prop}
+			Let $(E,M,\pi,G)$ be a principal $G-$bundle and $(p,g)$ a point in $E$. Then: 
+			$$dj_{(p,g),e}:\mathfrak{g}\rightarrow \mathcal{V}_{(p,g)}$$ is an isomorphism.
+		\end{Prop}
+		\begin{proof}
+			By proposition REFERENZA we know that the Kernel of the differential at the identity is the Stabilizer of $(p,g)$. However, for a principal $G-$bundle, the group acts freely on the manifold $E$ and so the stabilizer is trivial $Stab(p,g))=\{e\}$. Thus, $Ker dj_{(p,g),e}=0$ and the map is injective. By the prpevious propositon REFERENZA the image of the differential lies in the vertical subspace. Moreover, $dim\mathcal{V}_{(p,g)}=dim G$ and so the map must be an isnomorphism of vector spaces.			
+		\end{proof}
+		\begin{Obs}
+			As a consequence of the last result, all the vertical vectors are the fundamental vectors and all the fundamental vectors are the vertical vectors.\\
+			Let $T^a$ be a base for the Lie algebra $\mathfrak{g}$, then, at any point, by the isomorphism in the previous result, we get that they also form a base of $\mathcal{V}_{(p,g)}$ (under the action of the diffeomorphism). This defines the \textbf{Vertical Subbundle} $$\mathcal{V}=\bigsqcup_{(p,g)\in E}\mathcal{V}_{(p,g)}$$
+		\end{Obs}
+		\subsection{The horizontal subbundle}
+		We have seen that on a principal $G$-bundle there is a well defined vertical subbundle $\mathcal{V}$ of the tangent bundle $TE$. We say thet there is an \textbf{horizontal distribution} $\mathcal{H}$ if $TE=\mathcal{H}\oplus\mathcal{V}$. This means that for every point $(p,g)\in TE$ we have $T_{(p,g)}E=\mathcal{H}_{(p,g)}\oplus\mathcal{V}_{(p,g)}$ with $\mathcal{H}_{(p,g)}\cap\mathcal{V}_{(p,g)}=0$.\\
+		\\
+		In general, there is no canonically defined horizontal distribution on a principal $G$-bundle.
+		COSE CBE DEVO METTERE????
+	\section{Connections on principal bundles}
+		LEt $(E,M,\pi,G)$ be a principal $G$-bundle with a vertical and horizontal distribution, so that $TE=\mathcal{H}\oplus\mathcal{V}$. Let $\nu_{(p,g)}:\mathcal{H}_{(p,g)}\oplus\mathcal{V}_{(p,g)}$ be the standard projection on the vertical subbundle. Obiouvly, if $X_{(p,g)}\in T_{(p,g)}E$ is a vector field on $E$ at a point $(p,g)$, we call $\nu_{(p,g)}(X_{(p,g)})$ its \textbf{vertical component}.
+		\begin{Def}
+			We call an \textbf{Ehresmann connection}, or \textbf{connection on a principal bundle} a $\mathfrak{g}$-valued 1-form $\omega:TE\rightarrow \mathfrak{g}$ that respects the following properties:
+			\begin{itemize}
+				\item Given any $A\in\mathfrak{g}$ and $(p,g)\in E$ we have $\omega_{(p,g)}(\bar{A}_{(p,g)})=A$;
+				\item $(G-equivariance)$ for $g\in G$ we have $dr_g\omega=Ad(g^{-1})\omega$;
+				\item $\omega$ is $C^\infty$.
+			\end{itemize}
+		\end{Def}
+		Now it is just a matter to find a map that satisfies those conditions. A good candidate is the following composition:
+		$$\omega_{(p,g)}=$$
 	\end{document}
