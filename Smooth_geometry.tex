@@ -49,9 +49,21 @@
 \theoremstyle{definition}
 \newtheorem{Obs}[Def]{Osservazione:}
 \begin{document}
+	\chapter{The underlying necessary algebra}
+	\section{Sequences of vector spaces}
+		Consider a finite set of vector spaces indexed like $V_i$. Consider also a set of linear maps $f_i:V_i\rightarrow V_{i+1}$. We call a \textbf{sequence} of vector spaces simply a chained relation:
+		$$...\xrightarrow{f_{i-1}} V_i\xrightarrow{f_i}V_{i+1}\xrightarrow{f_{i+1}}V_{i+2}\xrightarrow{f_{i+2}}...$$
+		An \textbf{exact sequence} of vector spaces is a sequence in which the image of each map exactly matches the kernel of the following map. This means that in the above sequence we would have:
+		$$Im(f_i)=Ker(f_{i+1})$$
+		This means that each element sent by $f_i$ from $V_i$ to $V_{i+i}$ will be sent to $0$ by $f_{i+1}$. Namely: $f_{i+i}(f_i)(v_{V_i})=0_{V_{i+1}}$.\\
+		\\
+		A common sequence is the \textbf{short exact sequence}, which has only five terms and is in the form:
+		$$0\rightarrow A\xrightarrow{f}B\xrightarrow{g}C\rightarrow0$$
+		The 0 on the left means that $f$ is injective, since the only linear image of $0$ is 0 and so $Ker(f)=0_A$ is trivial. The 0 on the right instead means that $g$ is surjective. In fact the $Ker$ of the following map, which corresponds tot he image of $g$, is all of the space since every element is sent linearly to 0. Note also that since $Im(f)=Ker(g)$, all of the elements sent into $B$ by $f$ from $A$ are mapped to 0 in $C$.
+	\chapter{Smooth Manifolds}
 	\chapter{Metric Manifolds}
 	\section{Riemaniann metric}
-	\begin{Def}
+	\begin{Def}\label{Def_4.1}
 		Consider a manifold $M$ and it's tangent space $T_pM$ at any point. We call Riemaniann metric the assignment of an inner product $\langle,\rangle_p$ on the tangent space. This means that:
 		\begin{itemize}
 			\item $\langle,\rangle$ is bilinear;
@@ -63,7 +75,7 @@
 	\end{Def}
 	\chapter{Bundles}
 	\section{Fiber Bundles}
-	\begin{Def}
+	\begin{Def} \label{Def_5.1}
 		Let $E,M,F$ be topological spaces and let $M$ be connected. Let $\pi:E\rightarrow M$ be a map with the following properties:
 		\begin{itemize}
 			\item $\pi$ is continuous and surjective;
@@ -82,13 +94,13 @@
 		\includegraphics[scale=0.3]{bundle_cilinder.pdf}
 	\end{center}
 	Basically, this definition tells us that locally we can see $E$ as homeomoprhic to the product space $M\times F$. Now we make some examples:
-	\begin{Ex}[Product Bundle]\label{Ex_1.1}
+	\begin{Ex}[Product Bundle]\label{Ex_5.1}
 		Let $M$ be a connected topological space and $F$ a fiber. We set $E=M\times F$ and construct a projection in the usual obvious way:\\ $\pi:M\times F\rightarrow M$ like $\pi(x_M,x_F)=x_M$. This map is obviusly continuous and surjective since it is a projection. Now we just need to construct local trivializations: we set
 		$$\varphi:\pi^{-1}(U)\rightarrow U\times F$$
 		such that $\varphi(x_M,x_F)=(x_M,x_F)$ the identity map.
 	\end{Ex}
-	\begin{Ex}[\textbf{Cilinder}] \label{Ex_1.2}
-		An example of the product bundle is the cilinder. It can be constructed as a fiber bundle over the circle $S^1=\{z\in \mathbb{C}|z=e^{i\theta}, \theta\in[0,2\pi]\}$. We call $Cil=S^1\times [0,1]$ the cilinder and cosntruct the product bundle just like we did in example \ref{Ex_1.1}. We define the projection as: $\pi:Cil\rightarrow S^1$ that sends $\pi(z,t)\rightarrow z$. This is a projection so it is continuous and surjective.\\
+	\begin{Ex}[\textbf{Cilinder}] \label{Ex_5.2}
+		An example of the product bundle is the cilinder. It can be constructed as a fiber bundle over the circle $S^1=\{z\in \mathbb{C}|z=e^{i\theta}, \theta\in[0,2\pi]\}$. We call $Cil=S^1\times [0,1]$ the cilinder and cosntruct the product bundle just like we did in example \ref{Ex_5.1}. We define the projection as: $\pi:Cil\rightarrow S^1$ that sends $\pi(z,t)\rightarrow z$. This is a projection so it is continuous and surjective.\\
 		As for the local trivializations, we can take any subset of the circle $U$ and trivialize the bundle with the identity:
 		$\varphi:\pi^{-1}(U)\rightarrow U\times [0,1]=\mathbb{I}_d$.\\
 		In this case the fiber of the cilinder is a line. So each point has associaated a line and the totality of those lines composes the cilinder.
@@ -96,17 +108,17 @@
 			\includegraphics[scale=0.3]{bundle_generic.pdf}
 	\end{center}
 	\end{Ex}
-	\begin{Ex}[\textbf{Möbius strip}]\label{Ex_1.3}
+	\begin{Ex}[\textbf{Möbius strip}]\label{Ex_5.3}
 		This is an example of a non trivial bundle.
 	\end{Ex}
-	\begin{Def}
+	\begin{Def}\label{Def_5.2}
 		We say that a fiber bundle $(E,M,\pi,F)$ is a vector bundle if $M$ and $E$ are manifolds, $F$ and $\pi^{-1}(p)=F_p\in E$ are real finite-dimensional vector spaces; and the trivializing functions $\varphi:\pi^{-1}(U)\rightarrow U\times F$ are such that the induced map $\pi^{-1}(p)\rightarrow\{p\}\times F$ is a linear isomorphism.
 	\end{Def}
-	\begin{Def}
+	\begin{Def}\label{Def_5.3}
 		A vector bundle is said to be trivial if $E$ is isomorphic to $M\times F$ the product bundle.
 	\end{Def}
 	It clearly follows that the product bundle is trivial and so it is called the trivial bundle also.
-	\begin{Def}
+	\begin{Def}\label{Def_5.4}
 		A vector bundle is said to be smooth if $\pi$ is smooth and the local trivializations are diffeomorphisms.
 	\end{Def}
 	\section{The tangent bundle}
@@ -120,7 +132,7 @@
 		$$\Phi:TU\rightarrow \phi(U)\times \mathbb{R}^n; \hbox{ like: }
 		\Phi(p,v_p)=(x^i_pe_i,v^i_p\partial_i|_p)$$
 		This mapping is 1-1 and surjective so it is a bijection inside $U$. Moreover, it is continuous. Thus, being an homeomorphism, $\Phi$ insuces a topology on $TM$.
-		\begin{Theo}
+		\begin{Theo} \label{Theo_5.1}
 			The tangent bundle $TM$ has a second countable and Haussdorf topology
 		\end{Theo}
 		\begin{proof}
@@ -168,7 +180,7 @@
 		$$\varphi_p(v_p)=\varphi(p,v_p)=(p,v^i_p\partial_i|_p)$$
 		This is clearly a linear isomorphism between $\mathbb{R}^n$ and itself (we have the idenity composed with $\Phi$, which reduces to an isomorphism).
 	\section{Sections and frames}
-	\begin{Def}
+	\begin{Def}\label{Def_5.5}
 		Let $(E,M,\pi,F)$ be a vector bundle. We say that a map \\$s:U\subset M\rightarrow E$ is a section if $\pi\circ s=\mathbb{I}_d$. \\
 		Let $(U_M,\phi_M)$ be a chart on $M$, $\phi_M:U_M\rightarrow \mathbb{R}^n$ and $(U_E,\phi_E)$ be a chart on $E$, $\phi_E:U_E\rightarrow \mathbb{R}^k$. Then we say that $s$ is a smooth section if $\phi_E\circ s\circ \phi^{-1}_M:\mathbb{R}^n\rightarrow \mathbb{R}^k$ is a smooth function.\\
 		We denote the space of all smooth sections $\Gamma(E)$.
@@ -182,13 +194,13 @@
 			\item $st(p)=s(p)t(p)$.
 		\end{itemize}
 	\end{Obs}
-	\begin{Ex}\label{Ex_1.4}
+	\begin{Ex}\label{Ex_5.4}
 		Consider the Cilinder $Cil=S^1\times [0,1]$ as a fiber bundle. A generic section is a map $s:S^1\rightarrow Cil$ such that $s(z)=(z,t)$. So to each subset of the circle it associates a "line" in the cilinder.
 	\end{Ex}
 	\begin{Ex}
 		Consider the tangent bundle $TM$ of a manifold $M$. A section is a map that associates to each point a tangent vector. $s:M\rightarrow TM$. Note that every vector field is a section of the tangent bundle, since it does the same thing: it takes a point and associates a vector to it. Thus, smooth vector fields are smooth sections of the tangent bundle and vice-versa. We call the space $\Gamma(TM)=\mathfrak{X}(M)$.
 	\end{Ex}
-	\begin{Def}
+	\begin{Def}\label{Def_5.6}
 		Let $(E,M,\pi,F)$ be a vector bundle. We define a \textbf{frame} on an open set $U\subset M$ as a collection of sections $\{s_i\}$ such that $\{s_i(p)\}$ form a basis for $E$ at $p$, which means a base of the fiber $F$ at p. 
 	\end{Def}
 	\begin{Obs}
@@ -204,7 +216,7 @@
 		Now we check the contrary: suppose we have a smooth frame on a generic open subset $U\subset M$.
 	\end{proof}
 	\section{Connections}
-	\begin{Def}
+	\begin{Def}\label{Def_5.7}
 		Let $(E,M,\pi,F)$ be a vector bundle. We call \textbf{connection} a map $\nabla:\mathfrak{X}(M)\times\Gamma(E)\rightarrow\Gamma(E)$ such that:
 		\begin{itemize}
 			\item $\nabla$ is $\mathfrak{F}$-linear in $\mathfrak{X}(M)$ and $\mathbb{R}$ linear in $\Gamma(E)$: $\nabla_{fX}(\lambda s)=\lambda f\nabla_X s$ for $f:M\rightarrow \mathbb{R}, s\in\Gamma(E),\lambda\in\mathbb{R}$;
@@ -213,7 +225,7 @@
 		If $E=TM$ we say that the connection is affine.
 	\end{Def}
 	Note that since $X$ is a smooth vector field on $M$, we have that $Xf=df(X)$ is the differential of $f$ applied to $X$.
-	\begin{Def}
+	\begin{Def}\label{Def_5.8}
 		We say that a section $s$ is flat if $\nabla_X s=0$ for every $X\in \mathfrak{X}(M)$.
 	\end{Def}
 	\subsection{On the existence of connections}
@@ -271,7 +283,7 @@
 		This is still a Riemaniann metric since is the sum of Riemaniann metrics and on each point it becomes a finite sum by the properties of the partition of unity of a manifold.
 	\end{proof}
 	\subsection{Metric connections}
-	\begin{Def}
+	\begin{Def}\label{Def_5.9}
 		We say that a connection $\nabla$ on a Riemaniann bundle $E$ is compatible with the metric, or that it is a metric connection, if:
 		$$X\langle s,t\rangle =\langle \nabla_X s,t\rangle+\langle s,\nabla_X t\rangle$$
 	\end{Def}
@@ -379,7 +391,7 @@
 	\section{The Christoffel symbols}
 	\chapter{Principal Bundles}
 	\section{Generalizing fiber bundles}
-	\begin{Def}
+	\begin{Def}\label{Def_6.1}
 		Let $G$ be a Lie group and $M$ a manifold. We define a \textbf{right-action} of $G$ on $M$ as a map $\mu:G\times M\rightarrow M$ such that:
 		\begin{itemize}
 			\item $\mu(g,x)=x\cdot g$ is smooth (a Lie group is a manifold);
@@ -388,23 +400,24 @@
 		\end{itemize}
 		The left action is defined similarly.
 	\end{Def}
-	\begin{Def}
+	\begin{Def}\label{Def_6.2}
 		We call \textbf{stabilizer} of $x\in M$ under $G$ Lie group the subgroup:
 		$$Stab(x)=\{g\in G|x\cdot g=x\}$$
 		We call the \textbf{orbit} of $x$ the set:
 		$$O(x)=xG=\{x\cdot g|g\in G\}$$
 	\end{Def}
 	The fact that $Stab(x)$ is a subgroup is trivially verified. Also, the stabilizer is a Lie subgroup but we are not going to prove this result since it is well known and not necessary for the general understanding.
-	\begin{Def}
+	\begin{Def}\label{Def_6.3}
 		A manifold $M$ with a lei group $G$ (left) right-acting on it is called a \textbf{G-manifold}. We also say that a map $f:M\rightarrow N$ between $G-manifolds$ is equivariant if $f(x\cdot g)=f(x)\cdot g$.
 	\end{Def}
-	\begin{Def}
+	\begin{Def}\label{Def_6.4}
 		Let $(E,M,\pi,G)$ be a fiber bundle, where $G$ is a Lie group and $M$ and $E$ are manifolds. Let $\pi$ be smooth and the trivializations diffeomorphic; let $G$ be acting on $E$ such that:
 		\begin{itemize}
 			\item $G$ acts on $E$ freely: freely: $Stab(E)=\{e\in G\}$;
 			\item let $U\in M$ be a local trivializing set and $\phi:\pi^{-1}(U)\rightarrow U\times M$  the corresponding trivialization, then $\phi$ is equivariant: $\phi(x,h)\cdot g=\phi(x,hg)$
 		\end{itemize} 
-		Then we say that this fiber bundle is a \textbf{principal $G$-bundle}
+		Then we say that this fiber bundle is a \textbf{principal $G$-bundle}.
+	\end{Def}
 		 Let us now make some examples of $G$-bundles to better understand the structure.
 		 \begin{Ex}[\textbf{The product bundle}]
 		 	Consider the product bundle as usual, but let $E$ and $M$ be manifolds and $G$ be a Lie group. Then $E=M\times G$. We can give this the fiber bundle structure in the usual way: we first of all define a projection:
@@ -416,7 +429,6 @@
 		 \begin{Ex}
 		 	Let $G$ be a Lie group and $H$ be a closed subgroup of $G$.
 		 \end{Ex}
-	\end{Def}
 	Now we start to see some properties which will come in handy in a while.
 	\begin{Prop}
 		Let $(E,M,\pi,G)$ be a principal $G-$bundle, then $G$ acts transitively on each fiber. Also, for any group $G$, any right-equivariant map is a left translation.
@@ -466,7 +478,7 @@
 	\end{proof}
 	\section{The frame bundle}
 	\subsection{The manifold structure of the frame bundle}
-	\begin{Def}
+	\begin{Def}\label{Def_6.5}
 		Consider a vector space $V$ of finite dimension. We define $FR(V)$ as the set made of all ordered bases of $V$. This means that $Fr(V)$ contains all of the possible ways of choosing a base for $V$.
 	\end{Def}
 	\begin{Obs}
@@ -606,15 +618,96 @@
 		In general, there is no canonically defined horizontal distribution on a principal $G$-bundle.
 		COSE CBE DEVO METTERE????
 	\section{Connections on principal bundles}
-		LEt $(E,M,\pi,G)$ be a principal $G$-bundle with a vertical and horizontal distribution, so that $TE=\mathcal{H}\oplus\mathcal{V}$. Let $\nu_{(p,g)}:\mathcal{H}_{(p,g)}\oplus\mathcal{V}_{(p,g)}$ be the standard projection on the vertical subbundle. Obiouvly, if $X_{(p,g)}\in T_{(p,g)}E$ is a vector field on $E$ at a point $(p,g)$, we call $\nu_{(p,g)}(X_{(p,g)})$ its \textbf{vertical component}.
-		\begin{Def}
+		LEt $(E,M,\pi,G)$ be a principal $G$-bundle with a vertical and horizontal distribution, so that $TE=\mathcal{H}\oplus\mathcal{V}$. Let $\nu_{(p,g)}:\mathcal{H}_{(p,g)}\oplus\mathcal{V}_{(p,g)}\rightarrow \mathcal{V}_{(p,g)}$ be the standard projection on the vertical subbundle. Obiouvly, if $X_{(p,g)}\in T_{(p,g)}E$ is a vector field on $E$ at a point $(p,g)$, we call $\nu_{(p,g)}(X_{(p,g)})$ its \textbf{vertical component}.
+		\begin{Def}\label{Def_6.6}
 			We call an \textbf{Ehresmann connection}, or \textbf{connection on a principal bundle} a $\mathfrak{g}$-valued 1-form $\omega:TE\rightarrow \mathfrak{g}$ that respects the following properties:
 			\begin{itemize}
 				\item Given any $A\in\mathfrak{g}$ and $(p,g)\in E$ we have $\omega_{(p,g)}(\bar{A}_{(p,g)})=A$;
-				\item $(G-equivariance)$ for $g\in G$ we have $dr_g\omega=Ad(g^{-1})\omega$;
+				\item $(G-equivariance)$ for $g\in G$ we have $r^*_g\omega=Ad(g^{-1})\omega$;
 				\item $\omega$ is $C^\infty$.
 			\end{itemize}
 		\end{Def}
 		Now it is just a matter to find a map that satisfies those conditions. A good candidate is the following composition:
-		$$\omega_{(p,g)}=$$
-	\end{document}
+		$$\omega_{(p,g)}=dj_{(p,g)}^{-1}\circ \nu:T_{(p,g)}E\xrightarrow{\nu} \mathcal{V}_{(p,g)}\xrightarrow{dj_{(p,g)}}\mathfrak{g}$$
+		\begin{Theo}
+			If $\mathcal{H}$ is a smooth right-invariant horizontal distribution on a principal $G$-bundle $(E,M\pi,G)$, then 1-form $\omega_{(p,g)}=dj_{(p,g)}^{-1}$ respects the following properties:
+				\begin{itemize}
+				\item Given any $A\in\mathfrak{g}$ and $(p,g)\in E$ we have $\omega_{(p,g)}(\bar{A}_{(p,g)})=A$;
+				\item $(G-equivariance)$ for $g\in G$ we have $r^*_g\omega=Ad(g^{-1})\omega$;
+				\item $\omega$ is $C^\infty$.
+			\end{itemize}
+		\end{Theo}
+		\begin{proof}
+			Consider any $A\in\mathfrak{g}$. Then its fundamental vector field is in the vertical sub-bundle and so the projection $\nu$ leaves it invariant:
+			$$\omega_{(p,g)}(\bar{A}_{(p,g)})=(dj_{(p,g)}^{-1}\circ \nu)(\bar{A}_{(p,g)})=dj_{(p,g)}^{-1}(\bar{A}_{(p,g)})=
+			dj_{(p,g)}^{-1}(dj_{(p,g)}(A))=A$$
+			This proves the first property.\\
+			\\
+			As for the second property, we recall that in proposition PROPOSIZIONE we proved that for a fundamental vector field  we have:
+			$$dr_g(\bar{A})=\overline{Ad(g^{-1})(A)}$$
+			Recalling that on principal bundles the pullback of a 1 form gives:
+			$$r^*_h\circ \omega_{(p,g)}(X_{(p,g)})=\omega_{(p,g)\cdot h}(dr_h(X_{(p,g)}))$$
+			We need to prove that:
+			$$r^*_h\circ \omega_{(p,g)}(X_{(p,g)})=(Adh^{-1})\omega_{(p,g)}X_{(p,g)}$$
+			If $X_{(p,g)}\in\mathcal{V}$ is vertical then it will be a fundamental vector field of an element $X\in\mathfrak{g}$ and so by proposition PROPOSIZIONE we get:
+			$$\omega_{(p,g)\cdot h}(dr_h(X_{(p,g)}))=\omega_{(p,g)\cdot h}\overline{(Ad(h^{-1})(X_{(p,g)\cdot h}))}$$
+			Now by the previous property applied 2 times::
+			$$\omega_{(p,g)\cdot h}\overline{(Ad(h^{-1})(X_{(p,g)\cdot h}))}=Ad(h^{-1})(X)=Ad(h^{-1})\omega_{(p,g)}(X_{(p,g)})$$
+			If instead $X_{(p,g)}$ is horizontal then by the invariance horizontal distribution the field $dr X$ will still be horizontal ad so it will be annihilated by $\omega$ since it contains the projection on the vertical subbundle. Thus proving:
+			$$r^*_h\circ \omega_{(p,g)}(X_{(p,g)})=(Adh^{-1})\omega_{(p,g)}X_{(p,g)}=0$$
+			As for the last property, we need to prove that $\omega$ is smooth in a neighbourhood of an arbitrary point $(p,g)\in E$. Since $E$ is a manifold, we choose a chart $(U_E,\phi_E)$ centered in a point $(p,g)\in E$. Let $\{T^i\}$ be a base of the Lie algebra $\mathfrak{g}$ and $\{\bar{T^i}\}$ the associated fundamental vectors. Those fundamental vectors are all smooth by proposition PROPOSIZIONE. By the previous isomorphism, those span the whole vertical sub-bundle at any point. Furthermore, since by hypothesis $\mathcal{H}$ is a smooth distribution  of horizontal vectors, there is a base of smooth vector fields $X^i$ in any point that spans the whole space. Thus, since $TE=\mathcal{H}\oplus\mathcal{V}$, we can expand any element of $TE$ as a linear combination:
+			$$V=a_i \bar{T^i}+b_iX^i;\hbox{ with } V\in TE, a_i,b_i\in \mathcal{F}$$
+			The coefficeints $a_i,b_i$ aare smooth by the previous observations. Now, applying $\omega$, we get that the horizontal components are annihilated:
+			$$\omega(a_i \bar{T^i}+b_iX^i)=\omega(a_i \bar{T^i})=a_i T^i$$
+		\end{proof}
+		Basically an Ehresmann connection arises on a principal bundle if one can find an horizontal smooth right-invariant distribution on it. One simply uses it to construct the 1-form as above.\\
+		\\
+		There is another equivalent manifestation of a connection: if one can find a smooth $G$-equivariant 1-form that takes value on the lie algebra $\mathfrak{g}$ of $G$ such that $\omega(\bar{A})=A$, then one can construce the horizontal distribution. Naively, one defines $$\mathcal{H}_{(p,g)}=Ker(\omega_{(p,g)})$$
+		We are going to see later how this second definition is completely equivalent to the first one. In order to achieve this, it is useful to see something about sequences.
+		\subsection{Sequences of vector bundles}
+		Consider a short exact sequence of vector bundles over a manifold $M$:
+		$$0\rightarrow A\xrightarrow{i}B\xrightarrow{j}B\rightarrow C\rightarrow0$$
+		We call \textbf{splitting} a map $k:C\rightarrow B$ such that $j\circ K=\mathbb{I}_C$.
+		\begin{Theo}
+			Let
+			$$0\rightarrow A\xrightarrow{i}B\xrightarrow{j}B\rightarrow C\rightarrow0$$
+			be a short exact sequence of vector bundles on a manifold $M$. Then there is a $1-1$ correspondence between the following sets:
+			$$\{\hbox{subbundles } H\in B;B=i(A)\oplus H\}\longleftrightarrow\{splittings: k:C\rightarrow B\}$$
+		\end{Theo}
+		\begin{proof}
+			Consider NON HO VOGLIA
+		\end{proof}
+	\subsection{Horizontal sub-bundle and connections}
+	\begin{Prop}
+		If $\mathcal{H}$ is a smooth right-invariant distribution on a principal $G$-bundle, then $\forall g\in G$, the differential of the right-action $dr_g:TE\rightarrow TE$ commutes with the horizontal and the vertical projection operators.
+	\end{Prop}
+	\begin{proof}
+		The result is pretty obvious. Let $Hor:TE\rightarrow\mathcal{H}$ be the horizontal projection. Since both the horizontal and the vertical distributions are right-invariant, it means that for any $X_{(p,g)}\in TE$ we have $dr_h X_{(p,g)}=dr_h \nu(X_{(p,g)})+dr_hHor(X_{(p,g)})$ and each of the two terms is still vertical/horizontal, so that:
+		$$dr_h X_{(p,g)}=dr_h \nu(X_{(p,g)})+dr_hHor(X_{(p,g)})=
+		\nu dr_h(X_{(p,g)})+Hordr_h(X_{(p,g)})$$
+	\end{proof}
+	We are now going to show that given any 1-form $\omega$ with certain oproperties, we can always construct an horizontal distribution. The proof is pretty lenghty.
+	\begin{Theo}
+		Consider a principal $G$-bundle $(E,M,\pi,G)$ where we can find a smooth $\mathfrak{g}$-valued and $G$-equivariant 1-form on it, such that $\omega(\bar{A})=A$ for every fundamental vector field. Then $Ker(\omega)=\mathcal{H}$ is a smooth right-invariant horizontal distribution on $TE$.
+	\end{Theo}
+	\begin{proof}
+		We need to prove 3 basic properties:
+		\begin{itemize}
+			\item for every point $(p,g)\in E$, the tangent space of this manifold decomposes as:
+			$$TE=\mathcal{H}_{(p,g)}\oplus \mathcal{V}_{(p,g)}$$
+			\item $\mathcal{H}_{(p,g)}$ is right-invariant: for every $h\in G$ we have $dr_h \mathcal{H}_{(p,g)}\subset \mathcal{H}_{(p,g)\cdot h}$;
+			\item $\mathcal{H}_{(p,g)}$ is a smooth sub-bundle of $TE$.
+		\end{itemize}
+		There is a short exact sequence of vector spaces for every $(p,g)$:
+		$$0\rightarrow \mathcal{H}_{(p,g)}\xrightarrow{\mathbb{I}???} T_{(p,g)}E\xrightarrow{\omega_{(p,g)}} \mathfrak{g}\rightarrow0$$
+		Furthermore, we have a splitting of this exact sequence: 
+		$$dj_{(p,g)}^{-1}\mathfrak{g}\rightarrow \mathcal{V}_{(p,g)}$$
+		Thus, by proposition PROPOSIZIONE, there is a sequence of isomorphisms:
+		$$T_{(p,g)}E\simeq\mathfrak{g}\oplus\mathcal{H}\simeq\mathcal{V}\oplus\mathcal{H}$$
+		This proves the first requirement.\\
+		\\
+		As for the second property, we just evalue with a simple calculation the right-equivariance. Let $X\in\mathcal{H}$:
+		$$\omega_{(p,g)\cdot h}(dr_hX_{(p,g)})=Ad(h^{-1})\omega{(p,g)}X_{(p,g)}=0$$ 
+		Thus proving the second property.
+	\end{proof}
+\end{document}
