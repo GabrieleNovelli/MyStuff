@@ -479,7 +479,7 @@
 	\section{The frame bundle}
 	\subsection{The manifold structure of the frame bundle}
 	\begin{Def}\label{Def_6.5}
-		Consider a vector space $V$ of finite dimension. We define $FR(V)$ as the set made of all ordered bases of $V$. This means that $Fr(V)$ contains all of the possible ways of choosing a base for $V$.
+		Consider a vector space $V$ of finite dimension. We define $Fr(V)$ as the set made of all ordered bases of $V$. This means that $Fr(V)$ contains all of the possible ways of choosing a base for $V$.
 	\end{Def}
 	\begin{Obs}
 		There is a natural action of the general linear group on $Fr(V)$. The idea is the following: since $Fr(V)$ contains all of the possible basis of $V$, we get that, having choosen a base, we can re-order the elements of it and obtain the same base. We can also linearly combine those elements to obtain another base. Thus, all of the elements of $Fr(V)$ will be reached by matrices in $GL(n,\mathbb{R})$, where $n$ is the dimension of the vector space.\\
@@ -522,7 +522,11 @@
 		\\
 		Now, the action of $GL(k,\mathbb{R})$ on the fiber is just given by the product of matrices and so it is free. In particular, $GL(k,\mathbb{R})$ acts on $Fr(E)$ like this:
 		$$(p\in M,\vec{e_p}\in Fr(E_p))\longrightarrow(p,\vec{e_p}A)$$
-		This action is evidently free. Moreover, considering the chart $\varphi$, it is equivariant under this action. Thus, we have a principal $GL(k,\mathbb{R})$-bundle $(Fr(E),M,\pi_G,GL(k,\mathbb{R}))$.
+		This action is evidently free. Moreover, considering the chart $\varphi$, it is equivariant under this action. Thus, we have a principal $GL(k,\mathbb{R})$-bundle $(Fr(E),M,\pi_G,GL(k,\mathbb{R}))$.\\
+		\\
+		\begin{Obs} [\textbf{An intuition for the frame bundle}]
+			The frame bundle is nothing more than the union of all of the frame manifolds of the fibers. Basically, once we have a smooth fiber bundle on $M$, constructing the frame bundle means associating another bundle to $M$. This new bundle will be a principal bundle and at any point the fiber will be $Fr(F)$ the frame manifold of the fiber, which is 1 to 1 with $GL(k,\mathbb{R})$.
+		\end{Obs}
 		\subsection{Fundamental vector fields}
 		Suppose to have a Lie group $G$ that right-acts smoothly on a manifold $M$. Then, consider any element $A\in\mathfrak{g}$ inside the Lie Algebra of $G$. Define:
 		$$\bar{A}={d\over dt}\bigg|_{t=0}p\cdot e^{tA}\in T_pM$$
@@ -541,6 +545,14 @@
 		$$j_p(g)=p\cdot g$$
 		Its differential is defined as:
 		$$dj_p(A\in\mathfrak{g})={d\over dt}\bigg|_{t=0}j_p(e^{tA})={d\over dt}\bigg|_{t=0}p\cdot e^{tA}$$
+		\begin{Ex}
+			Consider the flat Euclidean manifold $\mathbb{R}^2$ and the Lie group $U(1)$ of complex modulo 1 numbers. The Lie algebra of the group is $\mathfrak{u}(1)={i\theta;\theta\in\mathbb{R}}$ made up of all multiples of $i$. We set the following action of $U(1)$ on $\mathbb{R}^2$ given by: $e^{i\theta}(x,y)=(xcos(\theta)-ysin\theta,ycos(\theta)+xsin(\theta))$.
+			Then, choosing the point $p=(1,1)\in\mathbb{R}^2$ and the generic element $e^{i\theta}\in U(1)$, we can compute the fundamental vector field in $p$. Consider the curve $c_p(t)=p\times e^{it\theta}$ and the fundamental vector field in $(1,1)$ is given by:
+			$$\bar{\theta}={d\over dt}\bigg|_{t=0}j_p(e^{it\theta})$$
+			To make things more explicit:
+			$${d\over dt}\bigg|_{t=0}(1,1)\cdot (cos(t\theta))+sin(t\theta)=
+			{d\over dt}\bigg|_{t=0}(cos(t\theta)-sin(t\theta),cos(t\theta)+sin(t\theta))=(-1,1)\theta$$
+		\end{Ex}
 		\begin{Prop}
 			Let $G$ be a Lie group right-acting smoothly on a manifold $M$ and let $r_g(p)=p\cdot g$ the right translation. For $A\in\mathfrak{g}$, it's fundamental vector field $\bar{A}$ satisfies:
 			$$dr_g(\bar{A})=\overline{Ad(g^{-1})(A)}$$
@@ -552,6 +564,14 @@
 			By the chain rule:
 			$$dr_g(\bar{A}_p)=dr_gdj_p(A)=dj_{pg}dc_{g^{-1}}(A)=dj_{pg}(Ad(g^{-1})(A))=\overline{Ad(g^{-1})(A_{pg})}$$
 		\end{proof}
+		This means that the push-forward of the fundamental vector field under the right action "transofrms" under the adjoint representation. Let us make an example to better interiorize this:
+		\begin{Ex}
+			Consider again the space $\mathbb{R}^2$ acted on by $U(1)$ like the previous example. Then, suppose $A=i\theta$ and $g=e^{iB}$. We saw that the fundamental vector field associated to $(x,y)$ was:
+			$$\bar{A}_{x,y}=(-\partial_y,\partial_x)\theta$$
+			Now, the push-forward of this vector field under $g$ will be the fundamental vector field of:
+			$$Ad(g^{-1})(A)=g^{-1}Ag=e^{-iB}Ae^{iB}$$
+			However, $U(1)$ is a commutative group, so that $Ad(g)A=A$. Thus, the push forward of the fundamental vector field is the same fundamental vector field.
+		\end{Ex}
 		\subsection{The integral curves of the fundamental vector fields}
 		\begin{Prop}
 			The curve $c_p(t)=p\cdot e^{tA}$ is the integral curve of the fundamental vector field $\bar{A}$ passing through $p\in M$.
@@ -606,11 +626,14 @@
 			$$dj_{(p,g),e}:\mathfrak{g}\rightarrow \mathcal{V}_{(p,g)}$$ is an isomorphism.
 		\end{Prop}
 		\begin{proof}
-			By proposition REFERENZA we know that the Kernel of the differential at the identity is the Stabilizer of $(p,g)$. However, for a principal $G-$bundle, the group acts freely on the manifold $E$ and so the stabilizer is trivial $Stab(p,g))=\{e\}$. Thus, $Ker dj_{(p,g),e}=0$ and the map is injective. By the prpevious propositon REFERENZA the image of the differential lies in the vertical subspace. Moreover, $dim\mathcal{V}_{(p,g)}=dim G$ and so the map must be an isnomorphism of vector spaces.			
+			By proposition REFERENZA we know that the Kernel of the differential at the identity is the Stabilizer of $(p,g)$. However, for a principal $G-$bundle, the group acts freely on the manifold $E$ and so the stabilizer is trivial $Stab(p,g))=\{e\}$. Thus, $Ker dj_{(p,g),e}=0$ and the map is injective. By the prpevious propositon REFERENZA the image of the differential lies in the vertical subspace. Moreover, $dim\mathcal{V}_{(p,g)}=dim G$ and so the map must be an isomorphism of vector spaces.			
 		\end{proof}
 		\begin{Obs}
 			As a consequence of the last result, all the vertical vectors are the fundamental vectors and all the fundamental vectors are the vertical vectors.\\
 			Let $T^a$ be a base for the Lie algebra $\mathfrak{g}$, then, at any point, by the isomorphism in the previous result, we get that they also form a base of $\mathcal{V}_{(p,g)}$ (under the action of the diffeomorphism). This defines the \textbf{Vertical Subbundle} $$\mathcal{V}=\bigsqcup_{(p,g)\in E}\mathcal{V}_{(p,g)}$$
+		\end{Obs}
+		\begin{Obs}
+			The name "vertical" comes from the definition $\mathcal{V}=Ker(d\pi)$. The basi idea is that, if we take any smooth vector field $X_E\in\mathfrak{X}(E)$, then the differential of the projection $d\pi:TE\rightarrow TM$ induces a new smooth vector field $X_M=d\pi X_E$ on the base space. The "vertical vector fields" are the ones who get annihilated when projected, since they belong to the Ker of $d\pi$. They are not to be though as vertical with respect to $E$, but to $M$.
 		\end{Obs}
 		\subsection{The horizontal subbundle}
 		We have seen that on a principal $G$-bundle there is a well defined vertical subbundle $\mathcal{V}$ of the tangent bundle $TE$. We say thet there is an \textbf{horizontal distribution} $\mathcal{H}$ if $TE=\mathcal{H}\oplus\mathcal{V}$. This means that for every point $(p,g)\in TE$ we have $T_{(p,g)}E=\mathcal{H}_{(p,g)}\oplus\mathcal{V}_{(p,g)}$ with $\mathcal{H}_{(p,g)}\cap\mathcal{V}_{(p,g)}=0$.\\
@@ -618,7 +641,7 @@
 		In general, there is no canonically defined horizontal distribution on a principal $G$-bundle.
 		COSE CBE DEVO METTERE????
 	\section{Connections on principal bundles}
-		LEt $(E,M,\pi,G)$ be a principal $G$-bundle with a vertical and horizontal distribution, so that $TE=\mathcal{H}\oplus\mathcal{V}$. Let $\nu_{(p,g)}:\mathcal{H}_{(p,g)}\oplus\mathcal{V}_{(p,g)}\rightarrow \mathcal{V}_{(p,g)}$ be the standard projection on the vertical subbundle. Obiouvly, if $X_{(p,g)}\in T_{(p,g)}E$ is a vector field on $E$ at a point $(p,g)$, we call $\nu_{(p,g)}(X_{(p,g)})$ its \textbf{vertical component}.
+		Let $(E,M,\pi,G)$ be a principal $G$-bundle with a vertical and horizontal distribution, so that $TE=\mathcal{H}\oplus\mathcal{V}$. Let $\nu_{(p,g)}:\mathcal{H}_{(p,g)}\oplus\mathcal{V}_{(p,g)}\rightarrow \mathcal{V}_{(p,g)}$ be the standard projection on the vertical subbundle. Obiouvly, if $X_{(p,g)}\in T_{(p,g)}E$ is a vector field on $E$ at a point $(p,g)$, we call $\nu_{(p,g)}(X_{(p,g)})$ its \textbf{vertical component}.
 		\begin{Def}\label{Def_6.6}
 			We call an \textbf{Ehresmann connection}, or \textbf{connection on a principal bundle} a $\mathfrak{g}$-valued 1-form $\omega:TE\rightarrow \mathfrak{g}$ that respects the following properties:
 			\begin{itemize}
@@ -630,7 +653,7 @@
 		Now it is just a matter to find a map that satisfies those conditions. A good candidate is the following composition:
 		$$\omega_{(p,g)}=dj_{(p,g)}^{-1}\circ \nu:T_{(p,g)}E\xrightarrow{\nu} \mathcal{V}_{(p,g)}\xrightarrow{dj_{(p,g)}}\mathfrak{g}$$
 		\begin{Theo}
-			If $\mathcal{H}$ is a smooth right-invariant horizontal distribution on a principal $G$-bundle $(E,M\pi,G)$, then 1-form $\omega_{(p,g)}=dj_{(p,g)}^{-1}$ respects the following properties:
+			If $\mathcal{H}$ is a smooth right-invariant horizontal distribution on a principal $G$-bundle $(E,M,\pi,G)$, then 1-form $\omega_{(p,g)}=dj_{(p,g)}^{-1}\circ \nu$ respects the following properties:
 				\begin{itemize}
 				\item Given any $A\in\mathfrak{g}$ and $(p,g)\in E$ we have $\omega_{(p,g)}(\bar{A}_{(p,g)})=A$;
 				\item $(G-equivariance)$ for $g\in G$ we have $r^*_g\omega=Ad(g^{-1})\omega$;
@@ -645,14 +668,15 @@
 			\\
 			As for the second property, we recall that in proposition PROPOSIZIONE we proved that for a fundamental vector field  we have:
 			$$dr_g(\bar{A})=\overline{Ad(g^{-1})(A)}$$
+			Now, we can directly prove this for fundamental vector fields, since they are the vertical ones and the horizontal ones would be annihilated by the projection $\nu$ contained inside $\omega$. \\
 			Recalling that on principal bundles the pullback of a 1 form gives:
-			$$r^*_h\circ \omega_{(p,g)}(X_{(p,g)})=\omega_{(p,g)\cdot h}(dr_h(X_{(p,g)}))$$
+			$$r^*_h\circ \omega_{(p,g)}(\overline{X_{(p,g)\cdot h}})=\omega_{(p,g)\cdot h}(dr_h(\overline{X_{(p,g)}}))$$
 			We need to prove that:
-			$$r^*_h\circ \omega_{(p,g)}(X_{(p,g)})=(Adh^{-1})\omega_{(p,g)}X_{(p,g)}$$
+			$$r^*_h\circ \omega_{(p,g)}(\overline{X_{(p,g)}})=(Adh^{-1})\omega_{(p,g)}(\overline{X_{(p,g)}})$$
 			If $X_{(p,g)}\in\mathcal{V}$ is vertical then it will be a fundamental vector field of an element $X\in\mathfrak{g}$ and so by proposition PROPOSIZIONE we get:
-			$$\omega_{(p,g)\cdot h}(dr_h(X_{(p,g)}))=\omega_{(p,g)\cdot h}\overline{(Ad(h^{-1})(X_{(p,g)\cdot h}))}$$
+			$$\omega_{(p,g)\cdot h}(dr_h(\overline{X_{(p,g)}}))=\omega_{(p,g)\cdot h}\overline{(Ad(h^{-1})(X_{(p,g)\cdot h}))}$$
 			Now by the previous property applied 2 times::
-			$$\omega_{(p,g)\cdot h}\overline{(Ad(h^{-1})(X_{(p,g)\cdot h}))}=Ad(h^{-1})(X)=Ad(h^{-1})\omega_{(p,g)}(X_{(p,g)})$$
+			$$\omega_{(p,g)\cdot h}\overline{(Ad(h^{-1})(X_{(p,g)\cdot h}))}=Ad(h^{-1})(X)=Ad(h^{-1})\omega_{(p,g)}(\overline{X_{(p,g)}})$$
 			If instead $X_{(p,g)}$ is horizontal then by the invariance horizontal distribution the field $dr X$ will still be horizontal ad so it will be annihilated by $\omega$ since it contains the projection on the vertical subbundle. Thus proving:
 			$$r^*_h\circ \omega_{(p,g)}(X_{(p,g)})=(Adh^{-1})\omega_{(p,g)}X_{(p,g)}=0$$
 			As for the last property, we need to prove that $\omega$ is smooth in a neighbourhood of an arbitrary point $(p,g)\in E$. Since $E$ is a manifold, we choose a chart $(U_E,\phi_E)$ centered in a point $(p,g)\in E$. Let $\{T^i\}$ be a base of the Lie algebra $\mathfrak{g}$ and $\{\bar{T^i}\}$ the associated fundamental vectors. Those fundamental vectors are all smooth by proposition PROPOSIZIONE. By the previous isomorphism, those span the whole vertical sub-bundle at any point. Furthermore, since by hypothesis $\mathcal{H}$ is a smooth distribution  of horizontal vectors, there is a base of smooth vector fields $X^i$ in any point that spans the whole space. Thus, since $TE=\mathcal{H}\oplus\mathcal{V}$, we can expand any element of $TE$ as a linear combination:
@@ -701,13 +725,130 @@
 		There is a short exact sequence of vector spaces for every $(p,g)$:
 		$$0\rightarrow \mathcal{H}_{(p,g)}\xrightarrow{\mathbb{I}???} T_{(p,g)}E\xrightarrow{\omega_{(p,g)}} \mathfrak{g}\rightarrow0$$
 		Furthermore, we have a splitting of this exact sequence: 
-		$$dj_{(p,g)}^{-1}\mathfrak{g}\rightarrow \mathcal{V}_{(p,g)}$$
+		$$dj_{(p,g)}^{-1}:\mathfrak{g}\rightarrow \mathcal{V}_{(p,g)}$$
 		Thus, by proposition PROPOSIZIONE, there is a sequence of isomorphisms:
 		$$T_{(p,g)}E\simeq\mathfrak{g}\oplus\mathcal{H}\simeq\mathcal{V}\oplus\mathcal{H}$$
 		This proves the first requirement.\\
 		\\
 		As for the second property, we just evalue with a simple calculation the right-equivariance. Let $X\in\mathcal{H}$:
-		$$\omega_{(p,g)\cdot h}(dr_hX_{(p,g)})=Ad(h^{-1})\omega{(p,g)}X_{(p,g)}=0$$ 
-		Thus proving the second property.
-	\end{proof}
+		$$\omega_{(p,g)\cdot h}(dr_hX_{(p,g)})=Ad(h^{-1})\omega{(p,g)}X_{(p,g)}=0$$
+		This means that $\omega$ acting on a right-transalted vector of $\mathcal{H}$ is 0, so that this vector is still in $\mathcal{H}$, thus proving the second property.\\
+		\\
+		As for the third property NON HO VOGLIA
+		\end{proof}
+		\subsection{The Horizontal Lift of a vector field}
+		Suppose that $\mathcal{H}$ is an horizontal distribution on a principal bundle $(E,M,\pi,G)$. Let $X\in\mathfrak{X}(M)$ be a vector field on $M$. Then for every point $(p,g)\in E$, we have $\mathcal{V}_{(p,g)}=Ker(d\pi_{(p,g)})$ and so we have some induced isomorphisms:
+		$${T_{(p,g)}E\over \mathcal{V}_{(p,g)}}\simeq \mathcal{H}_{(p,g)}\simeq T_{\pi(p,g)}M$$
+		Thus, there is a unique horizontal vector $\mathcal{X}_{(p,g)}\in\mathcal{H}_{(p,g)}$ such that:
+		$$d\pi(\mathcal{X}_{(p,g)})=X_{\pi(p,g)}\in T_{\pi(p,g)}M$$
+		We call this unique vecotr the Horizontal Lift of $X$ to $E$.
+		\begin{Obs}
+			Basically, when we have a principal $G$-bundle with an horizontal distribution, we see from the previous series of isomorphisms that the tangent space of the base manifold can  be identified with the horizontal tangent space of the principal bundle.\\
+			\\
+			Note that in our construction we have not assumed smoothness nor right-invariance. We are now going to prove that if $\mathcal{H}$ is smooth and right-invariant so will be the lift. (This is, honestly, pretty useless as a concept since it fucking obvious, yet it is useful to learn how to calculate stuff).
+		\end{Obs}
+		\begin{Prop}
+			Let $(E,M,\pi,G)$ be a principal bundle with a smooth right-invariant horizontal distribution $\mathcal{H}$. Then the horizontal lift $\mathcal{X}$ of any vector field $X\in\mathfrak{X}(M)$ is smooth and right-invariant as well.
+		\end{Prop}
+		\begin{proof}
+			Suppose that $p\in M$ and $(p,g)\in\pi^{-1}(p)$. Then we must have by definition of lift: $d\pi(\mathcal{X}_{(p,g)})=X_p$. Suppose now to take any other point of $\pi^{-1}(x)$ like $(p,h)$. Then, we must have, by the cosntruction of the principal bundle, that $(p,h)=dr_{g'}(p,g)=(p,g)\cdot g'$. Recalling that $\pi\circ r_{g'}=\pi$ we have:
+			$$d\pi(dr_{g'}\mathcal{X}_{(p,g)})=d\pi\circ dr_{g'}(\mathcal{X}_{(p,g)})=d\pi\mathcal{X}_{(p,g)}=d\pi\mathcal{X}_{(p,h)}$$
+			By uniqueness of the horizontal lift, $\mathcal{X}_{(p,g)}=\mathcal{X}_{(p,h)}$ and this proves right-invariance.\\
+			\\
+			As for the smoothness, we simply choose a trivializing chart on $M$ like $(U,\phi)$ and construct a trivialization 
+			$$\varphi_U:\pi^{-1}(U)\rightarrow U\times G$$
+			Now we define the vector field:
+			$$Z_{(p,g)}=(X_p,0)\in T_{(p,g)}(U\times G)$$
+			Clearly $Z$ is a smooth vector field on $U\times G$. Given the projection $\eta:U\times G\rightarrow U$ we have:
+			$$d\eta Z_{(p,g)}=X_p$$
+			To see this, note that $d\eta:T(U\times G)\rightarrow TU$ and so we get: $d\eta(Z)\in TU$ is a vector field. In particular, by definition of differential, we must have for any $(p,g)\in U\times G$:
+			$$d\eta_{(p,g)}(Z_{(p,g)})f=Z_{(p,g)}(f\circ \eta_{(p,g)})$$
+			And since $\eta$ projects the points from $U\times G$ to $U$, we get:
+			$$d\eta_{(p,g)}(Z_{(p,g)})=X_p$$
+			This implies that
+			We can also define a smooth vector field on $\pi^{-1}(U)$ like:
+			$$Y=d\varphi^{-1}(Z):U\times G \rightarrow T_{\pi^{-1}(U)}E$$
+			For the same reason as before, given that $\pi$ is a projection, we must have:
+			$$d\pi(Y_{(p,g)})=X_{\pi(p,g)}$$
+			We know that the projection $Hor(Y)$ is smooth by hypothesis, If now we decompose $Y_{(p,g)}=\nu(Y_{(p,g)})+Hor(Y_{(p,g)})$ and apply the differential of the projection, recalling that $\mathcal{V}=Ker(d\pi)$, we get:
+			$$d\pi(Y_{(p,g)})=d\pi(Hor(Y_{(p,g)}))=Hor(d\pi(Y_{(p,g)}))=X_{\pi(p,g)}$$
+			This means that $Hor(Y)$ is the lift of $X$. By uniqueness, $X$ is smooth on $M$.
+		\end{proof}
+		\chapter{Connections on vector bundles}
+		\section{The Pullback bundle}
+			Consider a vector bundle $(E,M,\pi,F)$ and $f:N\rightarrow M$ is a smooth map over manifolds. Then we can define a smooth vecgtor bundle, called pullback bundle $f^*E$ over $N$. In particular, the base space of this bundle will be $N$ and the total space of this bundle will be 
+			$$f^*E=\{(x_N,x_E)\in N\times E:f(x_N)=\pi(x_E)\}$$
+			Note that we can construct a commutative diagram by using the two projections:
+			$$\pi_N:f^*E\rightarrow N; \hbox{ and } \pi_E:f^*E\rightarrow E$$
+			Those act in the obvious way:
+			$$\pi_N(x_N,x_E)=x_N; \hbox{ and } \pi_E(x_N,x_E)=x_E$$
+			The commutative diagram those two fit in is the following:\\
+			\begin{center}
+				\begin{tikzcd}
+					f^*E \arrow{r}{\pi_E} \arrow[swap]{d}{\pi_N} & E \arrow{d}{\pi}\\
+					N \arrow{r}{f}& M 
+				\end{tikzcd}
+			\end{center}
+			Now, we show that there is a vector bundle structure on $(f^*E,N,\pi_N,\mathbb{R}^D)$ where $D$ will be: $dim(N)+dim(F)$.
+			\begin{Prop}
+				Let $(E,M,\pi,F)$ be a product bundle with $E=M\times F$ and $f^*E:N\rightarrow M$ is a smooth map between manifolds, then $f^*E$ is homeomoprhic to the product bundle $N\times F$.
+			\end{Prop}
+			\begin{proof}
+				$$f^*E=\{(x_N,(x_M,x_F))\in N\times (M\times F);f(x_N)=\pi(x_M,x_E)=x_M\}=$$
+				$$=\{(x_N,(f(x_N),x_F))\in N\times (M\times F)\}$$ 
+				is by definition the base space of the new vector bundle. Consider now the following map:
+				$$\sigma:f^*E\rightarrow N\times F \hbox{ such that }
+				\sigma(x_N,(f(x_N),x_F))=(x_N,x_F)$$
+				is clearly invertible and continuous and with continuous inverse. So it is an homeomprphism.
+			\end{proof}
+			\begin{Theo}
+				Let $(E,M,\pi,F)$ be a smooth vector bundle on $M$ and $f:N\rightarrow M$ a smooth map between manifolds. Then $(f^*E,N,\pi_N,F)$ is a smooth vector bundle with same fiber.
+			\end{Theo}
+			\begin{proof}
+				Suppose to take a trivializign open set of $M$, called $U$. Then, there is a map $\varphi_U:\pi^{-1}(U)\rightarrow U\times F$ diffeomorphic. Thus, locally, $E$ is homeomorphic to the product bundle $U\times F$. By the previous proposition, there is an homeomorphism $f^*E\simeq N\times F$. It remains to show that the trivializing charts are diffeomorphic since the projection is already smooth by construction.\\
+				If we take the map $\sigma$ of the previous proposition, this is clearly smooth, invertible and with smooth inverse.
+			\end{proof}
+			Now we make some examples of the pullback bundle:
+			\begin{Ex} [Vectors along a curve]
+				Consider a vector bundle $(E,M,\pi,F)$ and a smooth curve on $M$ like $\gamma:[a,b]\rightarrow M$. Then there is a pullbakc smooth bundle $(\gamma^*E,[a,b],\pi_\mathbb{R},F)$ over a subset of the real line. Thus, a section of the pullback bundle in this case is a map $s:[a,b]\rightarrow \gamma^*E$. In particular, it assigns to each $t\in[a,b]$ a couple $(t,x_E)$ so when composed with the proper projection it gives a section of the original bundle along the curve $\gamma$.\\
+				\\
+				To be more precise, if we consider the original bundle to be the tangen bundle, sections of the pullback bundle over the real line would give us smooth vector fields along the curve $\gamma(t)$.
+			\end{Ex}
+		\section{The parallel transportation on a vector bundle}
+			We are now basically going to generalize the notion of covariant derivative for generic vecotr bundles. One could already have guessed that this was possible in the previous chapters: we have not used once any property of the tangent bundle.\\
+			\\
+			Suppose to have a vector fiber bundle $(E,M,\pi,F)$ and a connection $\nabla:\mathfrak{X}(M)\times \Gamma(E)\rightarrow\Gamma(E)$ on it. Consider now a smooth curve on $M$ like $\gamma:[a,b]\rightarrow M$. This is a smooth map between manifolds, so we can construct a pullback bundle:
+			$$\gamma^*E=\{(t,x_E)\in [a,b]\times E:\gamma(t)=\pi(x_E)\}$$
+			As we know, there is an induced smooth vector bundle structure on $(\gamma^*E,[a,b],\pi_\mathbb{R},F)$. The sections of the pullback bundle can be thought of smooth sections of $E$ along the line $\gamma(t)$.
+			\begin{Theo}
+				Let $(E,M,\pi,F)$ be a vector bundle and $\nabla:\mathfrak{X}(M)\times \Gamma(E)\rightarrow\Gamma(E)$ a connection on it. Consider any smooth curve $\gamma:[a,b]\rightarrow M$ on the manifold and consider the induced opullback bundle $\gamma^*E$ and it's space of smooth sections $\Gamma(\gamma^*E)$. Then there is a unique linear map called \textbf{Covariant Derivative} along $\gamma$
+				$${D\over dt}:\Gamma(\gamma^*E)\rightarrow \Gamma(\gamma^*E)$$
+				such that it respects the follwoing properties:
+				\begin{itemize}
+					\item for every smooth section $s\in \Gamma(\gamma^*E)$,
+					then the covariant derivative is $\mathbb{R}$ linear;
+					\item The covariant derivative respects the Leibniz rule: for any $f\in [a,b]\rightarrow M$ 
+					$${D(fs)\over dt}={df\over dt}s+f{Ds\over dt}$$
+					\item if $s$ is an induced section from a global section $S\in\Gamma(E)$ in the sense that $S(\gamma(t))=s(t)$ then:
+					$${Ds\over dt}=\nabla_{\gamma'(t)}S$$  
+				\end{itemize} 
+			\end{Theo}
+			\begin{proof}
+				The proof is identical to the one we saw in theorem TEOREMA. The idea is to fix a framed open set $(U,e_i)$ and expand the section of $\Gamma(\gamma^*E)$ as:
+				$$s(t)=s^i(t)e_{i,\gamma(t)}$$
+				then repeat the same calculations, defining the covariant derivative as:
+				$${Ds\over dt}={ds^i\over dt}e_{i,\gamma(t)}+s^i\nabla_{\gamma'(t)}e_{i}$$
+			\end{proof}
+			In this new generalized definition we simply have that $E$ has the role of $TM$. The idea is the same and it is still useful to imagine the sections of the vector bundle as smooth vector fields, even if they are not.
+			\begin{Def}
+				We say that a section $s\in\Gamma(\gamma^*E)$ is parallel along the cure $\gamma:[a,b]\rightarrow M$ if ${Ds\over dt}=0$ for every $t\in[a,b]$. If $s$ is parallel, we call $s(b)$ the parallel transport of $s(a)$ along the curve $\gamma(t)$.
+			\end{Def}
+			\begin{Theo}
+				Suppose that $M$ is a manifold with a connection $\nabla:\mathfrak{X}(M)\times\Gamma(E)\rightarrow\Gamma(E)$. Then, given any curve $\gamma:[a,b]\rightarrow M$ and a section $s_a$ of $\Gamma(\gamma^*E)$ in $a$, there always exists a parallel section field $s$ along $\gamma$ such that $s(a)=s_a$. Furthermore, there is an isomorphism $\phi_{(a,b)}:E_{\gamma(a)}\rightarrow E_{\gamma(b)}$
+			\end{Theo}
+			\begin{proof}
+				The proof is not hard
+			\end{proof}
+		\section{Horizontal vectors on the frame bundle}
+			We are going to show that, given a smooth vector bundle $(E,M,\pi,F)$, a connection on $E$ automatically induces a notion of Horizontal vectors on the Frame bundle. In general, we have seen that the notion of Horizontal vector is not well defined for principal bundles. However, the sole existence of a connection on a vector bundle ensures a well behaving notion of horizontal vectors.
 \end{document}
