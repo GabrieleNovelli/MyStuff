@@ -739,6 +739,7 @@
 		\subsection{The Horizontal Lift of a vector field}
 		Suppose that $\mathcal{H}$ is an horizontal distribution on a principal bundle $(E,M,\pi,G)$. Let $X\in\mathfrak{X}(M)$ be a vector field on $M$. Then for every point $(p,g)\in E$, we have $\mathcal{V}_{(p,g)}=Ker(d\pi_{(p,g)})$ and so we have some induced isomorphisms:
 		$${T_{(p,g)}E\over \mathcal{V}_{(p,g)}}\simeq \mathcal{H}_{(p,g)}\simeq T_{\pi(p,g)}M$$
+		Note that the horizontal lift is up to a vertical vector field so it is not unique, the equivalence class is. However, we can find a unique vector field lying in $\mathcal{H}$ that is the lift of $X$, which corresponds to the lift with a 0 vertical component.
 		Thus, there is a unique horizontal vector $\mathcal{X}_{(p,g)}\in\mathcal{H}_{(p,g)}$ such that:
 		$$d\pi(\mathcal{X}_{(p,g)})=X_{\pi(p,g)}\in T_{\pi(p,g)}M$$
 		We call this unique vecotr the Horizontal Lift of $X$ to $E$.
@@ -844,11 +845,69 @@
 				We say that a section $s\in\Gamma(\gamma^*E)$ is parallel along the cure $\gamma:[a,b]\rightarrow M$ if ${Ds\over dt}=0$ for every $t\in[a,b]$. If $s$ is parallel, we call $s(b)$ the parallel transport of $s(a)$ along the curve $\gamma(t)$.
 			\end{Def}
 			\begin{Theo}
-				Suppose that $M$ is a manifold with a connection $\nabla:\mathfrak{X}(M)\times\Gamma(E)\rightarrow\Gamma(E)$. Then, given any curve $\gamma:[a,b]\rightarrow M$ and a section $s_a$ of $\Gamma(\gamma^*E)$ in $a$, there always exists a parallel section field $s$ along $\gamma$ such that $s(a)=s_a$. Furthermore, there is an isomorphism $\phi_{(a,b)}:E_{\gamma(a)}\rightarrow E_{\gamma(b)}$
+				Suppose that $M$ is a manifold with a connection $\nabla:\mathfrak{X}(M)\times\Gamma(E)\rightarrow\Gamma(E)$. Then, given any curve $\gamma:[a,b]\rightarrow M$ there always exists a unique \textbf{parallel translation} map $\varphi_{a,b}:E_{\gamma(a)}\rightarrow E_{\gamma(b)}$, which is a linear isomorphism.
 			\end{Theo}
 			\begin{proof}
-				The proof is not hard
+				Let $(s_1(a),...,s_n(a))$ be a base for $E_{\gamma(a)}$. Then if we consider the following system of equations:
+				$${D\over dt}s_i=0=\nabla_{\gamma'(t)}s_i=\omega^j_i(\gamma'(t))s_j$$
+				with an initial condition $s_i(a)=s_{i}\bigg|_a$ +, by the Cauchy theorem, the solution always exists in a small interval of $t$ near $a$.\\
+				\\
+				By taking a small enough $\epsilon$, the solution of the previous equation defines a map:
+				$$\varphi_{a-\epsilon,a+\epsilon}:E_{\gamma(a-\epsilon)}\rightarrow E_{\gamma(a+\epsilon)}$$ which is linear. Also, it has an inverse given by $\varphi_{a+\epsilon,a-\epsilon}$ since the curve can be parametrizzed with the opposite orientation. Thus, the map is an isomorphism.
 			\end{proof}
+			This means that $\varphi_{a,b}$ sends a base into a base. To be more precise, it parallely transports a base from a point to another of the curve. Thus, there always exists a unique parallely transported base of sections of $\Gamma(\gamma^*E)$ along the curve. This base is obviously unique.
 		\section{Horizontal vectors on the frame bundle}
-			We are going to show that, given a smooth vector bundle $(E,M,\pi,F)$, a connection on $E$ automatically induces a notion of Horizontal vectors on the Frame bundle. In general, we have seen that the notion of Horizontal vector is not well defined for principal bundles. However, the sole existence of a connection on a vector bundle ensures a well behaving notion of horizontal vectors.
+			We are going to show that, given a smooth vector bundle $(E,M,\pi,F)$, a connection on $E$ automatically induces a notion of Horizontal vectors on the Frame bundle. In general, we have seen that the notion of Horizontal vector is not well defined for principal bundles. However, the sole existence of a connection on a vector bundle ensures a well behaving notion of horizontal vectors.\\
+			\\
+			Recall that given a vector bundle $(E,M,\pi,F)$ we can construct a principal $GL(k, \mathbb{R})$ bundle called Frame bundle, where $k$ is the dimension of the fiber $F\simeq\mathbb{R}^k$. In particular, we construct $(Fr(E),M,\pi_{Fr},FL(k,\mathbb{R}))$ where $Fr(E)=\bigsqcup_{(p\in M}Fr(E_p)$.
+			\begin{Def}
+				Let $(E,M,\pi,F)$ be a vector bundle and $\gamma:[a,b]\rightarrow M$ a curve on $M$. We call a \textbf{parallel frame} along $\gamma$ a collection of parallel sections $(e_1(t),...,e_n(t))$ of the pullback bundle $\gamma^*E$ such that for each $t\in[a,b]$ they form a base of the space $E_{\gamma(t)}$.
+			\end{Def}
+			Recall that a section of $\gamma^*E$ is a map $s:[a,b]\rightarrow \gamma^*E$ that associates to each $t$ the couple $(t,x_E)$. Thus, a parallel frame along a curve is a collection of sections which form a base of the tangent space at any point of the curve $\gamma$, which are parallel to $\gamma$. This means that they are annihilated by the covariant derivative along $\gamma$:
+			$${D\over dt}e_i=0$$
+			From theorem TEOREMA, since the parallel translation is an isomorphism, we know that if $(e_1(a),...,e_n(a))$ is a parallel frame at $a$, then it also is a parallel frame at any $t$ in the curve $\gamma$.
+			\begin{Def}
+				Let $(E,M,\pi,F)$ be a vector bundle and let $(Fr(E),M,\pi_{Fr},GL(k,\mathbb{R}))$ be the associated frame bundle. Given any curve $\gamma:[a,b]\rightarrow M$ in $M$, we call \textbf{lift} of $\gamma$ to $Fr(E)$ the curve $\tilde{\gamma}:[a,b]\rightarrow Fr(E)$ such that $\pi_{Fr}(\tilde{\gamma}(t))=\gamma(t)$. A lift is said to be \textbf{horizontal} if it is a parallel frame along $\gamma$.
+			\end{Def}
+			Note that in general the lift is not unique up to an element of $Ker(d\pi_{Fr})$. However, the equivalence class is unique.
+			\begin{Def}
+				Let $(E,M,\pi,F)$ be a vector bundle with a connection $\nabla$. Then for any $p\in M$ and $\vec{e_p}\in Fr(E_p)$ a vector on the corresponding frame of the fiber. We say that a vector $v\in T_{\vec{e_p}}Fr(E)$ is \textbf{horizontal} if there exists a curve $\gamma(t)\in M$ containing $p$ such that ${d\over dt}\bigg|_0\tilde{\gamma(t)}=v$ where $\tilde{\gamma(t)}$ is the unique horizontal lift of $\gamma$. In other words: $\pi_{Fr}\tilde{\gamma(t)}=\gamma(t)$.
+			\end{Def}
+			In the case of the frame bundle, the uniqueness of the lift can be easily shown. In fact, if we take any smooth curve $\gamma:[a,b]\rightarrow M$ and an ordered basis of sections $(s_1(a),...s_k(a))$ which forms a base of $E_{\gamma(a)}$, then by theorem TEOREMA, there is a unique parallel frame $(s_1,...,s_k)$ along $\gamma$ such that $(s_1,...,s_k)(a)$= $(s_1(a),...s_k(a))$. Note that a section (restricted on the curve) is a map $s_i:[a,b]\rightarrow E$ and so a base of section (ordered) is an element of the frame bundle $Fr(E)$. Moreover, a base of sections defines a curve on $Fr(E)$. So, given a starting vector $\tilde{\gamma'(0)}$ on the frame bundle, the rest of the curve is uniquely determined by parallely transporting the sections along the curve $\gamma(t)$. So, among all of the possible lifts, we select the one in which the sections are parallely transported.
+			\begin{Lm}
+				Let $(E,M\pi,F)$ be vectoir bundle and $\gamma:[a,b]\rightarrow M$ a curve on $M$ with initial point $p\in M$. Let $\tilde{\gamma(t)}$ be it's unique horizontal lift to $Fr(E)$ with starting point $e_a=(e_1,...,e_n)(a)$. Let $s=(s_1,...,s_n)$ be a frame for $E$ with starting point $(s_1,...,s_n)(p)=(e_1,...,e_n)(a)$. Then $s(\gamma(t))$ will be a lift for $\gamma$ to $Fr(E)$ and will in general differ at any $t$ from the horizontal lift by a factor $s(\gamma(t))=\tilde{\gamma(t)}\cdot a(t)$ where $a(t)\in GL(n,\mathbb{R})$ for all $t$.\\
+				Let $ds:TM\rightarrow TFr(E)$ the differential of the frame and $A(t)\in\mathfrak{g}$ the associated Lie algebra element of $a(t)$ like $A(t)={da(t)\over dt}$ with the condition $a(0)=\mathbb{I}$. Let finally $\overline{A(0)}$ be it's fundamental vector field. Then:
+				$$ds(\gamma'(0))=\tilde{\gamma'(0)}+\overline{A(0)}$$
+				Furthermore, if $\omega_s$ is the connection matrix with respect to a parallel frame $(s_1,...,s_n)$ along $\gamma$. Then $\omega_s(\gamma'(0))=A(0)$
+			\end{Lm} 
+			\begin{proof}
+				The first part of the lemma is easily proven:\\
+				\\
+				We can differentiate the expression:
+				$$ds(\gamma(t))=d(\tilde{\gamma(t)}\cdot a(t))=d\mu(\tilde{\gamma'(t)},A(t))$$
+				Evaluating this at 0 and applying the formula for the differential of an action:
+				$$dr_{A(0)}\gamma'(0)+\overline{A(0)}=\gamma(0)+\overline{A(0)}$$
+				As for the second part of the lemma, consider:
+				$$\nabla_{\gamma'(0)}s_j=\omega^i_j(\gamma'(0))s_i(\gamma(0))$$
+				Furthermore, we have:
+				$$\nabla_{\gamma'(t)}s_j={D (s_j\circ \gamma)\over dt}(t)={D\over dt}\tilde{\gamma_i(t)}a^i_j(t)=$$
+				$${D\tilde{\gamma'_i(t)}\over dt}a^i_j(t)+\tilde{\gamma'_i(t)}A^i_j(t)=\tilde{\gamma'_i(t)}A^i_j(t)$$
+				Where in the last equivalence we have used the fact that the covariant derivatice of the horizontal lift is 0. Setting now $t=0$ we clearly see that:
+				$$\tilde{\gamma'_i(t)}A^i_j(0)=\omega^i_j(\gamma'(0))s_i(\gamma(0))$$
+				And we get the desired equivalence by remembering that the starting point of the frame along $\gamma$ is $\tilde{\gamma'(0)}$.
+			\end{proof}
+			As a corollary of this theorem, we get that the horizontal lift can be written in the starting point as:
+			$$\tilde{\gamma'(0)}=ds(\gamma'(0))-\omega_s(\gamma'(0))$$
+			\begin{Theo}
+				Let $(E,M,\pi,F)$ be a smooth vector bundle with a connection $\nabla$. Let $p\in M$ and $e_p\in Fr(E_p)$ be an ordered basis for $E_p=F$ the fiber at $p$. Consider the subset $\mathcal{H}_{e_p}\subset T_{e_p}Fr(E)$ of horizontal vectors lifted from $M$ is a vector space of dimension equal to the one of $M$. Furthermore, $d\pi_{Fr}:T_{e_p}Fr(E)\rightarrow T_pM$ is a linear isomorphism.  
+			\end{Theo}
+			\begin{proof}
+				Consider the mapping $\phi:T_pM\rightarrow T_{e_p}Fr(E)$ acting as an association of a vector to it's horizontal lift:
+				$$\phi(\gamma'(0))=\tilde{\gamma'(0)}$$
+				Given any frame for $E$, we have that this association can be explicided by using the following formula:
+				$$\tilde{\gamma'(0)}=ds(\gamma'(0))-\omega_s(\gamma'(0))$$
+				which is clearly linear. We also know that $\pi_{Fr}\tilde{\gamma(t)}=\gamma(t)$ and taking the derivative we get:
+				$$d\pi_{Fr}(\tilde{\gamma(0)})=\gamma(0)$$
+				Thus, $d\pi_{Fr}$ is an inverse for $\phi$ on the left and this proves that $\phi$ is injective.
+			\end{proof}
 \end{document}
