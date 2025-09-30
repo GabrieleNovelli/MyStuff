@@ -44,6 +44,7 @@
 
 \theoremstyle{definition}
 \newtheorem{Ex}[Def]{Example}
+\newtheorem{Exe}[Def]{Exercise}
 
 \theoremstyle{definition}
 \newtheorem{Cor}[Def]{Corollary}
@@ -1305,7 +1306,56 @@
 		Where $dV$ is the volume form.
 	\end{Prop}
 	\begin{proof}
-		From REFERENZA, we can extend the product defined in REFERENZA to define a bundle metric on BOH.
+		From REFERENZA, we can extend the product defined in REFERENZA to define a bundle metric on the adjoint bundle $P\times_H \mathfrak{g}$. This is possible since the product is $Ad(H)$-invariant. This implies the extension of the Hodge operator $\star$ on the bundle $P\times_H \mathfrak{g}$ like in REFERENZA. In particular, if $dV$ is the volume form of $M$ and $F_M\in\Omega^k(M,P\times_H \mathfrak{g})$, we have:
+		$$F_M\wedge \star F_M=\braket{F_M,F_M}dV$$ 
+		Consider now the curvature tensor $F$ of a given Cartan connection $\omega\in\Omega^1(P,\mathfrak{g})$. In our reductive case, $\omega=A+e$ splits in the well known way. Consequentially, $F$ also splits:
+		$$F=R+T+{1\over 2}[e,e]$$
+		Moreover, $F$ can be isomorphically mapped into $F_M\in\Omega^2(M,P\times_H\mathfrak{g})$ through the Musical Isomorphism REFERENZA. Thus, we can evaluate:
+		$$\braket{F_M,F_M}=\braket{R_M,R_M}+\braket{T_M,T_M}+\braket{e_M\wedge e_M,e_M\wedge e_M}+$$$$+2\braket{R_M,T_M}+2\braket{R_M,e_M\wedge e_M}+2\braket{T_M,e_M\wedge e_M}$$
+		However, due to the construction of the product, the mixed terms vanish:
+		$$\braket{F_M,F_M}=\braket{R_M,R_M}+\braket{T_M,T_M}+\braket{e_M\wedge e_M,e_M\wedge e_M}+$$$$+2\braket{R_M,e_M\wedge e_M}+2\braket{T_M,e_M\wedge e_M}$$
+		Take now a local section $s:M\rightarrow P$. From REFERENZA, we know that the above product can also be expressed as the product of the pulled back forms, so that:
+		$$\braket{F_M,F_M}=\braket{s^*F,s^*F}$$
+		By taking the pullback of those, we find:
+		$$s^*F=R_a\otimes J^a+T^a\otimes i_a+e^a\wedge e^b\otimes [i_a,i_b]$$
+		Now, choosing an orthonormal base for $\mathfrak{h}$ and an orthonormal base for $\mathfrak{m}$, we have:
+		$$\braket{J^a,J^b}=\eta^{ab}\hbox{ and }\braket{i_a,i_b}=\eta_{ab}$$
+		Moreover, in our 3 cases we have 
+		$$[J^a,J^b]=i\varepsilon^{ab}_{\hspace{9pt}c}J^c$$
+		$$[i_a,i_b]=\Lambda(-i\varepsilon_{abc})J^c$$
+		Where $\Lambda=0,1,-1$ like in REFERENZA. Thus, we find:
+		This automatically gives us:
+		$$\braket{F_M,F_M}=\braket{R_a,R^a}+\braket{T^a,T_a}-\braket{(e^a\wedge e^b),(e^c\wedge e^d)}\Lambda^2\varepsilon_{abe}\varepsilon_{cdf}\eta^{ef}+$$
+		$$-2i\Lambda \braket{R_a,e^b\wedge e^c}\varepsilon_{bce}\eta^{ae}-2\Lambda T^a e^b\wedge e^c\varepsilon_{bce}\times 0$$
+		The last term vanishes for the same reasons as above. Contracting the indices:
+		$$\braket{F_M,F_M}=\braket{R_a,R^a}+\braket{T^a,T_a}-\braket{(e^a\wedge e^b),(e^c\wedge e^d)}\Lambda^2\varepsilon_{abe}\varepsilon_{cdf}\eta^{ef}+$$
+		$$-2i\Lambda \braket{R^e,e^b\wedge e^c}\varepsilon_{bce}$$
+		Now, choosing as a coordinate base ${x^i}$ for $M$, one can show that:
+		$$\star \alpha_Idx^I={\sqrt{|g|}\over (n-k)!k!}\alpha_{i_1...i_k}g^{i_1j_1}...g^{i_kj_k}\varepsilon_{j_1...j_k,i_{k+1}...i_n}dx^{i_{k+1}}\wedge...\wedge dx^{i_n}$$
+		Automatically:
+		$$\star R^a=\star{1\over 2} R^a_{\mu\nu}dx^\mu\wedge dx^\nu={\sqrt{|g|}\over 4}R^{a,\mu\nu}\varepsilon_{\mu\nu\alpha\beta}dx^\alpha\wedge dx^\beta$$
+		The same holds for the torsion $T$ and for the remaining solder-depending terms. We find:
+		$$\star T^a=\star{1\over 2} T^a_{\mu\nu}dx^\mu\wedge dx^\nu={\sqrt{|g|}\over 4}T^{a,\mu\nu}\varepsilon_{\mu\nu\alpha\beta}dx^\alpha\wedge dx^\beta$$
+		$$\star e^a\wedge e^b=\star{1\over 2} e^a_{\mu} e^b_{\nu}dx^\mu\wedge dx^\nu={\sqrt{|g|}\over 4}e^{a,\mu} e^{b,\nu}\varepsilon_{\mu\nu\alpha\beta}dx^\alpha\wedge dx^\beta$$
+		Putting everything together and recalling that for the volume form, from REFERENZA, we have $\varepsilon^{\rho\sigma\alpha\beta}{\omega\over \sqrt{|g|}}=dx^\rho\wedge dx^\sigma \wedge dx^\alpha\wedge dx^\beta$ we obtain:
+		$$\braket{R^a,R_a}\omega={\sqrt{|g|}\over8}R_{a,\rho\sigma}R^{a,\mu\nu}\varepsilon_{\mu\nu\alpha\beta}dx^\rho\wedge dx^\sigma \wedge dx^\alpha\wedge dx^\beta={1\over8}R_{a,\rho\sigma}R^{a,\mu\nu}\varepsilon_{\mu\nu\alpha\beta}\varepsilon^{\rho\sigma\alpha\beta}\omega$$
+		Moreover: $\varepsilon_{\mu\nu\alpha\beta}\varepsilon^{\rho\sigma\alpha\beta}=4(\delta^\rho_\mu \delta^\sigma_\nu-\delta^\rho_\nu \delta^\sigma_\mu)$ and so:
+		$$\braket{R^a,R_a}\omega=R^a_{\mu\nu}R_a^{\mu\nu}\omega$$
+		The same exact thing applies to the torsion term:
+		$$\braket{T^a,T_a}\omega=T^a_{\mu\nu}T_a^{\mu\nu}\omega$$
+		As for the coframe field-dependent terms:
+		$$\braket{(e^a\wedge e^b),(e^c\wedge e^d)}\omega={\sqrt{|g|}\over 4}e^a_\rho e^b_\sigma e^{c,\mu} e^{d,\nu}\varepsilon_{\mu\nu\alpha\beta}dx^\rho\wedge dx^\sigma \wedge  dx^\alpha\wedge dx^\beta=$$
+		$${1\over 4}e^a_\rho e^b_\sigma e^{c,\mu} e^{d,\nu}\varepsilon_{\mu\nu\alpha\beta}\varepsilon^{\rho\sigma\alpha\beta}\omega=(e^a_\mu e^b_\nu-e^a_\nu e^b_\mu) e^{c,\mu} e^{d,\nu}$$
+		
+		$$\braket{(e^a\wedge e^b),(e^c\wedge e^d)}\Lambda^2\varepsilon_{abe}\varepsilon_{cdf}\eta^{ef}=\Lambda^2(e^a_\mu e^b_\nu-e^a_\nu e^b_\mu) e^{c,\mu} e^{d,\nu}\varepsilon_{abe}\varepsilon_{cdf}\eta^{ef}$$
+		To evalue this we need to go through a little bit of algebra. From REFERENZA, we have:
+		$$\varepsilon_{abe}\varepsilon_{cdf}=\delta_{ac}(\delta_{bd}\delta_{ef}-\delta_{bf}\delta_{ed})-\delta_{ad}(\delta_{bc}\delta_{ef}-\delta_{bf}\delta_{ec})+\delta_{af}(\delta_{bc}\delta_{ed}-\delta_{bd}\delta_{ec})$$
+		Now, contracting this with everything else we find:
+		$$(e^a_\mu e^b_\nu-e^a_\nu e^b_\mu) e^{c,\mu} e^{d,\nu}\varepsilon_{abe}\varepsilon_{cdf}\eta^{ef}=2e^a_\mu e^b_\nu e^{c,\mu} e^{d,\nu}\varepsilon_{abe}\varepsilon_{cdf}\eta^{ef}=$$
+		$$2\bigg\{
+			e^a_\mu e_a^{\mu}(\eta^{ee}e^b_\nu e_b^{\nu}-\eta_{db}e^b_\nu e^{d,\nu})-e^a_\mu e_a^{\nu}(\eta^{ee}e^b_\nu e_b^{\mu}-\eta_{cb}e^b_\nu e^{c,\mu})+(e^a_\mu e_a^\nu e^b_\nu e^{b,\mu}-e^a_\mu e_a^\mu e^b_\nu e_b^\nu) \bigg\}=$$
+		Since $\eta^{ee}$ is summed over, we get that it is 3, and so:
+		$$=2e^a_\mu e^\mu_ae_\nu^b e^\nu_b-2e^a_\mu e^\nu_ae_\mu^b e^\nu_b$$
 	\end{proof}
 	\chapter{Jets}
 	\section{First Jet bundle}
@@ -1328,8 +1378,8 @@
 		The first term can also be written as:
 		$$d(v\circ \phi)_p(\partial_{x^i})=dv_{\phi(p)}\circ d\phi_p(\partial_{x^i})$$
 		Clearly:
-		$$d\phi_p=\partial_{x^i}\phi(p) dx^i_p$$
-		$$dv_{\phi(p)}=\partial_{x^i_E}v(\phi(p)) (dx^i_E)_{\phi(p)}+\partial_{u^a}v(\phi(p)) du^a_{\phi(p)}$$
+		$$d\phi_p={\partial \phi\over \partial{x^i}}\bigg|_p dx^i_p$$
+		$$dv_{\phi(p)}={\partial v\over  \partial{x^i_E}}\bigg|_{\phi(p)} (dx^i_E)_{\phi(p)}+{\partial v\over \partial u^a}\bigg|_{\phi(p)} du^a_{\phi(p)}$$
 		Putting everything together we get:
 		$$d\phi_p(\partial_{x^j})=\partial_{x^j}\phi(p)$$
 		AS for the second term, the first part can be simplified, since $\pi\circ \phi=\mathbb{I}$:
@@ -1347,7 +1397,7 @@
 			\item For any coordinate systems $(x^i,u^a),(y^j,v^b)$ it holds:
 			$${\partial(u^a\circ\phi) \over \partial{x^i}}\bigg|_p={\partial(u^a\circ\psi) \over \partial{x^i}}\bigg|_p$$
 		\end{itemize} 
-		We say that the two sections are \textit{1-equivalent in $p$}. We call the equivalence class of $\phi\in\Gamma(E)$ at $p\in M$ as: $$[\phi]=j_p^1\phi$$
+		We say that the two sections are \textit{1-equivalent in $p$}. We call the equivalence class of $\phi\in\Gamma(E)$ at $p\in M$ as $j_p^1\phi$.
 	\end{Prop}
 	Clearly, the above relation is an equivalence relation.
 	\begin{Def}
@@ -1396,18 +1446,18 @@
 	\begin{Prop}
 		Let $E$ be a set, $M,F$ be manifolds. Let $\pi:E\rightarrow M$ be a map such that for any $p\in M$, $\pi^{-1}(p)$ is an $n$-dimensional manifold. Let then $\pi_1:M\times F\rightarrow M$ and $\pi_2:M\times F\rightarrow F$ be the standard projections. If for any $p\in M$ there is an open set $U\subset M$ and a bijection $\varphi:\pi^{-1}(U)\rightarrow U\times F$ such that:
 		\begin{itemize}
-			\item $\pi_1\circ \varphi=U$;
-			\item for any $q\in U$, $\pi_2\circ \varphi|_{\pi^{-1}(q)}:\pi^{-1}(q)\rightarrow F$ is a diffeomorphism.
+			\item $\pi_1\circ \varphi=\pi\big|_{\pi^{-1}(U)}$;
+			\item for any $q\in U$, $\pi_2\circ \varphi\big|_{\pi^{-1}(q)}:\pi^{-1}(q)\rightarrow F$ is a diffeomorphism.
 		\end{itemize}
 		Then $E$ can be given the structure of an $n$ dimensional manifold such that $(E,M,\pi,F)$ is a fiber bundle with $\varphi$ trivializations.
 	\end{Prop}
 	\begin{proof}
-		As usual, the hardest part is the topological part. We will first prove that $E$ has a smooth structure. By hypothesis, let $\varphi_p\circ \varphi_q^{-1}:(U_p\cap U_q)\times F\rightarrow (U_p\cap U_q)\times F$ be the composition of two local trivializations. It is clear that:
-		$$\varphi_p\circ \varphi_q^{-1}\bigg|_{r\times F}$$
+		As usual, the hardest part is the topological part. We will first prove that $E$ has a smooth structure. By hypothesis, let $\varphi_p\circ \varphi_q^{-1}:(U_p\cap U_q)\times F\rightarrow (U_p\cap U_q)\times F$ be the composition of two local trivializations. It is clear that, if $r\in (U_p\cap U_q)$:
+		$$\varphi_p\circ \varphi_q^{-1}\bigg|_{r\times F}:F\longrightarrow F$$
 		is a diffeomorphism from $F$ to itself. This means that composing this map with the projections we get:
 		$$\pi_1\circ \varphi_p\circ \varphi_q^{-1}:(U_p\cap U_q)\times F\rightarrow (U_p\cap U_q)$$
 		$$\pi_2\circ \varphi_p\circ \varphi_q^{-1}:(U_p\cap U_q)\times F\rightarrow F$$
-		WHich are both smooth. Thus, $\varphi_p\circ \varphi_q^{-1}$ is a diffeomorphism. This automatically implies that if we choose coordinates on $M,F$, we have a $C^\infty$ atlas on $E$. Now the topological properties:
+		Which are both smooth. Thus, $\varphi_p\circ \varphi_q^{-1}$ is a diffeomorphism. This automatically implies that if we choose coordinates on $M,F$, we have a $C^\infty$ atlas on $E$. Now the topological properties:
 		\begin{itemize}
 			\item T2:\\
 			\\
@@ -1429,10 +1479,180 @@
 		From the previous results, we just need to show that the projections $\pi_1,\pi_{1,0}$ are such that $\pi_1^{-1}(p),\pi^{-1}_{1,0}(e)$ are $n$-dimensional manifolds, and that we can find local trivializations for $E$ and $M$. By the regular level set theorem REFERENZA, it suffices to show that the projections are smooth surjective submersions.\\\\
 		Let us look at $\pi_1$ clearly $\pi_1:J^1(E,M)\rightarrow M$ like $\pi_1(j^i_p\phi)=p$ is surjective. Moreover, by construction, choosing some adapted coordinates $x^i$ on $M$ and $(x^i,u^a,u^a_i)$ on $J^1(E,M)$, we find:
 		$$x^i\circ \pi_1 \circ (x^i,u^a,u^a_i)^{-1}:\mathbb{R}^{m+n+mn}\rightarrow \mathbb{R}^n$$
-		Where $dim(M)=n$ and $dim(E)=m$. The smoothness of this map follows from the fact that this is simply the projection of $\mathbb{R}^{m+n+mn}$ to $\mathbb{R}^n$. The same holds for $\pi_2$.\\
+		Where $dim(M)=n$ and $dim(E)=m+n$. The smoothness of this map follows from the fact that this is simply the projection of $\mathbb{R}^{m+n+mn}$ to $\mathbb{R}^n$. The same holds for $\pi_2$.\\
 		\\
-		Lçastly, we need to find local trivializations, but those are obvious: for $M$, we set:
-		$$\varphi:\pi_1^{-1}(U)\rightarrow U\times \mathbb{R}^{m+mn}$$
-		$$\varphi(j^1_p\phi)=$$
+		Lastly, we need to find local trivializations. Consider any local trivialization $\varphi:E\rightarrow M\times F$, this is a diffeomorphism in some local patch. Let $Pr_F:M\times F\rightarrow F$ be the standard projection. We can define:
+		$$\varphi_1:\pi_1^{-1}(U)\rightarrow U\times \mathbb{R}^{m+mn}$$
+		$$\varphi_1(j^1_p\phi)=(p,[Pr_F\circ \varphi\circ\phi(p)],[d(Pr_F\circ \varphi\circ\phi)_p])$$
+		Where $[Pr_F\circ \varphi\circ\phi(p)]$ is the equivalence class of sections having fiber value equal at $p$ and $[d(Pr_F\circ \varphi\circ\phi)_p]$ the equivalence class of differentials of sections being fiberwise equal at $p$. This is clearly a diffeomorphism. As for $\pi_2$, we have:
+		$$\varphi_2:\pi_2^{-1}(U_E)\rightarrow U\times \mathbb{R}^{mn}$$
+		$$\varphi_2(j_p^1\phi)=(\phi(p)=e,[d(Pr_F\circ \varphi\circ\phi)_p])$$
 	\end{proof}
+	\begin{Cor}
+		Given any fiber bundle $(E,M,\pi,F)$, we have 2 vector bundles:
+		$$(J^1(E,M),M,\pi_1,\mathbb{R}^{m+mn})\hbox{ and }(J^1(E,M),E,\pi_{1,0},\mathbb{R}^{mn})$$
+		We have the following diagram:
+		\begin{center}
+			\begin{tikzcd}
+				&&J^1(E,M)\arrow{dddll}{\pi_1} \arrow{dddrr}{\pi_{1,0}}&&\\\\\\
+				M&& &&E\arrow{llll}{\pi}
+			\end{tikzcd}
+		\end{center}
+	\end{Cor}
+	\begin{Ex}
+		Let $(\mathbb{R}\times F,\mathbb{R},\pi,F)$ be the trivial bundle on $\mathbb{R}$. A section of this bundle is any map $s:\mathbb{R}\rightarrow \mathbb{R}\times F$ such that $\pi\circ s=\mathbb{I}$.
+		Then the first order jet bundle $J^1(\mathbb{R}\times F,\mathbb{R})$ is defined as:
+		$$J^1(E,\mathbb{R})=\{j^1_xs\big|x\in\mathbb{R},s\in\Gamma(\mathbb{R}\times F)\}$$
+		Now, since this bundle is trivial, we can find a global trivialization:
+		$$\varphi\equiv \mathbb{I}_d:\mathbb{R}\times F\rightarrow \mathbb{R}\times F$$
+		And so, if $s(x)=(x,f)$, the local trivializations for the source and target bundles are:
+		$$\varphi_1(j^1_xs)=(x,[f],[df_x])$$
+		$$\varphi_2(j^1_xs)=((x,f),[df_x])$$
+	\end{Ex}
+	\begin{Exe}
+		Prove that the first order source and target jet bundles over a trivial bundle are always trivial.
+	\end{Exe}
+	\begin{proof}
+		It suffices to find a global trivialization. Let $(E,M,\pi,F)$ be the trivial bundle. This means that $E=M\times F$. Pick a global section for this bundle:
+		$$s:M\rightarrow M\times F\hbox{ like }s(p)=(p,f)$$
+		Define the two global trivialziations as:
+		$$\varphi_1(j^1_ps)=(x,[f(x)],[df_x])$$
+		$$\varphi_2(j^1_ps)=((x,f(x)),[df_x])$$
+		Those are clearly globally defined since the section is.
+	\end{proof}
+	\section{Jet prolongations and contact forms}
+	\begin{Def}
+		Let $(E,M,\pi,F)$ be any fiber bundle, $U\subset M$ an open set and $\phi\in\Gamma(\pi^{-1}(U))$ be a section. We call the \textit{first jet prolongation} of $\phi$ the section $j^1\phi\in\Gamma(J^1(E,M))$ such that:
+		$$j^1\phi:U\rightarrow J^1(E,M)$$
+		$$j^1\phi(p)=j^1_p\phi$$
+	\end{Def}
+	\begin{Obs}
+		Clearly the first jet prolongation of any section is a section of $J^1(E,M)$ since:
+		$$\pi_1\circ j^1\phi=\mathbb{I}$$
+		Moreover, $\pi_{1,0}\circ j^1\phi(p)=\phi(p)$, or $\pi_{1,0}\circ j^1\phi=\phi$. This implies by definition:
+		$$j^1(\pi_{1,0}\circ j^1\phi)=j^1\phi$$
+	\end{Obs}
+	\begin{Cor}
+		If $\psi:U\subset M\rightarrow J^1(E,M)$ is a section, then there is $\phi:M\rightarrow E$ such that $\psi=j^1\phi$ if and only if $j^1(\pi_{1,0}\circ \phi)=\psi$.
+	\end{Cor}
+	\begin{Obs}
+		We are now interested in finding aa coordinate representation for the first jet prolongation. Let $(x^i,u^a)$ be an adapted coordinate system. Then:
+		$$u^a(j^1\phi(p))=u^a\circ \phi (p)$$
+		$$u_i^a(j^1\phi(p))={\partial (u^a\circ \phi)\over \partial x^i}\bigg|_p$$
+		Clearly, if $\psi:U\rightarrow J^1(E,M)$ is a section of the Jet bundle, then its fiber coordinates are:
+		$$(u^a\circ \psi,\psi^a_i)$$
+		In general, the second coordinates have nothing to do with the first ones. Instead for a Jet prolongation, there is a relation between the two:
+		$$(u^a\circ \psi,{\partial (u^a\circ \psi)\over \partial x^i})$$
+	\end{Obs}
+	\begin{Obs}
+		Let $(E,M,\pi,F)$ be a fiber bundle and let $J^1(E,M)$ be the first Jet bundle. We have a canonical target projection:
+		$$\pi_{1,0}:J^1(E,M)\rightarrow E\hbox{ like } \pi_{1,0}(j^1_p\phi)=\phi(p)$$
+		Of course there is the tangent bundle of the vector bundle $E$ like: $(TE,E,\pi_{TE},\mathbb{R}^k)$.
+		The target projection is by definition continuous and thus can be used to define a pullback bundle (see REFERENZA):
+		$$(\pi_{1,0}^*(TE),J^1(E,M),\pi_{JT},\mathbb{R}^{k})$$
+		Recall that the set $\pi_{1,0}^*(TE)$ is defined as:
+		$$\pi_{1,0}(TE)=\bigg\{(x_{TE},x_J)\in TE\times J^1(E,M)\bigg|\pi_{1,0}(x_j)=\pi_{TE}(x_E)\bigg\}$$
+		In terms of diagrams:
+		\begin{center}
+			\begin{tikzcd}
+				\pi_{1,0}^*(TE)\arrow{rr}{\pi_{JT}}&&J^1(E,M)\arrow{dd}{\pi_{1,0}}&&
+				\\\\
+				&&E&&TE\arrow{ll}{\pi_{TE}}
+			\end{tikzcd}
+		\end{center}
+	\end{Obs}
+	\begin{Def}
+		Let $(E,M,\pi,F)$ be a fiber bundle and $X_p\in T_pM$, $p\in M$, let $\phi\in\Gamma(E)$ be a section around $p$. We define the \textit{holonomic lift of $X$ through $\phi$} as:
+		$$(d\phi_p(X_p),j^1_p\phi)\in \pi_{1,0}^*(TE)$$
+	\end{Def}
+	\begin{Obs}
+		In general, the holonomic lift of a vector is not dependent on the section, but of equivalence classes. In particular, the first term in the above couple only depends on the values of $\phi$ and its first derivatives at $p\in M$. Those informations are contained in $j^1_p\phi$.
+	\end{Obs}
+	\begin{Theo}
+		There is a canonical decomposition of $\pi_{1,0}^*(TE)_{j^1_p\phi}$ like:
+		$$\pi_{1,0}^*(TE)_{j^1_p\phi}=\pi_{1,0}^*(\mathcal{V}_E)_{j^1_p\phi}\oplus Holl(\phi)_p$$
+		Where $Holl(\phi)_p$ is the collection of all holonomic lifts of all tangent vectors at $p$ through $\phi$. 
+	\end{Theo}
+	\begin{proof}
+		Take a generic element of $\pi_{1,0}^*(TE)_{j^1_p\phi}$ like: 
+		$$(\xi,j^1_p\phi)$$
+		Clearly, by definitioin:
+		$$(d\phi\circ d\pi(\xi),j^1_p\phi)\in Holl(\phi)_p$$
+		Now, since $0=d\pi(\xi-d\phi\circ d\pi(\xi))$, we have that this vector is vertical in $TE$:
+		$$(\xi-d\phi\circ d\pi(\xi),j^1_p\phi)\in \pi_{1,0}^*(\mathcal{V}_E)$$
+		Now, consider the intersection:
+		$$(\xi,j^1_p\phi)\in \pi_{1,0}^*(\mathcal{V}_E)_{j^1_p\phi}\cap Holl(\phi)_p$$
+		Clearly, $d\pi(\xi)=0$ and $\xi=d\phi_p(X_p)$ for $X\in T_pM$. Autocamically, $X_p=d\pi\circ d\phi(X_p)=0$. This completes the proof.
+	\end{proof}
+	\begin{Obs}
+		The last result implies that once we choose an equicalence class of sections $[j^1_p\phi]$ at a point $p$, there is an induced decomposition of the bundle $\pi_{1,0}(TE)_{j^1_p\phi}$. This is a canonical decomposition.
+	\end{Obs}
+	\begin{Exe}
+		Let $X$ be a vector field in $M$ in a coordinate chart like:
+		$$X_p=X^i_p\partial_{x_p^i}$$
+		Find the coordinate representation of the holonomic lift in the adapted coordinates $(x^i,u^a)$.\\
+		\\
+		Take a section $\phi:U\rightarrow E$ with $p\in U\subset M$. The holonomic lift is by definition:
+		$$(d\phi_p(X_p),j^1_p\phi)$$
+		Computing the differential:
+		$$d\phi_p(X_p)=X_p^id\phi_p(\partial_{x_p^i})$$
+		Our induced coordinate system implies the following decomposition:
+		$$d\phi={\partial (x^j\circ\phi)\over \partial x^i}dx^i\otimes {\partial \over \partial x^j}+{\partial (u^a\circ\phi) \over \partial u^a}du^a\otimes {\partial\over \partial u^a}$$
+	    Applying this to the tangent vector basis and recalling that $x^i\circ \phi=x^i$, we find:
+		$$d\phi\bigg({\partial\over \partial x^i}\bigg)={\partial \over \partial x^i}+{\partial (u^a\circ\phi) \over \partial x^i}{\partial\over \partial u^a}={\partial \over \partial x^i}+u^a_i(j^1\phi){\partial\over \partial u^a}$$
+	\end{Exe}
+	\begin{Def}
+		An element $(\eta_p,j^1_p\phi)\in \pi_{1,0}(T^*E)$ is called \textit{contact cotangent form} if $\phi^*(\eta_p)=0$.
+	\end{Def}
+	THE DUAL IS THE SUM OF THE ANNIHILATORS\\\\
+	\begin{Def}
+		Any section $\mathcal{X}^h\in\Gamma(Holl(\phi)_p)$ is called \textit{total derivative}.
+		This is a map:
+		$$\mathcal{X}^h:J^1(E,M)\rightarrow Holl(\phi)_p$$
+	\end{Def}
+	Basically, we call total derivative a vector field a map that takes a vector in $J^1(E,M)$ and associates the holonomic lift.
+	\begin{Ex}
+		Prove that any vector field on $M$ corresponds to a total derivative.\\
+		\\
+		To see this, define:
+		$$X^0_{j^1_p\phi}=d\phi_p(X_p)$$
+		Then we have a clear total derivative:
+		$$\mathcal{X}^h(j^1_p\phi)=(d\phi_p(X_p),j^1_p\phi)$$
+	\end{Ex}
+	\begin{Obs}
+		Recall that if $\mathcal{X}^h$ is a total derivative, then in coordinates, since it is an holonomic lift, it is given by:
+		$$\mathcal{X}^h(j^1\phi)={\partial\over \partial x^i}+u_i^a(j^1\phi){\partial\over \partial u^a}$$
+		This means that a base for the vertical part is given by:
+		$$\bigg\{{\partial\over\partial u^a_i}\bigg\}$$
+	\end{Obs}
+	\begin{Obs}
+		A contact cotangent form is an element like: $(\eta_p,j^1_p\phi)\in \pi_{1,0}(T^*E)$ such that $\phi^*(\eta_p)=0$. Given the natural action of $\pi_{1,0}(T^*E)$ onto $\pi_{1,0}(TE)$ having fixed a base, we have:
+		$$(\eta_p,j^1_p\phi)\cdot (\xi,j^1_p\phi)=\eta(\xi)$$
+		This means that, since for an holonomic lift $\xi=d\phi(X)$, we have:
+		$$\eta(\xi)=\eta(d\phi(\xi))=\phi^*\eta(\xi)=0$$
+		The contact cotangent forms are the ones that annihilate the holonomic lifts i.e. the vertical directions. Knowing this, we can see that they have the following form:
+		$$\eta_p=du^a-u^a_idx^i$$
+	\end{Obs}
+	\section{Second order Jets}
+	The construction of second order jets is a straight up generalization of first order jets.
+	\begin{Lm}
+		Let $(E,M,\pi,F)$ be any fiber bundle and $\phi,\psi\in\Gamma(E)$ be two sections of the bundle $E$, defined in an open set around $p\in M$. If
+		\begin{itemize}
+			\item $\phi(p)=\psi(p)$ 
+			\item For any coordinate systems $(x^i,u^a),(y^j,v^b)$ it holds:
+			$${\partial(u^a\circ\phi) \over \partial{x^i}}\bigg|_p={\partial(u^a\circ\psi) \over \partial{x^i}}\bigg|_p$$
+			$${\partial^2(u^a\circ\phi) \over \partial{x^i}\partial{x^j}}\bigg|_p={\partial^2(u^a\circ\psi) \over \partial{x^i}\partial{x^j}}\bigg|_p$$
+		\end{itemize} 
+		Then it also holds:
+		$${\partial(v^b\circ\phi) \over \partial{y^j}}\bigg|_p={\partial(v^b\circ\psi) \over \partial{y^j}}\bigg|_p$$
+		$${\partial^2(v^b\circ\phi) \over \partial{y^k}\partial{y^l}}\bigg|_p={\partial^2(v^b\circ\psi) \over \partial{y^k}\partial{y^l}}\bigg|_p$$
+	\end{Lm}
+	\begin{proof}
+		The first assertion follows from REFERENZA. As for the second one, it is just a matter of calculations:
+		$${\partial\over \partial y^k}\bigg\{\bigg[{\partial v^b\over \partial{x^j}}\circ \phi+\bigg({\partial v^b\over \partial{u^a}}\circ \phi\bigg) {\partial(u^a\circ \phi)\over \partial{x^j}}\bigg]{\partial x^j\over  \partial y^l}\bigg\}$$
+		Since $\phi(p)=(x,u^a(x))$ we get:
+		$${\partial\over \partial y^k}{\partial v^b\over \partial{x^j}}\circ \phi=
+		{\partial^2 v^b\over \partial{x^j}\partial x^i}+{\partial^2 v^b\over \partial{x^j}\partial u^a}$$
+	\end{proof}
+	\section{Lagrangian and Cartan form}
 	\end{document}
