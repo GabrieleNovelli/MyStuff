@@ -55,12 +55,484 @@
 \begin{document}
 	\tableofcontents
 	\chapter{Smooth manifolds}
+		\section{Topological manifolds}
+			In this section we will define the concept of topological manifolds and look at some examples and properties of them. The main idea is to find a way of describing spaces which are not necessaarily $\mathbb{R}^n$. To achieve this, we simply look at spaces which locally "look like" $\mathbb{R}^n$. This is the basic construction of a topological manifold. However, we will see that smooth manifolds take a step further.
+			\begin{Def}
+				A \textit{topological manifold} is a topological space $X$ such that:
+				\begin{itemize}
+					\item $X$ is $T_2$;
+					\item $X$ is second countable;
+					\item $X$ is locally euclidean.
+				\end{itemize}
+			\end{Def}
+			Let us make some examples:
+			\begin{Ex}
+				$\mathbb{R}$ is a topological manifold. Clearly, $\mathbb{R}$ is locally euclidean and $T_2$, and we can find a countable basis by choosing the open balls in $\mathbb{Q}$ like:
+				$$B_{r,s}=\big\{]r,s[\hbox{ with }r,s\in\mathbb{Q}\big\}$$
+				ALTRI ESEMPI
+			\end{Ex}
+			\begin{Def}
+				Let $(X,\tau)$ be a topological space. We call \textit{basis} for $X$ a subcollection $\beta\subset\tau$ of sets $\{U_i\}$ such that:
+				\begin{itemize}
+					\item $X$ is covered by the union of all the elements in $\beta$;
+					\item For any $x\in X$ and $U\in \tau$ containing $x$, there is a set $U_i\in \beta$ such that:
+					$$p\in U_i\subset U$$ 
+				\end{itemize}
+			\end{Def}
+			\begin{Prop}
+				A collection $\beta$ of subsets of  $X$ is a basis for some topology of $X$ if and only if:
+				\begin{itemize}
+					\item the union of all the elements of $\beta$ covers $X$;
+					\item for any $x\in X$ and $U,V\in \beta$ with $x\in U\cap V$, there is $W\in \beta$ with $x\in W\subset U\cap V$.
+				\end{itemize}
+			\end{Prop}
+			\begin{proof}
+				PROVA
+			\end{proof}
+			Now we start to enunciate the actual important topologicla properties we want our spaces to have:
+			\begin{Def}
+				A topological space $(X,\tau)$ is called:
+				\begin{itemize}
+					\item T2 or \textit{Hausdorff} if for any two distinct points $x,y\in X$, $x\neq y$, we can find two open sets $U,V\in \tau$, such that: $x\in U;y\in V$ and $U\cap V=\emptyset$;
+					\item \textit{second countable} of it has a countable basis;
+					\item \textit{locally euclidean} if for any open set $U$ we can find an homeomorphism $\phi:U\rightarrow \mathbb{R}^n$. The couple $(U,\phi)$ is called \textit{chart}.	
+				\end{itemize}
+			\end{Def}
+			\begin{Def}
+				A topological space which is also T2, second countable and locally euclidean is called \textit{topological manifold}.
+			\end{Def}
+			We now make some examples of topological manifolds.
+			\begin{Ex}
+				ESEMPI
+			\end{Ex}
+			We conclude this section with a very useful proposition, which will come in handy later.
+			\begin{Prop}
+				If $\pi:M\rightarrow N$ is a quotient map, $M$ is a second countable topological space and $N$ is locally euclidean. Then $N$ is also second countable.
+			\end{Prop}
+			\begin{proof}
+				
+			\end{proof}
+		\section{Smooth structures}
+		In this section we will define the notion of smooth manifold. This will be dependent on the notion of smooth structure. The basic idea is to be able to map diffeomorphically our spaces into $\mathbb{R}^n$.
+		\begin{Def}
+			Let $M$ be a topological manifold and $(U,\phi)$, $(V,\psi)$ two charts on $M$ such that $U\cap V\neq \emptyset$. We say that the two charts are \textit{compatible} if the composition $\psi\circ \psi^{-1}:\psi(U\cap V)\longrightarrow \phi(U\cap V)$ is a diffeomorphism.
+		\end{Def}
+		\begin{Def}
+			Let $M$ be a topological manifold. We define an \textit{Atlas} for $M$ as a collection of charts $\mathcal{A}=\{(U_i,\phi_i)\}$ that are smoothly compatible and that cover $M$.
+		\end{Def}
+		\begin{Def}
+			We define the \textit{smooth structure} of a topological manifold as the equivalence class of atlases $[\mathcal{A}]$, under the relation:
+			$$\mathcal{A}_1\simeq \mathcal{A}_2\iff \mathcal{A}_1\cup \mathcal{A}_2 \hbox{ is still an atlas for }M$$
+		\end{Def}
+		The above relation is clearly an equivalence relation. In practice, it means that any composition of the charts of $\mathcal{A}_1$ and $\mathcal{A}_2$ is a diffeomorphism.
+		\begin{Theo}
+			Every atlas is contained in a maximal atlas. Moreover, two atlases have the same maximal atlas if and only if their union is still an atlas.
+		\end{Theo} 
+		\begin{proof}
+			The first one is kind of obvious. Consider any atlas $\mathcal{A}$ and define $\mathcal{A}^{max}$ as the set of all charts compatible with $\mathcal{A}$. Then if $\mathcal{A}^{max}$ is an atlas it is also maximal. Consider tow charts in $\mathcal{A}^{max}$ like $(U_1,\phi_1),(U_2,\phi_2)$. We can look at:
+			$$\phi_1\circ \phi_2^{-1}$$
+			Since $\mathcal{A}$ is an atlas, there will be a chart $(V,\varphi)$ such that $U_1\cap U_2\cap V\neq \emptyset$. So we can write:
+			$$\phi_1\circ \varphi^{-1}\circ \varphi\circ \phi_2^{-1}$$
+			This is clearly smooth, since by construction $\phi_i$ are compatible with $\mathcal{A}$.\\
+			\\
+			As for the second point, if two atlas have the same maximal atlas then their union is by definition still an atlas. Instead if the unioon of two atlases $\mathcal{A}_1,\mathcal{A}_2$ is an atlas, consider $\mathcal{A}^{max}_1,\mathcal{A}^{max}_2$ their maximal atlases. Take any two charts $(U_1,\varphi_1)\in\mathcal{A}_1$ and $(U_2,\varphi_2)\in\mathcal{A}_2$. Then the following map is smooth:
+			$$\varphi_1\circ \varphi_2^{-1}$$
+			Now, taking an overlapping chart inside $\mathcal{A}_1^{max}$ like $(V_1,\psi_1)$, we have:
+			$$\varphi_1\circ \varphi_2^{-1}=\varphi_1\circ \psi_1^{-1}\circ \psi_1\circ \varphi_2^{-1}$$
+			By smoothness of the left hand side, we have that $\psi_1\circ \varphi_2^{-1}$ is smooth. This means $\mathcal{A}_1^{max}\subset \mathcal{A}_2^{max}$. One can easily prove the opposite inclusion. This concludes the proof.
+		\end{proof}
+		\begin{Def}
+			A topological manifold with a smooth structure is called a \textit{smooth manifold}.
+		\end{Def}
+		\begin{Ex}
+			We now make some examples of smooth manifolds.
+			\begin{itemize}
+				\item $\mathbb{R}^n$ is a topologicla manifold, and a smooth structure can be found with the following atlas made of only one chart:
+				$$\mathcal{A}=\{(\mathbb{R}^n,\mathbb{I}_n)\}$$
+				\item Let $M$ be a smooth manifold, then any open subset $U$ of $M$ is also a smooth manifold with the atlas $\mathcal{A}\big|_U$ reduced to $U$. This is clear since the topological properties are passed down to open subsets.
+				\item Consider the general linear group $GL(n,\mathbb{R})$. This is defined as:
+				$$GL(n,\mathbb{R})=\big\{A\in M_{n\times n}\hbox{ such that }det(A)\neq 0\big\}$$
+				It is then clear that $GL(n,\mathbb{R})$ is the preimage of the map:
+				$$det:\mathbb{R}^{n^2}\longrightarrow \mathbb{R}$$ 
+				This map is continuous and so, since $\mathbb{R}-\{0\}$ is open, $det(\mathbb{R}-\{0\})$ is open as well. This makes $GL(n,\mathbb{R})$ is an open subset of $\mathbb{R}^{n^2}$. This implies that it is a smooth manifold.
+				\item $S^n$ is a smooth manifold. BLA BLA CARTE
+				\item Any finite dimensional vector space is a smooth manifold. From topology, we know that any two norms defined on a finite dimensional vecotr space are equivalent in defining the same topology. In particular, those define a T2 and second countable topology (REFERENZA). FIx a base for $V$, like $\{e_i\}$. Then, we can find an isomorphism:
+				$$f:V\rightarrow \mathbb{R}^n\hbox{ like }f(v^ie_i)=(v^1,...,v^n)$$
+				This is an homeomorphism PERCHEEEEEEEEEEE
+			\end{itemize}
+		\end{Ex}
+		\begin{Def}
+			Let $M$ be a smooth manifold and $f:M\rightarrow\mathbb{R}$ a function. We say that $f$ is \textit{smooth} if for any chart $(U,\phi)$ in the maximal atlas $\mathcal{A}^{max}$ we have that
+			$f\circ \phi^{-1}$ is smooth.
+		\end{Def}
+		\begin{Obs}
+			Of course, any atlas is good enough. This is easy to check. If $\mathcal{A}^{max}$ is a maximal atlas and $A\in[\mathcal{A}^{max}]$, then, considering any $(U,\phi)\in \mathcal{A}$ chart, we have:
+			$$f\circ \phi^{-1}=f\circ \psi^{-1}\circ \psi\circ \phi^{-1}$$
+			where $(V,\psi)$ is a chart in $\mathcal{A}^{max}$ overlapping with our domain. This makes $f$ smooth also in $\mathcal{A}$.
+		\end{Obs}
+		\section{The partition of Unity}
+			In this section we construct the partition of unity. This is an analytical tool which will allow us to find some interesting results later on. This is very technical and it is a topic for the interested reader.
+			\begin{Def}
+				 Let $f:M\rightarrow \mathbb{R}$ be a smooth map. We call \textit{support of $f$} the set:
+				 $$supp(f)=\{p\in M\hbox{ such that } f(p)\neq 0\}$$
+			\end{Def}
+			\begin{Def}
+				We call \textit{bump function at $p\in\mathbb{R}^n$ supported in $U\subset \mathbb{R}^n$} any function $\rho:\mathbb{R}^n\rightarrow \mathbb{R}$ such that:
+				\begin{itemize}
+					\item $\rho=1$ in $V\subset U$ with $p\in V$;
+					\item $supp(\rho)\subset U$.
+				\end{itemize}
+			\end{Def}
+			FIGURA\\
+			\\
+			\begin{Ex}
+				It is not hard to construct a bump function. Consider the following.
+				$$f(x)=\begin{cases}
+					e^{-{1\over x}} \hbox{ for }x>0\\
+					0 \hbox{ otherwise}
+				\end{cases}$$
+				This is not a bump function as one can see from REFERENZA.
+				\begin{center}
+					\begin{tikzpicture}
+						\begin{axis}[xmin=-1.2, xmax=2, ymin=-0.7, ymax=1.2,
+							xtick = {-1,0,1}, ytick = { 1},
+							scale=0.4, restrict y to domain=-1.5:1.2,
+							axis x line=center, axis y line= center,
+							samples=40]
+							
+							
+							\addplot[black, samples=100, smooth, domain=-1.2:2, thick]
+							plot (\x, {exp{-1/\x}});
+						\end{axis}
+					\end{tikzpicture}
+				\end{center}
+				Starting from this nice function (smooth but not analytical!) we construct the following:
+				$$r(x)={f(a-x)\over f(a-x)+f(x-b)}$$
+				where $a,b$ are positive real numbers with $a>b$.
+				It is clear that $r(x)$ is a function supported in $]-a,a[$ and it is equal to $1$ in $]b,-b[$ at 0. One can then easily move this function with some translations.\\
+				We then clearly see that the function:
+				$$\rho(\vec{x})=r(|x|)$$ 
+				is indeed a bump function.
+				\begin{center}
+					\begin{tikzpicture}
+						\begin{axis}[xmin=-1.2, xmax=2, ymin=-0.7, ymax=1.2,
+							xtick = {-1,0,1}, ytick = { 1},
+							scale=0.4, restrict y to domain=-1.5:1.2,
+							axis x line=center, axis y line= center,
+							samples=40]
+							
+							
+							\addplot[black, smooth, thick, domain=-1:1]
+							{1};
+							
+							\addplot[black, smooth, thick, domain=1.001:1.999]
+							{exp(-1/(2 - x)) / (exp(-1/(2 - x)) + exp(1/(1 - x)))};
+							
+						\end{axis}
+					\end{tikzpicture}
+				\end{center}
+			\end{Ex}
+			One can easily generalize the definition of bump function to smooth manifolds in the following way:
+			\begin{Def}
+				A function $\rho:M\rightarrow \mathbb{R}$ is called \textit{bump function  at $p\in M$ supported in $U\subset M$} if there is a chart $(U,\phi)$ such that, in coordinates, $\rho\circ \phi^{-1}$ is a bump function.
+			\end{Def}
+			\begin{Prop}
+				Let $f_U:U\rightarrow\mathbb{R}$ be a smooth map. Then there always is a global $f:M\rightarrow \mathbb{R}$ smooth, such that $f=f_U$ in a possibly smaller $V\subset U$.
+			\end{Prop}
+			\begin{proof}
+				The proof is very easy since it makes use of the bump function (provided it exists). Take $\rho$ a bump function at $p\in U$ supported in $U$ and define for $q\in M$:
+				$$f(q)=\begin{cases}
+					f_U(q)\rho(q)\hbox{ for }q\in U\\
+					0 \hbox{ otherwise}
+				\end{cases}$$
+			\end{proof}
+			\begin{Def}
+				Let $\mathfrak{U}=\{U_i\}$ be a collection of sets of a topological space. This is called \textit{locally finite} if for any $p$ point there is a $U$ containing $p$ which intersects at most finitely many $U_i$. 
+			\end{Def}
+			\begin{Def}
+				Let $\mathfrak{U}=\{U_i\}$ be covering of a smooth manifold $M$. A \textit{partition of unity subordinate to $\mathfrak{U}$} is a family of smooth functions $\{\phi_i:U_i\rightarrow\mathbb{R}\}$ such that:
+				\begin{itemize}
+					\item $\phi_i(p)\in[0,1]$ for all indices;
+					\item $supp(\phi_i)\subset U_i$ for all indices;
+					\item the set $\{supp(\phi_i)\}$ is locally finite;
+					\item $\sum \phi_i(p)=1$ for all $p\in M$.
+				\end{itemize}
+			\end{Def}
+			\begin{Obs}
+				Note that the last sum in the above definition is always finite since the set of supports is always locally finite.
+			\end{Obs}
+			\begin{Theo}
+				A smooth manifold always has a partition of unity.
+			\end{Theo}
+			\section{The tangent space}
+			In this section we will introduce an extremely important construction, which will follow us through the whole book: the tangent space. We will give the precise notions on vector and vector fields for smooth amnifolds, and we will start to see how we can force the structure of $\mathbb{R}^n$ on our smooth manifolds.
+			\\\\
+			\begin{Def}
+				Let $p\in M$. Consider all pairs $(f,U)$, with $f:U\subset M\rightarrow \mathbb{R}$ smooth and $p\in U$. We say that $(f,U)\sim (g,V)$ if there is a $W\subset U\cap V$ such that $p\in W$ and $f\big|_W=g\big|_W$.
+				We call the \textit{germ of $f$ at $p$} the equivalence class $[(f,U)]$. We index the set of all germs at a point with:
+				$$C^\infty_p(M)$$
+			\end{Def}
+			\begin{Obs}
+				The above relation is clealry an equivalence relation (see it for yourself if you dont believe me).
+			\end{Obs}
+			\begin{Def}
+				We call \textit{derivation at $p\in M$} any smooth, linear map $D_p:C_p^\infty(M)\rightarrow \mathbb{R}$ which respects the Leibniz rule i.e.:
+				$$D_p(fg)=D_p(f)g(p)+f(p)D_p(g)$$
+				The set of all derivation is called \textit{tangent space at $p$} and it is indexed with $$T_pM$$
+			\end{Def}
+			\begin{Obs}
+				The space of derivation is clealry a vector space. I am not going to prove this because it is a matter of looking at 8 simple properties, and I would get extremely bored.
+			\end{Obs}
+			\begin{Obs}
+				From the definition of derivation some clear properties immediately follow:
+				\begin{itemize}
+					\item If $f$ is constant then $D_p(f)=0$
+					\\\\
+					To see this simply apply Leibniz: suppose $f=1$ w.l.o.g. and see:
+					$$D_p(f)=D_p(f^2)=2D_p(f)\implies 0$$
+					\item  If $f(p)=0=g(p)$ then:
+					$$D_p(fg)=0$$
+					
+					This is clear form the definition of Leibniz.
+				\end{itemize}
+			\end{Obs}
+			Since $\mathbb{R}^n$ is a smooth manifold as well, our definitions and properties apply to it. The idea now it to show that the tangent space at any point of $\mathbb{R}^n$ has dimension $n$.
+			\begin{Prop}
+				Let $\vec{x}\in\mathbb{R}^n$. There is an isomorphism $\mathbb{R}^n\simeq T_{\vec{x}}\mathbb{R}^n$.
+			\end{Prop}
+			\begin{proof}
+				Consider a generic derivation $D_{\vec{x}}\in T_{\vec{x}}\mathbb{R}^n$. Then, since the space of derivations is a point is a vector space, we can express our derivation in a base:
+				$$D_{\vec{x}}=D^i(\vec{x})e_i(\vec{x})$$
+				Let $x^i$ be the standard coordinates of $\mathbb{R}^n$. Define the map:
+				$$D_{\vec{x}}\longrightarrow v^i\partial_i\big|_{\vec{x}}$$
+				This map is injective. In fact in order for  $D_{\vec{x}}f=0$ for all functions, we also need $v^i=0$ for all $i$. This implies injectivity. As for surjectivity, consider any smooth map $f$ and its Taylor expansion around a point:
+				$$f(\vec{z})=f(\vec{x})+\partial_i f(\vec{x})(z^i-x^i)+o(\vec{x})$$
+				In particular, the residue will vanish in $\vec{x}$. Taking the derivation at $\vec{x}$ of this map, we see that the only non vanishing term is:
+				$$D_{\vec{x}}f=\partial_i f(\vec{x})D_{\vec{x}}(z^i-x^i)$$
+				Defining $v^i=D_{\vec{x}}(z^i-x^i)$ we have surjectivity.
+			\end{proof}
+			\begin{Cor}
+				Any tangent vector to $\mathbb{R}^n$ is of the form $X_p=X^i(p)\partial_i\big|_p$.
+			\end{Cor}
+			The idea now is to somehow push the naive structure found on $\mathbb{R}^n$ onto our smooth manifolds. The key to do this is the so called push-forward.
+			\begin{Def}
+				Let $M,N$ be smooth manifolds and $F:M\rightarrow N$ be a smooth map. For any $p\in M$ we can define the \textit{push-forward at $p$ with $F$} as the map:
+				$$F_{*,p}:T_pM\rightarrow T_{F(p)}N\hbox{ like }F_{\star,p}(X_p)f=X_p(f\circ F)$$
+			\end{Def}
+			Clearly, the definition of push-forward is pointwise. However, there are situations in which the point does not really matter, or it is not really necessary to specify it.
+			\begin{Prop}
+				The following properties hold for the push-forward:
+				\begin{itemize}
+					\item $(G\circ F)_*=G_*\circ F_*$ satisfies the chain rule.
+					\item If $F$ is a diffeomorphism, then $F_*$ is an isomorphism.
+				\end{itemize}
+				\begin{proof}
+					The first point is clear and just a matter of applying the definition. As for the second point: clearly, if $F$ is a diffeomorphism, there is an inverse $F^{-1}$ which is smooth as well. This will generate another push-forward:
+					$$F^{-1}_*(Y_{F(p)})g=Y_{F(p)}(g\circ F^{-1})$$
+					Now, clealry, by the above property, $F_*\circ F_*^{-1}$ is the push-forward of the identity; which is the identity.
+				\end{proof}
+			\end{Prop}
+			Since $\mathbb{R}^n$ is a smooth manifold, we can use the push-forward of diffeomorphism (charts) to automatically inherit the tangent space straucture through the isomorphism.
+			\begin{Obs}
+				Let $r^i$ be the standard coordinate of $\mathbb{R}^n$ and let $(U,\phi)$ be a chart on $M$. We define:
+				$${\partial\over \partial x^i}=\phi_*^{-1}\bigg({\partial\over \partial r^i}\bigg)$$
+				Since the chart is a diffeomoeprhism it sends a base into a base.
+			\end{Obs}
+			\begin{Cor}
+				$\big\{{\partial\over \partial x^i}\big\}$ is a base for $T_pM$.
+			\end{Cor}
+			\begin{Cor}
+				$T_pM$ has dimension $n=dim(M)$.
+			\end{Cor}
+			\begin{Exe}
+				Let $F:M\rightarrow N$ be a diffeomorphism between manifolds. Let $(U,\phi)$ be a chart on $M$ and $(V,\psi)$ be a chart on $N$. What is the base induced on $N$ through $F?$.\\
+				\\
+				Take any point $p\in M$ and take the base of the tangent space induced from the chart on $M$:
+				$${\partial \over \partial x^i}=\phi_*^{-1}\big({\partial\over \partial r^i}\big)$$
+				Where $r^i$ are the coordinates of $\mathbb{R}^n$. The pullback of this base through $F$ is given by:
+				$$F_*\big({\partial \over \partial x^i}\big)f={\partial \over \partial x^i}(f\circ F)$$
+				We now do the sandwich technique:
+				$${\partial \over \partial x^i}(f\circ F)={\partial \over \partial x^i}(f\circ\psi^{-1}\circ \psi \circ F)={\partial \over \partial r^i}(f\circ\psi^{-1}\circ \psi \circ F\circ \phi^{-1})$$
+				This is now just a derivative in $\mathbb{R}^k$. Let us call $z^a$ the induced coordinates on $\mathbb{R}^n$ through $\psi\circ F\circ\phi^{-1}$. From the chain rule we get:
+				$${\partial \over \partial x^i}(f\circ F)={\partial (\psi\circ F^{-1}\circ \phi^{-1})^a\over \partial r^i}{\partial (f\circ \psi^{-1})\over \partial z^a}$$
+			\end{Exe}
+			\begin{Obs}
+				We can apply the results found in the last exercise to a generic change of coordinate. In our case the map $F$ would just be the identity from $M$ to itself and the two charts would be on the same manifold (overlapping). In this case:
+				$$\psi\circ\phi^{-1}(x^i)=y^j(x^i)$$
+				So that $y^j$ would be the coordinate induced from $\psi$ onto $M$. This means that, applying the definition of pullback:
+				$${\partial (f\circ \psi^{-1})\over \partial z^j}={\partial\over \partial y^j}f$$
+				While the first term as well beccomes:
+				$${\partial (\psi\circ \phi^{-1})^a\over \partial r^i}={\partial y^j\over \partial x^i}$$
+				Thus, we get:
+				$${\partial \over \partial x^i}={\partial y^j\over \partial x^i}{\partial\over \partial y^j}$$
+			\end{Obs}
+			\begin{Obs}
+				The above result immediately implies that the components of a vector change in the opposite way: if $X_p=a^i(p){\partial\over \partial x^i}\bigg|_p$ at a certain point in a certain coordinate frame, then in another frame:
+				$$X_p=b^j(p){\partial\over \partial y^j}\bigg|_p$$
+				And so:
+				$$b^j(p)={\partial y^j\over \partial x^i}a^i(p)$$
+			\end{Obs}
 	\chapter{Fiber bundles}
+		\section{Fiber bundles}
+		\section{Vector bundles}
+			In this section we will introduce the notion of vector bundles. Intuitively, those are fiber bundles in which the fiber is a vector space.
+			\begin{Def}
+				Let $E,M$ be manifolds and $\pi:E\rightarrow M$ smooth and surjective. We define \textit{rank $k$ vector bundle} the quadruple $(E,M,\pi,\mathbb{R}^k)$ if the following conditions are met:
+				\begin{itemize}
+					\item for any $p\in M$, $\pi^{-1}(p)\equiv E_p$ is a vector space of dimension $n$;
+					\item for any $p\in M$ there is an open set $U\subset M$ containing $p$ and a diffeomorphic map 
+					$$\phi:\pi^{-1}(U)\longrightarrow U\times \mathbb{R}^k$$
+					called \textit{local trivialization} such that:
+					\begin{itemize}
+						\item[1)] at any point $\phi_p=\phi\big|_{\pi^{-1}(p)}$ is a linear isomorphism;
+						\item[2)] the following diagram commutes:\\\\
+						\begin{center}
+							\begin{tikzcd}
+								E\arrow{dd}{\pi}\arrow{rr}{\phi}&&U\times \mathbb{R}^k\arrow{ddll}{Pr_1}\\\\
+								M&&
+							\end{tikzcd}
+						\end{center}
+						Where $Pr_1(p,v)=p$ is the standard projection. 
+					\end{itemize}
+				\end{itemize}
+				As usual, we call $E$ the \textit{total space} of the bundle, $M$ the  \textit{base space} and $E_p$ the fiber.
+			\end{Def}
+			The idea is the same one used for fiber bundles: a vector bundle is the information of a manifold that locally (in general only locally) "looks like" a product space. We now make some examples:
+	\section{Sections and transition functions}
+		In this section we will briefly look at the notion of section of a vector bundle; and at the behaviour of transition functions. The idea is pretty simple, since to any point of the base space we associate a vector space, changing the trivialization means acting on the fiber with a linear map.
+		\begin{Prop}
+			Let $(E,M,\pi,\mathbb{R}^k)$ be a vector bundle. Let $\phi_{1,2}:\pi^{-1}(U_{1,2})\rightarrow U_{1,2}\times \mathbb{R}^k$ be two overlapping local trivialzizations. Then there exists a smooth map $g_{12}:U_1\cap U_2\rightarrow GL(n,\mathbb{R})$ such that:
+			$$\phi_1\circ \phi_2^{-1}(p,\vec{v})=(p,g(p)\cdot \vec{v})$$
+		\end{Prop}
+		\begin{proof}
+			By defining property, we have:
+			$$\Pr_1\circ \phi_1=\pi=Pr_1\circ \phi_2$$
+			This implies, by invertibility:
+			$$Pr_1=Pr_1\circ \phi_1\circ \phi_2^{-1}$$
+			Automatically, we have:
+			$$\phi_1\circ \phi_2^{-1}(p,\vec{v})=(p,f(p,\vec{v}))$$
+			However, by construction, fixing $p\in M$ we have a linear isomorphism. This means that:
+			$$f(p,\vec{v})=g(p)\cdot \vec{v}\hbox{ where }g(p)\in GL(k,\mathbb{R})$$
+			Since the maps used in the composition are smooth, we also have that $g(p)$ is smooth. To better see this, choose a basis $\{e_i\}$ for $E_p$. Then there is a dual basis $\{e^i\}$ so that:
+			$$f(p,\vec{v})=g^a_b(p)v^be_a\implies g^a_b(p)=e^a(f(p,e_b))$$
+		\end{proof}
+		\begin{Def}
+			Let the notation be as above. We call the map $g:U\rightarrow GL(n,\mathbb{R})$ \textit{transition function}.
+		\end{Def}
+		Clearly, $g_{ij}$ has the following properties:
+		\begin{Prop}
+			Let the notation be as above, then the transition functions are such that:
+			\begin{itemize}
+				\item $g_{ij}^{-1}=g_{ji}$;
+				\item $g_{ik}\circ g_{kj}=$
+			\end{itemize}
+		\end{Prop} 
+		\section{The tangent bunlde}
+			This section is devoted to the study of the most important example of vector bundle: the tangent bundle. We will go through its definition and we will see how we can describe vectors by the means of it.
+			\begin{Def}
+				We define the\textit{ tangent bundle} as the set:
+				$$TM=\bigcup_{p\in M}T_pM$$
+			\end{Def}
+			The idea is simple, to glue together all of the possible tangent spaces. However, as of now, this is just a set.
+			\begin{Theo}
+				Let $M$ be a smooth manifold of dimension $n$. The tangent bundle $TM$ is a manifold of dimension $2n$ and describes a vector bundle on $M$ with fiber $\mathbb{R}^n$. 
+			\end{Theo}
+			\begin{proof}
+				The proof will develop as follows: first of all we will show that $TM$ is a smooth manifold i.e. prove that it has a nice topology and a smooth structure; then we will look at the trivializations to show that it is a bundle.\\
+				\\
+				
+			\end{proof}
+		\section{The cotangent bundle}
+		\section{The pullback bundle for vector bundles}
+		\section{The Frobenius theorem}
+		In this section we study foliations and distributions. The final aim is to prove the Frobenius theorem, an extremely important result in smooth geometry.
+		\begin{Def}
+			We call \textit{distribution} $D$ on a manifold $M$ a smooth assignment $p\mapsto D_p\subset T_pM$ such that: for any $p$ one can find $U$ open containing $p$ such that for all $q\in U$ there is a collection of vector fields $\{X_i(q)\}$ that span $D_q$.
+		\end{Def}
+		Clearly, a distribution defines a subset of the tangent bundle $TM$.
+		\begin{Def}
+			A distribution is called regular of a \textit{constant rank} if the dimension of all spaces is the same. 
+		\end{Def}
+		\begin{Prop}
+			A constant rank distribution defines a sub-bundle of the tangent bundle.
+		\end{Prop}
+		\begin{proof}
+			This is clear from theorem REFERENZA. (L.TU 20.4 Geometry).
+		\end{proof}
+		\begin{Def}
+			We call a distribution \textit{involutive} if $[D,D]\subset D$ i.e. it is closed under the Lie braket.
+		\end{Def}
+		It is useful to see some easy examples of distributions.
+		\begin{Ex}
+			\begin{itemize}
+				\item Consider $\mathbb{R}^n$ with the usual smooth structure. We can easily see that $\{{\partial\over \partial x^1},...,{\partial\over \partial x^k}\}$ with $k\leq n$ is a constant rank distribution.
+				\item Let $X$ be a nowhere vanishing vector field on $M$. Then, at any point $p\in M$ we have a rank 1 distribution defined as $p\mapsto X_p$.
+			\end{itemize}
+		\end{Ex}
+		\begin{Def}
+			We say that a distribution $D\subset TM$ is \textit{completely integrable} if for any $p\in M$ there is a chart $(U,\phi)$ of $M$ such that:
+			\begin{itemize}
+				\item $\phi(U)$ is a cube in $\mathbb{R}^n$;
+				\item $D$ is spanned by the first $k$ coordinate vector fields $\{{\partial\over \partial x^1},...,{\partial\over \partial x^k}\}$.
+			\end{itemize}
+			A chart with those qualities is called \textit{flat} for $D$.
+ 		\end{Def}
+ 		\begin{Obs}
+ 			Clearly, in any flat chart, we have some submanifolds, defined by keeping the corresponding coordinates fixed.
+ 		\end{Obs}
+ 		\begin{Theo}[\textbf{Frobenius}]
+ 			A distribution is involutive if and only if it is completely integrable.
+ 		\end{Theo}
+ 		\begin{proof}
+ 			The proof is hard. We divide it into 2 blocks:
+ 			\begin{itemize}
+ 				\item Suppose $D$ is an involutive distribution. We first prove that the distribution admits a base of commuting vectors. Let $(U,\phi)$ be any chart around any point and let $\{\partial_i\}$ be the induced base for the tangent space. Let $Y_1,...,Y_k$ be a base for $D$ in this open set, then:
+ 				$$Y_i=a^j_i\partial_j$$
+ 				where the indices $j$ go from $0$ to $n$, while $i$ from $0$ to $k$.\\
+ 				Since the vectors $Y_i$ are by assumption linearly independent, the submatrix $a^i_j$ is invertible in the indices $i,j\in[1,k]$. Thus, setting $X_i=(a^{-1})^j_i Y_j$ we get new basis of vectors, which are of the form:
+ 				$$X_i=\partial_i+(a^{-1})^j_i a^l_j \partial_l$$
+ 				where in the last sum we have $l>k$.
+ 				Clearly, since the distribution is involutive, we must have:
+ 				$$[X_i,X_j]\in D$$
+ 				However, by construction, $[X_i,X_j]\in span\{\partial_{k+1},...,\partial_n\}$. This implies that $X$ is the desired base of commuting vectors.\\
+ 				\\
+ 				We are thus allowed to choose a chart $(U,\phi)$ in which the base for the distribution is made of commuting vevtors. In such base, those vector field are pushed forward to base coordinates:
+ 				$$\phi_*(X_i)=\partial_i$$
+ 				This proves the first part.
+ 				\item Suppose that the distribution $D$ is completely integrable. Take a point $p\in U\subset M$ and a chart around it $(U,\phi)$. Since the distribution is integrable, we assume that $\phi$ is a flat chart. This means that the tangent distribution space at any point $D_p$ is spanned by the first $k$-coordinates, which commute:
+ 				$$[\partial_i,\partial_j]=0$$
+ 				Since $\phi$ is a diffeomorphism, we have:
+ 				$$[\phi^{-1}_*\partial_i,\phi^{-1}_*\partial_j]=\phi_*[\partial_i,\partial_j]=0$$
+ 				This proves that the distribution is involutive.
+ 			\end{itemize}
+ 		\end{proof}
+ 		\begin{Def}
+ 			Let $M$ be a smooth manifold. We call \textit{$k$-dimensional foliation} $\mathcal{F}$ a family of $k$-dimensional submanifolds of $M$ such that:
+ 			\begin{itemize}
+ 				\item the elements of $\mathcal{F}$ are disjoint, connected, non empty, immersed $k$-dimensional submanifolds;
+ 				\item for any $p\in M$ there is a chart $(U,\phi)$ such that $\phi(U)$ is a cube in $\mathbb{R}^n$ and each of the elements of $\mathcal{F}$ intersects $U$ in either the empty set or a slice defined by keeping $n-k$ cooridnate constant: $x_{k+1}=Const,...x^n=Const$.
+ 			\end{itemize}
+ 			Such a chart is called \textit{flat} for $\mathcal{F}$. The elements of the foliation are called \textit{leaves}.
+ 		\end{Def}
+ 		\begin{Ex}
+ 			\begin{itemize}
+ 				\item The collection of hyperplanes $x_{k+1}=Const,...x^n=Const$ is a foliation of $\mathbb{R}^n-\{0\}$.
+ 				\item The family of spheres of increasing radius $S^{n-1}_r$ is a foliation of $\mathbb{R}^n$. This is pretty easy to prove: first of all, the spheres do not intersect, are all connected, non empty and are all immersed. As for the flat chart problem, take any point $\vec{x}\in \mathbb{R}^n$ and a ball around it of radius $\varepsilon$. Clearly, some of the spheres will intersect this ball and, in spherical coordinates, the radius coordinate is kept constant.
+ 			\end{itemize}
+ 		\end{Ex}
+ 		\begin{Obs}
+ 			It is not hard to see that given a completely integrable distribution we automatically have a foliation. In fact, each flat chart defines a family of submanifolds (locally). Those do not intersect since each one correspond to keeping fixed some coordinate of the base manifold $M$. The connectedness is found by taking the maximally connected generated submanifold. In other words:\\
+ 			\\
+ 			Suppose to take a point $p$ in $M$ and a flat chart $(U,\phi)$ fpr the distribution $D$. Then, i can define inside $U$ the submanifold corresponding to $x^{k+1}=0,...,x^n=0$. Taking another overlapping chart $(V,\psi)$ i can do the same if I choose it to be flat. By repeating the same argument for all the connected component of $p$, I get a connected submanifold.
+ 		\end{Obs}
+ 		As a corollary of Frobenius theorem we state:
+ 		\begin{Cor}
+ 			$D$ is an involutive distribution of constant rank if and only if it defines a foliation.
+ 		\end{Cor}
 	\chapter{Lie groups}
 	\chapter{Lie algebras}
 	\chapter{Representation theory}
 	\chapter{Principal bundles}
-	\chapter{Vector bundles}
 	\chapter{Ehresmann geometries}
 	\chapter{Cohomology}
 	\section{De Rham Cohomology}
@@ -1390,7 +1862,7 @@
 		The result follows immediately in $p$.
 	\end{proof}
 	The previous lemma allows us to construct an equivalence relation between sectionsa of a fiber bundle. The general idea is: two sections are equivalent if they have the same derivatives. This should immediately ring a couples of bells: first of all, first order Taylor polynomials appear to be pointwise defined in this equivalence class. Moreover, seing sections as fields, LAGRANGIAN.
-	\begin{Prop}
+	\begin{Def}
 		Let $(E,M,\pi,F)$ be any fiber bundle and $\phi,\psi\in\Gamma(E)$ be two sections of the bundle $E$, defined in an open set around $p\in M$. If
 		\begin{itemize}
 			\item $\phi(p)=\psi(p)$ 
@@ -1398,7 +1870,7 @@
 			$${\partial(u^a\circ\phi) \over \partial{x^i}}\bigg|_p={\partial(u^a\circ\psi) \over \partial{x^i}}\bigg|_p$$
 		\end{itemize} 
 		We say that the two sections are \textit{1-equivalent in $p$}. We call the equivalence class of $\phi\in\Gamma(E)$ at $p\in M$ as $j_p^1\phi$.
-	\end{Prop}
+	\end{Def}
 	Clearly, the above relation is an equivalence relation.
 	\begin{Def}
 		Let $(E,M,\pi,F)$ be any fiber bundle. We define the \textit{first order jet bundle of $E$ on $M$} as the set:
@@ -1633,6 +2105,14 @@
 		The contact cotangent forms are the ones that annihilate the holonomic lifts i.e. the vertical directions. Knowing this, we can see that they have the following form:
 		$$\eta_p=du^a-u^a_idx^i$$
 	\end{Obs}
+	\begin{Ex}
+		Consider $J^1(E,M)$ as a bundle on $E$.
+		Let $\nabla:\mathfrak{X}(E)\times \Gamma(J^1(E,M))\rightarrow \Gamma(J^1(E,M))$ be a connection on the first order jet bundle. Choosing a vector field $X\in\mathfrak{X}(E)$, we have a spin connection defined:
+		$$\nabla(X):\Gamma(J^1(E,M))\rightarrow \Gamma(J^1(E,M))$$
+		In particular, for any frame $\{n_i:U_E\subset E\rightarrow J^1(E,M)\}$ of sections of the first order jet bundle, we can write:
+		$$\nabla(X)n_i=\omega^j_i(X)n_j$$
+		Moreover, choosing a base for $E$ like $(x^i,u^a)$, we have that $X=X^i\partial_i+X^a\partial_a$,
+	\end{Ex}
 	\section{Second order Jets}
 	The construction of second order jets is a straight up generalization of first order jets.
 	\begin{Lm}
@@ -1649,10 +2129,269 @@
 	\end{Lm}
 	\begin{proof}
 		The first assertion follows from REFERENZA. As for the second one, it is just a matter of calculations:
-		$${\partial\over \partial y^k}\bigg\{\bigg[{\partial v^b\over \partial{x^j}}\circ \phi+\bigg({\partial v^b\over \partial{u^a}}\circ \phi\bigg) {\partial(u^a\circ \phi)\over \partial{x^j}}\bigg]{\partial x^j\over  \partial y^l}\bigg\}$$
+		$${\partial^2(v^b\circ\phi) \over \partial{y^k}\partial{y^l}}\bigg|_p={\partial\over \partial y^k}\bigg\{\bigg[{\partial v^b\over \partial{x^j}}\circ \phi+\bigg({\partial v^b\over \partial{u^a}}\circ \phi\bigg) {\partial(u^a\circ \phi)\over \partial{x^j}}\bigg]{\partial x^j\over  \partial y^l}\bigg\}=$$
+		$$={\partial\over \partial x^i}\bigg\{\bigg[{\partial v^b\over \partial{x^j}}\circ \phi+\bigg({\partial v^b\over \partial{u^a}}\circ \phi\bigg) {\partial(u^a\circ \phi)\over \partial{x^j}}\bigg]{\partial x^j\over  \partial y^l}\bigg\}{\partial x^i\over \partial y^k}$$
 		Since $\phi(p)=(x,u^a(x))$ we get:
-		$${\partial\over \partial y^k}{\partial v^b\over \partial{x^j}}\circ \phi=
-		{\partial^2 v^b\over \partial{x^j}\partial x^i}+{\partial^2 v^b\over \partial{x^j}\partial u^a}$$
+		$${\partial\over \partial x^i}\bigg({\partial v^b\over \partial{x^j}}\circ \phi\bigg)=
+		{\partial^2 v^b\over \partial{x^j}\partial x^i}+{\partial^2 v^b\over \partial{x^j}\partial u^a}{\partial u^a\over \partial x^i}$$
+		$${\partial\over \partial x^i}\bigg({\partial v^b\over \partial{u^a}}\circ \phi\bigg)=
+		{\partial^2 v^b\over \partial{u^a}\partial x^i}+{\partial^2 v^b\over \partial{u^a}\partial u^c}{\partial u^c\over \partial x^i}$$
+		Since partial derivatives commute, we have:
+		$${\partial^2 x^j\over \partial x^i\partial y^l}=0$$
+		It immediately follows that:
+		$${\partial^2(v^b\circ\phi) \over \partial{y^k}\partial{y^l}}={\partial\over \partial x^i}\bigg\{\bigg[{\partial^2 v^b\over \partial{x^j}\partial x^i}+{\partial^2 v^b\over \partial{x^j}\partial u^a}{\partial u^a\over \partial x^i}+\bigg({\partial^2 v^b\over \partial{u^a}\partial x^i}+{\partial^2 v^b\over \partial{u^a}\partial u^c}{\partial u^c\over \partial x^i}\bigg){\partial(u^a\circ \phi)\over \partial{x^j}}+$$$$+\bigg({\partial v^b\over \partial{u^a}}\circ \phi\bigg) {\partial^2(u^a\circ \phi)\over \partial{x^i}\partial{x^j}}\bigg]{\partial x^j\over  \partial y^l}\bigg\}{\partial x^i\over \partial y^k}$$
+		Clearly, by substituting every $\phi$ with $\psi$ at $p$, the result follows.
+	\end{proof}
+	We proceed again with the usual construction:
+	\begin{Def}
+		Let $(E,M,\pi,F)$ be any fiber bundle and $\phi,\psi\in\Gamma(E)$ be two sections of the bundle $E$, defined in an open set around $p\in M$. If
+		\begin{itemize}
+			\item $\phi(p)=\psi(p)$ 
+			\item For any coordinate systems $(x^i,u^a),(y^j,v^b)$ it holds:
+			$${\partial(u^a\circ\phi) \over \partial{x^i}}\bigg|_p={\partial(u^a\circ\psi) \over \partial{x^i}}\bigg|_p$$
+			$${\partial^2(u^a\circ\phi) \over \partial{x^i}\partial{x^j}}\bigg|_p={\partial^2(u^a\circ\psi) \over \partial{x^i}\partial{x^j}}\bigg|_p$$
+		\end{itemize} 
+		We say that the two sections are \textit{2-equivalent in $p$}. We call the equivalence class of $\phi\in\Gamma(E)$ at $p\in M$ as $j_p^2\phi$.
+	\end{Def}
+	Clearly, the above relation is an equivalence relation.
+	\begin{Def}
+		Let $(E,M,\pi,F)$ be any fiber bundle. We define the \textit{second order jet bundle of $E$ on $M$} as the set:
+		$$J^2(E,M)=\{j^2_p\phi \hbox{ with }p\in M, \phi\in\Gamma(E)\}$$
+	\end{Def}
+	\begin{Theo}
+		The second order jet bundle is a smooth manifold.
+	\end{Theo}
+	Just like we did for the first order jet bundle, we first of all need to show that we can find some smooth coordinates. Consider the adapted coordinates $(x^i,u^a)$ for $E$ in $U_E\subset E$. We define the following charts:
+	$$\bigg(U^2,(x^i,u^a,u^a_i,u^a_{ij})\bigg)$$
+	where: 
+	$$U^2=\{j^2_p\phi\in J^2(E,M)\big|\phi(p)\in U_E\}$$
+	Those are defined as follows:
+	$$x^i(j^2_p\phi)=x^i(p)\hspace{10pt} u^a(j^2_p\phi)=u^a(\phi(p))\hspace{10pt}
+	u^a_i(j^2_p\phi)=u^a_i(j^1_p\phi)$$
+	AS for the last coordinate, it behaves as:
+	$$u^a_{ij}(j^2_p\phi)={\partial^2 (u^a\circ \phi)\over \partial x^i \partial x^j}\bigg|_p$$
+	\begin{Obs}
+		Clearly, since partial derivatives commute, we have:
+		$$u^a_{ij}=u^a_{ji}$$
+	\end{Obs}
+	\begin{Lm}
+		The above coordinate system is smooth.
+	\end{Lm}
+	\begin{proof}
+		This is obvious since the above lemmas REFERENZA prove that changing coordinates gives smooth transition functions.
+	\end{proof}
+	\begin{Obs}
+		Just like in the first order case, we have some canonical projections:
+		$$\pi_2:J^2(E,M)\longrightarrow M$$
+		$$\pi_2(j^2_p\phi)=p$$
+		This is called \textit{source projection.}
+		$$\pi_{2,0}:J^2(E,M)\longrightarrow E$$
+		$$\pi_{2,0}(j^2_p\phi)=\phi(p)$$
+		This is called \textit{target projection.}
+		$$\pi_{2,1}:J^2(E,M)\longrightarrow J^1(E,M)$$
+		$$\pi_{2,1}(j^2_p\phi)=j^1_p\phi$$
+		This is called \textit{1-jet projection.}
+	\end{Obs}
+	\begin{center}
+		\begin{tikzcd}
+			J^2(E,M)\arrow{dddd}{\pi_{2,1}}\arrow{ddrr}{\pi_{2,0}}\arrow{ddrrrr}{\pi_2}&&&&\\\\
+			&&E\arrow{rr}{\pi}&&M\\\\
+			J^1(E,M)\arrow{uurr}{\pi_{1,0}}\arrow{uurrrr}{\pi_1}&&&&
+		\end{tikzcd}
+	\end{center}
+	To show that $J^2(E,M)$ can be given the structure of a smooth manifold, we need to use proposition REFERENZA as above. Thus:
+	\begin{Lm}
+		Let the notation be as above. The projections $\pi_2,\pi_{2,0},\pi_{2,1}$ are smooth and surjective.
+	\end{Lm}
+	\begin{proof}
+		The smoothness is obvious for the source and the target. For the 1-jet projection instead, consider the coordinate system $(x^i,u^a)$ on $E$. This automatically induces a coordinate system both on $J^1(E,M)$ like $(x^i,u^a,u^a_i)$; and on $J^2(E,M)$ like $(x^i,u^a,u^a_i,u^a_{ij})$. This implies that:
+		$$(x^i,u^a,u^a_i)\circ \pi_{2,1}\circ (x^i,u^a,u^a_i,u^a_{ij}):\mathbb{R}^{n+m+nm+{1\over 2}mn(m+1)}\rightarrow\mathbb{R}^{m+n+mn}$$
+		is the standard projection which is smooth. The surjectivity is obvious.
+	\end{proof}
+	To complete the proof that $J^2(E,M)$ is a manifold we need local trivializations. We first of all construct them in coordinates. For the 1-jet projection we have:
+	$$\varphi_{2,1}:\pi_{2,1}^{-1}(U^1)\longrightarrow U^1\times \mathbb{R}^{{1\over 2}mn(m+1)}$$
+	$$\varphi_{2,1}(j^2_p\phi)=(j^1_p\phi,u^a_{ij}(j^2_p\phi))$$
+	This is clearly smooth and invertible:
+	$$(j^1_p\phi,z^a_{ij})\mapsto(j^2_p\phi)$$
+	Basically we map the class $j^1_p\phi$ into the class $j^2_p\phi$ such that the second derivatives of $u^a\circ \phi$ are $z^a_{ij}$ at $p$. In particular, we define:
+	$$u^a\circ\phi=u^a(\phi(p))+u^a_i(j^1_p\phi)(x^i-x^i(p))+{1\over 2}z_{ij}^a(x^i-x^i(p))(x^j-x^j(p))$$
+	Clearly $z_{ij}^a=z^a_{ji}$ is symmetric. It is easy to see that this mapping respects all of the properties of proposition REFERENZA, as it is (in coordinates) merely a separation of the coordinates.\\
+	\\
+	This makes $J^2(E,M)$ a smooth manifold and a bundle on $J^1(E,M)$. 
+	\begin{Theo}
+		There exist the following vector bundles:
+		$$(J^2(E,M),J^1(E,M),\pi_{2,1},\mathbb{R}^{{1\over 2}nm(m+1)})\hspace{10 pt}(J^2(E,M),E,\pi_{2,0},\mathbb{R}^{nm+{1\over 2}nm(m+1)})$$
+		$$\hspace{10 pt}(J^2(E,M),M,\pi_{2},\mathbb{R}^{n+m+nm+{1\over 2}nm(m+1)})\hspace{10 pt}$$
+	\end{Theo}
+	\begin{proof}
+		The firsst bundle was defined above. As for the other bundles, the local trivializations are the following: 
+		\begin{itemize}
+			\item $$\varphi_2:\pi_2^{-1}(U_E)\longrightarrow U_E\times \mathbb{R}^{mn+{1\over 2}(m+1)mn}$$
+			$$\varphi_2(j^2_p\phi)=(\phi(p),u_i^a(\phi(p)),u_{ij}^a(\phi(p)))$$
+			\item 
+			$$\varphi_{2,0}:\pi_{2,0}^{-1}(U_E)\longrightarrow U\times \mathbb{R}^{n+m+mn+{1\over 2}(m+1)mn}$$
+			$$\varphi_{2,0}(j^2_p\phi)=(x^i(p),u^a\circ \phi(p),u_i^a(\phi(p)),u_{ij}^a(\phi(p)))$$		
+		\end{itemize}
+		Checking that those are smooth and ivertible is literally done as above; you define the inverse through the Taylor expansion.
 	\end{proof}
 	\section{Lagrangian and Cartan form}
+	\section{Higher order jets}
+	In this section we will generalize the construction of the jet bundle. The idea is to recover all of the Taylor coefficients of the expansion of a section. To achieve the following analysis, we need to construct a new notation, which will allow us to compute derivatives in a clearer way.
+	\subsection{Multi-Index notation}
+	\begin{Def}
+		We call \textit{multi-index} a $n$-tuple of natural numbers $I=(I(1),...,I(n))$. Each element of $I$ is indexed with $I(j)$ with $j\in [1,n]$. We define the \textit{length} of $I$ as $|I|=\sum_i I(i)$. Lastly, we define the \textit{factorial} of a multi-index as:
+		$$I!=\sum_{i}I(i)!$$
+	\end{Def}
+	\begin{Obs}
+		Clearly, a basis for the above multi-indices is:
+		$$1_i(j)=\begin{cases}
+			1 \hbox{ if } i=j\\
+			0 \hbox{ otherwise}
+		\end{cases}$$
+	\end{Obs}
+	\begin{Def}
+		We define the following notation:
+		$${\partial^{|I|}\over \partial x^I}=\prod_{i=1}^n\bigg({\partial \over \partial x^i}\bigg)^{I(i)}$$
+	\end{Def}
+	\begin{Exe}
+		Prove that:
+		$${\partial^{|I|}(fg)\over \partial x^I}=\sum_{J+K=I} {I!\over J!K!}{\partial^{|J|}f\over \partial x^J}{\partial^{|K|}g\over \partial x^K}$$
+		Use induction.\\
+		\\
+		The result is trivial for $|I|=0$. Suppose now that this holds for $|I|=n$. Then, from the Leibniz rule, we have:
+		$${\partial^{|I|+1}(fg)\over \partial x^{I+1_i}}=\sum_{J+K=I} {I!\over J!K!}\bigg[{\partial^{|J|+1}f\over \partial x^{J+1_i}}{\partial^{|K|}g\over \partial x^{K}}+{\partial^{|J|}f\over \partial x^{J}}{\partial^{|K|+1}g\over \partial x^{K+1_i}}\bigg]$$
+		Now we rescale the above indices alternatively: 
+		$$J\mapsto J-1_i\hbox{ and }K\mapsto K-1_i$$
+		$${\partial^{|I|+1}(fg)\over \partial x^{I+1_i}}=\sum_{J+K=I+1_i} {I!\over (J-1_i)!K!}{\partial^{|J|}f\over \partial x^{J}}{\partial^{|K|}g\over \partial x^{K}}+\sum_{J+K=I+1_i}{I!\over J!(K-1_i)!}{\partial^{|J|}f\over \partial x^{J}}{\partial^{|K|}g\over \partial x^{K}}$$
+		Clearly we also have the following:
+		$${I!\over (J-1_i)!K!}+{I!\over J!(K-1_i)!}={I!\over (J-1_i)!(K-1_i)!}\bigg({1\over J(i)}+{1\over K(i)}\bigg)$$
+		$$={I!\over (J-1_i)!(K-1_i)!}\bigg({J(i)+K(i)\over J(i)K(i)}\bigg)={I!(I(i)+1)\over (J-1_i)!(K-1_i)!(J(i)K(i))}=$$
+		$$={(I+1_i)!\over J!K!}$$
+		This concludes the exercise.
+	\end{Exe}
+	The following construction is a straight up generalization of the 1-jet bundle one.
+	\begin{Lm}
+		Let $(E,M,\pi,F)$ be a bundle and $\phi,\psi:U\rightarrow E$ be sections around $p\in U\subset M$. Then if we have two coordinate systems $(x^i,u^a),(y^j,v^b)$ and:
+		\begin{itemize}
+			\item $\phi(p)=\psi(p)$;
+			\item for every multi-index $I$ with $1\leq |I|\leq k$
+			$${\partial^{|I|} (u^a\circ \phi)\over \partial x^I}\bigg|_p={\partial^{|I|} (u^a\circ \psi)\over \partial x^I}\bigg|_p$$
+		\end{itemize}
+		Then it is also true that for every multi-index $J$ with $1\leq |J|\leq k$
+		$${\partial^{|J|} (v^b\circ \phi)\over \partial y^J}\bigg|_p={\partial^{|J|} (v^a\circ \psi)\over \partial x^J}\bigg|_p$$
+	\end{Lm}
+	\begin{proof}
+		We go by induction. If $|I|=0$ the proof is trivial. Now, suppose that for $|I|=n$ it holds:
+		$${\partial^{|J|}(v^b\circ \phi)\over \partial y^J }=F^b_J\circ(x^k,{\partial^{|K|} (u^a\circ \phi)\over \partial x^K})$$
+		with $0\leq |K|\leq |J|$ and $F^b_J$ does not depend on the choice of the section $\phi$. Then:
+		$${\partial^{|J|+1}(v^b\circ \phi)\over \partial y^{J+1_j} }={\partial x^i\over \partial y^j}\bigg({\partial F^b_J\over \partial x^i}\circ\bigg(x^k,{\partial^{|K|} (u^a\circ \phi)\over \partial x^K}\bigg)+\sum_{|L|=0}^{|J|}{\partial^{|L|+1}(u^c\circ \phi)\over \partial x^{L+1_i}} F^{bL}_{Jc}\circ\bigg(x^k,{\partial^{|K|} (u^a\circ \phi)\over \partial x^K}\bigg)\bigg)$$
+		Where $F^{bL}_{Jc}$ is the derivative of $F^b_J$ with respect to the coordinate ${\partial^{|L|}(u^c\circ \phi)\over \partial x^{L}}$. Clearly we can write:
+		$${\partial^{|J|+1}(v^b\circ \phi)\over \partial y^{J+1_j} }=F^b_{J+1_i}\circ \bigg(x^k,{\partial^{|K|} (u^a\circ \phi)\over \partial x^K}\bigg)$$
+		This completes the proof.
+	\end{proof}
+	\begin{Def}
+		We define two local sections $\phi,\psi$ to be $k$-equivalent in $p$ if in any coordinate frame $(x^i,u^a)$:
+		\begin{itemize}
+			\item $\phi(p)=\psi(p)$;
+			\item $${\partial^{|I|} (u^a\circ \phi)\over \partial x^I}\bigg|_p={\partial^{|I|} (u^a\circ \psi)\over \partial x^I}\bigg|_p$$
+			for any multi-index $0\leq |I|\leq k$.
+		\end{itemize}
+		We call the equivalence class of such sections $j^k_p\phi.$
+	\end{Def}
+	\begin{Def}
+		We define the \textit{$k^{th}$ order Jet bundle} as the set:
+		$$J^k(E,M)=\bigg\{j^k_p\phi \hbox{ with } \phi:U\rightarrow E\bigg\}$$
+	\end{Def}
+	It is now once again bestowed on us the problem of showing that the $k^{th}$ order jet bundle is a smooth manifold. Just like we did before, we do this through the bundle construction.
+	\begin{Obs}
+		There are $k+1$ natural projections:
+		\begin{itemize}
+			\item[a] The \textit{source projection}:
+			$$\pi_{k}:J^K(E,M)\longrightarrow M$$
+			$$\pi_k(j^k_p\phi)=p$$
+			\item[b] The \textit{target projection}:
+			$$\pi_{k,0}:J^K(E,M)\longrightarrow E$$
+			$$\pi_k(j^k_p\phi)=\phi(p)$$
+			\item[c] The \textit{$l$-jet projection}:
+			$$\pi_{k,l}:J^K(E,M)\longrightarrow J^l(E,M)$$
+			$$\pi_k(j^k_p\phi)=j^l_p\phi$$
+			With $l\leq k$.
+		\end{itemize}
+		The following commutative diagram is quite useful:
+		\begin{center}
+			\begin{tikzcd}
+				&&&&&&J^k(E,M)\arrow{dd}{\pi_{k,k-1}}\arrow{ddddrrrrrr}{\pi_{k,0}}\arrow{ddddllllll}{\pi_k}&&&&&&\\\\
+				&&&&&&J^{k-1}(E,M)\arrow{dd}{\pi_{k-1,k-2}}\arrow{ddrrrrrr}{\pi_{k-1,0}}\arrow{ddllllll}{\pi_{k-1}}&&&&&&\\\\
+				M&&&&&&...&&&&&&E\\\\
+				&&&&&&J^2(E,M)\arrow{dd}{\pi_{2,1}}\arrow{uurrrrrr}{\pi_{2,0}}\arrow{uullllll}{\pi_{2}}&&&&&&\\\\
+				&&&&&&J^1(E,M)\arrow{uuuurrrrrr}{\pi_{1,0}}\arrow{uuuullllll}{\pi_{1}}&&&&&&\\\\
+			\end{tikzcd}
+		\end{center}
+	\end{Obs}
+	\begin{Obs}
+		Once a coordinate system is selected on the initial bundle $E$, like $(U_E,(x^i,u^a))$, there is an induced coordinate system on $J^k(E,M)$ oike follows:
+		$$U^k=\big\{j^k_p\phi\big|\phi(p)\in U_E\big\}$$
+		$$(x^i,u^a,u^a_I)(j^k_p\phi)=\bigg(x^i(p),u^a(\phi(p)),{\partial^{|I|}(u^a\circ \phi)\over \partial x^I}\bigg|_p\bigg)$$
+		Clearly, it is intended that such functions $u^a_I$ are a family of functions. In particular, if $m$ is the dimension of $F$ the fiber of the bundle $E\rightarrow M$ (it is the number of indices of $u^a$), there are:
+		$$m\bigg({n+k\choose k}-1\bigg)$$
+		such functions.
+	\end{Obs}
+	\begin{Prop}
+		Let the notation be as above. Then the induced coordinate system is smooth.
+	\end{Prop}
+	\begin{proof}
+		The proof is obvious from lemma REFERENZA.
+	\end{proof}
+	To show that the $k^{th}$ order jet bundle satisfies the topological properties of a manifold we go on to work with the projections.
+	\begin{Prop}
+		The map $\pi_{k,k-1}:J^k(E,M)\longrightarrow J^{k-1}(E,M)$ is a smooth surjective projection.
+	\end{Prop}
+	\begin{proof}
+		The proof is easy. The idea is to show that if we compose this with the coordinate charts we get back the regular projection on $\mathbb{R}^h$.
+		Let $(x^i,u^a)$ be a coordinate frame on $E$. This induces a coordinate frame both on $J^k$, called $u^k$ and on $J^{k-1}$, called $u^{k-1}$. Thus:
+		$$u^{k-1}\circ \pi\circ (u^k)^{-1}(x^i,u^a,u^a_I)=(x^i,u^a,u^a_J)$$
+		where $J$ is the multi-index we got from $I$ by removing all of the $k$-order derivatives.
+	\end{proof}
+	\begin{Cor}
+		The $l$-jets projections are all smooth and surjective.
+	\end{Cor}
+	\begin{proof}
+		This follows from the previous demonstration due to the fact that $\pi_{k,m}=\pi_{l,k}\circ \pi_{k,l}$ by construction.
+	\end{proof}
+	The last ingredients are the local trivializations. Those are obvious in terms of Taylor Polynomials.\\
+	\\
+	Considering $J^k(E,M)$ as a bundle on $J^{l}(E,M)$ we have the following trivialization:
+	$$\varphi_{k,l}:\pi^{-1}_{k,l}(U^{l})\longrightarrow U^{l}\times\mathbb{R}^{N}$$
+	where $N=n\sum_{r=l+1}^{k}{n+r-1\choose r}$. Define:
+	$$\varphi_{k,l}(j^k_p\phi)=(j^l_p\phi,u^a_I(j^k_p\phi))$$
+	This map is clearly smooth in coordinates as it is just the composition of the identity with the coordinate chart. As for the inverse, consider:
+	$$(j^l_p\phi,z^a_I)\in U^{l}\times\mathbb{R}^{N}$$
+	The last coordinates can be used to completely define the taylor expansion of the section $\phi$. In particular, define:
+	$$\psi=u^a\circ \phi(p)+{\partial (u^a\circ \phi)\over \partial x^i}(x^i-x^i(p))+...$$
+	Up to the last multi-index of order $k$. Now, clearly, the inverse map will take the derivatives term from $l+1$ to $k$ and name them $u^a_I(j^k_p\phi)$. This completely defines the inverse trivialization in a smooth way. This completes the proof.\\
+	\\
+	The other trivializations for the descending bundles are defined in the same way.
+	\section{The general contact structure}
+		\begin{Def}
+			Let $(E,M,\pi,F)$ be a fiber bundle and $\phi\in\Gamma(E)$ a section around $p\in M$. We define the \textit{$k^th$-jet prolongation} of $\phi$ as:
+			$$j^k\phi:U\rightarrow J^k(E,M)\hbox{ like }j^k\phi(p)=j^k_p\phi$$ 
+		\end{Def}
+		Clearly, the jet prolongation is a section since $\pi_k\circ j^k\phi=\mathbb{I}$ is the identity. This means that in local coordinates, the jet prolongation is given by:
+		$$j^k\phi=(u^a\circ \phi,u^a_I\circ \phi)$$
+		\begin{Def}
+			Let $(E,M,\pi,F)$ be a fiber bundle and $\phi\in\Gamma(E)$ a section around $p\in M$ and $X_p\in T_pM$. We define the \textit{$k^{th}$-order holonomic lift of $X_p$ through $\phi$} as:
+			$$(j^k\phi_*(X_p),j^{k+1}_p(\phi))\in\pi_{k+1,k}(TJ^k(E,M))$$ 
+		\end{Def}
+		This definition is a lot to take in. Let us dissect it. First of all, the $k^{th}$ holonomic lift is an element of the pullback bundle through $\pi$. In particular, from REFERENZA, we have the following ingredients for the construction:
+		\begin{itemize}
+			\item $(TJ^k(E,M),J^k(E,M),\pi_{J^k},\mathbb{R}^N)$ the tangent bundle of the $k^{th}$-order jet bundle, which is a vector bundle of dimension $N$;
+			\item a map $\pi_{k+1,k}:J^{k+1}(E,M)\rightarrow J^k(E,M)$ which is the $k$-jet projection. 
+		\end{itemize}
+		This means there is a bundle:
+		$$(\pi_{k+1,k}^*(TJ^k(E,M)),J^{k+1}(E,M),\pi_{\pi_{k+1,k}^*},\mathbb{R}^N)$$
+		The fiber of this bundle is the same of the bundle on $J^k(E,M)$.\\
+		\\
+		By definition, an element of this new bundle is a couple:
+		$$(j^k\phi_*(X_p),j^{k+1}_p\phi)$$
+		An element of $J^{k+1}(E,M)$ and an element of the bundle on $J^k(E,M)$; such that $\pi_{k+1,k}(j^{k+1}_p\phi)=\pi_{TJ^k}(j^k\phi_*(X_p))$. This is the case since:
 	\end{document}
