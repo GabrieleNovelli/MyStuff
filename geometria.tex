@@ -20,6 +20,8 @@
 \usepackage{tikz-cd}
 \usepackage{mathtools}
 \usepackage{braket}
+\usepackage{pxfonts}
+\usepackage{lmodern}%THIS MUST GO AFTER PXFONTS
 
 \hypersetup{
 	colorlinks=true,
@@ -42,7 +44,7 @@
 
 \newtheorem{Lm}[Def]{Lemma}
 
-\theoremstyle{definition}
+\theoremstyle{break}
 \newtheorem{Ex}[Def]{Example}
 \newtheorem{Exe}[Def]{Exercise}
 
@@ -50,10 +52,176 @@
 \newtheorem{Cor}[Def]{Corollary}
 \newtheorem{Obs}[Def]{Observation}
 
-\title{A rigorous approach to magnetic monopoles}
-
 \begin{document}
 	\tableofcontents
+	\chapter{The necessary algebra}
+	In this chapter we go through some algebraic constructions which will be at the base of all of the future calculations. Nevertheless, it will be assumed a basic strong knowledge of linear algebra.
+	\section{The tensor product}
+	In this section we will rigorously define the notion of tensor product. There are many ways to define tensors and we will try to give a strong general definition. However, for practical reasons, we will restrict ourselves to tensor products of vector spaces. It is useful to keep in mind that the tensor product is rigorously defined over modules. However, there is no reason to employ this generalization in our analysis since there is no field (that i know of) in which it is used.
+	\begin{Def}\label{def_1.1.1}
+		Let $V,W$ be real vector spaces. We define the \textit{free real module} of $V\times W$ as the set:
+		$$R\braket{V^*\times W^*}=\{f:V\times W\rightarrow\mathbb{R}\hbox{ vanishing for all but a finite number of} (v,w)\}$$  
+	\end{Def}
+	Taking $(v^*_1,w^*_1)$ as the map defined like:
+	$$(v^*_1,w^*_1)(v_2,w_2)=\delta_{v_1,v_2}\delta_{w_1,w_2}$$
+	Any element of this new set is a linear combination:
+	$$\lambda^i(v_i^*,w_i^*)\in R\braket{V^*\times W^*}$$
+	This is clearly a vector space. The idea is now pretty straightforward. We want to be able to construct a product which keeps as fundamental property the multilinearity. Consider the following:
+	$$I=span\bigg\{\lambda(v,w)-(\lambda v,w),\lambda(v,w)-(v,\lambda w),(v+v',w)-(v,w)-(v',w),$$$$,(v,w+w')-(v,w)-(v,w')\bigg\}$$
+	This is clearly a subspace of the above vector space $R\braket{V^*\times W^*}$, spanned by the above elements. Thus, we can take the quotient:
+	\begin{Def}\label{def_1.1.2}
+		We define the \textit{tensor product} of $V^*\times W^*$ as the space:
+		$$V^*\otimes W^*=R\braket{V^*\times W^*}/I$$
+	\end{Def} 
+	\begin{Obs}\label{obs_1.1.1}
+		Clearly, sicne we took a quotient with a subspace, the reuslt is still a vector space. In particular, elements of $V^*\otimes W^*$ are equivalence classes of elements, we use the following identification:
+		$$v^*\otimes w^*=[(v^*,w^*)]$$
+		Since a dual space is a vector space and the double dual is canonically isomorphic to the starting space, we clearly generalize the above construction also to regular bector spaces.\\
+		It is clear that by construction the tensor product is multilinear (as an equivalence class):
+		$$\lambda v\otimes w=\lambda (v\otimes w)= v\otimes \lambda w$$
+		$$(v+v')\otimes w=v\otimes w+v'\otimes w$$
+		$$v\otimes (w+w')=v\otimes w+v\otimes w'$$
+	\end{Obs}
+	\begin{Prop}\label{prop_1.1.1}[\textbf{Universal property of tensor product}]
+		Let $V,W,Z$ be real finite dimensional vector spaces. Let $f:V\times W\rightarrow Z$ be a multilinear map. Then there is a unique linear map $\tilde{f}:V\otimes W\rightarrow Z$ such that the following diagram commutes:
+		\\
+		\begin{center}
+			\begin{tikzcd}
+				V\times W\arrow{rr}{f}\arrow{dd}{\pi}&&Z\\\\
+				V\otimes W \arrow{uurr}{\tilde{f}}&&
+			\end{tikzcd}
+		\end{center}
+	\end{Prop}
+	\begin{proof}
+		Define the map $F:R\braket{V\times W}\rightarrow Z$ as $F((v,w))=f(v,w)$. Clearly, since $f$ is bilinear by hypothesis, $I\subset Ker(F)$. This means that the map $F$ induces a map:
+		$$\tilde{f}:R\braket{V\times W}/I\rightarrow Z\hbox{ like }\tilde{f}(v\otimes w)=f(v,w)$$
+		This proves the existence. As for the uniqueness, suppose there is another map $g$ which satisfies the same properties as $\tilde{f}$. By definition $V\otimes W$ is spanned by all elements like $v\otimes w$, and since for all of those the maps agree $g(v\otimes w)=f(v\otimes w)=\tilde{f}(v\otimes w)$, they are indeed the same map. 
+	\end{proof}
+	\begin{Theo}\label{theo_1.1.1}
+		$$V^*\otimes W^*\simeq Bil(V\times W\rightarrow \mathbb{R})$$
+		This is canonical.
+	\end{Theo}
+	\begin{proof}
+		We make use of the universal property. Let $f(v^*,w^*)(v',w')=v^*(v')w^*(w')$ be a map. This is a mapping like:
+		$$f:V^*\times W^*\rightarrow Bil(V\times W)$$ 
+		Then from REFERENZA there is a unique mapping:
+		$$\tilde{f}:V^*\otimes W^*\rightarrow Bil(V\times W)$$
+		This is defined as: $f(v^*\otimes w^*)=f(v^*,w^*)$. Choose any bases for $V^*,W^*$ like $v^i,w^i$. Now it is only a matter to find an inverse of $\tilde{f}$. Consider:
+		$$g:Bil(V\times W)\rightarrow V^*\otimes W^*\hbox{ like }g(B)=B(v_i,w_j)v^i\otimes w^j$$
+		Let now $\rho$ be any element of $V\otimes W$. The composition is:
+		$$(g\circ \tilde{f})(\rho)=\tilde{f}(\rho)(v_i,w_j)v^i\otimes w^j$$
+		Recall that $\tilde{f}$ is linear, thus:
+		$$(g\circ \tilde{f})(\rho)=\rho_{km}\tilde{f}(v^k\otimes w^m)(v_i,w_j)v^i\otimes w^j$$
+		Moreover, $\tilde{f}\circ \pi=f$ from REFERENZA:
+		$$(g\circ \tilde{f})(\rho)=\rho_{km}f(v^k,w^m)(v_i,w_j)v^i\otimes w^j$$
+		By definition of $f$, we have:
+		$$(g\circ \tilde{f})(\rho)=\rho_{km}\delta^k_i\delta^m_jv^i\otimes w^j=\rho_{ij}v^i\otimes w^j=\rho$$
+		Thus, $g\circ \tilde{f}=\mathbb{I}$ is the identity. One can also easily prove the contrary:
+		$$(\tilde{f}\circ g)(B)=\tilde{f}(B(v_i,w_j)v^i\otimes w^j)=B(v_i,w_j)\tilde{f}(v^i\otimes w^j)=$$
+		$$(\tilde{f}\circ g)(B)(v',w')=B(v_i,w_j)f(v^i,w^j)(v'^kv_k,w'^lw_l)=B(v_i,w_j)v'^kw'^l\delta_i^k\delta_j^l=$$$$=B(v_i,w_j)v'^iw'^j=B(v',w')$$
+		By arbitrarity of the base this is canonical.
+	\end{proof}
+	\begin{Obs}\label{obs_1.1.2}
+		Since the above isomorphism is canonical it makes sense to think about bilinear maps as tensor products. 
+	\end{Obs}
+	Now we go through some properties of the tensor product, which are very technical but will help us develop the right tools for our future calculations.
+	\begin{Prop}\label{prop_1.1.2}
+		There is a unique canonical isomorphism: 
+		$$V\otimes W\simeq W\otimes V$$
+	\end{Prop}
+	\begin{proof}
+		This is just a consequence of the universal property. Let $f:V\times W\rightarrow V\otimes W$ be a bilinear map like:
+		$$f(v,w)=w\otimes v$$
+		THen, by the universal property, there is a unique linear mapping:
+		$$\tilde{f}:V\otimes W\rightarrow W\otimes V\hbox{ like }\tilde{f}(v\otimes w)=w\otimes v$$
+		Similarly, one can construct a map like: 
+		$$\tilde{g}:W\otimes V\rightarrow V\otimes W\hbox{ like }g(w\otimes v)=v\otimes w$$
+		This descends from the linear map $g(w,v)=v\otimes w$. Clearly, those maps are one the inverse of the other on both sides. Moreover, they are inverses on decomposable elements so they are unique inverses.
+	\end{proof}
+	\begin{Prop}\label{prop_1.1.3}
+		The tensor product is associative.
+	\end{Prop}
+	\begin{proof}
+		Clearly, since $V\otimes W$ is by construction a vector space, we can take its tensor product with $Z$ another vector space. This will define new equivalence classes by the same procedure as above, like: $(v\otimes w)\otimes z$. The aim is to prove $(V\otimes W)\otimes Z=V\otimes (W\otimes Z)$. This is a consequence of the universal property as well.\\
+		\\
+		Let $X$ be a vector space. Consider the trilinear mapping:
+		$$f:V\times W\times Z\rightarrow X$$
+		From the REFERENZA universal property, there is a bilinear map: 
+		$$\tilde{f}:V\times (W\otimes Z)\rightarrow X\hbox{ like }\tilde{f}(v,w\otimes z)=f(v,w,z)$$
+		Since $\tilde{f}$ is bilinear, there is another linear map, from the universal property, like $\tilde{\tilde f}:V\otimes(W\otimes Z)=f(v,w,z)$. Choosing now $X=(V\otimes W)\otimes Z$ and $f(v,w,z)=(v\otimes w)\otimes z$ (this is clearly trilinear) we have:
+		$$\tilde{\tilde f}(v\otimes (w\otimes z))=(v\otimes w)\otimes z$$
+		One can apply the same reasoning by commuting the order in which the tensor product is obtained. This will give a linear map:
+		$$\tilde{\tilde g}((v\otimes w)\otimes z)=v\otimes (w\otimes z)$$
+		Those are clear inverses.
+	\end{proof}
+	\begin{Def}\label{def_1.1.3}
+		We call $T^k_lV$ the space of multilinear maps 
+		$$f:V\times...\times V\times V^*\times...\times V^*\rightarrow\mathbb{R}$$
+	\end{Def}
+	\begin{Cor}\label{cor_1.1.1}
+		$$T^k_lV=\bigotimes^k V^*\otimes \bigotimes^l V$$
+	\end{Cor}
+	This follows immediately from the associativity and the isomorphism REFERENZA.
+	\begin{Prop}\label{prop_1.1.4}
+		Let $V,W$ be vector spaces and $\{e_i\}$ a base for it. Then, $e_i,f_j$ bases for them. Then, a base for $V\otimes W$ is:
+		$$\big\{e_i\otimes w_j\big\}$$
+	\end{Prop}
+	\begin{proof}
+		We use the isomorphism with multilinear maps. If $f\in Bil(V\times W)$, then it can be expressed as:
+		$$f=f_{ij} e^i\otimes f^j$$
+		This automatically implies that the above set spans all of the elements. To show linear independence, we see that:
+		$$f(e_m,f_l)=f_{ml}$$
+		So the 0 can be obrained only by taking all constant equal to 0.
+	\end{proof}
+	\begin{Cor}\label{cor_1.1.2}
+		$$\{e^{i_1}\otimes...e^{i_k}\otimes e_{j_1}\otimes...\otimes e_{j_l}\}\hbox{ is a base for }T^k_lV$$
+	\end{Cor}
+	\section{The exterior algebra}
+	In this section we take yet another step forward in the analysis on the tensor product. A posteriori, we will be mainly interested in antisymmetric tensors. This means we need a precise and rigorous way to define them. We will thus introduce the wedge product of vector spaces. This is unfortunately defined through the use of another quotient. \\
+	\\
+	Let $\bigotimes^k V$ be the $k$-tensor product space of $V$. Consider the ideal $I^k(V)$ spanned by all elements $v^1\otimes...\otimes v^k$ that have at least two equal vectors in the product.
+	\begin{Def}
+		We call \textit{exterior $k$-power} of $V\otimes W$ the quotient:
+		$$\bigwedge^k V=\bigotimes^kV/I^k(V)$$	
+		We index elements of $\bigwedge^k V$ as:
+		$$v^1\wedge...\wedge v^k=[v^1\otimes...\otimes v^k]$$
+	\end{Def}
+	\begin{Obs}
+		Clearly the exterior power is a vector space since it is the quotient of a vector space with one vector subspace. This translates in linearity of the equivalence classes.
+	\end{Obs}
+	\begin{Obs}
+		Clearly, by construction $$v^1\wedge...\wedge v^i\wedge v^{i+1}\wedge...\wedge v^k=-v^1\wedge...\wedge v^{i+1}\wedge v^{i}\wedge...\wedge v^k$$ is antysimmetric. This follows from the fact that:
+		$$[0]=0=v^1\wedge...\wedge (v^i+v^{i+1})\wedge (v^{i+1}+v^{i})\wedge...\wedge v^k=$$
+		$$=v^1\wedge...\wedge v^i\wedge v^{i+1}\wedge...\wedge v^k+v^1\wedge...\wedge v^{i+1}\wedge v^{i}\wedge...\wedge v^k+0+0$$
+		The last two 0 are elements that after the linear expansion contain two equal vectors.
+		Clearly, the above operations follow from the linearity of the tensor product.
+		\\
+		Given the above result it is not hard to see that if $\sigma$ is a permutation of the vectors (or the indices), then:
+		$$v^1\wedge...\wedge v^k=sgn(\sigma)v^{\sigma(1)}\wedge...\wedge v^{\sigma(k)}$$
+	\end{Obs}
+	\begin{Prop}
+		The wedge product is associative.
+	\end{Prop}
+	\begin{proof}
+		This is clear from the fact that the tensor product is associative and equivalence classes are linear.
+	\end{proof}
+	\begin{Prop}[\textbf{Universal property for the wedge product}]
+		Let $f:V^k\rightarrow Z$ any alternating multilinear map on a vector space. There is a unique alternating linear map $\tilde{f}:\bigwedge^kV\rightarrow Z$ such that the following diagram commutes:
+		\begin{center}
+			\begin{tikzcd}
+				\bigwedge^k V \arrow{rrdd}{\tilde{f}}&&\\\\
+				V^k\arrow{rr}{f}\arrow{uu}{\wedge}&&Z
+			\end{tikzcd}
+		\end{center}
+		Where $\wedge(v_1,...,v_k)=v_1\wedge ...\wedge v_k$ is the projection.
+	\end{Prop}
+	\begin{proof}
+		Since $f$ is multilinear, by REFERENZA the universal property of the tensor product, there is a linear map $h:\bigotimes^k V\rightarrow Z$ such that:
+		$$h(v_1\otimes...\otimes v_k)=f(v_1,...,v_k)$$
+		By the alternating property, $I^k(V)$ is in the kernel of this map. Thus, there exists a map:
+		$$\tilde{f}:\bigwedge^k V\rightarrow Z$$
+		which satisfies the above properties. This proves the existence. The uniqueness follows from the uniqueness of $h$.
+	\end{proof}
 	\chapter{Smooth manifolds}
 		\section{Topological manifolds}
 			In this section we will define the concept of topological manifolds and look at some examples and properties of them. The main idea is to find a way of describing spaces which are not necessaarily $\mathbb{R}^n$. To achieve this, we simply look at spaces which locally "look like" $\mathbb{R}^n$. This is the basic construction of a topological manifold. However, we will see that smooth manifolds take a step further.
@@ -101,16 +269,23 @@
 			\begin{Def}
 				A topological space which is also T2, second countable and locally euclidean is called \textit{topological manifold}.
 			\end{Def}
-			We now make some examples of topological manifolds.
 			\begin{Ex}
-				ESEMPI
+				We now make some examples of topological manifolds.
+				\begin{itemize}
+					\item The space $\mathbb{R}^n$ is trivially a topological manifold.
+					\item The sphere $S^n$ is a topological manifold. It is clearly T2 and second countable since it is inside $\mathbb{R}^n$. Moreover, it can be covered by the following charts:
+					$$U^{\pm}_i=\big\{\vec{x}\in S^n\big| \pm x_i>0\big\}$$
+					$$\phi_i^\pm:U^\pm_i\rightarrow \mathbb{R}^n\hbox{ like }\phi^\pm_i(\vec{x})=(x_1,...,x_{i-1},x_{i+1},...,x_{n+1})$$
+					Those have some clear inverses:
+					$$(\phi^\pm_i)^{-1}((x_1,...,x_{n+1}))=(x_1,...,x_{i-1},\pm\sqrt{1-||x^2||},x_{i+1},...,x_{n+1})$$
+				\end{itemize}
 			\end{Ex}
 			We conclude this section with a very useful proposition, which will come in handy later.
 			\begin{Prop}
 				If $\pi:M\rightarrow N$ is a quotient map, $M$ is a second countable topological space and $N$ is locally euclidean. Then $N$ is also second countable.
 			\end{Prop}
 			\begin{proof}
-				
+				a
 			\end{proof}
 		\section{Smooth structures}
 		In this section we will define the notion of smooth manifold. This will be dependent on the notion of smooth structure. The basic idea is to be able to map diffeomorphically our spaces into $\mathbb{R}^n$.
@@ -155,10 +330,14 @@
 				It is then clear that $GL(n,\mathbb{R})$ is the preimage of the map:
 				$$det:\mathbb{R}^{n^2}\longrightarrow \mathbb{R}$$ 
 				This map is continuous and so, since $\mathbb{R}-\{0\}$ is open, $det(\mathbb{R}-\{0\})$ is open as well. This makes $GL(n,\mathbb{R})$ is an open subset of $\mathbb{R}^{n^2}$. This implies that it is a smooth manifold.
-				\item $S^n$ is a smooth manifold. BLA BLA CARTE
-				\item Any finite dimensional vector space is a smooth manifold. From topology, we know that any two norms defined on a finite dimensional vecotr space are equivalent in defining the same topology. In particular, those define a T2 and second countable topology (REFERENZA). FIx a base for $V$, like $\{e_i\}$. Then, we can find an isomorphism:
+				\item $S^n$ is a smooth manifold. We have already seen in REFERENZA that this is a topological manifold. We just have to show that the composition of two charts is smooth. This is easy: let $\phi_1^\pm,\phi_2\pm$ be two such charts (without loss of generality we can fix two indices). Consider:
+				$$\phi_1^{\pm}\circ(\phi_2^{\pm})^{-1}(x_1,x_3,...,x_{n+1})=$$$$=\phi^\pm_1(x_1,\pm\sqrt{1-||x^2||},x_3,...,x_{n+1})=(\pm\sqrt{1-||x^2||},x_3,...,x_{n+1})$$
+				This is clearly smooth since taking the derivation of the square root we get:
+				$${d\over dx^i}(\pm\sqrt{1-||x^2||})={\pm x^i\over\sqrt{1-||x^2||}}$$ 
+				This is smooth since in our domain the root is well defined.
+				\item Any finite dimensional vector space is a smooth manifold. From topology, we know that any two norms defined on a finite dimensional vecotr space are equivalent in defining the same topology. In particular, those define a T2 and second countable topology (REFERENZA). Fix a base for $V$, like $\{e_i\}$. Then, we can find an isomorphism:
 				$$f:V\rightarrow \mathbb{R}^n\hbox{ like }f(v^ie_i)=(v^1,...,v^n)$$
-				This is an homeomorphism PERCHEEEEEEEEEEE
+				This is an homeomorphism REFERENZA. Considering an other base $f_j$, we can find a chang eof basis matrix $M^j_i$ so that our construction does not depend on the choice of the base.
 			\end{itemize}
 		\end{Ex}
 		\begin{Def}
@@ -170,6 +349,13 @@
 			$$f\circ \phi^{-1}=f\circ \psi^{-1}\circ \psi\circ \phi^{-1}$$
 			where $(V,\psi)$ is a chart in $\mathcal{A}^{max}$ overlapping with our domain. This makes $f$ smooth also in $\mathcal{A}$.
 		\end{Obs}
+		Lastly, we make a useful statement which will come in handy in a bit:
+		\begin{Lm}
+			Any smooth manifold $M$ has a countable basis made of coordinate charts.
+		\end{Lm}
+		\begin{proof}
+			Let $\{U_i\}$ be an atlas for $M$. Consider a countable basis of open sets $\{u_j\}$ of $M$. Take $p\in M$ and $U_i$ containing $p$. Then, there is an element $u_i$ of the basis such that $p\in u_{i,p}\subset U_{i}$ by definition of basis. The collection of the sets $u_{j,p}$ constructed like this, without duplicates, is a subcollection of the basis and so it is countable. Moreover, it is a collection of charts and covers $M$. To prove it is a base, consider $u\subset M$ and $p\in U$. Then there is $U_i\subset U$ containing $p$. Thus, there is also, by construction, $u_{i,p}\subset U$ containing $p$.
+		\end{proof}
 		\section{The partition of Unity}
 			In this section we construct the partition of unity. This is an analytical tool which will allow us to find some interesting results later on. This is very technical and it is a topic for the interested reader.
 			\begin{Def}
@@ -215,7 +401,7 @@
 				is indeed a bump function.
 				\begin{center}
 					\begin{tikzpicture}
-						\begin{axis}[xmin=-1.2, xmax=2, ymin=-0.7, ymax=1.2,
+						\begin{axis}[xmin=-2, xmax=2, ymin=-0.7, ymax=1.2,
 							xtick = {-1,0,1}, ytick = { 1},
 							scale=0.4, restrict y to domain=-1.5:1.2,
 							axis x line=center, axis y line= center,
@@ -227,6 +413,9 @@
 							
 							\addplot[black, smooth, thick, domain=1.001:1.999]
 							{exp(-1/(2 - x)) / (exp(-1/(2 - x)) + exp(1/(1 - x)))};
+							
+							\addplot[black, smooth, thick, domain=-1.001:-1.999]
+							{exp(-1/(2 + x)) / (exp(-1/(2 + x)) + exp(+1/(1 + x)))};
 							
 						\end{axis}
 					\end{tikzpicture}
@@ -266,7 +455,6 @@
 			\end{Theo}
 			\section{The tangent space}
 			In this section we will introduce an extremely important construction, which will follow us through the whole book: the tangent space. We will give the precise notions on vector and vector fields for smooth amnifolds, and we will start to see how we can force the structure of $\mathbb{R}^n$ on our smooth manifolds.
-			\\\\
 			\begin{Def}
 				Let $p\in M$. Consider all pairs $(f,U)$, with $f:U\subset M\rightarrow \mathbb{R}$ smooth and $p\in U$. We say that $(f,U)\sim (g,V)$ if there is a $W\subset U\cap V$ such that $p\in W$ and $f\big|_W=g\big|_W$.
 				We call the \textit{germ of $f$ at $p$} the equivalence class $[(f,U)]$. We index the set of all germs at a point with:
@@ -301,15 +489,13 @@
 				Let $\vec{x}\in\mathbb{R}^n$. There is an isomorphism $\mathbb{R}^n\simeq T_{\vec{x}}\mathbb{R}^n$.
 			\end{Prop}
 			\begin{proof}
-				Consider a generic derivation $D_{\vec{x}}\in T_{\vec{x}}\mathbb{R}^n$. Then, since the space of derivations is a point is a vector space, we can express our derivation in a base:
-				$$D_{\vec{x}}=D^i(\vec{x})e_i(\vec{x})$$
-				Let $x^i$ be the standard coordinates of $\mathbb{R}^n$. Define the map:
-				$$D_{\vec{x}}\longrightarrow v^i\partial_i\big|_{\vec{x}}$$
-				This map is injective. In fact in order for  $D_{\vec{x}}f=0$ for all functions, we also need $v^i=0$ for all $i$. This implies injectivity. As for surjectivity, consider any smooth map $f$ and its Taylor expansion around a point:
+				Consider a vector $\vec{v}\in\mathbb{R}^n$. We define the following map:
+				$$\vec{v}\rightarrow D_{\vec{v}}=v^i\partial_i$$
+				This map is injective since $D_{\vec{v}}(x^j)=v^j$ and so in order to obtain 0 we would need $\vec{v}=\vec{0}$. As for surjectivity, consider any smooth map $f$ and its Taylor expansion around a point:
 				$$f(\vec{z})=f(\vec{x})+\partial_i f(\vec{x})(z^i-x^i)+o(\vec{x})$$
 				In particular, the residue will vanish in $\vec{x}$. Taking the derivation at $\vec{x}$ of this map, we see that the only non vanishing term is:
-				$$D_{\vec{x}}f=\partial_i f(\vec{x})D_{\vec{x}}(z^i-x^i)$$
-				Defining $v^i=D_{\vec{x}}(z^i-x^i)$ we have surjectivity.
+				$$D_{\vec{v}}f=\partial_i f(\vec{x})D_{\vec{v}}(z^i-x^i)$$
+				Defining $v^i=D_{\vec{v}}(z^i-x^i)$ we have surjectivity.
 			\end{proof}
 			\begin{Cor}
 				Any tangent vector to $\mathbb{R}^n$ is of the form $X_p=X^i(p)\partial_i\big|_p$.
@@ -440,10 +626,147 @@
 			\begin{proof}
 				The proof will develop as follows: first of all we will show that $TM$ is a smooth manifold i.e. prove that it has a nice topology and a smooth structure; then we will look at the trivializations to show that it is a bundle.\\
 				\\
-				
+				Let $(U,\phi)$ be a chart on $M$. This induces a base for $T_pM$ at any $p\in U$ like $\{\partial_i\}$. Thus, we can define the following map:
+				$$\Phi:\pi_{TM}^{-1}(U)\rightarrow \mathbb{R}^{2n}$$
+				$$\Phi(v_p)=(\phi(p),v^i(p)\partial_i\big|_p)$$
+				This map has a clear inverse:
+				$$\Phi^{-1}(\vec{x},\vec{v})=v_p\hbox{ such that }v_p=v^i(p)\partial_i\big|_p\hbox{ and }p=\phi^{-1}(\vec{x})$$
+				We define the topology of $TM$ in such a way that this map becomes a homeomorphism: we call a set $A\subset TU$ open in $TU$ iff $\Phi(A)$ is open in $\mathbb{R}^{2n}$.\\
+				\\
+				The next step is not really strictly necessary but helps with the formality.\\
+				\\
+				The aim is now to biuld a base for this induced topology.
+				Let $\mathcal{A}=\{(U_i,\phi_i)\}$ be an atlas for $M$ and define the following set:
+				$$\mathcal{C}=\big\{A\subset TM\hbox{ such that }A \hbox{ is open in }TU_i\big\}$$
+				\begin{Lm}
+					If $A_{1,2}$ are open in $TU_{1,2}$, then $A_1\cap A_2$ are open in $T(U_1\cap U,2)$.
+				\end{Lm}
+				\begin{proof}
+					This is easy since clearly, due to $A_{1,2}\subset TU_{1,2}$, $A_1\cap A_2\subset T(U_1\cap U_2)$ and, from the definition of subset topology, $A_{1,2}\cap T(U_1\cap U_2)$ are open. Automatically:
+					$$A_1\cap A_2\cap T(U_1\cap U_2)=[A_1\cap T(U_1\cap U_2)]\cap [A_2\cap T(U_1\cap U_2)]$$
+					Those are intersections of open sets and so are open.
+				\end{proof}
+				From REFERENZA, $\mathcal{C}$ is a basis for some topology since:
+				\begin{itemize}
+					\item All elements of $\mathcal{C}$ cover $TM$ by construction;
+					\item for any $v_p\in A_1\cap A_2$ there is an open $A$ such that $v_p\in A\subset A_1\cap A_2$.
+				\end{itemize}
+				The second quality naturally descends from the lemma.\\
+				\\
+				Consider now a countable basis (from REFERENZA it exists) of charts for $M$ like $\{U_i\}$. Every one of those will define $TU_i$ which, being homeomorphic to $\mathbb{R}^{2n}$, is second countable. Since there is a countable number of $U_i$, we have a second countable basis for $TM$.\\
+				\\
+				The T2 quality immediately follows from the homeomorphism witb $\mathbb{R}^{2n}$.\\
+				\\
+				As for the trivializations, consider the map:
+				$$\psi=(\phi^{-1}\times \mathbb{I})\circ \Phi:\pi_{TM}^{-1}(U)\rightarrow U\times \mathbb{R}^n$$
+				This clearly reduces to a vector space isomorphism on the fibers. Moreover, it is clearly diffeomorphic. 
 			\end{proof}
+			\begin{Cor}
+				Any smooth manifold $M$ of dimension $n$ has a rank $n$ vector bundle:
+				$$(TM,M,\pi_{TM},\mathbb{R}^n)$$
+			\end{Cor}
 		\section{The cotangent bundle}
+		In this section we define yet another important object: the cotangent bundle. This can be thought of as the dual of the tangent bundle. We are going to see some properties of this object and study covectors or differential 1-forms. In some sense, the 1-forms will be the actual protagonist of our journey.
+		\begin{Obs}
+			At any point $p\in M$ we have a vector space $T_pM$ of dimension $n$. This implies the existence of a dual space $T_pM^* $ at any point.
+		\end{Obs}
+		\begin{Def}
+			We define the \textit{co-tangent} bundle as the set 
+			$$TM^*=\bigcup_{p\in M}T_pM^*$$
+		\end{Def}
+		\begin{Theo}
+			The tangent bundle is a smooth manifold and defines a rank $n=dim (M)$ smooth vector bundle on $M$.
+		\end{Theo}
+		\begin{proof}
+			The proof is identical to the one used in REFERENZA for the tangent bundle.
+		\end{proof}
+		\begin{Obs}
+			Note that once we choose a base for the tangent base $\{{\partial \over \partial x^i}\}$ i.e. a chart $(U,\phi)$, we automatically have an isomorphism between $T_pM$ and $T_pM^*$ at each point in the set $U$. This implies the definition of a dual base: $dx^i$ such that:
+			$$dx^i({\partial\over \partial x^j})=\delta^i_j$$
+			Note that in general there is no canonical isomorphism between $T_pM$ and $T_pM^*$. In order for have a canonical identification we would need a product... we'll see what we can do.
+		\end{Obs}
+		\begin{Def}
+			We define a \textit{covector field} of a \textit{differential 1-form} as a section of the co-tangent bundle:
+			$$\omega\in \Gamma(TM^*)$$
+		\end{Def}
+		\begin{Obs}
+			Clearly, in any coordinate frame, we have the following decomposition:
+			$$\omega=\omega_i dx^i$$
+			where, being smooth, $\omega_i:M\rightarrow \mathbb{R}$ are smooth maps.\\
+			Also, due to the action of dual vectors on vectors, given a differential 1-form  $\omega$ and a vector field $X$, we have the following smooth map:
+			$$\omega(X):M\rightarrow \mathbb{R}\hbox{ such that }\omega(X)(p)=\omega_pX_p$$
+		\end{Obs}
+		\begin{Exe}
+			Prove that the above mapping
+			$$\omega(X):M\rightarrow \mathbb{R}\hbox{ such that }\omega(X)(p)=\omega_pX_p$$
+			is smooth.\\
+			\\
+			This is really easy and amounts to choosing one single chart $(U,\phi)$. This induces some cooridnates on $U\subset M$ like $x^i$, on $TU\subset TM$ like $\partial_i$ and on $TU^*\subset TM^*$ like $dx^i$. At this point, we have:
+			$$\omega_pX_p=\omega_i(p)dx_p^i(X^j(p)\partial_j\big|_p)=\omega_i(p)X^i(p)$$
+			Done.
+		\end{Exe}
+		\begin{Def}
+			Let $f:M\rightarrow \mathbb{R}$ be a smooth map. We define its \textit{differential} as a differential 1-form defined like:
+			$$df(X)_p=X_pf$$
+		\end{Def}
+		\begin{Obs}
+			Clearly, in coordinates:
+			$$df=\partial_i fdx^i$$
+			This is smooth as well.
+		\end{Obs}
+		\begin{Def}
+			Let $F:M\rightarrow N$ be a smooth manp between manifolds. We define the \textit{pull-back through $F$} as a map:
+			$$F^*:T_pN^*\rightarrow T_pM^*$$
+			such that for any 1-form at a point $\omega_{F(p)}\in T_{F(p)}N$, we have that $F^*\omega_{F(p)}$ is a 1-form at $p$:
+			$$(F^*\omega_{F(p)})(X_p)=\omega_{F(p)}(F_*X_p)$$ 
+		\end{Def}
+		The pull-back has some interesting properties:
+		\begin{Prop}
+			The following holds:
+		\end{Prop}
 		\section{The pullback bundle for vector bundles}
+		\section{Tensors}
+		In this section we define the notion of tensor and tensor field on a smooth manifold and look at some of their properties.
+		\begin{Obs}
+			We have seen that $TM=\bigcup_{p\in M}T_pM$ and $TM^*=\bigcup_{p\in M}T_pM^*$ are vector bundles on $M$. Since at any point $T_pM$ is a vector space, we can define the tensor product $\bigotimes^k T_pM$ and equivalently for its dual. This automatically implies that at any point, havind selected a chart $(U,\phi)$ for $M$, there are some induced basis like $\{\partial_{i_1}\otimes...\otimes \partial_{i_k}\}$ and $\{dx^{i_1}\otimes...\otimes dx^{i_k}\}$. By the same identical pricedure used for the tangent bundle, we can define the following vector bundles:
+			$$TM_k=\bigsqcup_{p\in M} \bigotimes^k T_pM$$
+			$$ T^*M^k=\bigsqcup_{p\in M} \bigotimes^k T_pM^*$$
+			$$TM^l_k=\bigsqcup_{p\in M} \bigotimes^k T_pM\bigotimes^l T_pM^*$$
+			$$\bigwedge^k M=\bigsqcup_{p\in M} \bigwedge^k T_pM$$
+		\end{Obs}
+		\begin{Def}
+			We call $(k,l)$ tensor a section of $TM^k_l$. This is a map $T:M\rightarrow TM^l_k$
+		\end{Def}
+		In a given coordinate chart we have:
+		$$T=T_{i_1,...,i_l}^{j_1,...,j_k}dx^{i_1}\otimes...\otimes  dx^{i_l}\otimes \partial_{j_1}\otimes...\otimes \partial_{j_k}$$
+		We can also extend the notion of pull-back in the obvious way.
+		\begin{Def}
+			Let $F:N\rightarrow M$ be a smooth map between manifolds. We define the \textit{pull-back} of a $k$-form $\omega\in\Omega^k(N)$ as:
+			$$F^*_p\omega (X^1,...,X^k)=\omega_{F(p)}(F_*X^1,...,F_*X^k)$$
+		\end{Def}
+		The pull-back has some important properties.
+		\begin{Prop}
+			The following properties hold:
+			\begin{itemize}
+				\item[(1)] $F^*$ is $\mathbb{R}$-linear;
+				\item[(2)] $F^*(f\omega)=(f\circ F)F^*\omega$;
+				\item[(3)] $(F\circ G)^*=G^*\circ F^*$;
+				\item[(4)] $F^*(\omega\otimes \rho)=F^*\omega\otimes F^*\rho$.
+			\end{itemize}
+		\end{Prop}
+		\begin{proof}
+			The proof is just a straightforward calculation.
+			\begin{itemize}
+				\item[(1)] Obvious.
+				\item[(2)]  $F^*(f\omega)(X_1,...,X_k)=(f\omega)_F(p)(F_*X_1,...,F_*X_k)=(f\circ F(p))\omega_{F(p)}(F_*X_1,...,F_*X_k)$.
+				\item[(3)] $$(F\circ G)^*\omega(X_1,...,X_k)=\omega(F_*\circ G_*(X_1),...,F_*\circ G_*(X_k))=$$$$=F^*\omega(G_*(X_1),..., G_*(X_k))=G^*\circ F^*\omega(X_1,...,X_k)$$
+				\item[(4)] Obvious.
+			\end{itemize}
+		\end{proof}
+		\begin{Def}
+			We denote the space of smooth sections of the bundle $\bigwedge^k M$ like:
+			$$\Omega^k(M):=\Gamma(\bigwedge^k M)$$
+		\end{Def}
 		\section{The Frobenius theorem}
 		In this section we study foliations and distributions. The final aim is to prove the Frobenius theorem, an extremely important result in smooth geometry.
 		\begin{Def}
@@ -523,7 +846,7 @@
  		\begin{Obs}
  			It is not hard to see that given a completely integrable distribution we automatically have a foliation. In fact, each flat chart defines a family of submanifolds (locally). Those do not intersect since each one correspond to keeping fixed some coordinate of the base manifold $M$. The connectedness is found by taking the maximally connected generated submanifold. In other words:\\
  			\\
- 			Suppose to take a point $p$ in $M$ and a flat chart $(U,\phi)$ fpr the distribution $D$. Then, i can define inside $U$ the submanifold corresponding to $x^{k+1}=0,...,x^n=0$. Taking another overlapping chart $(V,\psi)$ i can do the same if I choose it to be flat. By repeating the same argument for all the connected component of $p$, I get a connected submanifold.
+ 			Suppose to take a point $p$ in $M$ and a flat chart $(U,\phi)$ for the distribution $D$. Then, i can define inside $U$ the submanifold corresponding to $x^{k+1}=0,...,x^n=0$. Taking another overlapping chart $(V,\psi)$ i can do the same if I choose it to be flat. By repeating the same argument for all the connected component of $p$, I get a connected submanifold.
  		\end{Obs}
  		As a corollary of Frobenius theorem we state:
  		\begin{Cor}
@@ -2378,6 +2701,13 @@
 		\end{Def}
 		Clearly, the jet prolongation is a section since $\pi_k\circ j^k\phi=\mathbb{I}$ is the identity. This means that in local coordinates, the jet prolongation is given by:
 		$$j^k\phi=(u^a\circ \phi,u^a_I\circ \phi)$$
+		\begin{Obs}
+			Consider the trivial bundle $M\times \mathbb{R}$ over $\mathbb{R}$. It is clear that sections of this bundle are in 1-1 with smooth maps:
+			$$s_f(x)=(x,f(x))$$
+			Thus, the $k^{th}$-jet prolongation of this section is:
+			$$j^ks_f:U\rightarrow J^k(M\times \mathbb{R},M)\hbox{ like }j^ks_f(x)=j^k_xs$$
+			This is the equivalence class of all functions (sections) that have same derivatives up to order $k$.
+		\end{Obs}
 		\begin{Def}
 			Let $(E,M,\pi,F)$ be a fiber bundle and $\phi\in\Gamma(E)$ a section around $p\in M$ and $X_p\in T_pM$. We define the \textit{$k^{th}$-order holonomic lift of $X_p$ through $\phi$} as:
 			$$(j^k\phi_*(X_p),j^{k+1}_p(\phi))\in\pi_{k+1,k}(TJ^k(E,M))$$ 
@@ -2392,6 +2722,246 @@
 		The fiber of this bundle is the same of the bundle on $J^k(E,M)$.\\
 		\\
 		By definition, an element of this new bundle is a couple:
-		$$(j^k\phi_*(X_p),j^{k+1}_p\phi)$$
-		An element of $J^{k+1}(E,M)$ and an element of the bundle on $J^k(E,M)$; such that $\pi_{k+1,k}(j^{k+1}_p\phi)=\pi_{TJ^k}(j^k\phi_*(X_p))$. This is the case since:
+		$$(X_{j^k_p\phi},j^{k+1}_p\phi)$$
+		An element of $J^{k+1}(E,M)$ and an element of the bundle on $J^k(E,M)$; such that $\pi_{k+1,k}(j^{k+1}_p\phi)=\pi_{TJ^k}(X_{j^k_p\phi})$. This is the case since:
+		$$\pi_{k+1,k}(j^{k+1}_p\phi)=j^k_p\phi$$
+		Moreover, $X_{j^k_p\phi}$ is a vector at $j^k_p\phi$, so that:
+		$$\pi_{TJ^k}(X_{j^k_p\phi})=j^k_p\phi$$
+		This settles the definition.
+		\begin{Obs}
+			It is obvious (almost) that the holonomic lift does not depend on the representative selected $\phi$. If in fact we take another element of the class $j^{k+1}_p\phi$ like $\psi$ we would have the same informations about the derivatives of $\phi$, since they equal the ones of $\psi$.
+		\end{Obs}
+		This construction seems unnecessarily complicated. It would be, if it wasn't for the following theorem:
+		\begin{Theo}
+			There is a canonical decomposition of the above defined space $\pi_{k+1,k}^*(TJ^k(E,M))_{j^{k+1}_p\phi}$ at any point, like:
+			$$\pi_{k+1,k}^*(TJ^k(E,M))_{j^{k+1}_p\phi}=\pi_{k+1,k}^*(\mathcal{V}_{TJ^k})_{j^{k+1}_p\phi}\oplus Holl_p^k(\phi)$$
+			Where $Hol_p^k(\phi)$ is the collection of the $k^{th}$-holonomic lifts at $p$ through $\phi$ of $T_pM$.
+		\end{Theo}
+		\begin{proof}
+			Take any element of $\pi_{k+1,k}^*(TJ^k(E,M))_{j^{k+1}_p\phi}$ like $(\chi_{j^{k}_p\phi},j^{k+1}_p\phi)$. Clearly, by definition, we have:
+			$$d\pi_k:TJ^k(E,M)\rightarrow TM$$
+			This means that, since $\chi_{j^{k+1}_p\phi}$ is in $T_{j^k_p\phi}J^k(E,M)$, we have that:
+			$$d\pi_k(\chi_{j^{k}_p\phi}) \hbox{ is an element of }T_pM$$
+			Clearly:
+			$$j^k\phi_*\circ d\pi_k(\chi_{j^{k}_p\phi})\hbox{ is an holonomic lift}$$
+			Thus, we write:
+			$$(j^k\phi_*\circ d\pi_k(\chi_{j^{k}_p\phi}),j^{k+1}_p\phi)\in Holl_p^k(\phi)$$
+			Furthermore, since $j^k\phi$ is a section of the bundle $J^k(E,M)$ onto $M$, we must have that it annihilates the projection:
+			$$d\pi_k(j^k\phi_*\circ d\pi_k)(\chi_{j^{k}_p\phi})=d\pi_k(\chi_{j^{k}_p\phi})$$
+			This automatically implies:
+			$$d\pi_k(\chi_{j^{k}_p\phi}-j^k\phi_*\circ d\pi_k)(\chi_{j^{k}_p\phi})=0$$
+			It follows that elements such as:
+			$$(\chi_{j^{k}_p\phi}-j^k\phi_*\circ d\pi_k(\chi_{j^{k}_p\phi}),j^{k+1}_p\phi)$$
+			belong to the space $\pi_{k+1,k}^*(\mathcal{V}_{TJ^k})_{j^{k+1}_p\phi}$. This is clear. Now we check the intersections: suppose to take an element which lives both in $\pi_{k+1,k}^*(\mathcal{V}_{TJ^k})_{j^{k+1}_p\phi}$ and in $Holl_p^k(\phi)$. Then we must have, from the belongings of the vertical space, that:
+			$$d\pi_k(\chi_{j^{k}_p\phi})=0$$
+			From the other space we inherit instead the fact that $\chi_{j^{k}_p\phi}=j^k\phi(X_p)$ is an holonomic lift. Due to the annihilation properites of sections we find:
+			$$d\pi_k( \chi_{j^{k}_p\phi})=d\pi_k\circ j^k\phi(X_p)=X_p=0$$
+			This completes the proof.
+		\end{proof}
+		\begin{Cor}
+			There is a canonical splitting of the above bundle:
+			$$\pi_{k+1,k}^*(TJ^k(E,M))=\pi_{k+1,k}^*(\mathcal{V}_{TJ^k})\oplus Holl^k$$
+		\end{Cor}
+		\begin{proof}
+			The proof amounts to showing that the splitting is smooth. Consider some adapted coordinates on $E$ like $(x^i,u^a)$. Those induce as seen some coordinates in every possible jet. Now, we define the \textit{total derivative} vector fields:
+			$$D_i:J^{k+1}(E,M)\rightarrow Holl^k$$
+			$$D_i={\partial \over \partial x^i}+\sum_{|J|=0}^ku^a_{i,J}{\partial \over \partial u^a_J}$$
+			where $$u^a_{i,I}(j^{k+1}_\phi)={\partial u^a_I\circ \phi\over \partial x^i}$$.
+			This is clearly a base of the horizontal vector fields i.e. the holonomic lifts. In fact:
+			$$j^k\phi_*\bigg({\partial\over \partial x^i}\bigg|_p\bigg)={\partial \over \partial x^i}\bigg|_{j^k_p\phi}+\sum_{|J|=0}^k{\partial u^a_I\circ \phi\over \partial x^i}\bigg|_p{\partial \over \partial u^a_J}\bigg|_{j^k_p\phi}$$
+			This proves the $Holl^k$ horizontal distribution is smooth since we have found a smooth local base. 
+		\end{proof}
+		\begin{Def}
+			An element $(\eta,j_p^{k+1}\phi)\in \pi_{k+1,k}^*(TJ^k(E,M)^*)$ is called \textit{contact cotangent vector} if:
+			$$j^k\phi^*(\eta)=0$$
+		\end{Def}
+		What does this mean? Well, to put it simply, the contact vectors are the ones that annihilate holonomic lifts. In fact it is not hard to check:
+		$$\eta(j^k\phi_*(X))=j^k\phi^*(\eta)(X)=0$$
+		\begin{Exe}
+			Show the form in coordinates of contact cotangent vectors.\\
+			\\
+			We simply apply the definition of the annihilation property, with the basis of the total derivatives found above:
+			$$\eta=\eta_idx^i+\eta_a^Idu^a_I$$
+			$$\eta(D_j)=0=\eta_i\delta^i_j+\sum_{|J|=0}^k\eta_a^I\delta_I^J\delta^a_b u^a_{j,J}=0$$
+			This gives:
+			$$\eta=\sum_{|I|=0}^k\eta_a^I(du^a_I- u^a_{i,I}dx^i)$$
+		\end{Exe}
+		\begin{Theo}
+			There is a splitting of the dual bundle $\pi_{k+1,k}(T^*J^k(E,M))$ into:
+			$$\pi_{k+1,k}(T^*J^k(E,M))=BLABLA ANNICHILATORI$$
+		\end{Theo}
+		\begin{proof}
+			This is clear from the annihilators properties.
+		\end{proof}
+		\begin{Obs}
+			Clearly, each vector field on $M$ corresponds to a total derivative: its holonomic lift.
+		\end{Obs}
+		\begin{Obs}
+			Let $X\in\mathfrak{X}(M)$ be a vector field and $f\in C^\infty(J^k(E,M))$ be a smooth map. Then there is a natural derivation operator:
+			$$d^k_X:C^\infty_p(J^k(E,M))\rightarrow\mathbb{R}$$
+			$$d^k_X(f)(j^{k+1}_p\phi)=j^k\phi_*(X_p(f))$$
+			This respects the Leibniz rule since the vector field do.
+		\end{Obs}
+		\begin{Def}
+			We call \textit{generalized vector field} a section of the bundle $\pi_{k+1,k}^*(\mathcal{V}_{TJ^k})$ on $J^k(E,M)$.
+		\end{Def}
+		\begin{Obs}
+			Clearly, due to the coordinate representation of the holonomic lift, a vertical vector field is expressed in cooridnates as:
+			$$X=X^a{\partial\over \partial u^a}$$
+		\end{Obs}
+		\section{Lagrangians}
+		In this section we finally define what is a lagrangian, using the language of jet bundles.
+		\begin{Def}
+			We call \textit{$k^{th}$ order Lagrangian density} a map:
+			$$\mathcal{L}\in C^\infty(J^k(E,M))$$
+			If $\Omega$ is the volume form of $M$, the full lagrangian is: BOH  
+		\end{Def}
+		\begin{Def}
+			We call a section $\phi\in\Gamma(E)$ an extremal of the lagrangian density if:
+			$${d\over dt}\bigg|_0\int_C(j^k(\psi^t\circ \phi))^*\mathcal{L}\Omega=0$$
+			Where $C$ is a compact $m$-dimensional sumbmanifold of $M$, $\psi^t$ is the flow of a vertical vector field $X\in\mathcal{V}_E$ such that $X\big|_{\pi^{-1}\partial C}=0$.
+		\end{Def}
+		\begin{Obs}
+			Recall that the flow $\psi^t$ of a vector field $X$, inside an open set $U$ is defined as the map:
+			$$\psi^t:U\rightarrow M$$
+			$${\partial\over \partial t}\psi^t(p)=X_{\psi^t(p)}$$
+			In our case, $\psi^t$ is a flow for a vertical vector $X$ on $TE$.
+		\end{Obs}
+		\begin{Obs}
+			The notation $j^k(\psi^t\circ \phi)$ is dangerous, since we have defined $j^k\phi:M\rightarrow J^k(E,M)$ not only to be a section, but to also take as an input a section. However, while $\phi$ is indeed a section of $E$ on $M$, $\psi:E\rightarrow E$, while $\psi^t:E\rightarrow E$ is a flux i.e. a diffeomorphism. Moreover, the field $X$ is vertical. This means that: $d\pi(X)=0$ so that:
+			$${d\over dt}\pi(\psi^t)=0$$
+			This implies that for any $t$, the projection is constant along the flux:
+			$$\pi\circ\psi\circ \phi=\pi\circ\psi=\mathbb{I} $$
+			So indeed the notation $j^k(\psi\circ\phi)$ is well defined.
+		\end{Obs}
+		\begin{Theo}
+			The local section $\phi$ is an extremal for a lagrangian density for $\mathcal{L}$ if and only if:
+			$$0=\int_C j^k\phi^* d^k_{X}\mathcal{L}\Omega$$
+		\end{Theo}
+		\begin{proof}
+			The proof is one of the most magical result i have ever came accross in mathematics. It is truly beautiful and astonishing, as it doe snot make any sense whatsoever. Consider:
+			$$\partial_t\big|_0(\mathcal{L}(j^k(\psi^t\circ \phi)))=dL(j^k(\psi^0\circ \phi))\partial_t(j^k(\psi^t\circ \phi))\big|_0$$
+			This was just the definition of differential. Now, we have that $\psi^0=\mathbb{I}$ is the identity. This implies:
+			$$\partial_t\big|_0(\mathcal{L}(j^k(\psi^t\circ \phi)))=\partial_t(j^k(\psi^t\circ \phi))\big|_0L(j^k(\phi))$$
+			Repeat with the chain rule:
+			$$\partial_t(j^k(\psi^t\circ \phi))\big|_0=\partial_t(\psi^t\circ \phi)\big|_0j^k(\phi)$$
+			Now, $\partial_t(\psi^t\circ \phi)\big|_0=X$ is the vector tangent in $0$. This means:
+			$$\partial_t\big|_0(\mathcal{L}(j^k(\psi^t\circ \phi)))=X(j^k\phi)(\mathcal{L}(j^k\phi))$$
+			Now, $X$ is a vector field on $E$, so that: 
+			$$X(j^k\phi)(\mathcal{L}(j^k\phi))=dj^k\phi(X)(\mathcal{L}(j^k\phi))=j^k\phi^*d_X^k\mathcal{L}$$
+			This does not make any sense in terms of compositions of maps, naively.
+			Now, taking outside the derivation, the only term that depends on $t$ is the flow. However, by hypothesis, the boundary term on $\partial C$ vanishes, so that:
+			$$\int_C j^k\phi^* d^k_{X}\mathcal{L}\Omega=\int_C{\partial\over \partial t}\bigg|_0(j^k(\psi^t\circ \phi))^*\mathcal{L}\Omega={d\over dt}\bigg|_0\int_C(j^k(\psi^t\circ \phi))^*\mathcal{L}\Omega$$
+		\end{proof}
+		\section{Derivations}
+		This small section is devoted to the definition of yet again some derivations on fiber bundles. We will study some of their properties and make some examples.
+		\begin{Def}
+			Let $(E,M,\pi,F)$ be any fiber bundle over $M$. We call \textit{derivation along $\pi$ of degree $n$} a map $D:\bigwedge M\rightarrow \bigwedge E$ such that:
+			\begin{itemize}
+				\item $D$ is $\mathbb{R}$-linear;
+				\item if $\omega\in\bigwedge^k M$ then $D\omega\in \bigwedge^{n+k}E$;
+				\item the following holds:
+				$$D(\omega\wedge \theta)=D\omega\wedge \pi^*\theta+(-)^{n\cdot deg(\omega)}\pi^*\omega\wedge D\theta$$
+			\end{itemize}
+		\end{Def}
+		\begin{Def}
+			A derivation $D$ along $\pi$ is called \textit{of type $i_*$} if for any $f\in C^\infty(M)\simeq \bigwedge^o M$ we have $Df=0$.
+		\end{Def}
+		We now state a key result, which will actually be the only useful thing in this section.
+		\begin{Prop}
+			Let $\omega:E\rightarrow \bigwedge^n TE^*\otimes \mathfrak{X}(E)$ be a vector valued form and $(E,M,\pi,F)$ a fiber bundle. Then there is an induced derivation of type $i_*$ and degree $n-1$ along $\pi$ like follows:
+			$$i_\omega\theta(X_1,...,X_{k+n-1})=$$
+			$$=\sum_{\sigma\in S_{n,k-1}}sgn(\sigma)\theta(\omega(X_{\sigma(1)},...,X_{\sigma(n)}),d\pi \circ X_{\sigma(n+1)},...,d\pi \circ X_{\sigma(n+k-1)})$$
+			Where $deg(\theta)=k$, $S_{n,k-1}$ is the subgroup of the permutation group $S_{n+k-1}$ such that:
+		$$\sigma(1)<...<\sigma(n)\hbox{ and }\sigma(n+1)<...<\sigma(n+k-1)$$
+		\end{Prop}
+		\begin{proof}
+			The fact that the above map is a derivation is obvious by construction: it is clearly $\mathbb{R}$-linear since forms are; it is clearly of degree $n-1$ and the Leibniz rule follows from the fact that we are contracting a form.
+		\end{proof}
+		\begin{Obs}
+			It is possible to prove that every derivation of this kind is determined by a unique vector valued form $\omega$, but we do not care at all.
+		\end{Obs}
+		\section{The $S$ tensor}
+		In this section we define a new kind of operation on jet bundles. Even though the construction will turn out to be quite excessive and intricate, it will be useful to obtain the Euler Lagrange equations. 
+		\begin{Def}
+			Let $\omega$ be a closed 1-form on $M$, $p\in M$, $j^k_p\phi\in J^k(E,M)$, $\xi_{j^{k-1}_p\phi}\in\mathcal{V}(\pi_{k-1})_{j^{k-1}_p\phi}$. In an adapted coordinate system $(x^i,u^a)$, if
+			$$\xi=\sum_{|I|=0}^{k-1}\xi_I^a{\partial\over \partial u^a_I}\hbox{  and  }\omega=\omega_idx^i$$
+			we define the \textit{vertical lift} of $\xi$ to $j^k_p\phi$ through $\omega$ as:
+			$$\xi\circledvee_{j^k_p\phi}\omega:=\sum_{|J+K|=0}^{k-1}\sum_i{(J+K+1_i)!\over (J+1_i)!K!}\xi_K^a{\partial^{|J|} \omega_i\over \partial x^J}\bigg|_p{\partial\over \partial u^a_{J+K+1_i}}\bigg|_{j^k_p\phi}$$
+		\end{Def}
+		\begin{Ex}
+			As an example, consider the $k=2$ case. It is no hard to see that:
+			$$\xi=\sum_{|I|=0}^{1}\xi_I^a{\partial\over \partial u^a_I}$$
+			$$\xi=\xi_j^a{\partial\over \partial u^a_j}$$
+			$$\xi\circledvee_{j^2_p\phi}\omega=\sum_{|J+K|=0}^{1}\sum_i{(J+K+1_i)!\over (J+1_i)!K!}\xi_K^a{\partial^{|J|} \omega_i\over \partial x^J}\bigg|_p{\partial\over \partial u^a_{J+K+1_i}}\bigg|_{j^2_p\phi}$$
+			Clearly, in this case either $K=J=0$, $K=1_j$ or $J=1_j$ for all possible indices $j$. In both cases, the other multi-index is 0.
+			$$\xi\circledvee_{j^2_p\phi}\omega=\sum_{i,j}{(1_i+1_j)!\over 1_i!1_j!}\xi_j^a \omega_i\bigg|_p{\partial\over \partial u^a_{1_j+1_i}}\bigg|_{j^k_p\phi}+\sum_{i,j}{(1_j+1_i)!\over (1_j+1_i)!0!}\xi^a{\partial \omega_i\over \partial x^j}\bigg|_p{\partial\over \partial u^a_{1_j+1_i}}\bigg|_{j^2_p\phi}+\sum_i\xi^a\omega_i{\partial\over \partial u^a_{1_i}}=$$
+			$$\xi\circledvee_{j^2_p\phi}\omega=\sum_{i,j}{2}\xi_j^a \omega_i\bigg|_p{\partial\over \partial u^a_{1_j+1_i}}\bigg|_{j^k_p\phi}+\sum_{i,j}\xi^a{\partial \omega_i\over \partial x^j}\bigg|_p{\partial\over \partial u^a_{1_j+1_i}}\bigg|_{j^2_p\phi}+\sum_i\xi^a\omega_i{\partial\over \partial u^a_{1_i}}$$
+		\end{Ex}
+		\begin{Obs}
+			The vertical lift is clearly a vector field on the bundle $J^k(E,M)$ and it is vertical with respect to the projection $\pi_{k,0}$. Thus:
+			$$\xi\circledvee \omega\in \Gamma(TJ^k(E,M))$$
+		\end{Obs}
+		\begin{Prop}
+			The vertical lift is independent from the choice of the coordinate system.
+		\end{Prop}
+		\begin{proof}
+			This quantity is clearly fully contracted, so its real value as a map will not depend on the coordinates selected. It is only a matter to check that the verticality is preserved. This is immediate since there will never be any term like $\partial\over \partial x^i$ alone.
+		\end{proof}
+		\begin{Def}
+			Let $\omega$ be a closed 1-form on $M$. We define the \textit{vertical endomorphism of order $k$} as $S^k_\omega:TJ^k(E,M)\rightarrow TJ^k(E,M)$ such that for $\xi_{j^k_p\phi}\in T_{j^k_p\phi}J^k(E,M)$:
+			$$S^k_\omega(\xi_{j^k_p\phi})=v_{j^k_p\phi}\circledvee \omega_p$$
+			Where $v_{j^k_p\phi}$ is the vertical projection of $\xi$. IN coordinates:
+			$$S^k_\omega=\sum_{|J+K|=0}^{k-1}\sum_i{(J+K+1_i)!\over (J+1_i)!K!}{\partial^{|J|} \omega_i\over \partial x^J}\bigg|_p(du^a_K-u^a_{K+1_j}dx^j)\otimes {\partial\over \partial u^a_{J+K+1_i}}\bigg|_{j^k_p\phi}$$
+			One can also see this as:
+			$S^k_\omega\in(Holl^k)^{\circ}\otimes \mathcal{V}(\pi_{k,0})$
+		\end{Def}
+		\begin{Obs}
+			The annihilator of the holonomic lifts i.e. the cotangent vector space, is isomprhic to the dual of the vertical space.
+		\end{Obs}
+		\begin{Ex}
+			We now make some examples to better understand the structure of this new map:
+			\begin{itemize}
+				\item Suppose to have a dimension 1 manifold $M$ and $\omega=dt$ to be a volume form. Then, for $k=1$ we must have:
+				$$S^1_\omega=(du^a-u^adt)\otimes {\partial \over \partial u^a}$$
+				\item for $k=1$ on any bundle it is clear that $S^1_\omega$ and the vertical lift do not depend on the space derivatives of $\omega$:
+				$$S^1_\omega=\omega^i(du^a-u_j^adx^j)\otimes {\partial \over \partial u^a_i}$$
+			\end{itemize}
+		\end{Ex}
+		\begin{Obs}
+			Clearly, we can generalize the previous operator by asking it to be a map on the space of closed 1-forms. However, it will be more useful for us to restrict this operator to the space of smooth functions on $M$, since every exact form is closed but the contrary is not true. Define:
+			$$S^k(\xi,\omega)=S^k_\omega(\xi)$$
+			In coordinates
+			$$S^k=\sum_{|J+K|=0}^{k-1}\sum_i{(J+K+1_i)!\over (J+1_i)!K!}(du^a_K-u^a_{K+1_j}dx^j)\otimes {\partial\over \partial u^a_{J+K+1_i}}\otimes{\partial^{|J|+1} \over \partial x^{J+1_i}}$$
+			Clearly, this can also be seen as an element of:
+			$$S^k\in (Holl^k)^\circ\otimes \mathcal{V}(\pi_{k,0})\otimes \pi_k^*(S^k(TM))$$
+			\end{Obs}
+		\begin{Def}
+			Let $\sigma:E\rightarrow TJ^k(E,M)^*$ a section, then define 
+			$$S\sigma=S^k(\cdot,\sigma,\cdot)$$
+		\end{Def}
+		\begin{Obs}
+			It goes by itself that in coordinates:
+			$$S\sigma=\sum_{|J+K|=0}^{k-1}\sum_i{(J+K+1_i)!\over (J+1_i)!K!}\sigma^{J+K+1_i}_a(du^a_K-u^a_{K+1_j}dx^j)\otimes{\partial^{|J|+1} \over \partial x^{J+1_i}}$$
+		\end{Obs}
+		\begin{Obs}
+			For $k=1$ it is clear that 
+			$$S^1\in \bigwedge_C^1J^1(E,M)\otimes \mathcal{V}(\pi_{1,0})\otimes \pi^*_1(TM)$$
+			Clearly, $S\sigma\in \bigwedge_C^1J^1(E,M)\otimes \pi^*_1(TM)$ is a vector valued 1-form and can be used to define, from REFERENZA a derivation of type $i_*$ called $i_{S\sigma}$. In particular:
+			$$S\sigma\big|_{k=1}=\sigma^{i}_a(du^a_K-u^a_{j}dx^j)\otimes{\partial \over \partial x^{i}}$$
+		\end{Obs}
+		\begin{Def}
+			Let $\Omega$ be the volume form on $M$. We define the \textit{canonical vector valued $m$-form on $J^1$} through its action:
+			$$S_\Omega\lrcorner \sigma=i_{S\sigma}\Omega$$
+			Where $\sigma\in\bigwedge^1J^1(E,M)$.
+		\end{Def}
+		The above definition is of a map 
+		$$S_\Omega: \bigwedge^{1}J^1(E,M)\rightarrow \bigwedge^{dim(M)+1}J^1(E,M)$$
+		From REFERENZA it is also clear that:
+		$$\sigma^{i}_a(du^a_K-u^a_{j}dx^j)\otimes{\partial \over \partial x^{i}} \lrcorner \Omega=\sigma^{i}_a(du^a_K-u^a_{j}dx^j)\wedge\bigg({\partial \over \partial x^{i}}\lrcorner \Omega\bigg)$$
+		Thus:
+		$$S_\Omega=(du^a_K-u^a_{j}dx^j)\wedge\bigg({\partial \over \partial x^{i}}\lrcorner \Omega\bigg)\otimes {\partial\over \partial u^a_i}$$
+		This is clearly a vector valued $dim(M)$-form.
+		\section{The Cartan Form}
+		In this section we use the previous knowledge to find a way to extract the Euler-Lagrange equations from the lagrangian.
 	\end{document}
