@@ -21,7 +21,7 @@
 \usepackage{mathtools}
 \usepackage{braket}
 \usepackage{pxfonts}
-\usepackage{lmodern}%THIS MUST GO AFTER PXFONTS
+%\usepackage{lmodern}%THIS MUST GO AFTER PXFONTS
 
 \hypersetup{
 	colorlinks=true,
@@ -54,6 +54,7 @@
 
 \begin{document}
 	\tableofcontents
+	\chapter*{Preamble}
 	\chapter{The necessary algebra}
 	In this chapter we go through some algebraic constructions which will be at the base of all of the future calculations. Nevertheless, it will be assumed a basic strong knowledge of linear algebra.
 	\section{The tensor product}
@@ -104,7 +105,7 @@
 	\begin{proof}
 		We make use of the universal property. Let $f(v^*,w^*)(v',w')=v^*(v')w^*(w')$ be a map. This is a mapping like:
 		$$f:V^*\times W^*\rightarrow Bil(V\times W)$$ 
-		Then from REFERENZA there is a unique mapping:
+		Then from \ref{prop_1.1.1} there is a unique mapping:
 		$$\tilde{f}:V^*\otimes W^*\rightarrow Bil(V\times W)$$
 		This is defined as: $f(v^*\otimes w^*)=f(v^*,w^*)$. Choose any bases for $V^*,W^*$ like $v^i,w^i$. Now it is only a matter to find an inverse of $\tilde{f}$. Consider:
 		$$g:Bil(V\times W)\rightarrow V^*\otimes W^*\hbox{ like }g(B)=B(v_i,w_j)v^i\otimes w^j$$
@@ -112,7 +113,7 @@
 		$$(g\circ \tilde{f})(\rho)=\tilde{f}(\rho)(v_i,w_j)v^i\otimes w^j$$
 		Recall that $\tilde{f}$ is linear, thus:
 		$$(g\circ \tilde{f})(\rho)=\rho_{km}\tilde{f}(v^k\otimes w^m)(v_i,w_j)v^i\otimes w^j$$
-		Moreover, $\tilde{f}\circ \pi=f$ from REFERENZA:
+		Moreover, $\tilde{f}\circ \pi=f$ from \ref{prop_1.1.1}:
 		$$(g\circ \tilde{f})(\rho)=\rho_{km}f(v^k,w^m)(v_i,w_j)v^i\otimes w^j$$
 		By definition of $f$, we have:
 		$$(g\circ \tilde{f})(\rho)=\rho_{km}\delta^k_i\delta^m_jv^i\otimes w^j=\rho_{ij}v^i\otimes w^j=\rho$$
@@ -132,7 +133,7 @@
 	\begin{proof}
 		This is just a consequence of the universal property. Let $f:V\times W\rightarrow V\otimes W$ be a bilinear map like:
 		$$f(v,w)=w\otimes v$$
-		THen, by the universal property, there is a unique linear mapping:
+		Then, by the universal property, there is a unique linear mapping:
 		$$\tilde{f}:V\otimes W\rightarrow W\otimes V\hbox{ like }\tilde{f}(v\otimes w)=w\otimes v$$
 		Similarly, one can construct a map like: 
 		$$\tilde{g}:W\otimes V\rightarrow V\otimes W\hbox{ like }g(w\otimes v)=v\otimes w$$
@@ -146,7 +147,7 @@
 		\\
 		Let $X$ be a vector space. Consider the trilinear mapping:
 		$$f:V\times W\times Z\rightarrow X$$
-		From the REFERENZA universal property, there is a bilinear map: 
+		From the \ref{prop_1.1.1} universal property, there is a bilinear map: 
 		$$\tilde{f}:V\times (W\otimes Z)\rightarrow X\hbox{ like }\tilde{f}(v,w\otimes z)=f(v,w,z)$$
 		Since $\tilde{f}$ is bilinear, there is another linear map, from the universal property, like $\tilde{\tilde f}:V\otimes(W\otimes Z)=f(v,w,z)$. Choosing now $X=(V\otimes W)\otimes Z$ and $f(v,w,z)=(v\otimes w)\otimes z$ (this is clearly trilinear) we have:
 		$$\tilde{\tilde f}(v\otimes (w\otimes z))=(v\otimes w)\otimes z$$
@@ -157,11 +158,13 @@
 	\begin{Def}\label{def_1.1.3}
 		We call $T^k_lV$ the space of multilinear maps 
 		$$f:V\times...\times V\times V^*\times...\times V^*\rightarrow\mathbb{R}$$
+		We call $\bigotimes^k V$ the space of $k$ times the tensor product of $V$ with itself:
+		$$\bigotimes^k V:=V\otimes V\otimes...\otimes V\hbox{ k times}$$
 	\end{Def}
 	\begin{Cor}\label{cor_1.1.1}
 		$$T^k_lV=\bigotimes^k V^*\otimes \bigotimes^l V$$
 	\end{Cor}
-	This follows immediately from the associativity and the isomorphism REFERENZA.
+	This follows immediately from the associativity and the isomorphism \ref{theo_1.1.1}.
 	\begin{Prop}\label{prop_1.1.4}
 		Let $V,W$ be vector spaces and $\{e_i\}$ a base for it. Then, $e_i,f_j$ bases for them. Then, a base for $V\otimes W$ is:
 		$$\big\{e_i\otimes w_j\big\}$$
@@ -180,16 +183,16 @@
 	In this section we take yet another step forward in the analysis on the tensor product. A posteriori, we will be mainly interested in antisymmetric tensors. This means we need a precise and rigorous way to define them. We will thus introduce the wedge product of vector spaces. This is unfortunately defined through the use of another quotient. \\
 	\\
 	Let $\bigotimes^k V$ be the $k$-tensor product space of $V$. Consider the ideal $I^k(V)$ spanned by all elements $v^1\otimes...\otimes v^k$ that have at least two equal vectors in the product.
-	\begin{Def}
+	\begin{Def}\label{def_1.2.1}
 		We call \textit{exterior $k$-power} of $V\otimes W$ the quotient:
 		$$\bigwedge^k V=\bigotimes^kV/I^k(V)$$	
 		We index elements of $\bigwedge^k V$ as:
 		$$v^1\wedge...\wedge v^k=[v^1\otimes...\otimes v^k]$$
 	\end{Def}
-	\begin{Obs}
+	\begin{Obs}\label{obs_1.2.1}
 		Clearly the exterior power is a vector space since it is the quotient of a vector space with one vector subspace. This translates in linearity of the equivalence classes.
 	\end{Obs}
-	\begin{Obs}
+	\begin{Obs}\label{obs_1.2.2}
 		Clearly, by construction $$v^1\wedge...\wedge v^i\wedge v^{i+1}\wedge...\wedge v^k=-v^1\wedge...\wedge v^{i+1}\wedge v^{i}\wedge...\wedge v^k$$ is antysimmetric. This follows from the fact that:
 		$$[0]=0=v^1\wedge...\wedge (v^i+v^{i+1})\wedge (v^{i+1}+v^{i})\wedge...\wedge v^k=$$
 		$$=v^1\wedge...\wedge v^i\wedge v^{i+1}\wedge...\wedge v^k+v^1\wedge...\wedge v^{i+1}\wedge v^{i}\wedge...\wedge v^k+0+0$$
@@ -199,13 +202,13 @@
 		Given the above result it is not hard to see that if $\sigma$ is a permutation of the vectors (or the indices), then:
 		$$v^1\wedge...\wedge v^k=sgn(\sigma)v^{\sigma(1)}\wedge...\wedge v^{\sigma(k)}$$
 	\end{Obs}
-	\begin{Prop}
+	\begin{Prop}\label{prop_1.2.1}
 		The wedge product is associative.
 	\end{Prop}
 	\begin{proof}
 		This is clear from the fact that the tensor product is associative and equivalence classes are linear.
 	\end{proof}
-	\begin{Prop}[\textbf{Universal property for the wedge product}]
+	\begin{Prop}\label{prop_1.2.2}[\textbf{Universal property for the wedge product}]
 		Let $f:V^k\rightarrow Z$ any alternating multilinear map on a vector space. There is a unique alternating linear map $\tilde{f}:\bigwedge^kV\rightarrow Z$ such that the following diagram commutes:
 		\begin{center}
 			\begin{tikzcd}
@@ -216,29 +219,34 @@
 		Where $\wedge(v_1,...,v_k)=v_1\wedge ...\wedge v_k$ is the projection.
 	\end{Prop}
 	\begin{proof}
-		Since $f$ is multilinear, by REFERENZA the universal property of the tensor product, there is a linear map $h:\bigotimes^k V\rightarrow Z$ such that:
+		Since $f$ is multilinear, by \ref{prop_1.1.1} the universal property of the tensor product, there is a linear map $h:\bigotimes^k V\rightarrow Z$ such that:
 		$$h(v_1\otimes...\otimes v_k)=f(v_1,...,v_k)$$
 		By the alternating property, $I^k(V)$ is in the kernel of this map. Thus, there exists a map:
 		$$\tilde{f}:\bigwedge^k V\rightarrow Z$$
 		which satisfies the above properties. This proves the existence. The uniqueness follows from the uniqueness of $h$.
 	\end{proof}
+	We now present an extremely important result regarding the space of alternating multilinear maps. In particular, we denote with $Alt^k(V,\mathbb{R})$ the space of all multilinear maps from $V^k=V\times V\times...\times V$ k-times to $\mathbb{R}$.
+	$$Alt^k(V,\mathbb{R})=\big\{f:V^k\rightarrow \mathbb{R} \hbox{ multilinear }\big\}$$
+	\begin{Theo}\label{theo_1.2.1}
+		There is a canonical isomorphism:
+		$$Alt^k(V,\mathbb{R})\equiv \bigwedge^k V$$
+	\end{Theo}
+	\begin{proof}
+		This is just a consequence of the previous result on the tensor product \ref{cor_1.1.1}. Since any multilinear map can be seen as an element of $\bigotimes^k V$ and any alternating multilinear map can be obtained by antisymmetrization, the equivalence is obvious.
+	\end{proof}
+	Lastly, like we did for the tensor product, we would like to find a basis for this new vector space which we constructed.
+	\begin{Theo}\label{theo_1.2.2}
+		If $\{e_i\}$ is a basis for $V$, then $\{e_{i_1}\wedge...\wedge e_{i_k}\hbox{ with }i_1<i_2<...<i_k\}$ is a base for $\bigwedge^k V$.
+	\end{Theo}
+	\begin{proof}
+		This follows immediately from proposition REFERENZA due to the quotient.
+	\end{proof}
+	\begin{Obs}\label{obs_1.2.3}
+		It is easy to see that if $k>n=dim(V)$, then $\bigwedge^kV=0$. This is due to the fact that this space must by definition contain some repeated elements.
+	\end{Obs}
 	\chapter{Smooth manifolds}
 		\section{Topological manifolds}
-			In this section we will define the concept of topological manifolds and look at some examples and properties of them. The main idea is to find a way of describing spaces which are not necessaarily $\mathbb{R}^n$. To achieve this, we simply look at spaces which locally "look like" $\mathbb{R}^n$. This is the basic construction of a topological manifold. However, we will see that smooth manifolds take a step further.
-			\begin{Def}
-				A \textit{topological manifold} is a topological space $X$ such that:
-				\begin{itemize}
-					\item $X$ is $T_2$;
-					\item $X$ is second countable;
-					\item $X$ is locally euclidean.
-				\end{itemize}
-			\end{Def}
-			Let us make some examples:
-			\begin{Ex}
-				$\mathbb{R}$ is a topological manifold. Clearly, $\mathbb{R}$ is locally euclidean and $T_2$, and we can find a countable basis by choosing the open balls in $\mathbb{Q}$ like:
-				$$B_{r,s}=\big\{]r,s[\hbox{ with }r,s\in\mathbb{Q}\big\}$$
-				ALTRI ESEMPI
-			\end{Ex}
+			In this section we will define the concept of topological manifolds and look at some examples and properties of them. The main idea is to find a way of describing spaces which are not necessaarily $\mathbb{R}^n$. To achieve this, we simply look at spaces which locally "look like" $\mathbb{R}^n$. This is the basic construction of a topological manifold. However, we will see that smooth manifolds take a step further. In what follows we will assume a basic knowledge of topology i.e. the notions of open and closed sets, closure, continuity and homeomorphisms.
 			\begin{Def}
 				Let $(X,\tau)$ be a topological space. We call \textit{basis} for $X$ a subcollection $\beta\subset\tau$ of sets $\{U_i\}$ such that:
 				\begin{itemize}
@@ -272,12 +280,14 @@
 			\begin{Ex}
 				We now make some examples of topological manifolds.
 				\begin{itemize}
-					\item The space $\mathbb{R}^n$ is trivially a topological manifold.
+					\item $\mathbb{R}$ is a topological manifold. Clearly, $\mathbb{R}$ is locally euclidean and $T_2$, and we can find a countable basis by choosing the open balls in $\mathbb{Q}$ like:
+					$$B_{r,s}=\big\{]r,s[\hbox{ with }r,s\in\mathbb{Q}\big\}$$
+					\item Since the cross product of two T2 and second countable spaces has the same topological properties, the space $\mathbb{R}^n$ is trivially a topological manifold.
 					\item The sphere $S^n$ is a topological manifold. It is clearly T2 and second countable since it is inside $\mathbb{R}^n$. Moreover, it can be covered by the following charts:
 					$$U^{\pm}_i=\big\{\vec{x}\in S^n\big| \pm x_i>0\big\}$$
 					$$\phi_i^\pm:U^\pm_i\rightarrow \mathbb{R}^n\hbox{ like }\phi^\pm_i(\vec{x})=(x_1,...,x_{i-1},x_{i+1},...,x_{n+1})$$
 					Those have some clear inverses:
-					$$(\phi^\pm_i)^{-1}((x_1,...,x_{n+1}))=(x_1,...,x_{i-1},\pm\sqrt{1-||x^2||},x_{i+1},...,x_{n+1})$$
+					$$(\phi^\pm_i)^{-1}(x_1,...,x_{n+1})=(x_1,...,x_{i-1},\pm\sqrt{1-||x^2||},x_{i+1},...,x_{n+1})$$
 				\end{itemize}
 			\end{Ex}
 			We conclude this section with a very useful proposition, which will come in handy later.
@@ -397,7 +407,7 @@
 				where $a,b$ are positive real numbers with $a>b$.
 				It is clear that $r(x)$ is a function supported in $]-a,a[$ and it is equal to $1$ in $]b,-b[$ at 0. One can then easily move this function with some translations.\\
 				We then clearly see that the function:
-				$$\rho(\vec{x})=r(|x|)$$ 
+				$$\rho(\vec{x})=r(|\vec{x}|)$$ 
 				is indeed a bump function.
 				\begin{center}
 					\begin{tikzpicture}
@@ -558,6 +568,146 @@
 				And so:
 				$$b^j(p)={\partial y^j\over \partial x^i}a^i(p)$$
 			\end{Obs}
+			\begin{Exe}
+				\begin{itemize}
+					\item Consider the following map:
+					$$F:\mathbb{R}^2\rightarrow \mathbb{R}\hbox{ like }F(x,y)=x^3+xy+y^3+1$$
+					Find the points in which $F_*$ is injective and or surjective.
+					\\
+					\\
+					The definition of push-forward is:
+					$$F_*(X)f=X(f\circ F)$$
+					This means that we can write in coordinates:
+					$$F_*(X)f=X^i\partial_i(f\circ F)=X^i\partial_i F^j\tilde{\partial}_jf$$
+					Where $\tilde{\partial}_j$ are the coordinates induced by $F$. Thus, we write:
+					$$F_*=\partial_iF^j\tilde{\partial}_j$$
+					In our case we have:
+					$$F_*=\begin{pmatrix}
+						\partial_x F(x,y) & \partial_y F(x,y)
+					\end{pmatrix}=\begin{pmatrix}
+					3x^2+y & 3y^2+x
+					\end{pmatrix}$$
+					This map is clearly never injective (from linear algebra) and it is surjective everywhere except in $(0,0),(-1/3,-1/3)$.
+					\item Consider the following maps:
+					$$F:\mathbb{R}^2\rightarrow \mathbb{R}^2\hbox{ like }F(x,y)=(x^2-2y,4x^3y^2)$$
+					$$G:\mathbb{R}^2\rightarrow \mathbb{R}^3\hbox{ like }G(x,y)=(x^2y+y^2,x-2y^3,ye^x)$$
+					Compute their push-forward. What is the image of $G(0,0)$?.\\
+					\\
+					As we showed before, computing the push-forward is equal to computing the Jacobian.
+					$$F_*=\begin{pmatrix}
+						\partial_x F_x & \partial_y F_x\\
+						\partial_x F_y & \partial_y F_y
+					\end{pmatrix}=\begin{pmatrix}
+					2x & -2\\
+					12x^2y & 8x^3y
+					\end{pmatrix}$$
+					$$G_*=\begin{pmatrix}
+						\partial_x G_x & \partial_y G_x \\
+						\partial_x G_y & \partial_y G_y\\
+						\partial_x G_z & \partial_y G_z\\
+					\end{pmatrix}=\begin{pmatrix}
+						2xy & x^2+2y\\
+						1 & -6y^2\\
+						ye^x& e^x
+					\end{pmatrix}$$
+					Lastly, we have:
+					$$G_*\big|_{(0,0)}=\begin{pmatrix}
+						0 & 0\\
+						1 & 0\\
+						0& 1
+					\end{pmatrix}$$
+				\end{itemize}
+			\end{Exe}
+			\section{Submanifolds}
+			In this sections we dive into the notion of submanifolds. This is a really necessary step in the whole architecture of differential geometry, as it will provide some results which will be used later on. The idea is to find a criterion to identify when a particular subset of a manifold is a submanifold (it behaves nicely topologically and is still smooth).
+			\begin{Def}
+				Let $M$ be a manifold of simension $n$. We call \textit{regular submanifold of dimension $k$} of $M$ a subset $S\subset M$ such that for all $p\in S$ there is a chart $(U,\phi)$ of $M$ such that $U\cap S$ is defined by the vanishing of the last $n-k$ coordinates.
+			\end{Def}
+			\begin{Prop}
+				A regular submanifold of dimension $k$ is a manifold of dimension $k$.
+			\end{Prop}
+			\begin{proof}
+				This is almost immediate. Let $S\subset M$ be our immersed submanifold. Then we can endow it with the subspace topology, which ensures that $S$ is both T2 and second countable. Moreover, considering two charts of $M$ like $(U,\phi)$ and $(V,\psi)$, we have some induced charts:
+				$$(U\cap S,\phi)\hbox{ and }(V\cap S,\psi)$$
+				Those are compatible:
+				$$\phi\big|_S(p)=(x^1,...,x^k,0,...,0)\hbox{ and }\psi\big|_S(p)=(y^1,...,y^k,0,...,0)$$
+				Those are compatible on $M$ and so they will also be on the reduction on $S$.
+			\end{proof}
+			\begin{Def}
+				A smooth map $F:M\rightarrow N$ between manifolds is said to be an \textit{immersion} at $p$ if it's push-forward at $p$ is injective, a \textit{submersion} at $p$ if it is srujective.
+			\end{Def}
+			Clearly, if a map is an immersion/submersion at all points, we just call it immersion/submersion.
+			\begin{Ex}
+				Here are two clear examples:
+				\begin{itemize}
+					\item The inclusion map $\pi:\mathbb{R}^k\rightarrow \mathbb{R}^n$ with $k<n$ and:
+					$$\pi(x^1,...,x^k)=(x^1,...,x^k,0,...,0)$$
+					is clearly an immersion.
+					\item The classical projection $\pi:\mathbb{R}^n\rightarrow \mathbb{R}^k$ with $k<n$ and:
+					$$\pi(x^1,...,x^n)=(x^1,...,x^k)$$
+					is a submersion.
+				\end{itemize}
+			\end{Ex}
+			Be aware that sometimes an immersion is indexed with the hook:
+			$$i:N\hookrightarrow M$$
+			\begin{Def}
+				Let $f:N\rightarrow M$ be a map between two sets. We call \textit{level set} for some $p\in M$ the set:
+				$$f^{-1}(p)=\big\{q\in N\hbox{ such that }f(q)=p\big\}$$
+			\end{Def}
+			\begin{Def}
+				Let $f:N\rightarrow M$ a smooth map between manifolds and $p\in M$. We call $f^{-1}(p)$ a \textit{regular level set} if $f_{*,q}$ is surjective i.e. if $f$ is a submersion in all the level set. 
+			\end{Def}
+			We now state an important result, whicb will allow us to identify when a level set of a smooth map defines a submanifold.
+			\begin{Theo}[\textbf{Regular level set}]
+				Let $f:N\rightarrow M$ be a smooth map between manifolds and let $f^{-1}(c)$ be a non empty regular level set. Then
+	 			$f^{-1}(c)$ is a submanifold of $N$ of dimension $dim(N)-dim(M)$.			
+			\end{Theo}
+			\begin{proof}
+				Consider a chart of $M$ like $(V,\psi)$ containing $c\in M$. Then, $f^{-1}(V)$ contains $f^{-1}(c)$. Also, susuppose to choose the chart such that $\psi(c)=\vec{0}$. This implies that $(\psi\circ f)^{-1}(0)$ is a regular level set.\\
+				Now choose another chart, in $N$, like $(U,\phi=x^i)$, containing $p\in f^{-1}(c)$ and contained in $f^{-1}(c)$. Since by hypothesis we have a regular level set, the Jacobian matrix
+				$$\partial F\over \partial x$$
+				has maximal rank inside $f^{-1}(V)$. \\
+				The idea is now to claim that the couple:
+				$$(U,F^1,...,F^{dim(M)},x^{dim(M)+1},...,x^{dim(N)})$$
+				is a chart, comaptible with the previous atlas. For simplicity, we call $dim(M)=m, dim(N)=n$. If we look at the Jacobian matrix of this new chart candidate, we have:
+				$$J=\begin{pmatrix}
+					{\partial F^i\over \partial x^j} & {\partial F^i\over \partial x^\alpha}\\
+					{\partial x^\beta\over \partial x^j} & {\partial x^\beta\over \partial x^\alpha}
+				\end{pmatrix}$$
+				Where the indices $i,j$ go from $1$ to $m$, while $\alpha,\beta$ go from $m+1$ to $n$. This is of the form:
+				$$\begin{pmatrix}
+					{\partial F^i\over \partial x^j} & {\partial F^i\over \partial x^\alpha}\\
+					0 & \mathbb{I}
+				\end{pmatrix}$$
+				Since the determinant of the up-left submatric is non 0 by the above arguments:
+				$$det\big({\partial F^i\over \partial x^j}\big)\neq 0$$
+				it means that the whole determinant is not 0. Thus, there is a neighbourhood of $p\in f^{-1}(c)$ in which the map:
+				$$(F^1,...,F^{dim(M)},x^{dim(M)+1},...,x^{dim(N)})$$
+				is a diffeomorphism in the previous coordinates. This concludes the proof.
+			\end{proof}
+			Before concluding, a couple of words on immersed submanifolds.
+			\begin{Def}
+				Let $S\subset M$ be the subset of a smooth manifold. We call $S$ an immersed submanifold if it can be given aa topology and a smooth structure such that $S$ becomes a smooth manifold and the inclusion $i:S\hookrightarrow M$ a smooth immersion.
+			\end{Def}
+			\begin{Obs}
+				We have seen that for regular submanifolds, the subset $S\subset M$ was automatically given the subset topology. For immersed submanifold this hypothesis no longer holds. The topology one gives to $S$ is constructed so that the inclusion becomes a smooth immersion. This makes it so that the topology often differs from the subset topology.
+			\end{Obs}
+			\begin{Theo}
+				Let $f:N\rightarrow M$ be a smooth map between manifolds. If $f$ is an injective immersion, then $F(N)$ can be given a unique topology and a smooth structure that make it an immersed submanifold of $M$.
+			\end{Theo}
+			\begin{proof}
+				The biggest problem is the topology. In general, we do not want the subset topology. We declare a set $V\subset F(N)$ to be open if $f^{-1}(V)$ is open in $N$. The charts we take have the form:
+				$$(f(U),\phi\circ f^{-1})$$
+				Where $(U,\phi)$ is a chart on $N$. Those charts are compatible by construction so they make a smooth atlas. The topological properties are inherited from the fact that with this topology the restriction $f\big|_{f(N)}$ is an homeomorphism. To conclude the proof, we need to show that the inclusion is a smooth immersion:
+				$$i:f(N)\xrightarrow{f^{-1}}N\rightarrow M$$
+				The first map is a diffeomorphism and the second is a smooth immersion. Thus the result is a smooth immersion.
+			\end{proof}
+			\begin{Ex}
+				We now make some examples of immersed submanifolds.
+				\begin{itemize}
+					\item 
+				\end{itemize}
+			\end{Ex}
 	\chapter{Fiber bundles}
 		\section{Fiber bundles}
 		\section{Vector bundles}
@@ -583,7 +733,16 @@
 				\end{itemize}
 				As usual, we call $E$ the \textit{total space} of the bundle, $M$ the  \textit{base space} and $E_p$ the fiber.
 			\end{Def}
-			The idea is the same one used for fiber bundles: a vector bundle is the information of a manifold that locally (in general only locally) "looks like" a product space. We now make some examples:
+			The idea is the same one used for fiber bundles: a vector bundle is the information of a manifold that locally (in general only locally) "looks like" a product space. 
+			\begin{Def}
+				If $E$ is diffeomorphic to $M\times \mathbb{R}^k$ we say that the bundle is \textit{trivial}.
+			\end{Def}
+			\begin{Ex}
+				We make a couple of examples of some vector bundles.
+				\begin{itemize}
+				\item The \textit{trivial} bundle is $(M\times V,M,\pi,\mathbb{R}^n)$, where $V$ is a $n$-dimensional vector space and $\pi:M\times V\rightarrow M$ is the standard projection. This is clearly a fiber bundle as in REFERENZA and the local trivializations are just the identity map. It is clear that those reduce to linear isomorphisms.
+				\end{itemize}
+			\end{Ex}
 	\section{Sections and transition functions}
 		In this section we will briefly look at the notion of section of a vector bundle; and at the behaviour of transition functions. The idea is pretty simple, since to any point of the base space we associate a vector space, changing the trivialization means acting on the fiber with a linear map.
 		\begin{Prop}
@@ -592,7 +751,7 @@
 		\end{Prop}
 		\begin{proof}
 			By defining property, we have:
-			$$\Pr_1\circ \phi_1=\pi=Pr_1\circ \phi_2$$
+			$$Pr_1\circ \phi_1=\pi=Pr_1\circ \phi_2$$
 			This implies, by invertibility:
 			$$Pr_1=Pr_1\circ \phi_1\circ \phi_2^{-1}$$
 			Automatically, we have:
@@ -613,6 +772,26 @@
 				\item $g_{ik}\circ g_{kj}=$
 			\end{itemize}
 		\end{Prop} 
+		\begin{Def}
+			We call \textit{local section of the bundle $E$} a map $s:U\subset M\rightarrow E$ such that: 
+			$$\pi\circ s=\mathbb{I}$$
+			We call the space of smooth sections on a bundle $\Gamma(E)$.
+		\end{Def}
+		The notion of section is extremely important and thus i feel like it is necessary to have a sort of physical interpretation for it. The idea is to "cut" the bundle. A section provides an element of the fiber to any point on its domain. Thus, it sorts of "cuts trajectories" in the bundle.
+		\begin{Def}
+			We call a \textit{local frame} for a bundle $E$ a set of sections $\{s_i:U\subset M\rightarrow E\}$ that form a base for $E_p$ at any $p\in M$.
+		\end{Def}
+		\begin{Prop}
+			A vector bundle is trivial if and only if it has a smooth global frame.
+		\end{Prop}
+		\begin{proof}
+			Suppose that the vector bundle is trivial i.e. there is a diffeomorphism $\psi:E\rightarrow M\times \mathbb{R}^k$. Then, picking any base $\{r_i\}$ for $\mathbb{R}^k$, we define the frame:
+			$$s_i(p)=\psi^{-1}(p,r_i)$$
+			Now, suppose to have a global frame $\{s_i\}$. This means that any $e\in E$ can be written like: $e=e^i(p)s_i(p)$ at any point. Then we can construct a global trivialization:
+			$$\psi:E\rightarrow M\times \mathbb{R}^k$$
+			$$\psi(e)=(\pi(e),e^1,...,e^k)$$
+			This has a clear inverse and clearly reduces to an isomorphism on the fibers. The smoothness is free since $\pi$ is smooth by assumption.
+		\end{proof}
 		\section{The tangent bunlde}
 			This section is devoted to the study of the most important example of vector bundle: the tangent bundle. We will go through its definition and we will see how we can describe vectors by the means of it.
 			\begin{Def}
@@ -665,6 +844,19 @@
 				Any smooth manifold $M$ of dimension $n$ has a rank $n$ vector bundle:
 				$$(TM,M,\pi_{TM},\mathbb{R}^n)$$
 			\end{Cor}
+			\begin{center}
+				$$
+				\begin{tikzcd}
+					&&U\times\mathbb{R}^n&&\\\\
+					TM\arrow{dd}{\pi_{TM}}\arrow{rr}{}&&TU\arrow{dd}{\pi_{TM}}\arrow{rr}{\Phi}\arrow{uu}{\psi}&&\mathbb{R}^{2n}\\\\
+					M\arrow{rr}{}&&U\arrow{rr}{\phi}&&\mathbb{R}^n
+				\end{tikzcd}
+				$$
+			\end{center}
+			Clearly, in the above diagram, the arrows without name are inclusions.
+			\begin{Def}
+				We define a \textit{vector field} as a section of the tangent bundle $\Gamma(TM)$ and we identify this space with $\mathfrak{X}(M)$.
+			\end{Def}
 		\section{The cotangent bundle}
 		In this section we define yet another important object: the cotangent bundle. This can be thought of as the dual of the tangent bundle. We are going to see some properties of this object and study covectors or differential 1-forms. In some sense, the 1-forms will be the actual protagonist of our journey.
 		\begin{Obs}
@@ -685,6 +877,18 @@
 			$$dx^i({\partial\over \partial x^j})=\delta^i_j$$
 			Note that in general there is no canonical isomorphism between $T_pM$ and $T_pM^*$. In order for have a canonical identification we would need a product... we'll see what we can do.
 		\end{Obs}
+		\begin{center}
+			$$
+			\begin{tikzcd}
+				&&U\times\mathbb{R}^n&&\\\\
+				TM\arrow{dd}{\pi_{TM}}\arrow{rr}{}&&TU\arrow{dd}{\pi_{TM}}\arrow{rr}{\Phi}\arrow{uu}{\psi}&&\mathbb{R}^{2n}\\\\
+				M\arrow{rr}{}&&U\arrow{rr}{\phi}&&\mathbb{R}^n\\\\
+				TM^*\arrow{rr}{}\arrow{uu}{\pi_{TM^*}}&&TU\arrow{rr}{\Phi^*}\arrow{dd}{\psi^*}\arrow{uu}{\pi_{TM^*}}&&\mathbb{R}^{2n}\\\\
+				&&U\times \mathbb{R}^n&&
+				\end{tikzcd}
+				$$
+			\end{center}
+		Clearly, in the above diagram, the dual trivializations and charts are indexed with the (*) symbol. Also, the projection $\pi_{TM^*}:TM^*\rightarrow M$ acts in the naive way $\pi_{TM^*}(\omega_p)=p$
 		\begin{Def}
 			We define a \textit{covector field} of a \textit{differential 1-form} as a section of the co-tangent bundle:
 			$$\omega\in \Gamma(TM^*)$$
@@ -714,16 +918,52 @@
 			$$df=\partial_i fdx^i$$
 			This is smooth as well.
 		\end{Obs}
+		\begin{Obs}
+			Note that the differential amounts to taking the gradient. Recall also that the push-forward corresponded to calculating the Jacobian of the function. This justifies an abuse of notation for the pushforward of maps like $F:M\rightarrow N$. In coordinates sometimes it is written:
+			$$F_*\equiv dF$$
+			Basically in coordinates taking the push-forward is the same thing as taking the gradient of all of the layers of the function. 
+		\end{Obs}
 		\begin{Def}
 			Let $F:M\rightarrow N$ be a smooth manp between manifolds. We define the \textit{pull-back through $F$} as a map:
 			$$F^*:T_pN^*\rightarrow T_pM^*$$
 			such that for any 1-form at a point $\omega_{F(p)}\in T_{F(p)}N$, we have that $F^*\omega_{F(p)}$ is a 1-form at $p$:
 			$$(F^*\omega_{F(p)})(X_p)=\omega_{F(p)}(F_*X_p)$$ 
 		\end{Def}
-		The pull-back has some interesting properties:
+		\section{Curves in a manifold}
+		In this section we briefly go through the notion of curve in a smooth manifold. We will see that to any point in a curve we can associate a tangent vector. There is an obvious physicsl interpretation to this: the tangent vector is the velocity.
+		\begin{Def}
+			We define a smooth curve in a manifold as a smooth map $\gamma:I\subset\mathbb{R}\rightarrow M$.
+		\end{Def}
+		\begin{Obs}
+			Let $\gamma:]-\varepsilon,\varepsilon[\rightarrow M$ be a smooth curve and $p=\gamma(0)$ a point. Let $(U,\phi)$ be a chart around $p$. Then, for any map $f:M\rightarrow \mathbb{R}$ smooth, we can evalue how it behaves when restricted to the curve:
+			$${d\over dt}(f\circ \gamma)=\gamma_*(\partial_t)f={d\over dt}(f\circ \phi^{-1}\circ \phi\circ \gamma)=$$
+			$$={d\over dt}(\phi\circ\gamma)^i\partial_i\big|_{\gamma(t)}f$$
+			We define the \textit{tangent vector to $\gamma$ in $p$} the following:
+			$${d\over dt}\bigg|_0(\phi\circ \gamma)^i\partial_i=\hat{\gamma}(t)$$
+		\end{Obs}
 		\begin{Prop}
-			The following holds:
+			Let $p\in M$ be a point and $X_p\in\mathfrak{X}(M)$. Then $X_p$ is a tangent vector to some curve in $p$.
 		\end{Prop}
+		\begin{proof}
+			Consider a chart $(U,\phi)$ around $p$. We want to find a curve $\gamma$ such that:
+			$${d\over dt}\bigg|_0(\phi\circ \gamma)=X_p$$
+			This is easy: take $\phi\circ \gamma(t)=(tX^1,...,tX^n)$.
+			Done.
+		\end{proof}
+		\begin{Def}
+			We call $\gamma:I\rightarrow M$ an \textit{integral curve} of the vector field $X$ if $\hat{\gamma}(t)=X_{\gamma(t)}$.
+		\end{Def}
+		\begin{Prop}
+			Given a vector field $X$ and a point $p\in M$, there is always a unique integral curve of $X$ around $p$.
+		\end{Prop}
+		\begin{proof}
+			This is easy. Finding an integral curve means finding, in a coordinate chart, a curve $\phi\circ \gamma (t)=(c^1(t),...,c^n(t))$ such that:
+			$$\begin{cases}
+				{d\over dt}(\phi\circ \gamma)^i\partial_i=X^i\partial_i\\
+				\gamma(0)=p
+			\end{cases}$$
+			This is a Cauchy problem and it is known from calculus that there is a unique solution in a neighbourhood of $\phi(p)$.
+		\end{proof}
 		\section{The pullback bundle for vector bundles}
 		\section{Tensors}
 		In this section we define the notion of tensor and tensor field on a smooth manifold and look at some of their properties.
@@ -767,6 +1007,41 @@
 			We denote the space of smooth sections of the bundle $\bigwedge^k M$ like:
 			$$\Omega^k(M):=\Gamma(\bigwedge^k M)$$
 		\end{Def}
+		\begin{Exe}
+			\begin{itemize}
+				\item Consider two vector fields $X,Y\in\mathfrak{X}(M)$. Prove that their commutator is still a vector field on $M$.
+				\\
+				\\
+				This is easy in local coordinates:
+				$$X=X^i\partial_i\hspace{20 pt}Y=Y^j\partial_j$$
+				$$[X,Y]=X^i\partial_iY^j\partial_j-Y^j\partial_jX^i\partial_i+X^iY^j\partial_i\partial_j-Y^jX^i\partial_j\partial_i$$
+				Due to the fact that partial derivatives commute, by renaming the indices we have:
+				$$[X,Y]=(X^j\partial_jY^i-Y^j\partial_jX^i)\partial_i$$
+				\item Consider the map $f:\mathbb{R}^3\rightarrow \mathbb{R}^2$ like $f(x,y,z)=(x-y,y^2+z)$. Consider then the form:
+				$\omega=(2xy+x^2+1)dx+(x^2-y)dy$. Compute the pullback $f^*\omega$.\\
+				\\
+				By definition:
+				$$f^*\omega=(\omega_i\circ f)f^*dx^i$$
+				This means:
+				$$\omega_x\circ f(x,y,z)=\omega_x(x-y,y^2+z)=2(x-y)(y^2+z)+(x-y)^2+1=$$
+				$$=2xy^2+2xz-2y^3-2yz+x^2+y^2-2xy+1=$$
+				$$=x^2+2xy(y-1)+2xz-2yz+y^2(1-2y)+1$$
+				$$\omega_y\circ f(x,y,z)=\omega_y(x-y,y^2+z)=(x-y)^2-y^2-z=$$
+				$$=x^2-2xy-z$$
+				As for the basis elements, we have:
+				$$F^*dx^i(\tilde{\partial_j})=dx^i(F_*\tilde{\partial_j})$$
+				$$F_*\tilde{\partial_j}(g)=\tilde{\partial_j}(g\circ F)={\partial g\over\partial x^i}\tilde{\partial_j} F^i$$
+				In turn this implies:
+				$$F^*dx^i(\tilde{\partial_j})=dx^i(\tilde{\partial_j}F^k\partial_k)=\tilde{\partial_j}F^i$$
+				Finally, we note that:
+				$$d(x^i\circ F)(\tilde{\partial_j})=\tilde{\partial_j}(x^i\circ F)=\tilde{\partial_j}F^i$$
+				Thus, it makes sense to write:
+				$$d(x^i\circ F)=F^*dx^i$$
+				Going back to our calculation, we have:
+				$$f^*dx=d(x-y)=dx-dy\hspace{20 pt} f^*dy=2ydy+dz$$
+				One then puts everything together.
+			\end{itemize}
+		\end{Exe}
 		\section{The Frobenius theorem}
 		In this section we study foliations and distributions. The final aim is to prove the Frobenius theorem, an extremely important result in smooth geometry.
 		\begin{Def}
@@ -852,8 +1127,70 @@
  		\begin{Cor}
  			$D$ is an involutive distribution of constant rank if and only if it defines a foliation.
  		\end{Cor}
-	\chapter{Lie groups}
-	\chapter{Lie algebras}
+	\chapter{Lie theory}
+	In this chapter we discuss Lie theory. We will go through the basic definitions and properties of Lie groups, Lie algebras and some representation theory. All of those are at the core of theoretical physics, as they represent the main instruments of particle physics and are at the core of almost all other theories.
+	\section{Lie groups}
+	In this section we treat Lie groups. This is one of the most important notions in differential geometry as it is the core object in which we will encapsulate symmetries. The idea behind Lie groups is not difficult at all: it is a group which is also a smooth manifold. There are many ways to see and interpret this. One of the most common intuitive thoughts of a Lie group is that of a group in which is possible to move smoothly accross all group elements. Even though this interpretation is to some satisfactory it is mathematically incorrect and incredibly imprecise. My personal suggestion is to see Lie groups without fantasy: it is just a group, which is also a manifold i.e it has nice topological properties and a smooth structure. It is worth mentioning that Lie groups are "a special kind of manifold". We are in fact going to see that the group structure automatically makes it so that the tangent bundle is "parallelizable" i.e. it is trivial. Before we begin, please be aware that the theory behind Lie group is incredibly big and much more complicated that it actually may look like from the following pages. We are just going through a brief introductory chapter which will be more than sufficient to develop our physical analysis.
+	\begin{Def}
+		A \textit{Lie group} $G$ is a group endowed with a manifold structure, such that:
+		\begin{itemize}
+			\item the multiplication operation $\mu:G\times G\rightarrow G$ like $\mu(g,h)=g\cdot h$ is smooth;
+			\item the inversion operation $i:G\rightarrow G$ like $i(g)=g^{-1}$ is also smooth
+		\end{itemize}
+	\end{Def}
+	\begin{Def}
+		A \textit{Lie subgroup} $H$ of a Lie group $G$ is an immersed submanifold of $G$ which is still a group under the induced operations from $G$.
+	\end{Def}
+	\begin{Ex}
+		Let us make some examples of Lie groups.
+		\begin{itemize}
+			\item The circle $S^1$ is a Lie group. This is clearly a smooth manifold from REFERENZA and it is endowed with the following operation:
+			$$\mu(e^{i\theta},e^{i\omega})=e^{i(\theta+\omega)}$$
+			This is clearly a smooth operation and it has a clear smooth inverse:
+			$$i(e^{i\theta})=e^{-i\theta}$$
+			\item The group $GL(n,\mathbb{R})$ was proved in REFERENZA to be a smooth manifold. This has an obvious multiplication operation: the row-columns multiplication:
+			$$\mu(A,B)=A\cdot B$$
+			This operation is smooth in coordinates. To convince ourselves of this, note that the entries of the resulting matrices are:
+			$$(AB)^i_j=A^i_kB^k_j$$
+			This is a polynomial, thus it is smooth.\\
+			As for the inverse, every matrix in $GL(n,\mathbb{R})$ is invertible, so that this multiplication allows for a well defined operation:
+			$$i:A\mapsto A^{-1}$$
+			This is smooth as well since the entries of the inverse matrix are a polynomial of the entries of the first one. This can be easily seen by applying Gauss method.
+			\\
+			This proves that the real general linear group is a Lie group.
+			\item Consider the special linear group 
+			$$SL(n,\mathbb{R})=\big\{A\in GL(n,\mathbb{R})\hbox{ such that } det(A)=1\big\}$$
+			This is clearly a subgroup of $GL(n,\mathbb{R})$. From REFERENZA we have that it is an immersed submanifold. Now it remains to show that the group operations behave well.
+			\\
+			\\
+			Consider the multiplication. Clearly, the determinant
+		\end{itemize}
+	\end{Ex}
+	\begin{Def}
+		Given a Lie group $G$, we define the \textit{left} and \textit{right mutliplication by} $g\in G$ as:
+		$$\ell_g:G\rightarrow G\hbox{ like }\ell_g(h)=g\cdot h$$
+		$$r_g:G\rightarrow G\hbox{ like }r_g(h)=h\cdot gh$$
+		We also define the \textit{conjugation} as the combination:
+		$$c_g=\ell_g\circ r_{g^{-1}}$$
+	\end{Def}
+	\begin{Obs}
+		Clearly: 
+		$$Ad_g=\ell_g\circ r_{g^{-1}}=r_{g^{-1}}\circ \ell_{g}$$
+	\end{Obs}
+	\begin{Exe}
+		Prove that $d\ell_g$ is an isomorphism.
+		\\\\
+		This is easy: it is sufficient to prove that $\ell_g$ is a diffeomorphism.\\
+		\\
+		By definition:
+		$$\ell_g(h)=g\cdot h=\mu(g,h)$$
+		This is smooth by definition. Then, we have an inverse, which is smooth as well:
+		$$\ell_{g^{-1}}=g^{-1}\cdot h$$
+		Those are clear inverses of one another:
+		$$\ell_g\circ \ell_{g^{-1}}(h)=g\cdot g^{-1}\cdot h=h$$
+		This proves the claim from REFERENZA. The same holds for $r_g$.  
+	\end{Exe}
+	\section{Lie algebras}
 	\chapter{Representation theory}
 	\chapter{Principal bundles}
 	\chapter{Ehresmann geometries}
