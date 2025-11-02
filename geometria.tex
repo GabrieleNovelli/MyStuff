@@ -685,6 +685,21 @@
 				$$(F^1,...,F^{dim(M)},x^{dim(M)+1},...,x^{dim(N)})$$
 				is a diffeomorphism in the previous coordinates. This concludes the proof.
 			\end{proof}
+			\begin{Ex}
+				We now make some examples of regular submanifolds.
+				\begin{itemize}
+					\item Clearly if $k<n$ then $\mathbb{R}^k\subset \mathbb{R}^n$ is a regular submanifold since it is determined by the vanishing of $n-k$ coordinates.
+					\item Consider the sphere $S^n$. This is clearly defined as the level set of the map:
+					$$f:\mathbb{R}^{n+1}\rightarrow \mathbb{R}\hbox{ like }f(\vec{x})=||x||^2$$
+					In particular $S^n=f^{-1}(1)$. 
+					This level set is regular. In fact $f_*=df=\nabla f=2\vec{x}$. This is never 0 since we are in the level set of $1$. From REFERENZA, since this level set is regular, the sphere is a regular submanifold of $\mathbb{R}^{n+1}$. 
+					\item Consider the real special linear group:
+					$$SL(n,\mathbb{R})=\big\{A\in GL(n,\mathbb{R})\hbox{ with }det(A)=1\big\}$$ 
+					Consider the map $f(A)=det(A)$. Clearly, $SL(n,\mathbb{R})=f^{-1}(A)$. This level set is indeed regular. To see this, recall that $det(A)$ is a linear combination of all of the determinants of the minor submatrices of $A$ (from linear algebra). Thus, indexing with $A^i_j$ the elements of $A$, we have:
+					$${\partial f\over \partial A^i_j}\propto det(m^i_j)$$
+					Where $m^i_j$ is one of such submatrices. Now, in order for the level set to not be regular, we would have all such minor to have determinant equal to 0. This would automatically imply that $det(A)=0$. Since this is false, the level set is regular. From REFERENZA, the special linear group is indeed a regular submanifold of the general linear group.
+				\end{itemize}
+			\end{Ex}
 			Before concluding, a couple of words on immersed submanifolds.
 			\begin{Def}
 				Let $S\subset M$ be the subset of a smooth manifold. We call $S$ an immersed submanifold if it can be given aa topology and a smooth structure such that $S$ becomes a smooth manifold and the inclusion $i:S\hookrightarrow M$ a smooth immersion.
@@ -699,13 +714,18 @@
 				The biggest problem is the topology. In general, we do not want the subset topology. We declare a set $V\subset F(N)$ to be open if $f^{-1}(V)$ is open in $N$. The charts we take have the form:
 				$$(f(U),\phi\circ f^{-1})$$
 				Where $(U,\phi)$ is a chart on $N$. Those charts are compatible by construction so they make a smooth atlas. The topological properties are inherited from the fact that with this topology the restriction $f\big|_{f(N)}$ is an homeomorphism. To conclude the proof, we need to show that the inclusion is a smooth immersion:
-				$$i:f(N)\xrightarrow{f^{-1}}N\rightarrow M$$
+				$$i:f(N)\xrightarrow{f^{-1}}N\xrightarrow{f} M$$
 				The first map is a diffeomorphism and the second is a smooth immersion. Thus the result is a smooth immersion.
 			\end{proof}
 			\begin{Ex}
 				We now make some examples of immersed submanifolds.
 				\begin{itemize}
-					\item 
+					\item Consider the sphere $S^n$. This was previously shown to be a manifold. However, we can show it is an immersed submanifold or $\mathbb{R}^{n+1}$. This is easy since the immersion is the identity:
+					$$i:S^n\rightarrow \mathbb{R}^{n+1}\hbox{ is defined as }i(\vec{x})=\vec{x}$$
+					This is clearly a smooth immersion.
+					\item Consider the real special linear group:
+					$$SL(n,\mathbb{R})=\big\{A\in GL(n,\mathbb{R})\hbox{ with }det(A)=1\big\}$$
+					From REFERENZA this is a regular submanifold of the real general linear group. However it is also an immersed submanifold since the immersion is once again the identity.
 				\end{itemize}
 			\end{Ex}
 	\chapter{Fiber bundles}
@@ -1160,11 +1180,23 @@
 			This proves that the real general linear group is a Lie group.
 			\item Consider the special linear group 
 			$$SL(n,\mathbb{R})=\big\{A\in GL(n,\mathbb{R})\hbox{ such that } det(A)=1\big\}$$
-			This is clearly a subgroup of $GL(n,\mathbb{R})$. From REFERENZA we have that it is an immersed submanifold. Now it remains to show that the group operations behave well.
-			\\
-			\\
-			Consider the multiplication. Clearly, the determinant
+			This is clearly a subgroup of $GL(n,\mathbb{R})$. From REFERENZA we have that it is an immersed submanifold. Now it remains to show that the group operations behave well. But this is obvious since $det(AB)=det(A)det(B)$ and $det(A^{-1})=det(A)^{-1}$.
+			\item Consider the orthogonal group $$O(n,\mathbb{R})=\big\{O\in M_{n\times n}\hbox{ such that }O^T=O^{-1}\big\}$$
+			This is clearly a subgroup of the general linear group. To show that it is a smooth manifold, consider the map:
+			$$f(O)=O^TO$$
+			Then $O(n,\mathbb{R})=f^{-1}(\mathbb{I})$ is the level set of the identity. We now prove that this level set is indeed regular. Consider a curve $O(t)$ in $GL(n,\mathbb{R})$ and differentiate:
+			$${d\over dt}f(O(t))=(O(t)^T)'O(t)+O(t)^T(O(t))'$$
+			Now, if the starting point of the curve $O(0)$ is an orthogonal matrix, then:
+			$${d\over dt}\bigg|_0f(O(t))=(O(0)^T)'O(0)+O(0)^T(O(0))'$$
+			We want to show that this is surjective. This amounts to asking for the above equality to span all possible symmetric matrices. This is easy, just pick $O(0)'={1\over 2}O(0)B$. With this choice 
+			$${d\over dt}\bigg|_0f(O(t))=B$$
+			which proves the surjectivity. This shows that the orthogonal group is a smooth manifold. The fact that the multiplication and the inversion operations are smooth follows from the same arguments given for the general linear group.
+			\item Groups like $U(n),SU(n)$, and the complex counterparts of the examples above are all Lie groups.
 		\end{itemize}
+	\end{Ex}
+	It is odd to see that all the examples of Lie groups we have made are of matrix groups. Not all Lie groups are matrix groups. However, the only groups that matter in physics are basically the matrix ones. We will see why later on.
+	\begin{Ex}
+		Now we make an example of a non-matrix Lie group: ESEMPIO
 	\end{Ex}
 	\begin{Def}
 		Given a Lie group $G$, we define the \textit{left} and \textit{right mutliplication by} $g\in G$ as:
@@ -1191,6 +1223,35 @@
 		This proves the claim from REFERENZA. The same holds for $r_g$.  
 	\end{Exe}
 	\section{Lie algebras}
+	In this section we dive into Lie algebras. There is an incredibly big amount of information to give about Lie algebras. We will focus on the meaning of a Lie algebra when attached to a Lie group. The idea is that, given the left translation $\ell_g$ of a Lie group, we will be able to deduce all of the information of the tangent bundle of the Lie group just by looking at the identity.
+	\begin{Def}
+		We call \textit{Lie algebra} $\mathfrak{g}$ a vector space with a \textit{braket} operation i.e. a bilinear map $[,]:\mathfrak{g}\times \mathfrak{g}\rightarrow\mathfrak{g}$  which satisfies:
+		\begin{itemize}
+			\item[(1)] skew-symmetry: $[x,y]=-[y,x]$;
+			\item[(2)] Jacobi identity:
+			$$[x,[y,z]]+[y,[z,x]]+[z,[x,y]]=0$$
+		\end{itemize}
+		for all $x,y,z\in\mathfrak{g}$.
+	\end{Def} 
+	The following definitions are trivial:
+	\begin{Def}
+		We call \textit{Lie subalgebra} $\mathfrak{h}\subset \mathfrak{g}$ any vector subspace closed for the restriction of the braket $[,]$. 
+	\end{Def}
+	\begin{Def}
+		We call \textit{Lie algebra homomorphism} any linear map $f:\mathfrak{g}\rightarrow\mathfrak{h}$ between Lie algebras whoch preserves the braket:
+		$$f\circ[,]\big|_\mathfrak{g}=[,]\big|_\mathfrak{h}\circ f$$
+	\end{Def}
+	In general, even though they share a similar name, it seems that Lie algebras are completely disconnected from the notion of Lie group.
+	\begin{Ex}
+		Now we make some easy examples of Lie algebras:
+		\begin{itemize}
+			\item For any vector space $V$ we can define a \textit{trivial} Lie algebra throught the trivial braket:
+			$$[v,w]=0\hbox{ for all }v,w\in V$$
+			\item Let $M_{n\times n}(\mathbb{R})$ be the space of square $n\times n$ matrices with real coefficients. This can be made into a Lie algebra. In particular, we have the braket:
+			$$[A,B]=AB-BA$$
+			This is clearly bilinear and skew symmetric. The Jacobi identity follows from a striaghtforward calculation done by applying the properties of the row-column product of matrices. The reader can either prove it or believe me. (I am bored). 
+		\end{itemize}
+	\end{Ex}
 	\chapter{Representation theory}
 	\chapter{Principal bundles}
 	\chapter{Ehresmann geometries}
