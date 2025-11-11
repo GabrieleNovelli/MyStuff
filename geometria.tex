@@ -1065,7 +1065,7 @@
 		\section{The Frobenius theorem}
 		In this section we study foliations and distributions. The final aim is to prove the Frobenius theorem, an extremely important result in smooth geometry.
 		\begin{Def}
-			We call \textit{distribution} $D$ on a manifold $M$ a smooth assignment $p\mapsto D_p\subset T_pM$ such that: for any $p$ one can find $U$ open containing $p$ such that for all $q\in U$ there is a collection of vector fields $\{X_i(q)\}$ that span $D_q$.
+			We call \textit{distribution} $D$ on a manifold $M$ a smooth assignment $p\mapsto D_p\subset T_pM$ such that: for any $p\in M$ one can find $U$ open containing $p$ such that for all $q\in U$ there is a collection of vector fields $\{X_i(q)\}$ that span $D_q$.
 		\end{Def}
 		Clearly, a distribution defines a subset of the tangent bundle $TM$.
 		\begin{Def}
@@ -1096,8 +1096,11 @@
 			A chart with those qualities is called \textit{flat} for $D$.
  		\end{Def}
  		\begin{Obs}
- 			Clearly, in any flat chart, we have some submanifolds, defined by keeping the corresponding coordinates fixed.
+ 			Clearly, in any flat chart, we have some immersed submanifolds, defined by keeping the corresponding coordinates fixed.
  		\end{Obs}
+ 		\begin{Def}
+ 			Let $D\subset TM$ be a completely integrable constant rank distribution. Then the immersed submanifold defined by it are called \textit{integral manifolds}.
+ 		\end{Def}
  		\begin{Theo}[\textbf{Frobenius}]
  			A distribution is involutive if and only if it is completely integrable.
  		\end{Theo}
@@ -1125,7 +1128,7 @@
  			\end{itemize}
  		\end{proof}
  		\begin{Def}
- 			Let $M$ be a smooth manifold. We call \textit{$k$-dimensional foliation} $\mathcal{F}$ a family of $k$-dimensional submanifolds of $M$ such that:
+ 			Let $M$ be a smooth manifold. We call \textit{$k$-dimensional foliation} $\mathcal{F}$ a family of $k$-dimensional immersed submanifolds of $M$ such that:
  			\begin{itemize}
  				\item the elements of $\mathcal{F}$ are disjoint, connected, non empty, immersed $k$-dimensional submanifolds;
  				\item for any $p\in M$ there is a chart $(U,\phi)$ such that $\phi(U)$ is a cube in $\mathbb{R}^n$ and each of the elements of $\mathcal{F}$ intersects $U$ in either the empty set or a slice defined by keeping $n-k$ cooridnate constant: $x_{k+1}=Const,...x^n=Const$.
@@ -1135,7 +1138,7 @@
  		\begin{Ex}
  			\begin{itemize}
  				\item The collection of hyperplanes $x_{k+1}=Const,...x^n=Const$ is a foliation of $\mathbb{R}^n-\{0\}$.
- 				\item The family of spheres of increasing radius $S^{n-1}_r$ is a foliation of $\mathbb{R}^n$. This is pretty easy to prove: first of all, the spheres do not intersect, are all connected, non empty and are all immersed. As for the flat chart problem, take any point $\vec{x}\in \mathbb{R}^n$ and a ball around it of radius $\varepsilon$. Clearly, some of the spheres will intersect this ball and, in spherical coordinates, the radius coordinate is kept constant.
+ 				\item The family of spheres of increasing radius $S^{n-1}_r$ is a foliation of $\mathbb{R}^n-\{0\}$. This is pretty easy to prove: first of all, the spheres do not intersect, are all connected, non empty and are all immersed. As for the flat chart problem, take any point $\vec{x}\in \mathbb{R}^n$ and a ball around it of radius $\varepsilon$. Clearly, some of the spheres will intersect this ball and, in spherical coordinates, the radius coordinate is kept constant.
  			\end{itemize}
  		\end{Ex}
  		\begin{Obs}
@@ -1252,6 +1255,98 @@
 			This is clearly bilinear and skew symmetric. The Jacobi identity follows from a striaghtforward calculation done by applying the properties of the row-column product of matrices. The reader can either prove it or believe me. (I am bored). 
 		\end{itemize}
 	\end{Ex}
+	\begin{Def}
+		Let $G$ be a Lie group and $X\in\mathfrak{X}(G)$ be a vector field. We say that $X$ is \textit{left invariant} if for all $g\in G$:
+		$$d\ell_g(X)=X$$
+	\end{Def}
+	\begin{Obs}
+		The above definition can be restated as:
+		$$d\ell_g(X_h)=X_{gh}$$
+		This means that a left invariant vector field is uniquely determined by its value at the identity. In fact:
+		$$X_g=d\ell_g(X_e)$$
+		where $e$ is the neutral element of $G$.
+		Suppose to have a vector at the identity $A\in T_eG$. We can clearly define a left invariant vector field called $\tilde{A}$ like:
+		$$\tilde{A}_g=d\ell_g(A)$$
+	\end{Obs}
+	\begin{Prop}
+		Any left invariant vector field is smooth.
+	\end{Prop}
+	\begin{proof}
+		Take a smooth curve $\gamma:I\rightarrow G$ with $\gamma(0)=e$ and $\dot{\gamma}(0)=X_e$. Since $X$ is assumed left invariant, we have that $\ell_g(\gamma(t))$ is a curve starting at $g$ with initial vector $X_g$. Then for any smooth function $f\in C^\infty(G)$:
+		$$df(X)_g=X_gf={d\over dt}\bigg|_0f(g\gamma(t))$$
+		This is clearly smooth since all of the components are smooth.
+	\end{proof}
+	\begin{Def}
+		We call $Lie(G)$ the space of all left invariant vector fields on $G$. 
+	\end{Def}
+	This definition has a very suggestive name. The reason will be clear in a bit. Consider the following results:
+	\begin{Def}
+		Clearly $Lie(G)$ is a vector space. We just need to find a braket. We define the following:
+		$$$$
+	\end{Def}
+	\begin{Prop}
+		There is an isomorphism:
+		$$T_eG\simeq Lie(G)$$
+	\end{Prop}
+	\begin{proof}
+		Let $A\in T_eG$ and consider the map:
+		$$A\rightarrow \tilde{A}$$
+		Clearly , by definition, $\tilde{A}_g=d\ell_g(A)$. Thus, for $\tilde{A}$ to be the 0 vector, since $d\ell_g$ is an isomorphism for all $g\in G$, we need $A=0$. This proves the map is injective. Moreover, given any vector field. From observation REFERENZA, any left invariant vector field is completely determined by its value at the identity. This automatically implies that the map is surjective.
+	\end{proof}
+	So far, we have just shown that the tangent space to the identity is canonically isomorphic to the set of all left invariant vector fields on $G$. We now wish to endow those spaces with a braket i.e. we wish to make them Lie algebras. To do this, we will construct a braket on $T_eG$ and then, through the isomorphism, induce it on $Lie(G)$.
+	\begin{Def}
+		Let $M$ be a smooth manifold and $X,Y\in\mathfrak{X}(M)$, $f\in C^\infty(M)$. We define the \textit{braket} of two vector fields as:
+		$$[X,Y]f=X(Y(f))-Y(X(f))$$
+	\end{Def}
+	\begin{Obs}
+		The above braket from REFERENZA is still a vector field. Moreover, it is clearly multilinear and antisymmetric pointwise. As for the Jacobi identity, it follows from a straightforward calculation which I will not carry on.
+	\end{Obs}
+	\begin{Prop}
+		$Lie(G)$ is a Lie algebra, and it will be indexed with $\mathfrak{g}$.
+	\end{Prop}
+	\begin{proof}
+		The idea is to induce this braket throught the isomorphism REFERENZA. Thus, we define it on the tangent space at the identity.
+		$$[A,B]=[\tilde{A},\tilde{B}]_e$$
+		Basically the braket of two tangent vectors at the identity is defined to be the braket of the corresponding left invariant vector fields evaluated at the identity. All of the properties of a braket are respected due to REFERENZA. The only thing missing is to prove that the braket of two left invariant vector fields is still a left invariant vector field. But this follows from the isomorphism.
+	\end{proof}
+	\begin{Def}
+		We call $Lie(G)\equiv T_eG=\mathfrak{g}$ the Lie algebra of the Lie group $G$.
+	\end{Def}
+	\begin{Obs}
+		Clearly, due to the isomorphism REFERENZA, $dim(\mathfrak{g})=dim(G)$.
+	\end{Obs}
+	\begin{Obs}
+		Recall that $d\ell_g:T_eG\rightarrow T_gG$ is an isomorphism. This means that we can identify any vector at a point with a left invariant vector field evaluated at that point.
+	\end{Obs}
+	\begin{Ex}
+		We now make some useful examples of Lie algebras. Those will come in handy in a bit and will be mainly centered on Lie groups.
+		\begin{itemize}
+			\item Consider the real general linear group $GL(n,\mathbb{R})$. This is an open set of $M_{n\times n}$ with the obious smooth structure. Thus, there is an obvious identification $T_{\mathbb{I}}GL(n,\mathbb{R})\simeq M_{n\times n}$ like:
+			$$M^i_{j}{\partial^2\over \partial x^i_j}\rightarrow [M^i_j]$$
+			The braket on this space is exactly the one in REFERENZA.
+			Thus, we have the Lie algebra of the real general linear group as:
+			$$\mathfrak{gl}(n,\mathbb{R})=M_{n\times n}$$
+			\item Consider the special linear grpup (real) $SL(n,\mathbb{R})$. This is a Lie group as well and so we can look at its Lie algebra. To do this, we take a curve $\gamma(t)=\mathbb{I}+tA$ through the identity. Clearly, since this curve must belong to the special linear group, we must have:
+			$$det(\mathbb{I}+tA)=\mathbb{I}+tTr(A)+O(t^2)$$
+			This forces $Tr(A)=0$. By differentiating: 
+			$${d\over dt}\bigg|_0\gamma(t)=B$$
+			Thus, we have the Lie algebra of the real special linear group as:
+			$$\mathfrak{sl}(n,\mathbb{R})=\big\{A\in M_{n\times n}\hbox{ such that }Tr(A)=0\big\}$$
+			\item Consider any $V$ vector space and consider its general linear group:
+			$$GL(V)={f:V\rightarrow V\hbox{ such that }f\hbox{ is linear and invertible}}$$
+			If $dim(V)=n$ there is a clear identification $GL(V)\simeq GL(n,\mathbb{R})$ once we fix a base. Since $\mathfrak{gl}(n,\mathbb{R})=M_{n\times n}\simeq End(V)=\{f:V\rightarrow V\hbox{ such that }f\hbox{ is linear}\}$
+			we have:
+			$$\mathfrak{gl}(V)=End(V)$$
+		\end{itemize}
+	\end{Ex}
+	Lastly, before we speak about the exponential map, we give a definition:
+	\begin{Def}
+		Let $\{T^a\}$ be a basis for a Lie algebra $\mathfrak{g}$. Then, we define the \textit{structure constants} $f^{ab}_{\hspace{9pt }c}$ as:
+		$$[T^a,T^b]=f^{ab}_{\hspace{9pt }c}T^c$$
+	\end{Def}
+	The structure constants will have a neat physical interpretation: the coupling between particles. We will later see that the structure constants will serve as couplings in front of the terms which appear in the lagrangians. Thus, they will regulat the strength of the interactions between the fields.
+	\section{The exponential map}
+	In this section we study an incredibly useful map, which will relate in an extremely beautiful way a Lie group with its Lie algebra. The true power of this map will fully uncover in the next chapter i.e. Representation theoy. However, we will see how, through the following construction, one will be able to connect elements of $G$ with elements of its Lie algebra $\mathfrak{g}$.
 	\chapter{Representation theory}
 	\chapter{Principal bundles}
 	\chapter{Ehresmann geometries}
@@ -2550,6 +2645,66 @@
 		Since $\eta^{ee}$ is summed over, we get that it is 3, and so:
 		$$=2e^a_\mu e^\mu_ae_\nu^b e^\nu_b-2e^a_\mu e^\nu_ae_\mu^b e^\nu_b$$
 	\end{proof}
+	\chapter{Spinors}
+	In this chapter we study spinors. Our
+	\section{Clifford Algebra}
+	In this section we introduce the general notion of Clifford algebra generated by a vector space. We will look at the definitions and at some basic properties.
+	\begin{Def}
+		Let $V$ be an $n$-dimensional real vector space and $Q$ a quadratic form. We define the \textit{Clifford algebra} as the following quotient:
+		$$Cl(V,Q)={T(V)\over I_{Q}}$$
+		Where $I_{Q}$ is the ideal generated by all of the elements like:
+		$$v\otimes v-Q(v)1$$
+	\end{Def}
+	\begin{Obs}
+		Recall that, from linear algebra, to any quadratic form $Q$ we have associated a bilinear symmetric form like:
+		$$\braket{v,w}={1\over 2}(Q(v+w)-Q(v)-Q(w))$$
+	\end{Obs}
+	\begin{Obs}
+		Clearly, if the form is trivial i.e. $Q(v)=0$ always, $Cl(V,Q)=\bigwedge V$.
+	\end{Obs}
+	\begin{Obs}
+		Suppose that $\{e_i\}$ is an orthogonal basis for the associated symmetric form. This automatically implies that:
+		$$(e_i+e_j)\otimes(e_i+e_j)=Q(e_i+e_j)=2\braket{e_i,e_j}+Q(e_i)+Q(e_j)=$$
+		$$=e_i\otimes e_i+e_j\otimes e_j+e_i\otimes e_j+ e_j\otimes e_i$$
+		Now, from the definition, repeated elements like $e_i\otimes e_i$ cancel out with $Q(e_i)$, so that:
+		$$e_i\otimes e_j+ e_j\otimes e_i=2\braket{e_i,e_j}=0$$
+		This means that for an orthonormal base:
+		$$e_i\otimes e_j=-e_j\otimes e_i$$ 
+	\end{Obs}
+	\begin{Obs}
+		Clearly, by construction, the Clifford algebra is indeed an algebra and so:
+		$$Cl(V,Q)=Cl^0(V,Q)\oplus Cl^1(V,Q)\oplus Cl^2(V,Q)\oplus...$$
+		In particular, $Cl^0(V,Q)=\mathbb{R}$, $Cl^1(V,Q)=V$.
+	\end{Obs}
+	\begin{Def}
+		We define $\mathfrak{spin}(V)=Cl^2(V,Q)$.
+	\end{Def}
+	\begin{Obs}
+		Clearly $\mathfrak{spin}(V)$ has a natural commutator:
+		$$[e_i\otimes e_j,]$$
+	\end{Obs}
+	\begin{Def}
+		We dewfine the \textit{Pin group} $Pin(V)$ of a vector space as:
+		$$Pin=\big\{ v_1\otimes...\otimes v_k\hbox{ with }Q(v_i)=1\big\}$$
+		We define the \textit{Spin group} of the vector space $V$ as 
+		$$Spin(V)=Pin(V)\cap Cl^{even}(V,Q)$$
+		$$Spin(V)=\big\{v_i\otimes...\otimes v_{2k}\hbox{ like }Q(v_i)=1\big\}$$
+	\end{Def}
+	Those are obviously groups with the tensor product operation. The neutral element is $1$ the neutral element for the algebra of $V$. The inverse is given in the following way:
+	$$v_1\otimes...\otimes v_k\mapsto v_k\otimes...\otimes v_1$$
+	To see they are ainverses, choose an orthonormal basis for the form (it always exists if the form is non degenerate). Then:
+	$$v_1\otimes...\otimes v_k=v_1^{i_1}...v_k^{i_k}e_{i_1}\otimes...\otimes e_{i_k}$$
+	Now, taking the product, by associativity:
+	$$(v_1\otimes...\otimes v_k)\otimes (v_k\otimes...\otimes v_1)=(v_1^{i_1})^2...(v_k^{i_k})^2e_{i_1}\otimes...\otimes e_{i_k}\otimes e_{i_k}\otimes...\otimes e_{i_1}$$
+	Taking out the couples, i get always $Q(e_j)=1$ by choice of an orthonormal basis. So the result is:
+	$$(v_1\otimes...\otimes v_k)\otimes (v_k\otimes...\otimes v_1)=(v_1^{i_1})^2...(v_k^{i_k})^2=1$$
+	The $Spin$ and the $Pin$ group are clearly closed under this inversion.
+	\begin{Obs}
+		One can complecify those groups by taking the tensor product with $\mathbb{C}$. In particular we call the complexification: $Spin^c(V)$.
+	\end{Obs}
+	\begin{Theo}
+		The Spin group is a Lie group.
+	\end{Theo}
 	\chapter{Jets}
 	\section{First Jet bundle}
 	\begin{Obs}
