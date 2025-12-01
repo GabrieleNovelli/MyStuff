@@ -984,6 +984,34 @@
 			\end{cases}$$
 			This is a Cauchy problem and it is known from calculus that there is a unique solution in a neighbourhood of $\phi(p)$.
 		\end{proof}
+		The following result follows immediately:
+		\begin{Theo}
+			For $X\in\mathfrak{X}(M)$ it holds:
+			\begin{itemize}
+				\item Let $I\subset\mathbb{R}$ be an open set of the reals and $U\subset M$ be an open set containign $p\in U$. For all $(t_0,q)\in\mathbb{I}\times U$ and $V\subset U$ there is an integral curve $\gamma$ defined inside $V$, such that $\gamma(t_0)=p$;
+				\item every two solutions $\gamma_{1,2}:I_{1,2}\rightarrow M$ agree on $I_1\cap I_2$;
+				\item the solution of the above Cauchy problem depends smoothly on the choice of the initial point.
+			\end{itemize}
+		\end{Theo}
+		\begin{proof}
+			The first point follows from the Cauchy problem structure. The second point follows from the uniqueness of a Cauchy problem. The third point follows from the smoothness of the following map:
+			$$Fl^X_t:M\rightarrow M\hbox{ like }Fl^X_t(p)=\gamma(t)\hbox{ starting at }p$$
+		\end{proof}
+		\begin{Obs}
+			The above result means that we can order integral curves, namely, if $\gamma_i:I_i\rightarrow M$ are integral curves and $I_1\subset I_2$, then we say $\gamma_1\leq \gamma_2$.
+		\end{Obs}
+		\begin{Def}
+			We call an integral curve of a vector field \textit{maximal} if $\gamma^{max}$ is not contained in any other integral curve.
+		\end{Def}
+		\begin{Def}
+			A vector field is called \textit{complete} if the maximal integral curve is defined on $\mathbb{R}$ for all $p\in M$.
+		\end{Def}
+		\begin{Prop}
+			The maximal integral curve of a vector field is unique.
+		\end{Prop}
+		\begin{proof}
+			Having seen the previous results, this is obvious.
+		\end{proof}
 		\section{The pullback bundle for vector bundles}
 		\section{Tensors}
 		In this section we define the notion of tensor and tensor field on a smooth manifold and look at some of their properties.
@@ -1062,6 +1090,8 @@
 				One then puts everything together.
 			\end{itemize}
 		\end{Exe}
+	\chapter{Distributions}
+	In this chapter we introduce the notion of distribution. This is an extremely wide topic, which evolves mainly around the infamous Frobenius theorem. The idea is simple: when does a distributuion of tangent vectors define a smooth manifold?
 		\section{The Frobenius theorem}
 		In this section we study foliations and distributions. The final aim is to prove the Frobenius theorem, an extremely important result in smooth geometry.
 		\begin{Def}
@@ -1150,6 +1180,105 @@
  		\begin{Cor}
  			$D$ is an involutive distribution of constant rank if and only if it defines a foliation.
  		\end{Cor}
+ 		\section{A generalization of Frobenius theorem}
+ 		In this section we go through an important generalization of Frobenius theorem. The idea is the same, however we would like to somewhat drop the requirement of the constant rank.
+ 		\begin{Def}
+ 			A distribution $D$ is called \textit{homogeneous} if it is invariant under the flow of its vector field, i.e.:
+ 			$$(Fl_t^X)_*D=D_{Fl^X_t}$$
+ 		\end{Def}
+ 		\begin{Ex}
+ 			We now make some example to better grasp the meaning of the previous definition.
+ 			\begin{itemize}
+ 				\item Consider the distribution:
+ 				$$D=\{\partial_x,\partial_y\}$$
+ 				defined in $\mathbb{R}^3$. Clearly, the integral curves of those fields are:
+ 				$$\gamma_x(t)=(t+x_0,y_0,z_0)\hbox{ and }\gamma_y(t)=(x_0,t+y_0,z_0)$$
+ 				This implies that:
+ 				$$(Fl_t^{\partial_x})_*=\begin{pmatrix}
+ 					1 & 0 & 0\\
+ 					0 & 1 & 0\\
+ 					0 & 0 & 1
+ 				\end{pmatrix}$$
+ 				This clearly preserves the distribution.
+ 				The same goes for $\partial_y$.
+ 				\item Consider the distribution:
+ 				$$D=\{y\partial_x,\partial_y\}$$
+ 				defined in $\mathbb{R}^3$. We clearly have:
+ 				$$\gamma_x(t)=(y_0t+x_0,y_0,z_0)\hbox{ and }\gamma_y(t)=(x_0,t+y_0,z_0)$$
+ 				Clearly
+ 				$$(Fl_t^X)_*=\begin{pmatrix}
+ 					1 & t & 0\\
+ 					0 & 1 & 0\\
+ 					0 & 0 & 1
+ 				\end{pmatrix}$$
+ 				And consequently:
+ 				$$(Fl_t^X)_*\partial_y=t\partial_x+\partial_y$$
+ 			\end{itemize}
+ 			It is worth noticing that the distribution in the first example is involutive, while the second isn't.
+ 		\end{Ex}
+ 		We now re-define the notion of adapted chart, dropping the costant rank requirement.
+ 		\begin{Def}
+ 			An \textit{adapted chart} around $p\in M$ for the distribution $D$ is a chart $(U,\phi)$ such that:
+ 			\begin{itemize}
+ 				\item [(i)] $\phi(p)=\vec{0}$ and $\phi(U)=]-\varepsilon,\varepsilon[^n$
+ 				\item[(ii)] given that $rank D=r$ at $p\in M$, we have that the collection $\{\partial_i\}_{i=1,...,r}\in \mathfrak{X}^D_{loc}(M)$;
+ 				\item[(iii)] for all $\vec{x}\in]-\varepsilon,\varepsilon[^{n-r}$ the distribution has constant rank along the slice $$\phi^{-1}(]-\varepsilon,\varepsilon[^r\times \vec{x})$$
+ 			\end{itemize}
+ 		\end{Def}
+ 		\begin{Obs}
+ 			Inside the adapted chart, the point with the lowest rank is exactly $p$, due to condition $2$.
+ 		\end{Obs}
+ 		\begin{Obs}
+ 			The third requirement is trivially satisfied if the distribution has constant rank. The key idea is the following: $D$ is allowed to change in rank, but in different slcies: those slices must not contain the integral curves of the fields. To put it in different terms: the change in rank must depend on the "reduntant coordinates" of the distribution.
+ 		\end{Obs}
+ 		\begin{Ex}
+ 			We now make an easy example of a distribution with an adapted chart at any point.\\
+ 			\\
+ 			Consider the follopwing distribution defined in $\mathbb{R}^3$:
+ 			$$D=\{z\partial_x,\partial_y\}$$
+ 			This distribution is clearly involutive, but it is not constant rank. In particular, in the hypersurface $z=0$, the rank drops to 1.\\
+ 			\\
+ 			Take any point $(x,y,z)$. We define the following adapted chart:
+ 			$$\phi(x,y,z)=(x,y,z)$$
+ 			Clearly, we have that condition (ii) of REFERENZA is satisfied. Moreover, taking any possible slice of fixed $z$, the distribution has constant rank. The only difference is that in the slice defined by $z=0$ the rank drops to 1.
+ 		\end{Ex}
+ 		\begin{Theo}[\textbf{Stefan and Sussmann}]
+ 			Let $D$ be a smooth distribution on a manifold $M$. The following statements are equivalent:
+ 			\begin{itemize}
+ 				\item[(i)] $D$ is integrable;
+ 				\item[(ii)] $D$ is involutive and has constant rank along its integral curves;
+ 				\item[(iii)] $D$ is homogeneous;
+ 				\item[(iv)] $D$ has an adapted chart at any point in $M$.
+ 			\end{itemize}
+ 		\end{Theo}
+ 		\begin{proof}
+ 			We concatenate the proof:
+ 			\begin{itemize}
+ 				\item[$(i)\implies(ii)$]
+ 				Suppose $D$ is integrable. Then any point $p\in M$ is contained in an integral manifold. Taking any two vectors tangent to $p$ in the direction of their distribution, they belong to a well defined tangent space and so their commutator will also belong to the distribution. This proves the involutivity. Moreover, sicne an integral manifold has constant rank, the integral curves of such vectors will also have constant rank.
+ 				\item[$(ii)\implies (iii)$]
+ 				Suppose $D$ is involutive and has constant rank along its integral curves. Take any vector $X\in D$ around $p\in M$ and take a frame for the distribution around this point, like $\{Y_i\}_{i=1,...,r}$. Define the curves:
+ 				$$\gamma_i(t)=(Fl_{-t}^X)_*Y_i(Fl_t^X(p))$$
+ 				Those are maps from the flux domain $\mathcal{D}^X_p$ of $X$ at $p$:
+ 				$$\gamma_i:\mathcal{D}^X_p\rightarrow T_{p}M$$
+ 				Now, taking the derivative:
+ 				$$\dot{\gamma_i}(t)={d\over dt}(Fl_{-t}^X)_*Y_i(Fl_t^X(p))$$
+ 				By naturality of the Lie derivative:
+ 				$$\dot{\gamma_i}(t)=(Fl_{-t}^X)_*[X,Y_i]_{Fl_t^X(p)}$$
+ 				The distribution is involutive and so the commutator still belongs to $D$. Moreover, the distribution has constant rank along the integral curves so the fields $(Fl_t^X)_*Y_i$ span the distribution along the curves. Moreover, we have, by construction:
+ 				$$(Fl_t^X)_*\gamma_i=Y_i(Fl_t^X(p))$$ 
+ 				This proves the claim.
+ 				\item[$(ii)\implies (iv)$]
+ 				Suppose the distribution is involutive, by REFERENZA we can find a local base of commuting vector fields around any point. From REFERENZA, since we have commuting fields, we can use them to make some coordinates:
+ 				$$\{\partial_1,...,\partial_r,\partial_{r+1},...,\partial_n\}$$
+ 				Since the distribution has constant rank along its integral curves, moving along the directions spanned from the first $r$ vectors produces no change in rank. This is clearly an adapted chart.
+ 				\item[$(iv)\implies (i)$]
+ 				If we have an adapted chart ant any $p$, it means that locally we have that $p$ is the point with the lowest rank possible, along each slice. In particular, $\phi^{-1}(]-\varepsilon,\varepsilon[^r\times 0)$ is an integral manifold of $D$.
+ 			\end{itemize}
+ 		\end{proof}
+ 		\begin{Obs}
+ 			Frobenius theorem follows as a corollary of the previous theorem, in the assumption of $D$ being constant rank.
+ 		\end{Obs}
 	\chapter{Lie theory}
 	In this chapter we discuss Lie theory. We will go through the basic definitions and properties of Lie groups, Lie algebras and some representation theory. All of those are at the core of theoretical physics, as they represent the main instruments of particle physics and are at the core of almost all other theories.
 	\section{Lie groups}
@@ -1322,7 +1451,7 @@
 		We now make some useful examples of Lie algebras. Those will come in handy in a bit and will be mainly centered on Lie groups.
 		\begin{itemize}
 			\item Consider the real general linear group $GL(n,\mathbb{R})$. This is an open set of $M_{n\times n}$ with the obious smooth structure. Thus, there is an obvious identification $T_{\mathbb{I}}GL(n,\mathbb{R})\simeq M_{n\times n}$ like:
-			$$M^i_{j}{\partial^2\over \partial x^i_j}\rightarrow [M^i_j]$$
+			$$M^i_{j}{\partial\over \partial x^i_j}\rightarrow [M^i_j]$$
 			The braket on this space is exactly the one in REFERENZA.
 			Thus, we have the Lie algebra of the real general linear group as:
 			$$\mathfrak{gl}(n,\mathbb{R})=M_{n\times n}$$
@@ -1348,6 +1477,331 @@
 	\section{The exponential map}
 	In this section we study an incredibly useful map, which will relate in an extremely beautiful way a Lie group with its Lie algebra. The true power of this map will fully uncover in the next chapter i.e. Representation theoy. However, we will see how, through the following construction, one will be able to connect elements of $G$ with elements of its Lie algebra $\mathfrak{g}$.
 	\chapter{Representation theory}
+	\chapter{Symmetries}
+	\section{Flows}
+	In this section we define the notion of flow of a vector field. This will turn out to be incredibly useful in comparing tensors at different points.
+	\begin{Def}
+		We define the \textit{flux domain} of $X\in \mathfrak{X}(M)$ as:
+		$$D=\big\{(t,p)\in \mathbb{R}\times U\hbox{ with }t\in I_p^{max}\}$$
+		where $I_p^{max}$ is the interval in which it is defined the maximal integral curve.
+		We define the \textit{flux of }$X$ as:
+		$$Fl^X:D\rightarrow M\hbox{ like }Fl^X(t,p)=\gamma_p(t)$$
+		where $\gamma_p(t)$ is the maximal integral curve of $X$ starting at $p$.
+	\end{Def}
+	By the results found in REFERENZA, the following follows:
+	\begin{Theo}
+		Let the notation be as above, then:
+		\begin{itemize}
+			\item $Fl_0^X=\mathbb{I}$;
+			\item $Fl_t^X\circ Fl_s^X=Fl_{t+s}^X$;
+			\item $Fl^X$ is smooth.
+		\end{itemize}
+	\end{Theo}
+	\begin{proof}
+		The first point is obvipus by definition. The second point is obvious by definition as well:
+		$$Fl_s^X\circ Fl_t^X(p)=Fl_s^X(\gamma_p(t))=\gamma_{\gamma_p(t)}(s)$$
+		Since every two integral curves agree on the overlap of their domains from REFERENZA, we have:
+		$$\gamma_{\gamma_p(t)}(s)=\gamma_p(s+t)$$
+		the third point follows from REFERENZA immediately.
+	\end{proof}
+	\begin{Ex}
+		Let us see some examples:
+		\begin{itemize}
+			\item Consider
+		\end{itemize}
+	\end{Ex}
+	\section{The Lie derivative}
+	In this section we will define a new type of derivation: the Lie derivative. The aim is to be able to differentiate tensors. In general, on a smooth manifold, one would like to compare vector fields at different points, to evaluate the rate of change of such fields. However, vectors at fifferent points belong to different vector spaces: it would be wrong to compare them.
+	\begin{Def}
+		Let $X\in\mathfrak{X}(M)$ be a smooth vector field and $f\in C^\infty(M)$ be a smooth map. We define the \textit{Lie derivative} of $f$ along $X$ as:
+		$$\mathcal{L}_Xf(p)={d\over dt}\bigg|_0(f\circ Fl_t^X)(p)$$
+	\end{Def}
+	\begin{Obs}
+		It is clear that:
+		$$\mathcal{L}_Xf(p)={d\over dt}\bigg|_0(f(\gamma_p(t)))$$
+		Which in coordinates is:
+		$$\dot{\gamma}^i(t)\partial_i f(p)=Xf(p)$$
+		Thus, the Lie derivative of a function coincides with the directional derivative:
+		$$\mathcal{L}_Xf=df(X)=Xf$$
+		This makes sense since we have no problem in comparing a smooth map in different points along the manifold: it is defined on the whole manifold and not in different spaces.
+	\end{Obs}
+	\begin{Def}
+		Let $X,Y\in\mathfrak{X}(M)$. We define the \textit{Lie derivative} of $Y$ along $X$ as:
+		$$\mathcal{L}_XY(p)={d\over dt}\bigg|_0(Fl_{-t}^X)_*Y_{Fl_t^X}(p)$$
+	\end{Def}
+	The idea is simple: we push-forward (backwards) the vector field $Y$ along the integral curve of $X$. Then we take the limit of the infinitesimal variation.
+	\begin{Theo}
+		$\mathcal{L}_XY=[X,Y]$
+	\end{Theo}
+	\begin{proof}
+		PROVA
+	\end{proof}
+	\begin{Cor}
+		The following properties follow immediately from the previous result:
+		\begin{itemize}
+			\item The Lie derivative of a vector field is a vector field;
+			\item The Lie derviative respects the Jacobi identity;
+			\item The Lie derivative is skwe-symmetric.
+		\end{itemize}
+	\end{Cor}
+	\section{Symmetries}
+	In this section we define the general notion of symmetry and see some properties.
+	\begin{Def}
+		Let $\phi:M\rightarrow M$ be a diffeomorphism, $f\in C^\infty(M)$, $X,Y\in\mathcal{X}(M)$. We say that:
+		\begin{itemize}
+			\item $\phi$ is a symmetry for $f$ if:
+			$$f\circ \phi=f$$
+			\item $X$ is a \textit{local symmetry generator} for $f$ if its flow preserves $f$ i.e. is a symmetry for $f$:
+			$$f\circ Fl_t^X=f$$
+			\item $X$ is a \textit{local symmetry generator} for $Y$ if:
+			$$(Fl_t^X)_*Y=Y$$
+		\end{itemize}
+	\end{Def}
+	\begin{Obs}
+		Clearly, a $X$ is a symmetry for $Y$ iff $\mathcal{L}_XY=0$. In the same way, $X$ generates a local symmetry for $f$ iff $Xf=\mathcal{L}_Xf=0$. This follows immediately from the definition of Lie derivative.
+	\end{Obs}
+	\begin{Obs}
+		Due to the skew symmetry property of the Lie derivative, if $X$ is a symmetry fro $Y$, the contrary is also true.
+	\end{Obs}
+	\begin{Ex}
+		Let us see some examples:
+		\begin{itemize}
+			\item Let $X=\partial_x$ and $Y=\partial_y+\partial_z$ in $\mathbb{R}^3$. Clearly, those vectors commute and so they are a symmetry for one another. One can also look at the pushforward of the local flows to infer this:
+			$$Fl_t^X(x,y,z)=(x+t,y,z)$$
+			This implies:
+			$$(Fl_t^X)_*(x,y,z)=\begin{pmatrix}
+				1&0&0\\
+				0&1&0\\
+				0&0&1
+			\end{pmatrix}$$
+			This clearly sends $Y$ into itself.
+			\item Consider the fields:
+			$$X=y\partial_x\hbox{ and }Y=\partial_y$$
+			defined in $\mathbb{R}^3$. Clearly, those do not commute and the failure of the commutator is the following:
+			$$[X,Y]=-\partial_x$$
+			This is also reflected in the flow non-invariance:
+			$$Fl_t^X(x,y,z)=(yt+x,y,z)$$
+			This implies:
+			$$(Fl_t^X)_*=\begin{pmatrix}
+				1&t&0\\
+				0&1&0\\
+				0&0&1
+			\end{pmatrix}$$
+			Thus:
+			$$(Fl_t^X)_*Y=\begin{pmatrix}
+				1&t&0\\
+				0&1&0\\
+				0&0&1
+			\end{pmatrix}\begin{pmatrix}
+			0\\
+			1\\
+			0
+			\end{pmatrix}=t\partial_x+\partial_y$$
+			And one again sees that the failure corresponds exactly to a translation in the $X$ direction.
+		\end{itemize}
+		\item Consider the function $f(x,y)=x^2+y^2$ and a rotation:
+		$$R=\begin{pmatrix}
+			cos(\theta)&sin(\theta)\\
+			-sin(\theta)&cos(\theta)
+		\end{pmatrix}$$
+		Clearly:
+		$$f\circ R(x,y)=f(xcos(\theta)+ysin(\theta),-xsin(\theta)+ycos(\theta))=$$
+		$$=x^2+y^2=f(x,y)$$
+		Thus the rotation (which is clearly a diffeomorphism) is a symmetry for $f$.
+		
+	\end{Ex}
+	\chapter{Connections on vector bundles}
+	In this chapter we will go through the famous construction of connections on vector bundles. The reader is advised: this is a rather itnricate construction which I personally, for the most part, dislike. The reason for this is that this construction, even if not quite abstract, is inherintly characterized by locality. We will see that it will be necessary to constantly choose local frames of the vector bundle. This I dislike. However, the point is that this construction can be generalized and recovered in the framework of principal bundles, which is far more abstract and elegant. The apparent locality of the following construction will acquire global characteristics in the subsequent analysis on principal connections.
+	\section{What is a connection}
+	In this section we will define the general concept of a connection on a vector bundle. The most important and known case, as we will see, is the one of affine connections i.e. connections that are defined on the tangent bundle.
+	\begin{Def}
+		A \textit{connection} on a vector bundle $E$ over $M$ is a map
+		$$\nabla: \mathfrak{X}(M)\times \Gamma(E)\rightarrow \Gamma(E)$$
+		such that it satisfies the following requests:
+		\begin{itemize}
+			\item $\nabla$ is $\mathbb{R}$-linear and $\mathcal{F}$-linear i.e.:
+			$$\nabla_{cX}ks=ck\nabla_Xs\hbox{ and }\nabla_{fX}=f\nabla_X$$
+			\item $\nabla$ follows Leibniz:
+			$$\nabla_Xfs=df(X)s+f\nabla_X s$$
+		\end{itemize}
+	\end{Def}
+	\begin{Obs}
+		Clearly, one can define a connection also as a map:
+		$$\nabla:\Gamma(E)\rightarrow \Gamma(TM^*\otimes E)$$
+	\end{Obs}
+	\begin{Ex}
+		As an example consider the directional derivative on $\mathbb{R}^n$:
+		$$D(X,Y)=D_XY=XY^i \partial_i$$
+		This is a connection.
+	\end{Ex}
+	\begin{Obs}
+		Pick a local frame $\{e_i:U\rightarrow E\}$ for the bundle. Then, since the connection spits back at us a section, we can expand:
+		$$\nabla_X s=\nabla_X s^ie_i=ds^i(X)e_i+s^i\nabla_X e_i$$
+		This means that a connection is completely specified, once we choose a frame i.e. a trivialization (see REFERENZA) by its action on the frame.
+	\end{Obs}
+	\begin{Def}
+		Let the notation be as above. We have:
+		$$\nabla_X e_i=\omega^j_i(X)e_j$$
+		We call $\omega^j_i$ the \textit{connection form relative to the frame} $e_i$.
+	\end{Def}
+	\begin{Obs}
+		The connection form is indeed a form, in fact:
+		$$\omega\in \Omega^1(M,\mathfrak{gl}(n\mathbb{R}))$$
+	\end{Obs}
+	\section{Existence of a connection}
+	\section{Curvature}
+	In this section we will define the curvature form and the Riemann tensors, together with some related quantities. We will later see that there is a deep connection between those quantities defined on a vector bundle and on a principal bundle.
+	\begin{Def}
+		We define the \textit{Riemann tensor} as:
+		$$R(X,Y)=[\nabla_X,\nabla_Y]-\nabla_{[X,Y]}$$
+	\end{Def}
+	\begin{Obs}
+		By definition the Riemann tensor is a map:
+		$$R:\mathfrak{X}(M)\times \mathfrak{X}(M)\times \Gamma(E)\rightarrow \Gamma(E)$$
+		This is clearly a tensor since it is the difference of two mappings which have as outputs tensors.
+	\end{Obs}
+	\begin{Obs}
+		Having picked a frame for our bundle $\{e_i:U\rightarrow E\}$ we can expand:
+		$$R(X,Y)e_i=\Omega^j_i(X,Y)e_j$$
+	\end{Obs}
+	\begin{Def}
+		Let the notation be as abvoe. We call $\Omega$ the \textit{curvature form}. 
+		$$\Omega\in\Omega^2(M,\mathfrak{gl}(n,\mathbb{R}))$$
+	\end{Def}
+	\begin{Prop}
+		The curvature form satisfies the following structural equation:
+		$$\Omega=d\omega+\omega\wedge \omega$$
+		Where $\omega$ is the connection form relative to any choosen frame.
+	\end{Prop}
+	\section{Gauge transformations on vector bundles}
+	In this section we will go through the procedure to show what happens when we fix a choice of a frame i.e. a gauge for the connection form. We will see that indeed the connection form will mutate into a quite peculiar way.
+	\begin{Def}
+		We define a \textit{local passive gauge transformation on a vector bundle} as a change of local frame.
+	\end{Def}
+	\begin{Prop}
+		Let $\omega$ be the connection form relative to a frame $\{e_i\}$. Suppose $\{f_j\}$ is another frame and $\omega'$ is the connection form relative to this frame. Then:
+		$$\omega'=g^{-1}\omega g+g^{-1}dg$$
+		where $g$ is the matrix-valued transition function corresponding to the local change of reference frame.
+	\end{Prop}
+	\begin{proof}
+		By definition: $\omega'^j_i f_j=\nabla f_i$. Taking $f_j=g^i_je_i$ we apply the Leibniz rule:
+		$$\nabla f_i=\nabla (g^i_je_i)=dg^i_je_i+g^i_j\omega^k_ie_k$$
+		Substituting back: $e_i=(g^{-1})^j_if_j$ we get:
+		$$\nabla f_i=\nabla (g^i_je_i)=(g^{-1})_i^kdg^i_jf_k+g^i_j\omega^k_i(g^{-1})^j_kf_j$$
+		This completes the proof.
+	\end{proof}
+	\begin{Prop}
+		Let the notation be as above. Under a gauge transformation, the curvature form transforms as:
+		$$\omega'=g^{-1}\omega g$$
+	\end{Prop}
+	\begin{proof}
+		Instead of computing the naive substitution we observe: if $e$ is a frame (a matrix in which the columns are the frame's sections) then $R(X,Y)e=e\Omega(X,Y)$
+		This comes from the expansion in REFERENZA. This implies:
+		$$R(X,Y)(f)=R(X,Y)eg=e\Omega g=f(g^{-1}\Omega g)$$
+		This proves the claim.
+	\end{proof}
+	It should be somewhat clear from the previous analysis that it seems more convenient to work only with frames. The framework of vector bundles forces us to choose a set of sections every time. It would be nicer to find a formalism in which a sectin corresponds to a frame. We will see that this allows for a more general definition of a connection.
+	\section{Parallel transport on vector bundles}
+	In this section we discuss the notion of parallel transport, which comes freely with a connection. The idea is that the connectin form allows to "parallely transport" objects accross curves. This will come in handy when we will define geodesics. The only meaningful question now is: what does "parallel" mean?
+	\begin{Prop}
+		Let $\nabla$ be a connection on a vector bundle $E$ over $M$ and let $\gamma:I\rightarrow M$ be a smooth curve in $M$. There is a linear isomorphism from any two close enough points of the curve $\gamma$, called \textit{parallel transport}.
+		$$\phi_t:T_{\gamma(0)}M\rightarrow T_{\gamma(t)}M$$ 
+	\end{Prop}
+	\begin{proof}
+		Take any vector $X_0\in \gamma(0)$. Consider the following equations:
+		$$\nabla_{\dot{\gamma(t)}}X(\gamma(t))=0$$
+		In components and in a frame $e$ we get::
+		$$0=[dX^i(\gamma(t))+X^j\omega^i_j(\dot{\gamma}(t))]e_i$$
+		This is a set of differential equations, which has a unique solution in a small enought neighbourhood of $0$, once we fix an initial condition i.e. $X_{\gamma(0)}=X_0$. We call such a solution the \textit{parallel transport} of $X$ along $\gamma$. The isomorphism is the map which sends $X_0$ into its unique "parallely transported vector". The map has a clear inverse: it is just a matter to look at $\gamma(-t)$ in the aboive equation. The linearity follows from the linearity of the differential equations we solve.
+	\end{proof}
+	\begin{Def}
+		We define the \textit{covariant derivative} induced by a connection $\nabla$ of a vector field $X$ along a curve $\gamma$ as:
+		$$\nabla_{\dot{\gamma}(t)}X$$
+	\end{Def}
+	\begin{Def}
+		We call \textit{geodesic} a curve which is parallel to itself:
+		$$\gamma(t)\hbox{ such that }\nabla_{\dot{\gamma}}\dot{\gamma}(t)=0$$
+	\end{Def}
+	Note that the notion of geodesic is completely independent from the choice of the bundle we are woirking with. We will however be more interested in metric-related geodesics.
+	\section{Metric connections}
+		\section{A more meaningful view on connections}
+	In this section we expose the true nature behind the definition of connection on a vector bundle. Up unitl now, it has been presented sort of a magical construction, god given. The truth is that the idea is actually similar to the one behind the Lie derivative, with some important caveats.\\
+	\\
+	The starting problem is always the same: we would like to take derivatives of tensors i.e. to take the difference between quantities that are defined on different vector spaces. To be explicit, take a smooth vector field $X\in\mathfrak{X}(M)$. We would like to compare $X_p$ with $X_q$ at two different points. This cannot be canonically done: it is true that at any point of the manifold the tangent spaces are isomorphic, but this depends on the choice of a local chart. There is no canonical isomorphism. Thus, we need a new way to differentiate. Consider:
+	Suppose as always that we have a rank $k$ vector bundle $E$ on $M$ with projection $\pi:E\rightarrow M$
+	\begin{Def}
+		Let $(E,M,\pi,\mathbb{R}^k)$ be a vector bundle and let $\pi_*$ be the push-forward of the projection. We define the \textit{vertical subspace} at $p\in E$ as:
+		$$\mathcal{V}_p=Ker(\pi_*|_p)$$
+		We also define the \textit{vertical bundle} or \textit{vertical distribution}:
+		$$\mathcal{V}=\bigsqcup_{p\in E}\mathcal{V}_p\subset TE$$
+	\end{Def}
+	\begin{Prop}
+		Let the notation be as above: then $\mathcal{V}$ is a vector bundle of dimension $k$ on $E$.
+	\end{Prop}
+	\begin{proof}
+		Clearly, $TE$ is a bundle on $E$, and it is a vector bundle of dimension $2dim(E)=2(n+k)$ with $dim(M)=n$. PROVAAA
+	\end{proof}
+	\begin{Obs}
+		We have seen that $\mathcal{V}$ is a vector sub-bundle of $TE$. Thus, we can look at its complement $\mathcal{H}$ so that $TE=\mathcal{V}\oplus\mathcal{H}$. This will be called \textit{horizontal sub-bundle} or \textit{horizontal distribution}.\\
+		\\
+		Clearly, the choice of an horizontal distribution is not at all canonical. Hoever, if we select one horizontal distribution, then there is an automatic homeomorphism:
+		$$Hor_p:T_{\pi(p)}M\longrightarrow \mathcal{H}_p$$
+		This implies that whatever the choice, the dimension of $\mathcal{H}_p$ will always be $n=dim(M)$.
+	\end{Obs}
+	\begin{Def}
+		Let $\gamma:I\rightarrow M$ be a curve on $M$. We call $\tilde{\gamma}:I\rightarrow E$ a \textit{lift} for $\gamma$ if $\pi(\tilde{\gamma})=\gamma$ at all points.
+	\end{Def}
+	\begin{Def}
+		Suppose to have an horizontal distribution $\mathcal{H}$ on $E$. A lift $\tilde{\gamma}$ is called \textit{horizontal} if 
+		$\dot{\tilde{\gamma}}(t)_p=Hor_{\tilde{\gamma}(t)}(\dot{\gamma}(t))$.
+	\end{Def}
+	
+	\chapter{Transversal and Normal connections}
+	\section{The Second Fundamental Form}
+	\begin{Obs}
+		Let $M$ be a Riemannian manifold with a metric $g^M$ and $S\subset M$ a regular submanifold. Then, for any $p\in M$, we can decompose the space:
+		$$T_pM=T_pS\oplus T_pS^\perp$$
+		This decomposition is canonical since the manifold is by assumption endowed with a metric tensor. Clearly the complement is took as the orthogonal complement with respect to the subspace.  
+	\end{Obs}
+	Suppose now that $\nabla^M$ is the Levi-Civita connection on $M$. Then, taking an orthonormal frame $\{X_i\}_{i=1,...,n}$, we can expand:
+	$$\begin{cases}
+		d\theta^\alpha=\theta^\beta\wedge \Gamma^\alpha_\beta\\
+		\Gamma^\alpha_\beta=-\Gamma_\alpha^\beta
+	\end{cases}$$
+	Where $\{\theta^i\}$ are the co-frames of $X_i$. The first condition is clearly the Torsion free condition REFERENZA; while the other is the metric compatibility REFERENZA. Now, if we restrict ourselves to the submanifold $S$, we have:
+	$$\theta^\alpha=0\hbox{ for }\alpha>k$$
+	This implies automatically:
+	$$d\theta^\alpha=0=\theta^\beta\wedge \Gamma^\alpha_\beta\hbox{ with }\beta\leq k, \alpha >k$$
+	\begin{Lm}[\textbf{Cartan's}]
+		If $\{\theta^i\}$ are linear independent forms on $M$ and ${\omega_i}$ are forms such that $\theta^i\wedge \omega_i=0$, then there exist smooth functions $A_{ij}$ such that:
+		$$\omega_i=A_{ij}\theta^j$$
+	\end{Lm}
+	\begin{proof}
+		PROVARE
+	\end{proof}
+	\begin{Obs}
+		By the previous lemma we can rewrite:
+		$$\Gamma^\alpha_\beta=f_{\beta\gamma}^\alpha \theta^\gamma$$
+		with $\alpha>k$ and $\beta,\gamma\leq k$. This begs to be fully contracted. Define:
+		$$N:TS\otimes TS\longrightarrow TS^\perp$$
+		$$N(X,Y)=f_{\beta\gamma}^\alpha \theta^\beta\otimes \theta^\gamma \otimes X_\alpha(X,Y)$$
+		with respect to the selected frame.
+	\end{Obs}
+	We can check how this behaves:
+	$$N(U,V)=\sum_{\alpha>k,\beta,\gamma\leq k}f_{\beta\gamma}^\alpha\theta^\beta(U)\theta^\gamma(V)X_\alpha=\sum_{\alpha>k,\beta,\gamma\leq k}\mu_{\beta}^\alpha(V)U^\beta X_\alpha$$
+	Where we have implicitly used the Cartan's Lemma. This clearly implies:
+	$$N(U,V)=(\nabla^M_VU)^\perp=(\nabla^M_UV)^\perp$$
+	\begin{Def}
+		We define the \textit{second fundamental form} as:
+		$$\mathbb{II}(U,V)=(\nabla^M_VU)^\perp$$
+		Or equivalently:
+		$$\mathbb{II}(U,V)=N(U,V)$$
+	\end{Def}
+	The second fundamental form is thus a symmetric form:
+	$$\mathbb{II}\in Sym^2(TS^*)\otimes TS^\perp$$
+	\section{The Gauss equation}
+	\section{The Ricci equation}
+	\section{The Codazzi equation}
 	\chapter{Principal bundles}
 	\chapter{Ehresmann geometries}
 	\chapter{Cohomology}
