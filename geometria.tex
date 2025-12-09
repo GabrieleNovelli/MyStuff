@@ -1090,105 +1090,72 @@
 				One then puts everything together.
 			\end{itemize}
 		\end{Exe}
+		\section{Differential forms}
+		In this section we give the basic notion of differential forms. Those are an extremely useful tool whoch finds many applications everywhere.
+		\begin{Def}
+			We define a $k$-form as a smooth section of the tensor bundle:
+			$$\omega\in\Omega^k(M)$$
+		\end{Def}
+		\begin{Obs}
+			Clearly, in a coordinate chart we can write:
+			$$\omega={1\over k!}\omega_{i_1,...,i_k}dx^{i_1}\wedge ...\wedge dx^{i_k}$$
+		\end{Obs}
+		\begin{Ex}
+			Show that if $\omega$ is a $k$-form and $X_1,...,X_k$ are vector fields then:
+			$$\omega(X_1,...,X_k)=det(\omega^iX_j)$$
+			This is just a matter of expanding in coordinates all of the objects. From REFERENZA we have:
+			$$dx^{i_1}\wedge ...\wedge dx^{i_k}(\partial_{j_1},...,\partial_{j_k})={1\over k!}\sum_\sigma sgn(\sigma) dx^{i_{\sigma(1)}}(\partial_{j_1})dx^{i_{\sigma(2)}}(\partial_{j_2})...dx^{i_{\sigma(k)}}(\partial_{j_k})=$$
+			$$={1\over k!}\sum_\sigma sgn(\sigma) \delta^{i_{\sigma(1)}}_{j_1}\delta^{i_{\sigma(2)}}_{j_2}...\delta^{i_{\sigma(k)}}_{j_k}=det(\delta^i_j)$$
+		\end{Ex}
 	\chapter{Distributions}
 	In this chapter we introduce the notion of distribution. This is an extremely wide topic, which evolves mainly around the infamous Frobenius theorem. The idea is simple: when does a distributuion of tangent vectors define a smooth manifold?
-		\section{The Frobenius theorem}
-		In this section we study foliations and distributions. The final aim is to prove the Frobenius theorem, an extremely important result in smooth geometry.
-		\begin{Def}
-			We call \textit{distribution} $D$ on a manifold $M$ a smooth assignment $p\mapsto D_p\subset T_pM$ such that: for any $p\in M$ one can find $U$ open containing $p$ such that for all $q\in U$ there is a collection of vector fields $\{X_i(q)\}$ that span $D_q$.
-		\end{Def}
-		Clearly, a distribution defines a subset of the tangent bundle $TM$.
-		\begin{Def}
-			A distribution is called regular of a \textit{constant rank} if the dimension of all spaces is the same. 
-		\end{Def}
-		\begin{Prop}
-			A constant rank distribution defines a sub-bundle of the tangent bundle.
-		\end{Prop}
-		\begin{proof}
-			This is clear from theorem REFERENZA. (L.TU 20.4 Geometry).
-		\end{proof}
-		\begin{Def}
-			We call a distribution \textit{involutive} if $[D,D]\subset D$ i.e. it is closed under the Lie braket.
-		\end{Def}
-		It is useful to see some easy examples of distributions.
-		\begin{Ex}
-			\begin{itemize}
-				\item Consider $\mathbb{R}^n$ with the usual smooth structure. We can easily see that $\{{\partial\over \partial x^1},...,{\partial\over \partial x^k}\}$ with $k\leq n$ is a constant rank distribution.
-				\item Let $X$ be a nowhere vanishing vector field on $M$. Then, at any point $p\in M$ we have a rank 1 distribution defined as $p\mapsto X_p$.
-			\end{itemize}
-		\end{Ex}
-		\begin{Def}
-			We say that a distribution $D\subset TM$ is \textit{completely integrable} if for any $p\in M$ there is a chart $(U,\phi)$ of $M$ such that:
-			\begin{itemize}
-				\item $\phi(U)$ is a cube in $\mathbb{R}^n$;
-				\item $D$ is spanned by the first $k$ coordinate vector fields $\{{\partial\over \partial x^1},...,{\partial\over \partial x^k}\}$.
-			\end{itemize}
-			A chart with those qualities is called \textit{flat} for $D$.
- 		\end{Def}
- 		\begin{Obs}
- 			Clearly, in any flat chart, we have some immersed submanifolds, defined by keeping the corresponding coordinates fixed.
- 		\end{Obs}
- 		\begin{Def}
- 			Let $D\subset TM$ be a completely integrable constant rank distribution. Then the immersed submanifold defined by it are called \textit{integral manifolds}.
- 		\end{Def}
- 		\begin{Theo}[\textbf{Frobenius}]
- 			A distribution is involutive if and only if it is completely integrable.
- 		\end{Theo}
- 		\begin{proof}
- 			The proof is hard. We divide it into 2 blocks:
- 			\begin{itemize}
- 				\item Suppose $D$ is an involutive distribution. We first prove that the distribution admits a base of commuting vectors. Let $(U,\phi)$ be any chart around any point and let $\{\partial_i\}$ be the induced base for the tangent space. Let $Y_1,...,Y_k$ be a base for $D$ in this open set, then:
- 				$$Y_i=a^j_i\partial_j$$
- 				where the indices $j$ go from $0$ to $n$, while $i$ from $0$ to $k$.\\
- 				Since the vectors $Y_i$ are by assumption linearly independent, the submatrix $a^i_j$ is invertible in the indices $i,j\in[1,k]$. Thus, setting $X_i=(a^{-1})^j_i Y_j$ we get new basis of vectors, which are of the form:
- 				$$X_i=\partial_i+(a^{-1})^j_i a^l_j \partial_l$$
- 				where in the last sum we have $l>k$.
- 				Clearly, since the distribution is involutive, we must have:
- 				$$[X_i,X_j]\in D$$
- 				However, by construction, $[X_i,X_j]\in span\{\partial_{k+1},...,\partial_n\}$. This implies that $X$ is the desired base of commuting vectors.\\
- 				\\
- 				We are thus allowed to choose a chart $(U,\phi)$ in which the base for the distribution is made of commuting vevtors. In such base, those vector field are pushed forward to base coordinates:
- 				$$\phi_*(X_i)=\partial_i$$
- 				This proves the first part.
- 				\item Suppose that the distribution $D$ is completely integrable. Take a point $p\in U\subset M$ and a chart around it $(U,\phi)$. Since the distribution is integrable, we assume that $\phi$ is a flat chart. This means that the tangent distribution space at any point $D_p$ is spanned by the first $k$-coordinates, which commute:
- 				$$[\partial_i,\partial_j]=0$$
- 				Since $\phi$ is a diffeomorphism, we have:
- 				$$[\phi^{-1}_*\partial_i,\phi^{-1}_*\partial_j]=\phi_*[\partial_i,\partial_j]=0$$
- 				This proves that the distribution is involutive.
- 			\end{itemize}
- 		\end{proof}
- 		\begin{Def}
- 			Let $M$ be a smooth manifold. We call \textit{$k$-dimensional foliation} $\mathcal{F}$ a family of $k$-dimensional immersed submanifolds of $M$ such that:
- 			\begin{itemize}
- 				\item the elements of $\mathcal{F}$ are disjoint, connected, non empty, immersed $k$-dimensional submanifolds;
- 				\item for any $p\in M$ there is a chart $(U,\phi)$ such that $\phi(U)$ is a cube in $\mathbb{R}^n$ and each of the elements of $\mathcal{F}$ intersects $U$ in either the empty set or a slice defined by keeping $n-k$ cooridnate constant: $x_{k+1}=Const,...x^n=Const$.
- 			\end{itemize}
- 			Such a chart is called \textit{flat} for $\mathcal{F}$. The elements of the foliation are called \textit{leaves}.
- 		\end{Def}
- 		\begin{Ex}
- 			\begin{itemize}
- 				\item The collection of hyperplanes $x_{k+1}=Const,...x^n=Const$ is a foliation of $\mathbb{R}^n-\{0\}$.
- 				\item The family of spheres of increasing radius $S^{n-1}_r$ is a foliation of $\mathbb{R}^n-\{0\}$. This is pretty easy to prove: first of all, the spheres do not intersect, are all connected, non empty and are all immersed. As for the flat chart problem, take any point $\vec{x}\in \mathbb{R}^n$ and a ball around it of radius $\varepsilon$. Clearly, some of the spheres will intersect this ball and, in spherical coordinates, the radius coordinate is kept constant.
- 			\end{itemize}
- 		\end{Ex}
- 		\begin{Obs}
- 			It is not hard to see that given a completely integrable distribution we automatically have a foliation. In fact, each flat chart defines a family of submanifolds (locally). Those do not intersect since each one correspond to keeping fixed some coordinate of the base manifold $M$. The connectedness is found by taking the maximally connected generated submanifold. In other words:\\
- 			\\
- 			Suppose to take a point $p$ in $M$ and a flat chart $(U,\phi)$ for the distribution $D$. Then, i can define inside $U$ the submanifold corresponding to $x^{k+1}=0,...,x^n=0$. Taking another overlapping chart $(V,\psi)$ i can do the same if I choose it to be flat. By repeating the same argument for all the connected component of $p$, I get a connected submanifold.
- 		\end{Obs}
- 		As a corollary of Frobenius theorem we state:
- 		\begin{Cor}
- 			$D$ is an involutive distribution of constant rank if and only if it defines a foliation.
- 		\end{Cor}
- 		\section{A generalization of Frobenius theorem}
+ 		\section{Generalized distributions}
  		In this section we go through an important generalization of Frobenius theorem. The idea is the same, however we would like to somewhat drop the requirement of the constant rank.
  		\begin{Def}
- 			A distribution $D$ is called \textit{homogeneous} if it is invariant under the flow of its vector field, i.e.:
+ 			A \textit{distribution} $D$ is a pointwise assignment $p\mapsto D_p\subset T_pM$. If this assignment is smooth the distribution is called \textit{smooth}. If for any $p$ one has that $D_p$ has dimension $k$ the distribution is called constant rank.  		
+ 		\end{Def}
+ 		\begin{Ex}
+ 			Let us now see some easy examples of distributions:
+ 			\begin{itemize}
+ 				\item Consider the map: $(x,y,z)\mapsto (z\partial_x,\partial_y,0)$ in $\mathbb{R}^3$. This is clearly a smooth distribution. However, it is not constant rank. In fact we see that in the plane $z=0$ the distribution loses a direction.
+ 				\item Consider the \textit{Euler vector field:}
+ 				$$E=x\partial_x+y\partial_y$$
+ 				This is a distribution in $\mathbb{R}^2$ but it is not constant rank.
+ 				\item An easy example of a constant rank distribution is the trivial one:
+ 				$$\{\partial_x,\partial_y\}$$
+ 			\end{itemize}
+ 		\end{Ex}
+ 		\begin{Prop}
+ 			If $D$ is a smooth distribution of constant rank $k$, it defines a sub-bundle of the tangent bundle.
+ 		\end{Prop}
+ 		\begin{proof}
+ 			This is obvious from REFERENZA.
+ 		\end{proof}
+ 		\begin{Def}
+ 			A distribution is called involutive if it is closed under the Lie braket: $[D,D]\subset D$.
+ 		\end{Def}
+ 		\begin{Prop}
+ 			Let $D$ be an involutive constant rank distribution. Then, locally, $D$ has a base of commuting vector fields.
+ 		\end{Prop}
+ 		\begin{proof}
+ 			Take any base, local, of $D$: $\{Y_i\}_{i=1,...,k}$. In a chart we will have:
+ 			$$Y_i=Y_i^j\partial_j$$
+ 			Where $j$ goes from $1$ to $n$ and $i$ from $1$ to $k<n$. This defines a matrix $[Y_i^j]$, which is not invertible. However, since the vector fields are a base for $D$, they are linearly independent. Without losing generality, we can thus restrict ourselves to the $k\times k$ sub-matrix of the first $k$ coordinates. This will be invertible. Define:
+ 			$$X_l=(Y^{-1})^i_lY_i=\partial_l+(Y^{-1})^i_lY_i^j\partial_j$$
+ 			It is clear that in the right-hand side, the first term has the index $l$ travelling from $1$ to $k$, while the second term has the index $j$ goes from $k+1$ to $n$. Now, by construction:
+ 			$$[X_l,X_m]=\hbox{span}\{\partial_{k+1},...,\partial_n\}$$
+ 			However, since the distribution is involutive, we must have:
+ 			$$[X_l,X_m]=f_{lm}^bX_b$$
+ 			This is absurd. Therefore $\{X_i\}$ commute.
+ 		\end{proof}
+ 		\begin{Def}
+ 			A smooth distribution $D$ is called \textit{homogeneous} if it is invariant under the flow of its vector field, i.e.:
  			$$(Fl_t^X)_*D=D_{Fl^X_t}$$
  		\end{Def}
  		\begin{Ex}
  			We now make some example to better grasp the meaning of the previous definition.
  			\begin{itemize}
+ 				\item Consider any nowhere vanishing vector field $X\in\mathfrak{X}(M)$. THis defines a distribution: $p\mapsto X_p$. This distribution is trivially homogeneous, involutive and of cosntant rank $1$.
  				\item Consider the distribution:
  				$$D=\{\partial_x,\partial_y\}$$
  				defined in $\mathbb{R}^3$. Clearly, the integral curves of those fields are:
@@ -1199,7 +1166,8 @@
  					0 & 1 & 0\\
  					0 & 0 & 1
  				\end{pmatrix}$$
- 				This clearly preserves the distribution.
+ 				Thus $(FL_t^{\partial_x})_*\partial_y=\partial_y$
+ 				At the same time $\partial_y\big|_{FL_t^{\partial_x}(p)}$
  				The same goes for $\partial_y$.
  				\item Consider the distribution:
  				$$D=\{y\partial_x,\partial_y\}$$
@@ -1213,10 +1181,25 @@
  				\end{pmatrix}$$
  				And consequently:
  				$$(Fl_t^X)_*\partial_y=t\partial_x+\partial_y$$
+ 				\item Consider the distribution:
+ 				$$D=\{\partial_x,x\partial_x+y\partial_y\}$$
+ 				defined in $\mathbb{R}^3$. Clearly, the integral curves of those fields are:
+ 				$$\gamma_1(t)=(x_0+t,y_0,z_0)\hbox{ and }\gamma_2(t)=(xe^t,ye^t)$$
+ 				If now we compute the push-forward:
+ 				$$(Fl_t^X)_*=\begin{pmatrix}
+ 					1 & 0 & 0\\
+ 					0 & 1 & 0\\
+ 					0 & 0 & 1
+ 				\end{pmatrix}$$
+ 				$$(Fl_t^X)_*(x\partial_x+y\partial_y)=(x\partial_x+y\partial_y)$$
+ 				However, even if this matrix is the identity, this flow does not preserve the vector field since:
+ 				$$(x\partial_x+y\partial_y)\big|_{Fl_t^{\partial_x}(x,y,z)}=(x\partial_x+(y+t)\partial_y)$$
  			\end{itemize}
- 			It is worth noticing that the distribution in the first example is involutive, while the second isn't.
+ 			It is worth noticing that the distribution in the first example is involutive, while the other aren't.
  		\end{Ex}
- 		We now re-define the notion of adapted chart, dropping the costant rank requirement.
+ 		\begin{Obs}
+ 			Notice that in all our previous definitions we did not require the distribution to be constant rank.
+ 		\end{Obs}
  		\begin{Def}
  			An \textit{adapted chart} around $p\in M$ for the distribution $D$ is a chart $(U,\phi)$ such that:
  			\begin{itemize}
@@ -1242,6 +1225,26 @@
  			$$\phi(x,y,z)=(x,y,z)$$
  			Clearly, we have that condition (ii) of REFERENZA is satisfied. Moreover, taking any possible slice of fixed $z$, the distribution has constant rank. The only difference is that in the slice defined by $z=0$ the rank drops to 1.
  		\end{Ex}
+ 		\begin{Def}
+ 			Let $D$ be a smooth distribution on $M$. A connected submanifold of $M$ $\psi:N\rightarrow M$ is called an \textit{integral submanifold of $D$ through $p\in M$} if:
+ 			$$p\in\psi(N)\hbox{ and }\psi_{*,q}(T_qN)=D_{\psi(q)}$$
+ 			for all $q\in N$.
+ 			A smooth distribution is called \textit{integrable} if for all $p\in M$ there is an integral submanifold of $D$.
+ 		\end{Def}
+ 		\begin{Obs}
+ 			The idea behind the above distribution can be stated in a simpler way: a distribution is integrable if it is the tangent space of some submanifold.
+ 		\end{Obs}
+ 		\begin{Ex}
+ 			Let us now see some examples of integrable distributions.
+ 			\begin{itemize}
+ 				\item Consider the usual easy distribution:
+ 				$$(x,y,z)\mapsto\{\partial_x,\partial_y\}$$
+ 				This is integrable: in fact the integral submanifolds in  $\mathbb{R}^3$ are defined like $z=const$.
+ 				\item Consider a nowhere vanishing vector field $X\in\mathfrak{X}(M)$. This makes a rank $1$ smooth distribution, which is integrable: the integral manifolds are the maximal integral curves of the vector field.
+ 			\end{itemize}
+ 		\end{Ex}
+ 		\section{Generalized Frobenius theorem}
+ 		In this section we prove Frobenius theorem, with a nice extension found by Stefan and Sussmann. It is worth mentioning that Frobenius theorem is a fundamental result in differential geometry, as it gives relates nicely the concepts of involutivity and integrability of a distribution. Usually, among the requirements for the distribution, there is "constant rank". However, thanks to Stefan and Sussmann, we are able to extend Frobenius theorem for distributions which are also not constant rank. The idea is incredibly simple: it is fine if the rank changes, as long as it changes on different submanifolds.
  		\begin{Theo}[\textbf{Stefan and Sussmann}]
  			Let $D$ be a smooth distribution on a manifold $M$. The following statements are equivalent:
  			\begin{itemize}
@@ -1252,10 +1255,10 @@
  			\end{itemize}
  		\end{Theo}
  		\begin{proof}
- 			We concatenate the proof:
+ 			We concatenate the proof in different steps:
  			\begin{itemize}
  				\item[$(i)\implies(ii)$]
- 				Suppose $D$ is integrable. Then any point $p\in M$ is contained in an integral manifold. Taking any two vectors tangent to $p$ in the direction of their distribution, they belong to a well defined tangent space and so their commutator will also belong to the distribution. This proves the involutivity. Moreover, sicne an integral manifold has constant rank, the integral curves of such vectors will also have constant rank.
+ 				Suppose $D$ is integrable. Then any point $p\in M$ is contained in an integral manifold. Taking any two vectors tangent to $p$ in the direction of their distribution, they belong to a well defined tangent space and so their commutator will also belong to the distribution. This proves the involutivity. Moreover, since an integral manifold has constant rank, the integral curves of such vectors will also have constant rank.
  				\item[$(ii)\implies (iii)$]
  				Suppose $D$ is involutive and has constant rank along its integral curves. Take any vector $X\in D$ around $p\in M$ and take a frame for the distribution around this point, like $\{Y_i\}_{i=1,...,r}$. Define the curves:
  				$$\gamma_i(t)=(Fl_{-t}^X)_*Y_i(Fl_t^X(p))$$
@@ -1267,18 +1270,75 @@
  				$$\dot{\gamma_i}(t)=(Fl_{-t}^X)_*[X,Y_i]_{Fl_t^X(p)}$$
  				The distribution is involutive and so the commutator still belongs to $D$. Moreover, the distribution has constant rank along the integral curves so the fields $(Fl_t^X)_*Y_i$ span the distribution along the curves. Moreover, we have, by construction:
  				$$(Fl_t^X)_*\gamma_i=Y_i(Fl_t^X(p))$$ 
- 				This proves the claim.
- 				\item[$(ii)\implies (iv)$]
- 				Suppose the distribution is involutive, by REFERENZA we can find a local base of commuting vector fields around any point. From REFERENZA, since we have commuting fields, we can use them to make some coordinates:
- 				$$\{\partial_1,...,\partial_r,\partial_{r+1},...,\partial_n\}$$
- 				Since the distribution has constant rank along its integral curves, moving along the directions spanned from the first $r$ vectors produces no change in rank. This is clearly an adapted chart.
+ 				The above relation implies the following set of equations:
+ 				$$\dot{\gamma_i}(t)=\lambda^j_i\gamma_j(t)$$
+ 				Given the initial condition $\gamma(0)\in D_p$, since the flux of the fields spans the distribution, $\gamma_i$ is inside the distribution at any $t$.
+ 				\item[$(iii)\implies (iv)$]
+ 				Suppose the distribution is homogeneous. Take a local frame $\{X_i\}_{i=1,...,r}$ for the distribution $D$ around the point $p$. This is always possible since the distribution is smooth. This can locally be completed to a frame $\{X_1,...,X_n\}$. Define the map:
+ 				$$\phi(t_1,...,t_n)=Fl_{t_1}^{X_1}\circ...\circ Fl_{t_n}^{X_n}$$
+ 				Clearly, $\phi(0,...,0)$ is a vector space isomorphism, since we have selected a local frame around $p$. This means that we can find a small neighbourhood of $(0,...,0)$ where $\phi$ is aa diffeomorphism. We thus define the chart $(U,\phi^{-1})$ in this little set. It remains to show that this is the adapted chart. Clearly, $\{\partial_i\}_{i=1,...,r}$ belong to $D$ by construction. Fixing a slice $(t_1,...,t_r,\vec{t})$ we can clearly move along the integral curves of $D$. Thus, by homogeneity, the rank of the distribution is constant on it.
  				\item[$(iv)\implies (i)$]
  				If we have an adapted chart ant any $p$, it means that locally we have that $p$ is the point with the lowest rank possible, along each slice. In particular, $\phi^{-1}(]-\varepsilon,\varepsilon[^r\times 0)$ is an integral manifold of $D$.
  			\end{itemize}
  		\end{proof}
+ 		\begin{Theo}[\textbf{Frobenius}]
+ 			A distribution is involutive if and only if it is integrable.
+ 		\end{Theo}
  		\begin{Obs}
  			Frobenius theorem follows as a corollary of the previous theorem, in the assumption of $D$ being constant rank.
  		\end{Obs}
+ 		\section{Generalized Foliations}
+ 		In this section we give the notion of foliation, see some examples and look at some results. Once again, we try to give definitions without the requirement of the rank being constant. This is because we would like to attach to the notion of involutivity the notion of foliation: an involutive distribution foliates space.
+ 		\begin{Def}
+ 			Let $M$ be a smooth manifold. We call $\mathcal{F}$ a \textit{foliation} of $M$ if:
+ 			\begin{itemize}
+ 				\item $\mathcal{F}$ is a set of connected, disjoint, non-empty submanifolds of $M$, called \textit{leaves} $\mathcal{L_\mathcal{F}}$;
+ 				\item for every point $p\in M$ there is a chart $(U,\phi)$ such that:
+ 				\begin{itemize}
+ 					\item[(i)] $\phi(U)$ is  a cube in $\mathbb{R}^n$;
+ 					\item[(ii)] The leaves are invariant under the flows of the first $r$ vector fields $\{\partial_1,...,\partial_r\}$ with $dim(\mathcal{L}_\mathcal{F})=r$.
+ 				\end{itemize}
+ 			\end{itemize}
+ 		\end{Def}
+ 		\begin{Obs}
+ 			If every leaf has the same dimension $k$, then condition $2$ is eequivalent to saying that the intersection $\phi(U\cap \mathcal{L}_\mathcal{F})$ is a union of slices $$]-\varepsilon,\varepsilon[^{r}\times \vec{x}$$
+ 			This follows from the fact that a foliation defines a distribution and, if it is constant rank then also the distribution will be. Moreover, the requirement $i,ii$ translate to the distribution having an adapted chart at each point. By observation REFERENZA the claim follows.
+ 		\end{Obs}
+ 		\begin{Obs}
+ 			Once again, condition $ii$ implies that the rank of the foliation is locally non decreasing.
+ 		\end{Obs}
+ 		\begin{Ex}
+ 			Here are some examples of foliations.
+ 			\begin{itemize}
+ 				\item Clearly in $\mathbb{R}^3$ the set of planes $x=const$ makes a constant rank foliation. The fistribution this defines is $\{\partial_x\}$.
+ 				\item The family of spheres of increasing radius $S^{n-1}_r$ is a foliation of $\mathbb{R}^n-\{0\}$. This is pretty easy to prove: first of all, the spheres do not intersect, are all connected, non empty and are all immersed. As for the flat chart problem, take any point $\vec{x}\in \mathbb{R}^n$ and a ball around it of radius $\varepsilon$. Clearly, some of the spheres will intersect this ball and, in spherical coordinates, the radius coordinate is kept constant.
+ 			\end{itemize}
+ 			We now need some work to prove quite important results.
+ 		\end{Ex}
+ 		\begin{Lm}
+ 			Let $D$ be a distribution on $M$.
+ 			\begin{itemize}
+ 				\item If $N_{1,2}\subset M$ are integral manifolds of $D$ and are not disjoint, then $N_1\cap N_2$ is open and $N_1\cap N_2$ has a smooth structure which coincide with the ones induced from $N_{1,2}$. Moreover, there is a unique smooth structure on $N_1\cap N_2$ for which $N_1,N_2$ are open submanifolds and $N_1\cap N_2$ is an integral manifold of $D$;
+ 				\item Let $N\subset M$ be an integral manifold of $D$. If any slice $U_{\vec{x}}$ if an adapted chart at any point intersects $N$, then it is also an integral manifold.
+ 			\end{itemize}
+ 		\end{Lm}
+ 		\begin{proof}
+ 			We divide the proof in two parts:
+ 			\begin{itemize}
+ 				\item The dimension of $D$ on $N_1,N_2$ coincide by construction. Take a point $p\in N_1\cap N_2$ and a local generating family for $D$ around it: $\{X_1\}_{i=1,...,r}$ The restriction of those fields to $U\cap N_i$ defines a local diffeomorphism:
+ 				$\phi^i(t-1,...,t_n)=Fl_{t_1}^{X_1}\circ Fl_{t_2}^{X_2}\circ ...\circ Fl_{t_n}^{X_n}$
+ 				This is clearly implying $\phi^1=\phi^2$ in the intersection: this proves that the smooth structure on $N_1\cap N_2$ induced by both is the same. By compatibility of the smooth strucutres of $N_1,N_1\cap N_2,N_2$, the second part of the claim is also proved.
+ 				\item Suppose that a slice 
+ 				$$U_{\vec{x}}=\phi^{-1}(]-\varepsilon,\varepsilon[^r,\vec{x})$$
+ 				intersects the integral manifold $N$. Then, from REFERENZA, since the rank is locally non decreasing and the slice has constant rank, it is an integral manifold. Note that $N\cap U$ is open by the previous result, in $N$. Since the topology of $N\cap U$ is induced by the one of a smooth manifold, the number of slices $U_{\vec{x}}$ that intersects it must be second countable. The uniqueness is clear by construction.
+ 			\end{itemize}
+ 		\end{proof}
+ 		\begin{Theo}
+ 			Let $D$ be an integrable distribution over $M$. Then for every $p\in M$ there is a unique maximal integral manifold of $D$.
+ 		\end{Theo}
+ 		\begin{proof}
+ 			Take $p\in M$ and take the union $N_p$ of all possible integral manifolds passing through it. By construction, they will have the same dimension. By lemma REFERENZA, this union has a smooth atlas induced by the integral manifolds, since their number is countable.
+ 		\end{proof}
 	\chapter{Lie theory}
 	In this chapter we discuss Lie theory. We will go through the basic definitions and properties of Lie groups, Lie algebras and some representation theory. All of those are at the core of theoretical physics, as they represent the main instruments of particle physics and are at the core of almost all other theories.
 	\section{Lie groups}
@@ -1610,6 +1670,35 @@
 		Thus the rotation (which is clearly a diffeomorphism) is a symmetry for $f$.
 		
 	\end{Ex}
+	\chapter{Metric manifolds}
+	\section{Metrics}
+	\begin{Def}
+		Let $M$ be a smooth manifold. A \textit{metric} on $M$ is a smooth assignment to any $p\in M$ of a symmetric, bilinear, non degenerate product $g$.\\
+		\\
+		If $g$ is positive definite then we call it a Riemannian metric. If it is not positive definite we call it Pseudo-Riemannian.
+		\\\\
+		We call a manifold endowed with a metric a \textit{metric manifold} or \textit{Riemannian manifold, or PSeudo-Riemannian manifold}.
+	\end{Def}
+	\begin{Obs}
+		Equivalently, a metric is a section $\Gamma(Sym(TM\otimes TM))$ which is also has the other properties.
+	\end{Obs}
+	In general, very similar properties hold for Riemannian and Pseudo-Riemannian metrics.
+	\begin{Ex}
+		The most famous example of a Pseudo-Riemannian manifold is the Minkowsky space of special relativity.
+		$$(\mathbb{R}^4,\eta)$$
+		Where $\eta=diag(-1,1,1,1)$ or the opposite signature.
+	\end{Ex}
+	\begin{Theo}
+		A Pseudo-Riemannian metric is always diagonalizable pointwise through an orthonormal frame. From the spectral theore, since in coordinates the metric is pointwise a symmetric matrix, it can be diagonalized. Note that, under a change of coordinates:
+		$$g\mapsto \Lambda^T g\Lambda$$
+		This comes from the fact that $g$ is a tensor. This formula is completely different from the regular change of basis in linear algebra. However, for a symmetric matrix the change of basis matrices are orthogonal. Thus the inverse is the transpose.
+	\end{Theo}
+	\begin{Obs}
+		The above theorem is valid \textit{pointwise}!!
+	\end{Obs}
+	\begin{Def}
+		Let $g$ be a Pseudo-Riemannian metric on $M$.
+	\end{Def}
 	\chapter{Connections on vector bundles}
 	In this chapter we will go through the famous construction of connections on vector bundles. The reader is advised: this is a rather itnricate construction which I personally, for the most part, dislike. The reason for this is that this construction, even if not quite abstract, is inherintly characterized by locality. We will see that it will be necessary to constantly choose local frames of the vector bundle. This I dislike. However, the point is that this construction can be generalized and recovered in the framework of principal bundles, which is far more abstract and elegant. The apparent locality of the following construction will acquire global characteristics in the subsequent analysis on principal connections.
 	\section{What is a connection}
@@ -1649,7 +1738,7 @@
 		$$\omega\in \Omega^1(M,\mathfrak{gl}(n\mathbb{R}))$$
 	\end{Obs}
 	\section{Existence of a connection}
-	\section{Curvature}
+	\section{Curvature and Torsion}
 	In this section we will define the curvature form and the Riemann tensors, together with some related quantities. We will later see that there is a deep connection between those quantities defined on a vector bundle and on a principal bundle.
 	\begin{Def}
 		We define the \textit{Riemann tensor} as:
@@ -1673,6 +1762,51 @@
 		$$\Omega=d\omega+\omega\wedge \omega$$
 		Where $\omega$ is the connection form relative to any choosen frame.
 	\end{Prop}
+	\begin{proof}
+		This is  aboring straightforward calculation in a frame:
+		$$R(X,Y)e_i=[\nabla_X,\nabla_Y]e_i-\nabla_{[X,Y]}e_i$$
+		Since $\nabla_Ye_i=Y^j\omega_{ji}^ke_k$ and the covariant derivative respects the Leibniz rule, we have:
+		$$\nabla_X\nabla_Ye_i=X^l\nabla_l(\omega_{i}^k(Y)e_k)=X(\omega_{i}^k(Y)e_k)+\omega_{j}^k(Y)\nabla_X e_k$$
+		So we get:
+		$$R(X,Y)e_i=X(\omega_{i}^k(Y)e_k)+\omega_{i}^k(Y)\nabla_Xe_k-Y(\omega_{i}^k(X)e_k)-\omega_{j}^k(X)\nabla_Y e_k-\omega^k_i([X,Y])e_k=$$
+		$$=X(\omega_{i}^k(Y)e_k)-Y(\omega_{i}^k(X)e_k)+\omega_{i}^k(Y)\omega_{k}^l(X)e_k-\omega_{i}^k(X)\omega_{k}^l(Y)e_k-\omega^k_i([X,Y])e_k$$
+		Now, since from REFERENZA we got:
+		$$d\omega(X,Y)=X\omega(Y)-Y\omega(X)-\omega([X,Y])$$
+		And we have defined in REFERENZA $\omega\wedge \omega(X,Y)=\omega(X)\omega(Y)-\omega(Y)\omega(X)$, we get the desired result.
+	\end{proof}
+	This is called \textit{second structural equation.}
+	\begin{Def}
+		We define the \textit{torsion tensor} of a connection on the tangent bundle as:
+		$$T(X,Y)=\nabla_XY-\nabla_YX-[X,Y]$$
+	\end{Def}
+	\begin{Obs}
+		Note that by construction, the torsion tensor becomes a vector field when fed with 2 vectors $T(X,Y)\in\mathfrak{X}(M)$. Once we choose a frame, the torsion tensor can be expanded:
+		$$T(X,Y)=\tau(X,Y)^ie_i$$
+		Where $\{e_i\}$ is a frame for the tangent bundle.
+	\end{Obs}
+	\begin{Prop}
+		The torsion tensor respects the following structural equation:
+		$$\tau^i=d\theta^i+\omega^i_j\wedge \theta^j$$
+		where $\{\theta^i\}$ is the co-frame to the selected frame $\{e_i\}$.
+	\end{Prop}
+	\begin{proof}
+		This is a straightforward calculation. The only caveat is that we can expand any vector field $X$ with the co-frame:
+		$$X=\theta^i(X)e_i\hbox{ and }Y=\theta^i(Y)e_i$$
+		Consider:
+		$$\nabla_XY=X\theta^i(Y)e_i+\theta^j(Y)\omega_j^i(X)e_i$$ 
+		The same expansion is valid for $\nabla_YX$. Then:
+		$$\tau^i(X,Y)=X\theta^i(Y)-Y\theta^i(X)+\theta^j(Y)\omega_j^i(X)-\theta^j(X)\omega_j^i(Y)-\theta^i([X,Y])$$
+		Now recall that:
+		$$d\theta^i(X,Y)=X\theta^i(Y)-Y\theta^i(X)-\theta^i([X,Y])$$
+		Moreover, from REFERENZA, the remaining term group up like:
+		$$d\tau^i=d\theta^i+\theta^j\wedge \omega^i_j$$
+	\end{proof}
+	This is called \textit{first structural equation.}
+	\begin{Obs}[\textit{\textbf{The meaning of Torsion}}]
+		Notice that in the case of $0$ torsion, if two vector fields commute then the difference:
+		$$\nabla_XY-\nabla_YX=0$$
+		Thus, moving $X$ in a parallel way along $Y$, the change is the same as moving $Y$ in a parallel way accross $X$. If the torsion is 0 for two commuting vector fields, moving in a parallel way along integral curves is the same as moving along integral curves.
+	\end{Obs}
 	\section{Gauge transformations on vector bundles}
 	In this section we will go through the procedure to show what happens when we fix a choice of a frame i.e. a gauge for the connection form. We will see that indeed the connection form will mutate into a quite peculiar way.
 	\begin{Def}
@@ -1718,12 +1852,214 @@
 		We define the \textit{covariant derivative} induced by a connection $\nabla$ of a vector field $X$ along a curve $\gamma$ as:
 		$$\nabla_{\dot{\gamma}(t)}X$$
 	\end{Def}
+	\begin{Obs}
+		The notion of covariant derivative and of parallel transport is completely independent of the bundle.
+	\end{Obs}
+	The notion of paarallel transport is useful since in the case of the tanagent bundle, it enables one do give the definition of geodesic.
 	\begin{Def}
-		We call \textit{geodesic} a curve which is parallel to itself:
+		Let $\nabla$ be a connection on the tangent bundle. We call \textit{geodesic} a curve which is parallel to itself:
 		$$\gamma(t)\hbox{ such that }\nabla_{\dot{\gamma}}\dot{\gamma}(t)=0$$
 	\end{Def}
-	Note that the notion of geodesic is completely independent from the choice of the bundle we are woirking with. We will however be more interested in metric-related geodesics.
-	\section{Metric connections}
+	We will however be more interested in metric-related geodesics.
+	\section{Affine connections}
+	In this section we look at the particular case of connections defined on the tangent bundle. This is an extremely important restriction, since the whole idea of General Relativity is based on it.
+	\begin{Def}
+		We call \textit{affine connection} a connection defined on the tangent bundle.
+	\end{Def}
+	\begin{Obs}
+		In this case $\nabla:\mathfrak{X}(M)\times \mathfrak{X}(M)\rightarrow \mathfrak{X}(M)$ has all of the properties of a regular connection. In this case however, we denote the connection form with $\Gamma$. In particular:
+		$$\Gamma^i_j=(\nabla e_j)^i$$
+		It becomes really important now the distinction between frame and coordinate frame. We have seen previously that a set of commuting vector fields can be used to define a reference frame. This is not true in general: \textbf{Not every frame is a coordinate frame}.\\
+		\\
+		This is important because the indices of $\Gamma^i_j$ are relative to the frame, not to the coordinates.
+	\end{Obs}
+	\begin{Def}
+		Let $\nabla$ be an affine connection. Let $(U,\phi)$ be a chart and $\{\partial_i\}$ the induced frame. We define the \textit{Christoffel symbols} as:
+		$$\Gamma^j_{ik}\partial_j=\nabla_i\partial_k$$
+	\end{Def}
+	\begin{Obs}
+		A Christoffel symbol is defined on coordinate frames, not on regular frames!
+	\end{Obs}
+	\begin{Obs}
+		Clearly, from REFERENZA, we can immediately deduce the transformation rule for the Christoffel symbols:
+		$$\Gamma\mapsto \Lambda^{-1}Ad_{\Lambda^{-1}}\Gamma +(\Lambda^{-1})^2d\Lambda$$
+	\end{Obs}
+	\begin{Def}
+		An affine connection $\nabla$ is said to be \textit{compatible} with $g$ a metric if:
+		$$\nabla g=0$$
+	\end{Def}
+	The above definition means that the covariant derivative of $g$ is always 0 along any vector field. There are different ways to define compatibility:
+	\begin{Prop}
+		The following statements are equivalent:
+		\begin{itemize}
+			\item[(i)] $\nabla g=0$;
+			\item[(ii)] if $X,Y$ are parallel transported along $\gamma$, then: $g_{\gamma(t)}(X_{\gamma(t)},Y_{\gamma(t)})=const$;
+			\item[(iii)] if $X,Y$ are defined along a curve $\gamma$, then $${d\over dt}g(X,Y)=g(\nabla_{\gamma(t)}X,Y)+g(X,\nabla_{\gamma(t)}Y)$$
+			\item[(iv)] $$Xg(Y,Z)=g(\nabla_XY,Z)+g(Y,\nabla_XZ)$$
+		\end{itemize}
+	\end{Prop}
+	\begin{proof}
+		We concatenate the proof:
+		\begin{itemize}
+			\item[(ii)$\implies$(iii)]
+			Takes a point along a curve and define on it an orthonormal frame $\{e_i(p)\}$. Then, extend this orthonormal frame along the curve in a parallel way:
+			$$\nabla_{\gamma(t)}e_i=0 \hbox{ with }e_i(\gamma(0))=e_i(p)$$
+			This has a local unique solution from the Cauchy theorem. Then, we can expand some vectors $X,Y$ defined along the curve in this frame:
+			$$X=X^ie_i\hbox{ and }Y=Y^ie_i$$
+			Since this frame is by cosntruction parallel transported:
+			$$\nabla_{\gamma(t)}(X)=\partial_tX^i e_i$$
+			The same goes for $Y$. Putting everything together:
+			$$g(\nabla_{\gamma(t)}X,Y)+g(X,\nabla_{\gamma(t)}Y)=\partial_tX^ig_ijY^j+X^ig_ij\partial_tY^j={d\over dt}g(X,Y)$$ 
+			\item[(i)$\iff$(iv)] Obvious from the extended definition of covariant derivative of a general tensor. See REFERENZA.
+			\item[(i)$\iff $(ii)]
+			if $\nabla g=0$ then:
+			$$\nabla_X g(Y,Z)=0=Xg(Y,Z)-g(\nabla_X Y,Z)-g(Y,\nabla_X Z)$$
+			However, if $Y,Z$ are parallel transported along the integral curve of $X$ called $\gamma$ then:
+			$$0=Xg(Y,Z)\implies g(Y,Z)=Const\hbox{ along the curve }$$
+			\item[(iii)$\iff$(i)]
+			This follows in exactly the same way:
+			$$\nabla_X g(Y,Z)=Xg(Y,Z)-g(\nabla_X Y,Z)-g(Y,\nabla_X Z)$$
+			This holds by definition. Thus, if we take $X$ to be the tangent vector of a curve $\gamma$, we get:
+			$$Xg(Y,Z)={d\over dt}g_{\gamma(t)}(Y,Z)$$
+		\end{itemize}
+	\end{proof}
+	We now look at how the metric compatibility influences the connection.
+	\begin{Prop}
+		If $\nabla$ is an affine connection on $(M,g)$ a metric manifold and $\omega$ is the connection form relative to an orthonornal frame $\{e_i\}$, then:
+		$$\omega^k_j\eta_{ik}=-\omega^k_i\eta_{jk}$$
+		The contrary is also true: given a connection form which respects the above relation in a frame, the corresponding connection will be compatible with the metric.
+	\end{Prop}
+	\begin{proof}
+		From REFERENZA, we can write:
+		$$0=Xg(e_i,e_j)=g(\nabla_X e_i,e_j)+g(e_i,\nabla_Xe_j)=g(\omega^k_i(X) e_k,e_j)+g(e_i,\omega^k_j(X)e_k)=$$
+		$$=\omega^k_i(X)\eta_{kj}+\omega^k_j(X)\eta_{ik}$$
+	\end{proof}
+	\begin{Cor}
+		In the case of a Riemannian metric, $\eta=\delta$, so that:
+		$$\omega_{k}^i=-\omega_{i}^k$$
+	\end{Cor}
+	\begin{Obs}
+		In general, the previous relation can be understood as a sort of \textit{skew-symmetry} for the connection form, in terms of lowering the indices:
+		$$0=\omega_{ij}+\omega_{ji}$$
+	\end{Obs}
+	\begin{Prop}
+		Let $\omega$ be a connection fomr in a Riemannian manifold and let it be compatible with the metric. Then if $\omega$ is skew-symmetric, so is its curvature $\Omega$.
+	\end{Prop}
+	\begin{proof}
+		This is a straightforward calculation.
+		$$\Omega^i_j=d\omega^i_j+\omega^i_k\wedge \omega^k_j$$
+		By skew-symmetry in the Riemannian case:
+		$$\Omega^i_j=-d\omega_i^j+\omega_i^k\wedge \omega_k^j=-d\omega_i^j-\omega_k^j\wedge \omega^k_i=-\Omega^j_i$$
+	\end{proof}
+	\section{The Levi-Civita connection}
+	In this section we discuss the construction of the infamous Levi-Civita connection. This is the most famous and used connection in General-Relativity, due to the incredibly nice properties with which is endowed. The idea is the following: we would like to find a canonical connection, pinned down through the metric. This is possile by requiring it to be torsion free. Morally, this means that the compatibility requirement completely fixes a canonical choice for the connection on any metric manifold. the one with 0 torsion.
+	\begin{Def}
+		Let $\nabla$ be a connection compatible with the metric on a metric manifold $(M,g)$ Let $\{e_i\}$ be an orthonormal frame and $\{\theta^i\}$ its dual. We say that $\nabla$ is \textit{torsion free} if 
+		$$d\theta^i+\omega^i_j\wedge \theta^j=0$$
+	\end{Def}
+	\begin{Theo}[\textbf{Levi-Civita}]
+		There is a unique torsion free connection which is also compatible with the metric. We call this the \textit{Levi-Civita} connection.
+	\end{Theo}
+	\begin{proof}
+		The proof is magical. The idea is to define a connection by permuting with a specific aim the set of vector fields on which it acts on. This goes by the \textbf{Koszul formula}. Define $\nabla$ by:
+		$$2g(\nabla_XY,Z)=X(g(Y,Z))+Y(g(Z,X))-Z(g(X,Y))-g(X,[Y,Z])+g(Y,[Z,X])-g(Z,[X,Y])$$
+		Clearly:
+		$$g(\nabla_XY,Z)+g(Y,\nabla_XZ)=X(g(Y,Z))$$
+		This is only a matter of looking at it for long enough. It is also not hard to see that, by a straightforward computation:
+		$$g(\nabla_XY-\nabla_YX,Z)=g(Z,[X,Y])$$
+		since all other terms vanish trivially. This implies that the torsion free condition is respected. As for the uniqueness, suppose $\tilde{\nabla}$ is another connection with those properties. Then we can define:
+		$$F(X,Y)=\nabla_XY-\tilde{\nabla}_XY$$
+		By torsion free: $F(X,Y)=F(Y,X)$. Thus, we compute:
+		$$g(F(X,Y),Z)+g(F(X,Z),Y)=0$$
+		This is clear since by metric compatibility:
+		$$0=X(g(Y,Z))-g(\nabla_XY,Z)-g(Y,\nabla_XZ)-X(g(Y,Z))+g(\tilde{\nabla}_XY,Z)+g(Y,\tilde{\nabla}_XZ)$$
+		Taking $Y=Z$, by symmetry we find:
+		$$g(F(X,Y),Y)=0$$
+		Since this must hold foe every vector field: $\nabla=\tilde{\nabla}$. This completes the proof.
+	\end{proof}
+	\section{Levi-Civita Geodesics}
+	In this sections we study geodesics generated by the Levi-Civita connection. We will see that the geodesic equation we will recover will coincide with the equation of motion in physics.
+	\begin{Prop}
+		The Christoffel symbols of the LEvi-Civita connection are symmetric in the lower indices in any coordiante chart.
+	\end{Prop}
+	\begin{proof}
+		To see this recall that in a coordinate chart $[\partial_i,\partial_j]=0$. By torsion freeness:
+		$$\nabla_i\partial_j-\nabla_j\partial_i=[\partial_i,\partial_j]=0=$$
+		$$=\Gamma_{ij}^k\partial_k-\Gamma_{ji}^k\partial_k$$
+		This concludes the proof.
+	\end{proof}
+	\begin{Prop}
+		The Christoffel symbols for the Levi-Civita connection are:
+		$$\Gamma^l_{ij}={1\over 2}g^{lk}(\partial_i g_{jk}+\partial_k g_{ji}-\partial_j g_{ik})$$
+	\end{Prop}
+	\begin{proof}
+		We apply the metric compatibility condition:
+		$$\nabla_i g_{jk}=\partial_i g_{jk}-\Gamma^l_{ij}g_{lk}-\Gamma^l_{ik}g_{jl}=0$$
+		The idea now is to use the fact that the Christoffel symbols for the Levi-Civita connection are symmetric. We take the following sum:
+		$$0=\nabla_i g_{jk}+\nabla_k g_{ji}-\nabla_j g_{ki}=$$
+		$$=\partial_i g_{jk}-\Gamma^l_{ij}g_{lk}-\Gamma^l_{ik}g_{jl}+\partial_k g_{ji}-\Gamma^l_{kj}g_{li}-\Gamma^l_{ki}g_{jl}-\partial_j g_{ik}+\Gamma^l_{ji}g_{lk}+\Gamma^l_{jk}g_{il}$$
+		Grouping up terms and taking the symmetrization:
+		$$0=(\partial_i g_{jk}+\partial_k g_{ji}-\partial_j g_{ik})-(\Gamma^l_{ij}-\Gamma^l_{ji})g_{lk}-2\Gamma^l_{ik}g_{jl}-(\Gamma^l_{kj}-\Gamma^l_{jk})g_{il}$$
+		We find:
+		$$\Gamma^l_{ij}={1\over 2}g^{lk}(\partial_i g_{jk}+\partial_k g_{ji}-\partial_j g_{ik})$$
+	\end{proof}
+	\begin{Cor}
+		Is the metric tensor has vanishing derivatives then the Christoffel symbols are 0.
+	\end{Cor}
+	\begin{Theo}
+		Let $(M,g)$ be a metric manifold and $\nabla$ be an affine connection compatible with the metric. The \textit{geodesic equation} in a chart $(U,\phi)$ is given by:
+		$$\ddot{x}^i+\Gamma^i_{jk}\dot{x}^j\dot{x}^k=0$$
+	\end{Theo}
+	\begin{proof}
+		This is a straightforward calculation. Take a curve $\gamma(t)$ and apply the geodesic equation:
+		$$\nabla_{\dot{\gamma}(t)}\dot{\gamma}(t)=0=[d\dot{\gamma}^i(t)(\dot{\gamma}(t))+\dot{\gamma}^j(t)\omega^i_j(\dot{\gamma}(t))]\partial_i=$$
+		$$=[\ddot{\gamma}^i+\dot{\gamma}^j(t)\dot{\gamma}^k(t)\Gamma^i_{kj}]\partial_i$$
+	\end{proof}
+	\begin{Cor}
+		In the neighbourhood of any point of a Riemannian manifold there is always a unique geodesic.
+	\end{Cor}
+	\begin{proof}
+		This follows from the fact that on a Riemannian manifold we have always the Levi-Civita connection. Moreover, there is always a unique local geodesci, since given an initial condition the geodesic equation found in REFERENZA above is a set of second order ordinary differential equations.
+	\end{proof}
+	\begin{Exe}
+		Calculate geodesics in Minkowski 4D spacetime.\\
+		\\
+		The solution is as follows: in Minkowski space-time the metric tensor is cosntant:
+		$$\eta=diag(-1,1,1,1)$$
+		This means that the derivatives of this tensor are 0 in our usual smooth atlas. Thus, the geodesic equation is simply:
+		$$\ddot{x^i}=0$$
+		which gives straigh-lines
+	\end{Exe}
+	\begin{Ex}
+		Consider $\mathbb{R}^2$ with the flat Minkowski metric $\eta=diag(-1,1)$. We have our regular coordinates $(t,x)$ defined everywhere. We now define the so called Rindler-Coordinates $(\tau,\xi)$:
+		$$\begin{cases}
+			t={\xi} sinh({\alpha\tau})\\
+			x={\xi} cosh({\alpha\tau})
+		\end{cases}$$
+		Those span only the right part of $\mathbb{R}^2$ contained between $t=x$ and $t=-x$ for $x>0$. For the other parts of spaces it suffices to re-define the coordinates with minus signs and permutations. We will not go throught it right now because it is useless. Let us restrict ourselves to the above space.
+		\\\\DISEGNO\\\\
+		If now we consider this space endowed with the flat minkowsky metric we get:
+		$$\eta=-dt^2+dx^2$$
+		in the starting frame. In the new coordinate frame:
+		$$\eta=-(\alpha x)^2d\tau^2+dx^2$$
+		Thys, the Christoffel symbols in this coordinate frame are:
+		$$\Gamma_{xx}^x={1\over 2}g^{xl}(\partial_xg_{xl}+\partial_xg_{lx}-\partial_lg_{xx})$$
+		However, $g=\eta$ is diagonal in this frame. Thus, since $g_{xx}$ is constant:
+		$$\Gamma_{xx}^x=0$$
+		Repeating for the other symbols:
+		$$\Gamma_{tx}^x=\Gamma_{xt}^x={1\over 2}g^{xl}(\partial_tg_{xl}+\partial_xg_{lt}-\partial_lg_{tx})=0$$
+		$$\Gamma_{tt}^x={1\over 2}g^{xl}(2\partial_tg_{tl}-\partial_lg_{tt})=0$$
+		$$\Gamma^t_{xx}={1\over 2}g^{tl}(2\partial_xg_{xl}+\partial_xg_{lt}-\partial_lg_{xx})=0$$
+		$$\Gamma_{tx}^t=0$$
+		$$\Gamma_{tt}^t={1\over 2}g^{tt}\partial_tg_{tt}=-{1\over (\alpha\tau)^2}$$
+		SONO SBAGLIATI I CONTIIIII
+	\end{Ex}
+	\begin{Cor}
+		The fact that Christoffel symbols are 0 in a given frame DOES NOT imply them to be 0 in another coordinate frame.
+	\end{Cor}
+	\begin{Obs}
+		In general, 
+	\end{Obs}
 		\section{A more meaningful view on connections}
 	In this section we expose the true nature behind the definition of connection on a vector bundle. Up unitl now, it has been presented sort of a magical construction, god given. The truth is that the idea is actually similar to the one behind the Lie derivative, with some important caveats.\\
 	\\
@@ -1803,6 +2139,104 @@
 	\section{The Ricci equation}
 	\section{The Codazzi equation}
 	\chapter{Principal bundles}
+	In this chapter we will introduce the notion of principal bundle, together with some examples and useful properties of them. Principal bundles are the main object in physics, as they represent the basi architecture in which we encode symmetries. The idea is pretty simple: we wish to attach to any point of space-time a symmetry group. That is it: a principal bundle is nothing more than a fiber bundle in which the fiber is a Lie group. This is extremely powerful: constructing this in the fiber bundle fashion, we expect to recover a space-time structure in which, locally, we have a trivial symmetry, while globally we might have a more complex non-trivial structure. As an example, one might think of general relativity. We would like to study spacetime in a way that lets us recover locally the Poincaré symmetry $SO(n-1,1)$, however, due to the non-trivial curvature, we would also expect this symmetry to not be global. Another meaningful construction, which we will dive into later on, is the one of Gauge theories. The idea is to let particles have a local $SU(n)$ symmetry. Thus, at each point of spacetime, we will glue the symmetry group. Before going on, I would like to remark how important are, at least to my understanding, principal bundles to physics. As of now, to my knowledge, there is little to no branch of physics which does not make us of principal bundles: mechanics, quantum physics, matter physics and much more. They all rely on this very construction. Physics, to me, is the study of symmetries i.e. the study of principal bundles.
+	\section{What is a Principal Bundle?}
+	In this section we give the general notion of principal bundle and make some examples. We are going to see that, similarly but more naively, a global section for a principal bundle implies triviality. This is notably different from the case of vector bundles: as they require a global frame.
+	\begin{Def}
+		Let $M,P$ be smooth manifolds and $G$ be a Lie group. Suppose the following is satisfied:
+		\begin{itemize}
+			\item $G$ acts freely with a smooth right action on $P$:
+			$$\mu:p\times G\rightarrow P$$
+			$$Stab(P)=\{e\in G\}\hbox{ with }e\hbox{ neutral element of $G$}$$
+			\item Around any point there is a diffeomorphic equivariant trivialization: $$\phi:\pi^{-1}(x)\rightarrow U\times G$$ 
+			with $\pi=Pr_1\circ \phi$ and
+			$$\phi(p)\cdot g=\phi(\mu(p,g))$$
+			Where $(x,h)\cdot g=(x,hg)$ clearly.
+		\end{itemize}
+		Then we call \textit{Principal G-bundle} the set of information:
+		$$(P,M,\pi,G)$$
+	\end{Def}
+	\begin{Prop}
+		On a principal bundle the action of the group is inherintly transitive on each fiber.
+	\end{Prop}
+	\begin{proof}
+		It is clear that on $\{p\}\times G$ the group acts transitively. Since any trivialization $\phi$ is equivariant, the group acts also transitively on the fiber.
+	\end{proof}
+	This is quite remarkable, to be fair.
+	\begin{Lm}
+		If $G$ is a group, any equivariant $f:G\rightarrow G$ is necessarily a left translation.
+	\end{Lm}
+	\begin{proof}
+		If $f$ is equivariant then:
+		$$f(gh)=f(g)h$$
+		so that:
+		$$f(g)=f(eg)=\ell_{f_(e)}g$$
+		Nice isn't it? Tis is only basic group theory, no additional structure involved.
+	\end{proof}
+	\begin{Obs}
+		Note that by construction on a Principal bundle the projection in invariant:
+		$$\pi\circ \mu=\pi$$
+		This is true since: $\pi=Pr_1\circ \phi$ and 
+		$$\pi(\mu(p,g))=\Pr_1\circ \phi(\mu(p,g))=Pr_1\circ \phi(p)\cdot g=x=\mu(p)$$
+		This comes from the request that the trivialziations are equivariant.
+	\end{Obs}
+	\begin{Ex}
+		Let us now make some examples of Principal bundles.
+		\begin{itemize}
+			\item We can always define the \textit{trivial bundle}: $M\times G$. This clearly makes a bundle. There is the canonical projection
+			$$\pi:M\times G\rightarrow M\hbox{ like }\pi(x,g)=x$$
+			And the trivializations are the identity maps:
+			$$\mathbb{I}(x,g)=(x,g)$$
+			The trivializations are clearly equivariant.
+			\item We now construct the infamous \textbf{\textit{Hopf bundle}} Consider the sphere $S^2$. This is:
+			$$S^2=\{(z,x)\in\mathbb{C}\times \mathbb{R}\hbox{ such that }|z|^2+x^2=1\}$$
+			We would like to put on it a non-trivial bundle. Consider $U(1)=S^1$ the unitary group of dimension 1. This has an action on $S^3$ the 4-dimensional sphere. In particular:
+			$$S^3=\{(z_1,z_2)\in\mathbb{C}^2\hbox{ such that }|z_1|^2+|z_2|^2=1\}$$
+			And the action is:
+			$$\mu:S^3\times U(1)\rightarrow S^3\hbox{ like }\mu((z_1,z_2),e^{i\theta})=(e^{i\theta}z_1,e^{i\theta}z_2)$$
+			Take the projection:
+			$$\pi:S^3\rightarrow S^2\hbox{ like }\pi(z_1,z_2)=(2z_1z_2^*,|z_1|^2-|z_2|^2)$$
+			Note that by definition the projection is invariant under the action:
+			$$\pi\circ \mu=\pi$$
+			Notice also that the projection is well defined:
+			$$4|z_1z_2|^2+|z_1|^4+|z_2|^4-2|z_1|^2|z_2|^2=(|z_1|^2+|z_2|^2)=1$$
+			Both the projection and the action are smooth, and the projection is clearly surjective. The only ingredient missing is the trivializations. We define two open sets:
+			$$U_1=S^2\setminus (0+i0,1)\hbox{ and }U_2=S^2\setminus (0+i0,-1)$$
+			Clearly:
+			$$\pi^{-1}(U_1)=\{(z_1,z_2)\in\mathbb{C}^2\hbox{ with }z_2\neq 0\}\hbox{ and }\pi^{-1}(U_1)=\{(z_1,z_2)\in\mathbb{C}^2\hbox{ with }z_1\neq 0\}$$
+			The corresponding trivializations are:
+			$$\phi_i:\pi^{-1}(U_i)\longrightarrow S^2\times U(1)$$
+			$$\phi_1(z_1,z_2)=\big(\pi(z_1,z_2),{z_2\over |z_2|}\big)\hbox{ and }\phi_1(z_1,z_2)=\big(\pi(z_1,z_2),{z_1\over |z_1|}\big)$$
+			The trivializations are clearly well defined and smooth and they are easy to be checked equivariant:
+			$$\phi_i(\mu((z_1,z_2),e^{i\theta}))=\big(\pi(\mu((z_1,z_2)),e^{i\theta}),{z_i\over |z_i|}\big)=e^{i\theta}\big((z,x),{z_i\over |z_i|}\big)$$
+			This defines the Hopf bundle.
+			\item One important example of a principal bundle is the \textbf{\textit{Homogeneous space}}. Let $G$ be a Lie group and let $H$ be a closed normal Lie subgroup. We have proved in REFERENZA that the quotient $G\slash H$ is a smooth manifold. There is a canonical projection:
+			$$\pi:G\rightarrow {G\slash H}$$
+			That associates to each element its class: $g\xmapsto{\pi}[g]_H$. This defines a principal $H$-bundle. The natural action is the multiplication:
+			$$\mu:H\rightarrow G\hbox{ like }\mu(h,g)=h\cdot g$$ PROVAREEEE
+		\end{itemize}
+	\end{Ex}
+	\section{Local and Global Gauges}
+	In this section we go through the analysis of the notion of gauges. This will be nothing more than sections of principal bundles. It will however be nice to set up an architecture which will allow us to generalize the results found for vector bundles.
+	\begin{Def}
+		We call a \textit{local or global gauge} a local or global section of a principal bundle i.e. a map:
+		$$s:U\subset M\rightarrow P$$
+		such that $\pi\circ s=\mathbb{I}$
+	\end{Def}
+	Just like for vector bundles, two local overlapping trivializations differ by some smooth map.
+	\begin{Prop}
+		Consider two overlapping trivializations of a principal bundle:
+		$$\phi_{i,j}:\pi^{-1}(U_{i,j})\rightarrow U\times G$$
+		Then there is a smooth map:
+		$$g_{ij}:U_{i}\cap U_{j}\rightarrow G$$
+		such that:
+		$$\phi_i\circ \phi_j^{-1}(x,h)=(x,g_{ij}(x)h)$$
+	\end{Prop}
+	\begin{proof}
+		The trivializations are equivariant on the fibers. Moreover, since $\phi_{i,j}$ have same projection, they will differ by an element of $g$:
+		$$\phi_i\circ \phi_j^{-1}(x,h)=(x,g_{ij}(x)h)$$
+		The map $g$ is clearly smooth, sicne the trivializations are.
+	\end{proof}
 	\chapter{Ehresmann geometries}
 	\chapter{Cohomology}
 	\section{De Rham Cohomology}
