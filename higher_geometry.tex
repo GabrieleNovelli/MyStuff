@@ -1,0 +1,564 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[english]{babel}
+\usepackage{newlfont}
+\usepackage{color}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{frontespizio}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows.meta,positioning}
+\usepackage{biblatex}
+\usepackage{csquotes}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{comment}
+\usepackage[compat=1.0.0]{tikz-feynman}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage{pxfonts}
+%\usepackage{lmodern}%THIS MUST GO AFTER PXFONTS
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Overleaf Example},
+	pdfpagemode=FullScreen,
+}
+
+\textwidth=450pt\oddsidemargin=0pt
+\geometry{a4paper, top=3cm, bottom=3cm, left=3cm, right=3cm, % heightrounded, bindingoffset=5mm 
+}
+\theoremstyle{definition}
+\newtheorem{Def}{Definition}[chapter]
+
+\theoremstyle{Theorem}
+\newtheorem{Theo}[Def]{Theorem}
+\newtheorem{Prop}[Def]{Proposition}
+
+\newtheorem{Lm}[Def]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{Ex}[Def]{Example}
+\newtheorem{Exe}[Def]{Exercise}
+
+\theoremstyle{definition}
+\newtheorem{Cor}[Def]{Corollary}
+\newtheorem{Obs}[Def]{Observation}
+\begin{document}
+	\tableofcontents
+	\chapter{Categories}
+	There are many reasons why we are forced to study category theore. The first and foremost is that we cannot describe higher gauge theories without it. In particular, we wish to describe higher gauge fields, which might have symmetries that cannot be correctly described by usual principal bundles. The approach is thus to substitute the notion of Lie group with something more abstract: a Lie groupoid; that is, a category.
+	\section{What is a category}
+	The notion of category appears, in simple term, to be incredibly itnuitive: \textit{"a category is a set of objects and arrows between them"}. This simpler definition however needs some refinement. In particular, we are not really happy with the terms \textit{"sets"}, and we would like to include in the definition some "morphism" properties for our category.
+	DA FINIREEEE DEFINIZIONE CLASSE INSIEME
+	\begin{Def}
+		A \textit{category} is the following set of informations:
+		\begin{itemize}
+			\item a class of objects $C_0$ and a class of morphisms $C_1$;
+			\item two maps $s,t:C_\rightarrow C_0$ called \textit{source} and \textit{target}, such that for any morphism $f:a\rightarrow b$ we have $s(f)=a$ and $t(f)=b$; 
+			\item for any $c\in C_0$ there is an identity morphism $1_c:c\rightarrow c$;
+			\item an associative unit composition rule $\circ$ i.e.:
+			$$f\circ (g\circ h)=(f\circ g)\circ h\hbox{ and }f\circ 1=1\circ f=f$$
+		\end{itemize}
+		A category is said to be \textit{large} if both the sets $C_0,C_1$ are classes. Otherwise we say it is \textit{small}.  
+	\end{Def}
+	\begin{Ex}
+		We now go through some examples of small categories.
+		\begin{itemize}
+			\item $\mathbf{Set}$ is the category with objects all small sets and with morphisms arrows between them;
+			\item $\mathbf{Grp}$ is the cmall category with objects small groups and morphisms all group homomorphisms;
+			\item $\mathbf{Ab}$ all small abelian groups with morphisms of such;
+			\item $\mathbf{Top}$ is the small categroy of all topological spaces and all continuous maps between them.
+		\end{itemize}
+		One can make many more examples. We can also make some examples of large categories:
+		\begin{itemize}
+			\item 
+		\end{itemize}
+	\end{Ex}
+	\begin{Obs}
+		Consider a category $\mathcal{C}=C_1\rightrightarrows C_0$, then, for any ordered couple $a,b$ of objects, we can define:
+		$$Hom(a,b)=\{f\in C_1\hbox{ such that }f:a\rightarrow b\}$$
+		This is called \textit{hom-set}. It is possible to define categories starting from their hom-sets, but for our analysis this is rather useless so we will not go through it.
+	\end{Obs}
+	\begin{Def}
+		A \textit{subcategory} $\mathcal{S}$ of a category $\mathcal{C}$ is a collection of objects and and morphisms of $\mathcal{C}$ such that:
+		\begin{itemize}
+			\item $\mathcal{S}$ contains all objects in sources and targets of its morphisms (it is well defined);
+			\item $\mathcal{S}$ contains the identity morphism of each of its elements;
+			\item For every composition of morphisms $f,g$ in $\mathcal{S}$, $f\circ g\in \mathcal{S}$.
+		\end{itemize}
+		Equivalently, a subcategory is a category within a category.
+	\end{Def}
+	\begin{Obs}
+		If $\mathcal{S}$ is a subcategory of $\mathcal{C}$, then there is a canonical \textit{inclusion funcotr}. It is defined as the identity map:
+		$$I:\mathcal{S}\rightarrow\mathcal{C}$$
+		This is celarly covariant.
+	\end{Obs}
+	\begin{Def}
+		Let $\mathcal{C}_1,\mathcal{C}_2$ be two categories. We define the \textit{product category} $\mathcal{C}_1\times \mathcal{C}_2$ as the category having as objects ordered pairs $(c_1,c_2)$ and as morphisms pairs of morphisms $(f_1,f_2)$.
+	\end{Def}
+	\begin{Obs}
+		Clearly, in the notation above, one must have that $f_{1,2}:c_{1,2}\rightarrow c'_{1,2}$. MOreover, there is a natural composition rule which indeed makes the product of two categories a category:
+		$$(f_1,f_2)\circ (g_1,g_2)=(f_1\circ g_1,f_2\circ g_2)$$
+	\end{Obs}
+	\section{Functors}
+	\begin{Def}
+		Let $\mathcal{C},\mathcal{B}$ be two categories. We define a \textit{functor} as a map $T:\mathcal{C}\rightarrow \mathcal{B}$, between objects and arrows of the categories $c\rightarrow Tc\in \mathcal{B}$ and $f\rightarrow Tf\in \mathcal{B}$, such that:
+		\begin{itemize}
+			\item $T(1_c)=1_{Tc}$ for any identity map in $\mathcal{C}$;
+			\item One of those two holds:
+			$$T(g\circ f)=\begin{cases}
+				Tg\circ Tf\\
+				Tf\circ Tg
+			\end{cases}$$
+		\end{itemize}
+		If the first property is satisfied we say that the functor is \textit{covariant}, if the other is satisfied we say that it is \textit{contravariant}.
+	\end{Def}
+	\begin{Ex}
+		We now make some examples of covariant and contravariant functors.
+		\begin{itemize}
+			\item Consider the categories $\mathbf{Top}$ and $\mathbf{Ab}$. It is known that to any topological space we can assign a singulaar homology $H(X)$. Then, for any $n$, we have a covariant functor:
+			$$H_n:\mathbf{Top}\rightarrow \mathbf{Ab}\hbox{ like } H_n(f):H_n(X)\rightarrow H_n(Y) \hbox{ for }f:X\rightarrow Y\hbox{ continuous}$$
+			This is a covariant functor
+			\item Consider the category $\mathbf{CRng}$ of commutative rings $K$ and homomorphism between them. We can associate to any ring the set $Gl(n,K)$... this is a functor! Take any $f:K\rightarrow K'$ morphism and define
+			$$GL_n:\mathbf{CRng}\rightarrow \mathbf{Grp}\hbox{ like }GL_n(f):Gl(n,K)\rightarrow GL(n,K')\hbox{ a homomorphism of groups}$$
+			This is clearly a covariant functor.
+			\item Consider the category of
+		\end{itemize}
+	\end{Ex}
+	\begin{Def}
+		A covariant functor $T:\mathcal{C}\rightarrow \mathcal{B}$ is said to be an isomorphism of categories if it is bijective (equivalently it has a 2 sided inverse).
+	\end{Def}
+	\begin{Ex}
+		An easy example is $\mathcal{B}\times \mathcal{C}\simeq \mathcal{C}\times \mathcal{B}$. In particular, the isomorphism is the following:
+		$$T:\mathcal{B}\times \mathcal{C}\rightarrow \mathcal{C}\times \mathcal{B}\hbox{ like} T(f,g)=(g,f)$$
+		This is clearly covariant.
+	\end{Ex}
+	\begin{Obs}
+		Consider the product of two categories  $\mathcal{B}\times \mathcal{C}$. There are two natural functors:
+		\begin{center}
+			\begin{tikzcd}
+				\mathcal{B}&\mathcal{B}\times \mathcal{C}\arrow{l}{Pr_1}\arrow{r}{Pr_2}&\mathcal{C}
+			\end{tikzcd}
+		\end{center}
+		Their action is obvious: $Pr_1(f,g)=f$ and $Pr_2(f,g)=g$. Those are covariant functors.
+	\end{Obs}
+	\begin{Prop}
+		Consider two functors $T_1:\mathcal{A}\rightarrow \mathcal{B}$ and $T_2:\mathcal{A}\rightarrow \mathcal{C}$ between categories. Suppose that $T_1,T_2$ are wither both covariant or contraviariant. Then there is a unique functor $F:\mathcal{A}\rightarrow \mathcal{B}\times \mathcal{C}$ such that the following diagram commutes:
+		\begin{center}
+			\begin{tikzcd}
+				&\mathcal{A}\arrow{dl}{T_1}\arrow{dr}{T_2}\arrow{d}{F}&\\
+				\mathcal{B}&\mathcal{B}\times \mathcal{C}\arrow{l}{Pr_1}\arrow{r}{Pr_2}&\mathcal{C}
+			\end{tikzcd}
+		\end{center}
+	\end{Prop}
+	\begin{proof}
+		Let $T_{1,2}$ be both contravariant. Define $F=(T_1,T_2)$. Then the diagram commutes by construction. Moreover:
+		$$F(f_1\circ g_1,f_2\circ g_2)=(T_1(g_1)\circ T_1(f_1),T_1(g_2)\circ T_1(f_2))=F(g_1,g_2)\circ F(f_1,f_2)$$
+		The covariant case is straightforward.
+	\end{proof}
+	\begin{Def}
+		A \textit{bifunctor} is a functor $T$ whose domain is a product of two categories.
+	\end{Def}
+	\begin{Ex}
+		A bifuncotr can be covariant in one argument and contravariant in the other, yet still be covariant/contravariant as a whole! Consider the following example: ESEMPIOOOOOOOO
+	\end{Ex}
+	\section{Natural transformations}
+	\begin{Def}
+		Consider two functors $S,T:\mathcal{C}\rightarrow \mathcal{B}$. A \textit{natural transformation} is formally a map $\omega: Obj(\mathcal{C})\rightarrow Arr(\mathcal{B})$ like $\omega(c)=\omega_c: Sc\rightarrow Tc$; such that for any morphism $f\in Arr(\mathcal{C})$ like $f:c\rightarrow c'$, the following diafram commutes:
+		\begin{center}
+			\begin{tikzcd}
+				c\arrow{d}{f}& &Sc\arrow{r}{\omega_c}\arrow{d}{Sf} &Tc\arrow{d}{Tf}\\
+				c'& & Sc'\arrow{r}{\omega_{c'}}&Tc'
+			\end{tikzcd}
+		\end{center}
+	\end{Def}
+	\begin{Ex}
+		The determinant is a natural transformation. To see this, consider the categories $\mathbb{CRng}$ and $\mathbf{Grp}$. We have a functor:
+		$$GL_n:\mathbf{CRng}\rightarrow \mathbf{Grp}\hbox{ like }GL_n(K)=GL(n,\mathbb{K})$$
+		which to each ring associates its general linear group. We have another functor $*:\mathbf{CRng}\rightarrow \mathbf{Grp}$ which associates to each commutative ring $K$ the group of invertible elements that live in it:
+		$$*(K)=K^*$$
+		The determinant is a map such that $det(GL(n,K))\in K^*$. Moreoverm for every morphism $f$ 
+	\end{Ex}
+	\section{Duality}
+	\section{2-categories}
+	\section{...and Bicategories}
+	The notion of bicategory is quite complicated. The idea is not hard:we wish to generalize the notion of a 2-category, in such a way that the identity maps are identical up to isomorphisms. However, to bridge this isomorphic gap we need morphisms between morphisms and some other additional structure. This results in an extremely tecnical definition for the notion of bicategories. Those are, however, useful.
+	\begin{Def}
+		A \textit{bicategory} is the following set of information:
+		\begin{itemize}
+			\item A structure $C_2\rightrightarrows C_1\rightrightarrows C_0$ with sources $s_{1,2}$ and targets $t_{1,2}$;
+			\item For each ordered pair of objects $a,b$ there is a category $\mathcal{B}(a,b)$ which has as objects the morphisms from $a$ and $b$ and as morphisms all of the morphisms of $C_2$ between such morphisms;
+			\item For each ordered triple $a,b,c$ there is a bifunctor
+			$$*:\mathcal{B}(b,c)\times \mathcal{B}(a,b)\rightarrow \mathcal{B}(a,c)$$
+			and for each element $a\in C_0$ an identity $1_a:a\rightarrow a$, such that:
+			\begin{itemize}
+				\item[(i)] the following diagram commutes:
+				
+			\end{itemize}
+			
+		\end{itemize}
+	\end{Def}
+	\chapter{Diffeological spaces}
+	\section{Diffeology}
+	\begin{Def}
+		Let $X$ be any set. We say that $\mathcal{D}\subset Param(X)$ is a \textit{diffeology} on $X$ if it respects the three following axioms:
+		\begin{itemize}
+			\item[(A1)] $\mathcal{D}$ contains all of the constant parametrizations $p_x:\mathbb{R}^n\rightarrow X\hbox{ like }p_x(\vec{r})=x\in X$;
+			\item[(A2)] Take any $p:U\rightarrow X\in Param(X)$. If for all $\vec{r}$ there is an open set $V\subset U$ containing $\vec{r}$ such that $p\big|_V\in \mathcal{D}$, then $p\in \mathcal{D}$;
+			\item[(A3)] For any $p\in \mathcal{D}$, for any $V\subset \mathbb{R}^n$ and for any $F\in C^\infty(V,U)$, the composition is in the diffeology: $p\circ F\in \mathcal{D}$.
+		\end{itemize}
+	\end{Def}
+	\begin{Ex}
+		\begin{itemize}
+			\item Take any $U\subset \mathbb{R}^n$. Let $\mathcal{D}$ be the set of all possible smooth parametrizations on $U$. This is a diffeology.
+			\item Consider $S^1=\{z\in\mathbb{C}\hbox{ such that }|z|=1\}$. We define the following diffeology:\\\\
+			$\mathcal{D}=\{P:U\rightarrow S^1\hbox{ such that for any }\vec{r}\in U \hbox{ there is }V\subset U \hbox{ with }\vec{r}\in V \hbox{ and a smooth map }f:V\rightarrow \mathbb{R}\hbox{ such that }p(\vec{r})=exp(2\pi if(\vec{r}))\}$
+			\\\\
+			Clearly, this definition satisfies axiom A2. The constant parametrizations are contained in $\mathcal{D}$. In fact, if $z=exp(i\theta)$,, we can just define $f(\vec{r})=\theta/2\pi$, so that: $exp(2\pi i f(\vec{r}))$.\\
+			As for axiom A3 since locally $p$ is the exponential of a smooth map $p=exp\circ f$, for any smooth $F\in C^\infty(V,U)$, $p\circ F=p\circ f\circ F\in \mathcal{D}$.
+		\end{itemize}
+	\end{Ex}
+	\section{Smooth maps}
+	\begin{Def}
+		Let $(X,\mathcal{D})$ and $(X',\mathcal{D'})$ be two diffological spaces. Given any map $f:X\rightarrow X'$, we say that it is \textit{smooth} if $\forall p\in\mathcal{D}$, we have $f\circ p\in \mathcal{D}'$.
+		A \textit{diffeomorphism} is a smooth map with a smooth inverse.
+	\end{Def}
+	\begin{Prop}
+		The composition of two smooth maps is still a smooth map.
+	\end{Prop}
+	\begin{proof}
+		Obvious by definition.
+	\end{proof}
+	\begin{Def}
+		We define the category $\mathbf{Diffeology}$ as having as objects diffeological spaces and as morphisms smooth maps.
+	\end{Def}
+	\begin{Prop}
+		Plots are smooth.
+	\end{Prop}
+	\begin{proof}
+		To see this, consider a diffeological space $(X,\mathcal{D})$ and equip any $U\subset\mathbb{R}^n$ with the diffeology of its smooth maps. Then, taking any plot $p:u\rightarrow U$, we can check its smoothness by taking any $F:U\rightarrow V$ and evaluing the composition $p\circ F$. but this is in $\mathcal{D}$ by axiom A3. Thus, plots are smooth.
+	\end{proof}
+	\section{Push-forward and pull-backs of diffeologies}
+	\begin{Def}
+		Let $X$ be any set and $(X',\mathcal{D}')$ be a diffeological space. Any map $f:X\rightarrow X'$ induces a diffeology on $X$, called the \textit{pullback diffeology}
+		$$f^*(\mathcal{D}')=\{p\in Param(X)\hbox{ such that }f\circ p\in \mathcal{D}'\}$$
+	\end{Def}
+	\begin{Prop}
+		The pullbback diffeology is a diffeology. It is  the coarsest diffeology which makes $f$ smooth.
+	\end{Prop}
+	\begin{proof}
+		We first of all show that this is indeed a diffeology. We have to prove the 3 axioms.
+		\begin{itemize}
+			\item[A1] Take $p_x$ the constant oparametrization on $X$. Then, $f\circ p(\vec{r})=f(x)$ for all $\vec{r}$, so it is the constant parametrization.
+			\item[A2] Take any $p\in Param(X)$ such that locally $p\big|_V\in f^*(\mathcal{D}')$. Then it means that $f\circ p\big|_V\in \mathcal{D}'$, so that $f\circ p\in \mathcal{D}'$ since $\mathcal{D}'$ is a diffeology. Thus, $p\in f^*(\mathcal{D}')$;
+			\item[A3] Take any $F\in C^\infty(V,U)$ and $p\in f^*(\mathcal{D}')$. Then, since $\mathcal{D}'$ is a diffeology we have $f\circ p \circ F\in \mathcal{D}'$. This implies $p\circ F\in f^*\mathcal{D}'$.
+		\end{itemize}
+		Furthermore, if $\mathcal{D}$ is any other diffeology in which $f$ is smooth,, it means by definition that $f\circ p \in \mathcal{D}$ for any $p\in \mathcal{D}$. Thus, $D\subset f^*(D)$. This completes the proof.
+	\end{proof}
+	We can give an analogous definition and result for the pullback. This is straightforward but we carry on the full procedure or clarity.
+	\begin{Def}
+		Let $(X,\mathcal{D})$ be any diffeological space and $X'$ be a set. Let $f:X\rightarrow X'$ be any map. Then there is an induced \textit{pushforward diffeology} on $X'$ like:
+		\begin{multline*}
+			f_*(\mathcal{D})=\big\{P\in Param(X')\hbox{ such that } \forall \vec{r}\in U\hbox{ there is } V\subset U\hbox{ with }\vec{r}\in V\hbox{ such that}\\
+			 \hbox{either }p\big|_V=const,\hbox{ or there is some }q:V\rightarrow X\in \mathcal{D}\hbox{ such that }p\big|_V=f\circ q\big\}
+		\end{multline*}
+	\end{Def}
+	\begin{Prop}
+		$f_*(\mathcal{D})$ is a diffeology and it is the finest diffeology which makes $f$ smooth.
+	\end{Prop}
+	\begin{proof}
+		We once again have to verify the axioms.
+		\begin{itemize}
+			\item[A1] Obvious by definition.
+			\item[A2] Obvious by definition.
+			\item[A3] Obvious since $q\in \mathcal{D}$.
+		\end{itemize}
+		As for the last part of the proposition. Suppose that $\mathcal{D}'$ makes $f$ smooth. Then clearly $\mathcal{D}'$ must, by definition, contain all of the plots $p$ such that $f\circ q$ is smooth for some $q\in \mathcal{D}$. Thus $f_*(\mathcal{D})\subset \mathcal{D}'$.
+	\end{proof}
+	\begin{Prop}
+		The following properties hold:
+		\begin{itemize}
+			\item $(f\circ g)^*(\mathcal{D})=g^*(f^*(\mathcal{D}))$;
+			\item $(f\circ g)_*(\mathcal{D})=f_*(g_*(\mathcal{D}))$
+		\end{itemize}
+	\end{Prop}
+	\begin{proof}
+		The proof is a straightforward calculation in both cases. Suppose $f:X'\rightarrow X''$ and $g:X\rightarrow X'$. Let us begin with the first property:
+		\\\\
+		By definition: $$g^*(f^*(\mathcal{D}''))=\{p\in Param(X)\hbox{ such that }g\circ p\in f^*(\mathcal{D}'')\}=\{p\in Param(X)\hbox{ such that }f\circ g p\in \mathcal{D}\}$$
+		Where we have applied the definition 2 times.\\
+		\\
+		As for the second case, we compute:
+		\begin{multline*}
+			f_*(g_*(\mathcal{D}''))=\big\{P\in Param(X')\hbox{ such that } \forall \vec{r}\in U\hbox{ there is } V\subset U\hbox{ with }\vec{r}\in V\hbox{ such that}\\
+			\hbox{either }p\big|_V=const,\hbox{ or there is some }q:V\rightarrow X\in g_*(\mathcal{D}'')\hbox{ such that }p\big|_V=f\circ q\big\}
+		\end{multline*}
+		but since $q:\in g_*(\mathcal{D}'')$, it means that, either it is constant (in which case $p$ remains constant locally), or it is also locally given by composing $g$ with some $\rho\in \mathcal{D}''$. Thus:
+		\begin{multline*}
+			f_*(g_*(\mathcal{D}''))=\big\{P\in Param(X')\hbox{ such that } \forall \vec{r}\in U\hbox{ there is } V\subset U\hbox{ with }\vec{r}\in V\hbox{ such that}\\
+			\hbox{either }p\big|_V=const,\hbox{ or there is some }q:V\rightarrow X\in \mathcal{D}''\hbox{ such that }p\big|_V=f\circ g\circ q\big\}
+		\end{multline*}
+	\end{proof}
+	\section{Inductions and subductions}
+	\begin{Def}
+		Let $(X,\mathcal{D})$ and $(X',\mathcal{D}')$ be two diffeological spaces and $f:X\rightarrow X'$ be a map. Then we say that $f$ is an \textit{induction} if:
+		\begin{itemize}
+			\item $f$ is injective;
+			\item $f^*(\mathcal{D}')=\mathcal{D}$.
+		\end{itemize}
+		We instead say that $f$ is an \textit{subduction} if:
+		\begin{itemize}
+			\item $f$ is surjective;
+			\item $f_*(\mathcal{D})=\mathcal{D}'$.
+		\end{itemize}
+	\end{Def}
+	\begin{Obs}
+		The composition of two inductions is still clearly an induction. This means that inductions form a subcatefory of $\mathbf{Diffeology}$, which we call $\mathbf{Inductions}$. This follows from REFERENZA. The same exact thing holds for subductions and we call the subcategory generated by them $\mathbf{Subductions}$.
+	\end{Obs}
+	\begin{Theo}[Criterion for being an induction or a subduction]
+		A map $f:X\rightarrow X'$ is an induction if and only if the two following properties are satisfied:
+		\begin{itemize}
+			\item $f$ is a smooth injection;
+			\item for any plot $p$ of $\mathcal{D}'$ with values in $f(X)$, $f^{-1}\circ p$ is a plot for $\mathcal{D}$.
+		\end{itemize}
+		On the other hand, a map $f:X\rightarrow X'$ is an subduction if and only if the two following properties are satisfied:
+		\begin{itemize}
+			\item $f$ is a smooth surjection;
+			\item for any plot $p:U\rightarrow X'$ of $\mathcal{D}'$ and for every $\vec{r}\in U$, there is an open set $V\subset U$ containing $\vec{r}$ and a plot $q:V\rightarrow X$ such that $p\big|_V=f\circ q$.
+		\end{itemize}
+	\end{Theo}
+	\begin{proof}We begin by proving the induction part of the theorem.\\
+		\\
+		Suppose that $f$ is an induction. Then clearly by definition it is an injective induction. Moreover, let $p$ be any plot for $X'$ with values in the image $f(X)$. By invertibility of $f$ onto its image, we can construct $q=f^{-1}\circ p$ and so $p=f\circ q\in \mathcal{D}'$. This proves that $q$ is indeed a plot for $X'$.\\
+		\\
+		Suppose on the contrary that $f$ satiesfies both of the conditions above. Then it is clear that $f$ is injective. Moreover, by smoothness, $f^*(\mathcal{D}')\supset\mathcal{D}$. It remains to show the other inclusion. Take a parametrization $p\in Param(X)$ such that $f\circ p$ is a plot for $X'$ with values in $f(X)$. Then, by condition 2, $p\in\mathcal{D}$. This proves $f^*(\mathcal{D}')\subset\mathcal{D}$.\\
+		\\
+		Suppose now that $f$ is a subduction FINIREEE. 
+	\end{proof}
+	\begin{Prop}
+		$f:X\rightarrow X'$ is a diffeomorphism if and only if it is a surjective induction. At the same time, $f:X\rightarrow X'$ is a diffeomorphism if and only if it is an injective induction.
+	\end{Prop}
+	\begin{proof}
+		Suppose $f$ is a surjective induction. Then, we know that $f$ is smooth and bijective. Moreover, from REFERENZA, we also know that, since $f(X)=X'$, the inverse $f^{-1}$ is also smooth since if we compose it with a plot it remains a plot.
+		\\\\
+		Suppose now that $f$ is an injective subduction. This implies that $f$ is smooth and, from the second condition in REFERENZA, locally,  for any plot $p\in\mathcal{D}'$ we have another plot $q\in \mathcal{D}$ such that $p=f\circ q$. But since $f$ is bijective, $q=f^{-1}\circ p$. This proves that the inverse of $f$ is smooth and so that $f$ is indeed a diffeomorphism.\\
+		\\
+		Suppose instead that $f$ is a diffeomorphism. This means that $f$ is smooth, bijective, and its sinverse is also smooth. Thus, $f$ is a smooth injection and for any plot $p\in\mathcal{D}'$, $f^{-1}\circ p$ is a plot for $\mathcal{D}$ by definition of smoothness. This proves that $f$ is a surjective induction. However, by definition of diffeomorphism, $f$ is also a surjective smooth map. Moreover, since $f$ is a diffeomorphism, for any plot $p\in \mathcal{D}$, $f^{-1}\circ p$ is a plot for $\mathcal{D}'$. Thus, the second condition in REFERENZA is proved and $f$ is also an injective subduction.
+	\end{proof}
+	\section{Subspaces, sums and products of diffeologies}
+	\begin{Def}
+		Let $(X,\mathcal{D})$ be a diffeological space. Let $S\subset X$ be any subset and $j_S:S\rightarrow X$ be the canonical inclusion. We call $j_S^*(\mathcal{D})$ the \textit{subset diffeology}.
+	\end{Def}
+	\begin{Obs}
+		This is extremely powerful: any subset of a diffeological space is itself a diffeological space, with the canonical subset diffeology. Note also that the choice of this topology is the one which makes $j_S$ and induction.
+	\end{Obs}
+	\begin{Cor}
+		The restriction of a smooth map to any subspace is still smooth.
+	\end{Cor}
+	We now turn to the sum of diffeological spaces. We in particular consider families of sets $\{X_i\}$ and study the diffeological properties of their union $X=\bigsqcup X_i$. In particular, given any such family of sets, we immediatley have two maps: the inclusions $j_{X_i}:X_i\rightarrow X$ and the indidex map: $I(x_i,i)=i$.
+	\begin{Prop}
+		Consider $\{X_i\}$ a family of sets. If every $X_i$ is a diffeological space with $\mathcal{D}_i$, then there is a diffeology $\mathcal{D}$ on $X=\bigsqcup_i X_i$ like:
+		\begin{multline*}
+		\mathcal{D}=\{p\in Param(X)\hbox{ }\big|\forall\vec{r}\in U\exists V\subset U\hbox{ with }\vec{r}\in V\hbox{ such that }p\big|_V\in \mathcal{D}_i \hbox{ and }I(p)\big|_V=i\}	
+		\end{multline*}
+	\end{Prop}
+	\begin{proof}
+		We have to prove the 3 axioms. Clearly A2 is satisfied by definition. A1 instead is satisfied since the constant parametrizations are globally belonging to $\mathcal{D}_i$. AS for the axiom A3, it is satisfied since locally the parametrizations of $\mathcal{D}$ are the plots of $X_i$, so if we compose them with smooth maps they still belong to the diffeology.
+	\end{proof}
+	We call the above diffeology the \textit{sum diffeology}.
+	\begin{Obs}
+		In general, if $X=\bigsqcup X_i$ has a diffeology $\mathcal{D}$ and we give it the sum diffeology $\mathcal{D}_{sum}$ induced by all of the subset diffeologies, $\mathcal{D}_{sum}\subset \mathcal{D}$. This can be easily seen with the following toy example:
+		\\\\
+		Consider $X=\mathcal{\mathbb{R}}$ with the diffeology $C^{\infty}$. Clearly: 
+		$$X=(\mathbb{R}\setminus \mathbb{Q})\sqcup \mathbb{Q}$$
+		and the diffeology induced on any subset $X_i$ is just:
+		$$\mathcal{D}_i=\{p\in \mathcal{D}\hbox{ such that }Im(p)\subset X_i\}$$
+		This implies that the plot $p=\mathbb{I}$ i.e. $p(t)=t$ is indeed a plot contained in $\mathcal{D}$, but clearly, locally, it does not belong to any $X_i$. Thus $\mathcal{D}\supset\mathcal{D}_{sum}$.
+	\end{Obs}
+	\begin{Cor}
+		The \textit{sum diffeology} is the finest diffeology for which all of the inclusions are smooth.
+	\end{Cor}
+	\begin{proof}
+		Take any other such diffeology $\mathcal{D}_2$ on the sum $X$ and select a plot $p\in \mathcal{D}$, which is locally a plot for $X_i$. This means that it also belongs to $j_{X_i}^*(\mathcal{D})$, so it means that $\mathcal{D}_2\supset\mathcal{D}$ the sum diffeology.
+	\end{proof}
+	\begin{Ex}[\textbf{The foliated diffeology}]
+		Consider any diffeological space $(X,\mathcal{D})$ and an equivalence relation on it $\sim$. We can look at the quotient $X/\sim$ and express the original set as the sum of its classes:
+		$$X=\bigsqcup_{[x]} [x]$$
+		Now, each class of $X$ is endowed with the subspace diffeology i.e. $j_{[x]}^*(\mathcal{D})=\mathcal{D}_{[x]}$. 
+		We clearly have a bijection $\omega:x\rightarrow ([x],x)$ and a diffeology on $X$: the sum diffeology. in particular:
+		$$\mathcal{D}_X=\{p\in Param(X)\hbox{ }\big|\forall\vec{r}\in U\exists V\subset U\hbox{ with }\vec{r}\in V\hbox{ such that }p\big|_V\in \mathcal{D}_{[x]} \hbox{ and }I(p)\big|_V=i\}$$
+		Now, we can pullback this diffeology by $\omega$. We call $\omega^*(\mathcal{D}_X)$ the \textit{foliated diffeology}. By definition:
+		$$\omega^*(\mathcal{D}_X)=\{p\in Param(X)\hbox{ such that }\omega\circ p\in\mathcal{D}_X\}$$
+		This is finer than the original diffeology.
+	\end{Ex}
+	We now turn our eye to the product of diffeological spaces. We will remind the reader the general abstract notion of the product of two sets. This is to avoid confusion, since in our analysis we will construct diffeologies which behave completely fine also on infinite dimensional sums. If $\{X_i\}$ is a family of sets, we can define $\bigsqcup X_i$ and we have a canonical projection:
+	$$Pr_I:\bigsqcup X_i\rightarrow I \hbox{ like }Pr_I(i,x_i)=i$$
+	This is simply the map which tells me to what set does the element belong to. We call \textit{section} $s:I\rightarrow \bigsqcup X_i$ a map which respects $Pr_I\circ s=\mathbb{I}_I$. We define:
+	$$\prod_i X_i=\{s:I\rightarrow \bigsqcup X_i\hbox{ section}\}$$ 
+	It is worth noticing that, for any index $i\in I$, we have another projector:
+	$$\pi_i:\prod_i X_i\rightarrow X_i\hbox{ like }\pi_i(s)=Pr_2(s(i))$$
+	where $Pr_2(i,x_i)=x_i$.
+	\begin{Def}
+		Let $\{X_i\}$ be a family of diffeological spaces with $\mathcal{D}_i$. We define the \textit{product diffeology} as $$\mathcal{D}_{prod}=\bigcap\pi^*_i(\mathcal{D}_i)$$
+	\end{Def}
+	In other words, a plot for $\prod_i X_i$ is a family of parametrizations $\{p_i:U\rightarrow X_i\}$ such that for all $i$, $p_i$ is a plot of $X_i$.
+	\begin{Prop}
+		The product diffeology is a diffeology and it is the finest one which makes all $\pi_i$ smooth.
+	\end{Prop}  
+	\begin{proof}
+		Clearly, from REFERENZA, the intersection of diffeologies is still a diffeology. Moreover, by definition in REFERENZA, this is clearly the minimum for the above relation.
+	\end{proof}
+	\begin{Prop}
+		Projections are subductions.
+	\end{Prop}
+	\begin{proof}
+		Consider any projection $\pi_k$. In the product diffeology those are smooth and clearly surjective. Moreover, for any plot $p_k\in\mathcal{D}_k$, consider: $p:U\rightarrow \prod_i X_i$ defined like:
+		$$P(\vec{r})=\begin{cases}
+			i\mapsto (i,x_i) \hbox{ for } i\neq k\\
+			k\mapsto (k, p_k)\hbox{ for} k=i
+		\end{cases}$$
+		Then, this is clearly a plot for $\prod_i X_i$ and $\pi_k\circ P=p_i$. This proves condition 2 in REFERENZA and so $\pi_k$ is indeed a subduction.
+	\end{proof}
+	\section{The functional diffeology}
+	\begin{Def}
+		Let $(X,\mathcal{D})$ and $(X',\mathcal{D}')$ be two diffeological spaces. Let $C^\infty(X,X')$ be the set of all smooth maps from $X$ to $X'$. Define the \textit{evaluation map} as:
+		$$ev:C^\infty(X,X')\times X\rightarrow X'\hbox{ like }ev(f,x)=f(x)$$
+		We will call \textit{functional diffeology} any diffeology which makes $ev$ smooth. The coarsest one between those is called \textit{standard functional diffeology}.
+	\end{Def}
+	\begin{Prop}
+		The standard functional diffeology is defined as:
+		$$\mathcal{D}_\infty=\{p\in Param(C^\infty(X,X'))\hbox{ such that the map }(\vec{r},x)\mapsto p(r)(x)\hbox{ is smooth}\}$$
+	\end{Prop}
+	\begin{proof}
+		We first of all prove that this is a diffeology on $C^\infty(X,X')$. \\\\
+		The axiom A1 is trivially satisfied since if $q$ is a plot for $X$ and $p$ is a constant parametrization for $C^\infty(X,X')$, then $p(\vec{r})(q(\vec{s}))$ is a plot for $X'$ and so the map $p$ is smooth.\\\\
+		Consider $A2$ the locality axiom. If $p$ is a plot for $\mathcal{D}_\infty$ then, given any plot $q$ of $X$, $p(\vec{r})(q(\vec{s}))$ is a plot for $X'$. By locality of those plots, if $p|_V\in\mathcal{D}_\infty$, then $p\in\mathcal{D}_{\infty}$. Lastly, for A3, consider any smooth map $F\in C^\infty(U,V)$. Then if $p$ is a plot for $\mathcal{D}_{\infty}$ and $q$ is a plot for $X$, we have:
+		$$p\circ F(\vec{r},q(\vec{s}))$$
+		This is the composition of two smooth maps and so it is smooth. This proves that $\mathcal{D}_\infty$ is indeed a diffeology.\\
+		\\
+		Suppose now to have another functional diffeology $\mathcal{D}'$ on $C^\infty$. Take a plot $p\in \mathcal{D}_{\infty}$ and $q$ a plot for $X$. Then, we have $ev\circ (p\times q)=p\cdot q$; where $p\cdot q(\vec{r},\vec{s})=p(\vec{r})q(\vec{s})$. Since by assumption $p\times q$ and $p\cdot q$ are smooth, so is $ev$. This proves $\mathcal{D}_\infty\subset\mathcal{D}'$.
+	\end{proof}
+	\begin{Def}
+		We call $Diff(X)$ the subgroup of all of the diffeomorphisms of $C^\infty(X,X)$.
+	\end{Def}
+	\begin{Obs}
+		$Diff(X)$ as a subpace inherits the subspace diffeology of $C^\infty(X,X)$. Moreover, since the composition of smooth maps is still smooth, it defines a group.
+	\end{Obs}
+	\chapter{Diffeological groups}
+	\section{Basics of diffeological groups}
+	\begin{Def}
+		We call $G$ a diffeological group if it is a group wndowed with a diffeology, such that the operations of multiplication and inversions are smooth.
+	\end{Def}
+	\begin{Prop}
+		Clearly, any subgroup $H$ of a diffeological group is still a diffeological group with the subset diffeology.
+	\end{Prop}
+	\begin{Prop}
+		If $N\subseteq G$ is a normal subgroup of a diffeological group $G$, then the quotient $G/N$ is canonically a diffeological group with the quotient diffeology.
+	\end{Prop}
+	\begin{proof}
+		FINIREEE
+	\end{proof}
+	\section{Group actions}
+	\begin{Def}
+		Let $(X,\mathcal{D})$ be a diffeological space and $G$ a diffeological group. A \textit{smooth action} of $G$ on $X$ is any smooth group homomorphism $\rho:G\rightarrow Diff(X)$ where $Diff(X)$ is equipped with any functional subset diffeology.
+	\end{Def}
+	\begin{Prop}
+		An homomorphism $\rho:G\rightarrow Diff(X)$ is smooth iff the evaluation map $ev_\rho:X\times G\rightarrow X$ like $ev_\rho(x,g)=\rho(g)(x)$ is smooth.
+	\end{Prop}
+	\begin{proof}
+		Suppose that $\rho$ is smooth. We clearly have the following commutative diagram:
+		\begin{center}
+			\begin{tikzcd}
+				G\arrow{r}{\rho}&Diff(X)\arrow{d}{x}\\
+				X\times G\arrow{u}{Pr_2}\arrow{r}{ev_\rho}&X
+			\end{tikzcd}
+		\end{center}
+		Since $ev_\rho=x\circ \rho\circ Pr_2$, we immediately obtain $ev_\rho$ smooth.\\
+		Suppose instead that $ev_\rho$ is smooth.
+	\end{proof}
+	\chapter{Lie Groupoids}
+	\section{What is a groupoid?}
+	\begin{Def}
+		We call \textit{groupoid} $\mathcal{G}$ a small categroy in which every arrow is invertible. A \textit{subgroupoid} is a subcategory which is still a groupoid.
+	\end{Def}
+	\begin{Obs}
+		Let $\mathcal{G}$ be a groupoid. Then there is an equivalence relation automatically defined in it. In particular, two objects $g,h\in\mathcal{G}$ are equivalent $g\sim h$ iff there is an arrow connecting them. This is clearly an equivalence relation and it decomposes the groupoid $\mathcal{G}$ into subgroupoids i.e. the equivalence classes. This is trivial. We call such subgroupoids \textit{transitivity components} of $\mathcal{G}$.
+	\end{Obs}
+	\begin{Def}
+		A groupoid $\mathcal{G}$ is called transitive if it has only one transitivity component.
+	\end{Def}
+	\section{Lie groupoids}
+	\begin{Def}
+		Consider a groupoid $G\rightrightarrows G_0$. We call this a \textit{Lie groupoid} if the following requests are satisfied:
+		\begin{itemize}
+			\item[(i)] $G,G_0$ are both smooth manifolds;
+			\item[(ii)] the source and the target maps $s,t:G\rightarrow G_0$ are both surjective submersions;
+			\item[(iii)] there are 2 smooth maps:
+			$$1:G_0\rightarrow G\hbox{ and } i:G\rightarrow G$$
+			\item[(iv)] the following properties hold:
+			\begin{itemize}
+				\item $s(gh)=s(h)$ and $t(gh)=t(g)$ for all $g,H\in G_0$;
+				\item the composition in $G$ is smooth and associative;
+				\item 1 is the identity map i.e. $s(1_{g_0})=t(1_{g_0})=g_0\in G_0$ and $g1_{s(g)}=g$; $1_{t(g)}g=g$;
+				\item $i$ is the inverse i.e. $i(g)g=1_{s(g)}$ and $gi(g)=1_{t(g)}$ 
+			\end{itemize}
+		\end{itemize}
+	\end{Def}
+	This is an extremely long definition. We have swept something under the carpet: asking for a smooth and associative multiplication of arrows means that there is a smooth map $m:G\times_{s,t} G\rightarrow G$ such that: $m(g,h)=gh$ is associative. The notation $G\times_{s,t} G$ is understood as follows:
+	$$G\times_{s,f} G=\{(g,h)\in G\times G\hbox{ such that }s(g)=t(g)\}$$
+	Naively, those are the composable maps.
+	\begin{Ex}
+		We now make an example of a Lie groupoid. Consider a Lie group acting smoothly on a manifold $M$. THen we can define the Lie groupoid $G\ltimes M$. This is the Lie groupoid such that: the arrow space is $G\times M$; the object space is $M$; the source and target projections are the following:
+		$$s(g,p)=p\hbox{ and }t(g,p)=\mu(g,p)$$
+		Where $\mu:G\times M\rightarrow M$ indicates the action of the group. We now show clearly that this is a groupoid. The source and the target maps are clearly smooth submersions. As for the composition, the composable arrows are the ones for which: $s(g,p)=t(h,q)$. This means that for $(p,g)$ and $(h,q)$ to be composable we must have: $hq=p$. Thus;
+		$$(g,hq)\cdot (h,q)=(gh,q)$$
+		This is clearly smooth, associative and invertible. Now we briefly show that all the other properties are satisfied.
+		\begin{itemize}
+			\item $$s((g,hq)(h,q))=s(gh,q)=q=s(h,q)$$ and $$t((g,hq)(h,q))=t(gh,q)=\mu(gh,q)=\mu(g,\mu(h,q))$$
+			\item The identity map is $1(p)=(e,p)$ where $e$ is the neutral element of $G$, so that:
+			$$s(1(p))=t(1(p))=p$$
+			Moreover:			$$1(t(g,p))(g,p)=1(g,p)(g,p)=(e,gp)(g,p)=(g,p)$$
+			and the same goes for $s$. 
+			\item The inversion is well behaved:
+			$$i(g,p)(g,p)=(g^{-1},gp)(g,p)=(e,p)=1(s(g,p))$$
+			and the same goes for $t$.
+		\end{itemize}
+		Notating this properly in the categorical framework:
+		$$G\ltimes M=G\times M\rightrightarrows M$$
+	\end{Ex}
+	\begin{Obs}
+		Consider any groupoid $G\rightrightarrows G_0$ and a smooth map $f:M\rightarrow G_0$. Then, algebraically, we are always able to reconstruct a groupoid, called the \textit{pullback groupoid}, as follows: we define the groupoid $f^*G$ as the categroy with as object space $M$ DA FINIREEE
+	\end{Obs}
+	\section{Lie groupoids principal bundles}
+	\begin{Def}
+		Let $\mathcal{G}:=G\rightrightarrows G_0$ be a Lie groupoid and $P$ be any smooth manifold. We say that $\mathcal{G}$ acts on $M$ if there are two maps:
+		$$a:P\rightarrow G_0 \hbox{ and }\mu: P\times_{a,t}G\rightarrow P$$
+		called \textit{anchor map} and \textit{action}, such that:
+		\begin{itemize}
+			\item $a,\mu$ are both smooth;
+			\item The following diagrams commute:
+			\begin{center}
+				\begin{tikzcd}
+					P\times_{a,t}G\arrow{r}{Pr_2}\arrow{d}{Pr_1}&G\arrow{d}{t}&& P\times_{a,t}G\arrow{r}{Pr_2}\arrow{d}{\mu}&G\arrow{d}{s}\\
+					P\arrow{r}{a}&G_0&& P\arrow{r}{a}&G_0\\
+				\end{tikzcd}
+			\end{center}
+			\item $\mu((\mu(p,g))g')=(p\cdot g)\cdot g'=p\cdot(gg')$ and $p\cdot1(a(p))=p$
+		\end{itemize}
+ 	\end{Def}
+ 	Basically we wish for this action to be associative and for the anchor map to not move $p$.
+ 	\begin{Obs}
+ 		Notice that by definition the action is defined on the set
+ 		$$P\times_{a,t}G=\{(p,g)\hbox{ such that }a(p)=t(g)\}$$
+ 		This reminds a lot of a pullback bundle FINIREEEE.
+ 	\end{Obs}
+\end{document}
